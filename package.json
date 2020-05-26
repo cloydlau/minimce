@@ -1,0 +1,45 @@
+{
+  "name": "minimce",
+  "version": "0.0.1",
+  "author": "",
+  "license": "LGPL-2.1-only",
+  "description": "",
+  "keywords": [],
+  "private": false,
+  "main": "dist/minimce.umd.min.js",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "scripts": {
+    "dev": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lib": "vue-cli-service build --target lib --name minimce src/index.vue",
+    "pub": "npm run lib && yrm use npm && npm publish && yrm use taobao"
+  },
+  "dependencies": {
+    "@tinymce/tinymce-vue": "^3.2.2",
+    "core-js": "^3.6.0"
+  },
+  "peerDependencies": {
+    "element-ui": "^2.13.2",
+    "filepool": "^0.0.2",
+    "imgpond": "^0.1.22",
+    "plain-kit": "^0.2.3",
+    "vue": "^2.6.11"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.3.0",
+    "@vue/cli-service": "~4.3.0",
+    "axios": "^0.19.2",
+    "element-ui": "^2.13.2",
+    "filepool": "^0.0.2",
+    "imgpond": "^0.1.22",
+    "pic-viewer": "^0.2.5",
+    "plain-kit": "^0.2.3",
+    "sass": "^1.26.0",
+    "sass-loader": "^8.0.2",
+    "vue": "^2.6.11",
+    "vue-template-compiler": "^2.6.11"
+  }
+}
