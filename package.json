@@ -15,7 +15,7 @@
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lib": "vue-cli-service build --target lib --name minimce src/index.vue",
-    "pub": "npm run lib && yrm use npm && npm publish && yrm use taobao"
+    "pub": "npm run lib && yrm use npm && npm publish"
   },
   "dependencies": {
     "@tinymce/tinymce-vue": "^3.2.2",
@@ -24,17 +24,17 @@
   "peerDependencies": {
     "element-ui": "^2.13.2",
     "filepool": "^0.0.2",
-    "imgpond": "^0.1.22",
+    "imgpond": "^0.1.24",
     "plain-kit": "^0.2.3",
     "vue": "^2.6.11"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.3.0",
-    "@vue/cli-service": "~4.3.0",
+    "@vue/cli-plugin-babel": "~4.4.0",
+    "@vue/cli-service": "~4.4.0",
     "axios": "^0.19.2",
     "element-ui": "^2.13.2",
     "filepool": "^0.0.2",
-    "imgpond": "^0.1.22",
+    "imgpond": "^0.1.24",
     "pic-viewer": "^0.2.5",
     "plain-kit": "^0.2.3",
     "sass": "^1.26.0",

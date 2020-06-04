@@ -68,6 +68,7 @@ export default {
       tinymceId: 'vue-tinymce-' + +new Date() + ((Math.random() * 1000).toFixed(0) + ''),
       selfValue: '',
       options: {
+        invalid_elements: 'iframe,frame',
         init_instance_callback: editor => {
           this.loading = false
         },
