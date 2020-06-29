@@ -1,5 +1,5 @@
 <template>
-  <el-dialog :visible.sync="show" :title="'插入'+{'audio':'音频','video':'视频'}[type]" :append-to-body="true"
+  <el-dialog :visible="show" :title="'插入'+{'audio':'音频','video':'视频'}[type]" :append-to-body="true"
              :close-on-click-modal="false"
              destroy-on-close
              @close="$emit('update:show', false)"

@@ -1,16 +1,15 @@
 <template>
-  <el-dialog :visible="show" title="插入图片" :append-to-body="true" :close-on-click-modal="false"
+  <el-dialog :visible="show" title="插入电话号码"
+             :append-to-body="true"
+             :close-on-click-modal="false"
              destroy-on-close
              @close="$emit('update:show', false)"
   >
     <el-form ref="rowForm"
              :model="form"
     >
-      <el-form-item label="" prop="imgUrl" :rules="required">
-        <slot name="Imgpond"
-              :v_model="form"
-              valueType="array"
-        />
+      <el-form-item label="" prop="tel" :rules="[required,tel(false)]">
+        <el-input v-model="form.tel" clearable/>
       </el-form-item>
     </el-form>
     <div slot="footer">
@@ -30,8 +29,9 @@ export default {
   data () {
     return {
       required: $validator.required,
+      tel: $validator.tel,
       form: {
-        imgUrl: []
+        tel: ''
       }
     }
   },
@@ -40,7 +40,7 @@ export default {
       handler (newVal, oldVal) {
         if (!newVal) {
           this.form = {
-            imgUrl: []
+            tel: ''
           }
         }
       },
@@ -50,9 +50,7 @@ export default {
     handleSubmit () {
       this.$refs.rowForm.validate(valid => {
         if (valid) {
-          this.form.imgUrl.map(v => {
-            this.$emit('insertTag', `<img src=${v}>`)
-          })
+          this.$emit('insertTag', `<a href="tel:${this.form.tel}">${this.form.tel}</a>`)
           this.$emit('update:show', false)
         }
       })

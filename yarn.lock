@@ -2950,15 +2950,15 @@ dashdash@^1.12.0:
   dependencies:
     assert-plus "^1.0.0"
 
-dayjs@^1.8.25:
-  version "1.8.25"
-  resolved "https://registry.npmjs.org/dayjs/-/dayjs-1.8.25.tgz#d09a8696cee7191bc1289e739f96626391b9c73c"
-  integrity sha512-Pk36juDfQQGDCgr0Lqd1kw15w3OS6xt21JaLPE3lCfsEf8KrERGwDNwvK1tRjrjqFC0uZBJncT4smZQ4F+uV5g==
-
 dayjs@^1.8.26:
   version "1.8.26"
   resolved "https://registry.npmjs.org/dayjs/-/dayjs-1.8.26.tgz#c6d62ccdf058ca72a8d14bb93a23501058db9f1e"
   integrity sha512-KqtAuIfdNfZR5sJY1Dixr2Is4ZvcCqhb0dZpCOt5dGEFiMzoIbjkTSzUb4QKTCsP+WNpGwUjAFIZrnZvUxxkhw==
+
+dayjs@^1.8.28:
+  version "1.8.28"
+  resolved "https://registry.npm.taobao.org/dayjs/download/dayjs-1.8.28.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fdayjs%2Fdownload%2Fdayjs-1.8.28.tgz#37aa6201df483d089645cb6c8f6cef6f0c4dbc07"
+  integrity sha1-N6piAd9IPQiWRctsj2zvbwxNvAc=
 
 de-indent@^1.0.2:
   version "1.0.2"
@@ -3660,10 +3660,15 @@ filepond-plugin-media-preview@^1.0.5:
   resolved "https://registry.npmjs.org/filepond-plugin-media-preview/-/filepond-plugin-media-preview-1.0.5.tgz#6d66d0cf4f47339723f439d17ab5d94ba2a830f7"
   integrity sha512-O591jQoe8iZWwEa0YtsEZ+d2LEvyO9jr6VEPk4s4z7Se+UJm7GYYm1B9i5n6T1+ID5T4bzwy31xhY+kcEiqfkw==
 
-filepond@^4.13.7, filepond@~4.13.7:
+filepond@^4.13.7:
   version "4.13.7"
   resolved "https://registry.npmjs.org/filepond/-/filepond-4.13.7.tgz#360ff9c27fb8943bdd28eec8ec04ef028ad751df"
   integrity sha512-aCyFGKUSgz9seLif1vvhUJeyV5gPyONpKxeY4wapFNyfE3H6M7ayC6glZi2ZjzRJfew+4B/9b4RKagbrywaedA==
+
+filepond@~4.17.1:
+  version "4.17.1"
+  resolved "https://registry.npm.taobao.org/filepond/download/filepond-4.17.1.tgz#f9412ddc1c4430657480862fe73a5e2ae64cdda2"
+  integrity sha1-+UEt3BxEMGV0gIYv5zpeKuZM3aI=
 
 filepool@^0.0.2:
   version "0.0.2"
@@ -4315,15 +4320,16 @@ ignore@^4.0.3:
   resolved "https://registry.npmjs.org/ignore/-/ignore-4.0.6.tgz#750e3db5862087b4737ebac8207ffd1ef27b25fc"
   integrity sha512-cyFDKrqc/YdcWFniJhzI42+AzS+gNwmUzOSFcRCQYwySuBBBy/KjuxWLZ/FHEH6Moq1NizMOBWyTcv8O4OZIMg==
 
-imgpond@^0.1.24:
-  version "0.1.24"
-  resolved "https://registry.npmjs.org/imgpond/-/imgpond-0.1.24.tgz#b17d6e35d6dbaafacfd54d5a2398f598e755cffb"
-  integrity sha512-hlrA0sOh6emCAh1ZSUTk/CDjSfquDgTecL5z9g9DDsYjnxfvWJgwjev1RYtISajBqS8H9VXVXSVRo5cCxPq3Zw==
+imgpond@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.npm.taobao.org/imgpond/download/imgpond-0.2.2.tgz#aba717cdf53078bea0db90522347798502597b4e"
+  integrity sha1-q6cXzfUweL6g25BSI0d5hQJZe04=
   dependencies:
     core-js "~3.6.0"
-    filepond "~4.13.7"
+    filepond "~4.17.1"
     filepond-plugin-file-validate-type "~1.2.5"
     filepond-plugin-image-preview "~4.6.4"
+    sortablejs "^1.10.2"
     vue-cropperjs "~4.1.0"
     vue-filepond "~6.0.2"
 
@@ -5920,20 +5926,20 @@ pkg-up@^2.0.0:
   dependencies:
     find-up "^2.1.0"
 
-plain-kit@^0.2.3:
-  version "0.2.3"
-  resolved "https://registry.npmjs.org/plain-kit/-/plain-kit-0.2.3.tgz#e51af967b3ffc258d01c17205e7c01591a40199b"
-  integrity sha512-0B/zoOKYrgFIpjequCp0F7/ncWeIQa2556UA2+/06TLZ7RhsHOem4baKPd/+RKAOxXuW4BVfYcm5fpVjfwLl4g==
+plain-kit@^0.2.10:
+  version "0.2.10"
+  resolved "https://registry.npm.taobao.org/plain-kit/download/plain-kit-0.2.10.tgz#60b0c53ba3846fc312e39538630c6571fa9f7ff5"
+  integrity sha1-YLDFO6OEb8MS45U4Ywxlcfqff/U=
   dependencies:
     animate.css "^4.1.0"
     core-js "^3.6.0"
-    dayjs "^1.8.25"
+    dayjs "^1.8.28"
     lodash "^4.17.15"
     qrcode "^1.4.4"
     qs "^6.9.4"
-    sweetalert2 "^9.10.12"
-    time-range-picker "^0.1.14"
-    vuex "^3.3.0"
+    sweetalert2 "^9.15.2"
+    time-range-picker "^0.1.19"
+    vuex "^3.4.0"
 
 pngjs@^3.3.0:
   version "3.4.0"
@@ -7100,6 +7106,11 @@ sort-keys@^1.0.0:
   dependencies:
     is-plain-obj "^1.0.0"
 
+sortablejs@^1.10.2:
+  version "1.10.2"
+  resolved "https://registry.npm.taobao.org/sortablejs/download/sortablejs-1.10.2.tgz#6e40364d913f98b85a14f6678f92b5c1221f5290"
+  integrity sha1-bkA2TZE/mLhaFPZnj5K1wSIfUpA=
+
 source-list-map@^2.0.0:
   version "2.0.1"
   resolved "https://registry.npmjs.org/source-list-map/-/source-list-map-2.0.1.tgz#3993bd873bfc48479cca9ea3a547835c7c154b34"
@@ -7466,10 +7477,10 @@ svgo@^1.0.0:
     unquote "~1.1.1"
     util.promisify "~1.0.0"
 
-sweetalert2@^9.10.12:
-  version "9.10.12"
-  resolved "https://registry.npmjs.org/sweetalert2/-/sweetalert2-9.10.12.tgz#e3752fcbe13e7d23d0f85ee84b3c5fdc923da552"
-  integrity sha512-RnarmbDGTPmwecJbaVdq5LvlzbVReIOtPk0huPnXOE19G00xMxGcTY0wjt9AjwsexUnLivLXc3b6nD6+D6NlGg==
+sweetalert2@^9.15.2:
+  version "9.15.2"
+  resolved "https://registry.npm.taobao.org/sweetalert2/download/sweetalert2-9.15.2.tgz#d26f1e6dee91d9ff57b3b98b3d92a0d6c3fa6fc1"
+  integrity sha1-0m8ebe6R2f9Xs7mLPZKg1sP6b8E=
 
 tapable@^1.0.0, tapable@^1.1.3:
   version "1.1.3"
@@ -7573,10 +7584,10 @@ time-range-picker@^0.1.0:
     core-js "^3.6.4"
     time-range-picker "^0.1.0"
 
-time-range-picker@^0.1.14:
-  version "0.1.14"
-  resolved "https://registry.npmjs.org/time-range-picker/-/time-range-picker-0.1.14.tgz#7b72824ab73c80e4f037d8ebd8f082bda51b9954"
-  integrity sha512-mxNgAAVhghCLJKEw0rX1w5c3/464S4rehg5a9IzwbtuyePluYustIhdhGI5T4VmQ4KD/6F39ehduqSOluJkOFw==
+time-range-picker@^0.1.19:
+  version "0.1.19"
+  resolved "https://registry.npm.taobao.org/time-range-picker/download/time-range-picker-0.1.19.tgz#982e4ced07c9cf7b1cf247d5a8f7e529e0a69dca"
+  integrity sha1-mC5M7QfJz3sc8kfVqPflKeCmnco=
   dependencies:
     core-js "^3.6.4"
     dayjs "^1.8.26"
@@ -7987,10 +7998,10 @@ vue@^2.6.11:
   resolved "https://registry.npmjs.org/vue/-/vue-2.6.11.tgz#76594d877d4b12234406e84e35275c6d514125c5"
   integrity sha512-VfPwgcGABbGAue9+sfrD4PuwFar7gPb1yl1UK1MwXoQPAw0BKSqWfoYCT/ThFrdEVWoI51dBuyCoiNU9bZDZxQ==
 
-vuex@^3.3.0:
-  version "3.3.0"
-  resolved "https://registry.npmjs.org/vuex/-/vuex-3.3.0.tgz#665b4630ea1347317139fcc5cb495aab3ec5e513"
-  integrity sha512-1MfcBt+YFd20DPwKe0ThhYm1UEXZya4gVKUvCy7AtS11YAOUR+9a6u4fsv1Rr6ePZCDNxW/M1zuIaswp6nNv8Q==
+vuex@^3.4.0:
+  version "3.4.0"
+  resolved "https://registry.npm.taobao.org/vuex/download/vuex-3.4.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fvuex%2Fdownload%2Fvuex-3.4.0.tgz#20cc086062d750769fce1febb34e7fceeaebde45"
+  integrity sha1-IMwIYGLXUHafzh/rs05/zurr3kU=
 
 watchpack@^1.6.0:
   version "1.6.1"

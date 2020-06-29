@@ -13,7 +13,9 @@
           <slot name="Imgpond" :slotProps="slotProps"/>
         </template>
       </InsertImg>
-      <InsertFile v-if="customPlugins.includes('audio')" @insertTag="insertTag" type="audio"
+      <InsertFile v-if="customPlugins.includes('audio')"
+                  @insertTag="insertTag"
+                  type="audio"
                   :show.sync="showInsertionDialog.audio">
         <template #Imgpond="slotProps">
           <slot name="Imgpond" :slotProps="slotProps"/>
@@ -22,12 +24,15 @@
           <slot name="Filepool" :slotProps="slotProps"/>
         </template>
       </InsertFile>
-      <InsertFile v-if="customPlugins.includes('video')" @insertTag="insertTag" type="video"
+      <InsertFile v-if="customPlugins.includes('video')"
+                  @insertTag="insertTag"
+                  type="video"
                   :show.sync="showInsertionDialog.video">
         <template v-slot:Filepool="slotProps">
           <slot name="Filepool" :slotProps="slotProps"/>
         </template>
       </InsertFile>
+      <InsertTel :show.sync="showInsertionDialog.tel" @insertTag="insertTag"/>
     </div>
   </div>
 </template>
@@ -36,9 +41,10 @@
 import TinyMCE from '@tinymce/tinymce-vue'
 import InsertImg from './components/InsertImg'
 import InsertFile from './components/InsertFile'
+import InsertTel from './components/InsertTel'
 
 export default {
-  components: { TinyMCE, InsertImg, InsertFile },
+  components: { TinyMCE, InsertImg, InsertFile, InsertTel },
   props: {
     value: String,
     disabled: Boolean,
@@ -73,6 +79,14 @@ export default {
           this.loading = false
         },
         setup: editor => {
+          editor.ui.registry.addIcon('tel', `<svg t="1593331139446" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="10282" width="200" height="200"><path d="M780.207 868.621c0 48.892-40.51 89.402-89.402 89.402L333.195 958.023c-48.892 0-89.402-40.511-89.402-89.402L243.793 153.402c0-48.891 40.51-89.402 89.402-89.402l357.609 0c48.893 0 89.402 40.511 89.402 89.402L780.206 868.621zM713.155 265.155c0-11.875-10.478-22.351-22.351-22.351L333.195 242.804c-11.874 0-22.351 10.476-22.351 22.351l0 491.713c0 11.874 10.477 22.351 22.351 22.351l357.609 0c11.873 0 22.351-10.477 22.351-22.351L713.155 265.155zM567.877 153.402 456.124 153.402c-6.286 0-11.175 4.89-11.175 11.176 0 6.284 4.889 11.174 11.175 11.174l111.753 0c6.285 0 11.175-4.89 11.175-11.174C579.052 158.292 574.162 153.402 567.877 153.402zM512 812.744c-30.732 0-55.876 25.145-55.876 55.877s25.145 55.877 55.876 55.877c30.732 0 55.877-25.145 55.877-55.877S542.732 812.744 512 812.744z" p-id="10283"></path></svg>`)
+          editor.ui.registry.addMenuItem('tel', {
+            text: '电话号码',
+            icon: 'tel',
+            onAction: () => {
+              this.showInsertionDialog.tel = true
+            }
+          })
           editor.ui.registry.addMenuItem('localimage', {
             text: '本地图片',
             icon: 'image',
@@ -139,7 +153,7 @@ export default {
         menu: {
           insert: {
             title: 'Insert',
-            items: 'localimage localvideo localaudio mobilelink | image link media template codesample inserttable | charmap emoticons hr | pagebreak nonbreaking anchor toc | insertdatetime'
+            items: 'localimage localvideo localaudio | mobilelink tel | image link media template codesample inserttable | charmap emoticons hr | pagebreak nonbreaking anchor toc | insertdatetime'
           },
         },
         menubar: 'file edit view insert format tools table help',
@@ -150,6 +164,7 @@ export default {
         audio: false,
         video: false,
         mobilelink: false,
+        tel: false,
       },
     }
   },
