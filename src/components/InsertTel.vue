@@ -50,7 +50,8 @@ export default {
     handleSubmit () {
       this.$refs.rowForm.validate(valid => {
         if (valid) {
-          this.$emit('insertTag', `<a href="tel:${this.form.tel}">${this.form.tel}</a>`)
+          //data-type data-value 用于小程序端解析
+          this.$emit('insertTag', `<a data-type="tel" data-value="${this.form.tel}" href="tel:${this.form.tel}">${this.form.tel}</a>`)
           this.$emit('update:show', false)
         }
       })
