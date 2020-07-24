@@ -7,52 +7,61 @@
                :init="options"
                :api-key="apiKey"
       />
-      <slot v-if="customPlugins.includes('mobilelink')" name="mobilelink" :show.sync="showInsertionDialog"/>
-      <InsertImg v-if="customPlugins.includes('img')" @insertTag="insertTag" :show.sync="showInsertionDialog.img">
+      <slot name="mobilelink" :show.sync="showInsertionDialog"/>
+      <InsertTel :show.sync="showInsertionDialog.tel" @insertTag="insertTag"/>
+      <component :is="InsertImg"
+                 @insertTag="insertTag"
+                 :show.sync="showInsertionDialog.img"
+      >
         <template #Imgpond="slotProps">
           <slot name="Imgpond" :slotProps="slotProps"/>
         </template>
-      </InsertImg>
-      <InsertFile v-if="customPlugins.includes('audio')"
-                  @insertTag="insertTag"
-                  type="audio"
-                  :show.sync="showInsertionDialog.audio">
+      </component>
+      <component :is="InsertAudio"
+                 @insertTag="insertTag"
+                 type="audio"
+                 :show.sync="showInsertionDialog.audio"
+      >
         <template #Imgpond="slotProps">
           <slot name="Imgpond" :slotProps="slotProps"/>
         </template>
         <template #Filepool="slotProps">
           <slot name="Filepool" :slotProps="slotProps"/>
         </template>
-      </InsertFile>
-      <InsertFile v-if="customPlugins.includes('video')"
-                  @insertTag="insertTag"
-                  type="video"
-                  :show.sync="showInsertionDialog.video">
+      </component>
+      <component :is="InsertVideo"
+                 @insertTag="insertTag"
+                 type="video"
+                 :show.sync="showInsertionDialog.video"
+      >
         <template v-slot:Filepool="slotProps">
           <slot name="Filepool" :slotProps="slotProps"/>
         </template>
-      </InsertFile>
-      <InsertTel :show.sync="showInsertionDialog.tel" @insertTag="insertTag"/>
+      </component>
     </div>
   </div>
 </template>
 
 <script>
 import TinyMCE from '@tinymce/tinymce-vue'
-import InsertImg from './components/InsertImg'
-import InsertFile from './components/InsertFile'
 import InsertTel from './components/InsertTel'
 
 export default {
-  components: { TinyMCE, InsertImg, InsertFile, InsertTel },
+  components: { TinyMCE, InsertTel },
   props: {
     value: String,
     disabled: Boolean,
     apiKey: String,
-    customPlugins: {
-      type: Array,
-      default: () => []
-    }
+    audioMenuItem: {
+      type: Boolean,
+      default: true
+    },
+    html2text: Boolean,
+    text: String,
+    textMaxlength: {
+      type: [Number, Boolean],
+      default: 30
+    },
   },
   model: {
     prop: 'value',
@@ -67,6 +76,46 @@ export default {
     },
     selfValue (newVal, oldVal) {
       this.$emit('change', newVal)
+      if (this.html2text && this.throttle && this.htmlToText) {
+        if (!this.getTextThrottle__) {
+          this.getTextThrottle__ = this.throttle(() => {
+            if (this.selfValue) {
+              let text = this.htmlToText.fromString(this.selfValue, {
+                wordwrap: false,
+                ignoreHref: true,
+                ignoreImage: true
+              })
+              if (text) {
+                text = text.replace(/[\f\n\r\t\v]/g, '')
+                if (typeof this.textMaxlength === 'number') {
+                  text = text.substr(0, this.textMaxlength)
+                }
+                this.$emit('update:text', text)
+              }
+            } else {
+              this.$emit('update:text', '')
+            }
+          }, 1000, {
+            leading: false, //true会导致：如果调用≥2次 则至少触发2次 但此时可能只期望触发1次
+            trailing: true
+          })
+        }
+
+        this.getTextThrottle__()
+      }
+    },
+    html2text: {
+      immediate: true,
+      handler (newVal, oldVal) {
+        if (newVal) {
+          if (!this.htmlToText) {
+            this.htmlToText = require('html-to-text')
+          }
+          if (!this.throttle) {
+            this.throttle = require('lodash/throttle')
+          }
+        }
+      }
     }
   },
   data () {
@@ -87,31 +136,39 @@ export default {
               this.showInsertionDialog.tel = true
             }
           })
-          editor.ui.registry.addMenuItem('localimage', {
-            text: '本地图片',
-            icon: 'image',
-            onAction: () => {
-              this.showInsertionDialog.img = true
-            }
-          })
-          editor.ui.registry.addMenuItem('localvideo', {
-            text: '本地视频',
-            icon: 'embed',
-            onAction: () => {
-              this.showInsertionDialog.video = true
-            }
-          })
-          if (this.customPlugins.includes('audio')) {
-            editor.ui.registry.addIcon('audio', `<svg t="1588903157483" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1160" width="200" height="200"><path d="M742.78 128H430.89v96h0.11v306.65c-28.24-16.34-61.03-25.69-96-25.69-106.04 0-192 85.96-192 192s85.96 192 192 192c103.68 0 188.15-82.18 191.86-184.96h0.14V224h119.78l96-96zM335 792.96c-53.02 0-96-42.98-96-96s42.98-96 96-96 96 42.98 96 96-42.98 96-96 96z" p-id="1161"></path></svg>`)
-            editor.ui.registry.addMenuItem('localaudio', {
-              text: '本地音频',
-              icon: 'audio',
+          if (this.$scopedSlots.Imgpond) {
+            this.InsertImg = require('./components/InsertImg').default
+            editor.ui.registry.addMenuItem('localimage', {
+              text: '本地图片',
+              icon: 'image',
               onAction: () => {
-                this.showInsertionDialog.audio = true
+                this.showInsertionDialog.img = true
               }
             })
           }
-          if (this.customPlugins.includes('mobilelink')) {
+          if (this.$scopedSlots.Filepool) {
+            if (this.audioMenuItem) {
+              this.InsertAudio = require('./components/InsertFile').default
+              editor.ui.registry.addIcon('audio', `<svg t="1588903157483" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1160" width="200" height="200"><path d="M742.78 128H430.89v96h0.11v306.65c-28.24-16.34-61.03-25.69-96-25.69-106.04 0-192 85.96-192 192s85.96 192 192 192c103.68 0 188.15-82.18 191.86-184.96h0.14V224h119.78l96-96zM335 792.96c-53.02 0-96-42.98-96-96s42.98-96 96-96 96 42.98 96 96-42.98 96-96 96z" p-id="1161"></path></svg>`)
+              editor.ui.registry.addMenuItem('localaudio', {
+                text: '本地音频',
+                icon: 'audio',
+                onAction: () => {
+                  this.showInsertionDialog.audio = true
+                }
+              })
+            }
+
+            this.InsertVideo = require('./components/InsertFile').default
+            editor.ui.registry.addMenuItem('localvideo', {
+              text: '本地视频',
+              icon: 'embed',
+              onAction: () => {
+                this.showInsertionDialog.video = true
+              }
+            })
+          }
+          if (this.$scopedSlots.mobilelink) {
             editor.ui.registry.addMenuItem('mobilelink', {
               text: '移动端页面链接',
               icon: 'link',
@@ -166,6 +223,9 @@ export default {
         mobilelink: false,
         tel: false,
       },
+      InsertImg: null,
+      InsertAudio: null,
+      InsertVideo: null,
     }
   },
   created () {

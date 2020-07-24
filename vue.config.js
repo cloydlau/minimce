@@ -13,7 +13,7 @@ const externals = process.env.NODE_ENV === 'development' ? {} : {
 module.exports = {
   pages: {
     index: {
-      entry: 'demo/main.js',
+      entry: 'demo/main.ts',
       template: 'public/index.html',
       filename: 'index.html'
     }
