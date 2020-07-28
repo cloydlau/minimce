@@ -26,7 +26,7 @@ export default {
     value: {
       type: String,
       default: '',
-      required: true
+      required: true,
     },
     text: String,
   },
@@ -56,27 +56,27 @@ export default {
   },
   data () {
     return {
-      MobileLink: MobileLink || this.$slots.MobileLink,
-      Imgpond: Imgpond || this.$slots.Imgpond,
-      Filepool: Filepool || this.$slots.Filepool,
+      MobileLink: MobileLink || this.$attrs.MobileLink,
+      Imgpond: Imgpond || this.$attrs.Imgpond,
+      Filepool: Filepool || this.$attrs.Filepool,
       selfValue: '',
       selfText: '',
     }
-  },
-  created() {
-    console.log(this.$slots)
   },
   computed: {
     props () {
       return {
         ...this.$attrs,
-        audioMenuItem: this.audioMenuItem === 'boolean' ?
-          this.audioMenuItem :
+        audioMenuItem: typeof this.$attrs.audioMenuItem === 'boolean' ?
+          this.$attrs.audioMenuItem :
           typeof audioMenuItem === 'boolean' ?
             audioMenuItem : true,
-        apiKey: this.apiKey || apiKey,
-        html2text: this.html2text || html2text,
-        textMaxlength: this.textMaxlength || textMaxlength,
+        html2text: typeof this.$attrs.html2text === 'boolean' ?
+          this.$attrs.html2text :
+          typeof html2text === 'boolean' ?
+            html2text : true,
+        apiKey: this.$attrs.apiKey || apiKey,
+        textMaxlength: this.$attrs.textMaxlength || textMaxlength,
       }
     }
   }

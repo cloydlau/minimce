@@ -3425,15 +3425,15 @@ filepond-plugin-media-preview@^1.0.5:
   resolved "https://registry.npmjs.org/filepond-plugin-media-preview/-/filepond-plugin-media-preview-1.0.5.tgz#6d66d0cf4f47339723f439d17ab5d94ba2a830f7"
   integrity sha512-O591jQoe8iZWwEa0YtsEZ+d2LEvyO9jr6VEPk4s4z7Se+UJm7GYYm1B9i5n6T1+ID5T4bzwy31xhY+kcEiqfkw==
 
+filepond@4.17.1:
+  version "4.17.1"
+  resolved "https://registry.npmjs.org/filepond/-/filepond-4.17.1.tgz#f9412ddc1c4430657480862fe73a5e2ae64cdda2"
+  integrity sha512-r/mdPvnuZn6da4ui3vYzQv2ZYQKBqx5yDAU5pyLNrmS7phYTl1lN8BFOf+uP3bd0OV6+YHo2iwxm+GzfqWqnig==
+
 filepond@^4.13.7:
   version "4.18.0"
   resolved "https://registry.npmjs.org/filepond/-/filepond-4.18.0.tgz#6d56d3d13b55b5f49530351c4b11946ab682dfc4"
   integrity sha512-lIRv27uYU0DQjUNa0G+aGsdmkhxdEzk9k2gbOsWLQdO+4u6FGNPjA1lUfy5vkF4ifx2GEeO1X+xP6Kqyb6tWaw==
-
-filepond@~4.17.1:
-  version "4.17.1"
-  resolved "https://registry.npmjs.org/filepond/-/filepond-4.17.1.tgz#f9412ddc1c4430657480862fe73a5e2ae64cdda2"
-  integrity sha512-r/mdPvnuZn6da4ui3vYzQv2ZYQKBqx5yDAU5pyLNrmS7phYTl1lN8BFOf+uP3bd0OV6+YHo2iwxm+GzfqWqnig==
 
 filepool@^0.0.2:
   version "0.0.2"
@@ -4087,13 +4087,13 @@ ignore@^4.0.3:
   resolved "https://registry.npmjs.org/ignore/-/ignore-4.0.6.tgz#750e3db5862087b4737ebac8207ffd1ef27b25fc"
   integrity sha512-cyFDKrqc/YdcWFniJhzI42+AzS+gNwmUzOSFcRCQYwySuBBBy/KjuxWLZ/FHEH6Moq1NizMOBWyTcv8O4OZIMg==
 
-imgpond@^0.2.4:
-  version "0.2.4"
-  resolved "https://registry.npmjs.org/imgpond/-/imgpond-0.2.4.tgz#fa65907c330d6b365f0f7b15ccbbc0f798ecb5fd"
-  integrity sha512-XDXjfG8yx/Yb79LfLDtOWY0pTzwV4arF9qZLrfIlJh7EcU9OeSs17e4+oKvdy+l5eOhPzCZnP8Nq9HsPPw70Jw==
+imgpond@^0.2.5:
+  version "0.2.5"
+  resolved "https://registry.npmjs.org/imgpond/-/imgpond-0.2.5.tgz#5c34f6700ca772bf936307ea79940896fb709837"
+  integrity sha512-EXxw/n5ObbzIvVFOOc2AZz2nEr9irt6CTZsqe9w1Pk4k+lyMI45Mxj+FCDFEqpjM7z7AZP19ON9JKGxc8QX5vQ==
   dependencies:
     core-js "~3.6.0"
-    filepond "~4.17.1"
+    filepond "4.17.1"
     filepond-plugin-file-validate-type "~1.2.5"
     filepond-plugin-image-preview "~4.6.4"
     sortablejs "^1.10.2"

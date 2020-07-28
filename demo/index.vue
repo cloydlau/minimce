@@ -1,42 +1,38 @@
 <template>
   <el-dialog visible :close-on-click-modal="false" :show-close="false" title="minimce">
-    <el-form label-position="right"
-             label-width="78px"
-    >
-      <el-form-item label="富文本">
-        <Minimce v-model="value"
-                 :text.sync="text"
-                 v-bind="props"
-        >
-          <Imgpond slot="Imgpond"/>
-          <Filepool slot="Filepool"/>
-          <MobileLink slot="MobileLink"/>
-        </Minimce>
-      </el-form-item>
-      <el-form-item label="普通文本">
-        <el-input v-model="text" type="textarea" :autosize="{minRows:3}" maxlength="1000" show-word-limit clearable/>
-      </el-form-item>
-    </el-form>
+    <Minimce v-model="value"
+             :text.sync="props.text"
+             v-bind="props"
+    />
+    <PropsEditor v-model="props"/>
   </el-dialog>
 </template>
 
 <script>
-import Minimce from '../src/index' //dev
+import Minimce from '../src/RichText' //dev
 //import { Minimce } from '../dist/minimce.umd' //prod
 //import { Minimce } from 'minimce' //todo
 
+import PropsEditor from './PropsEditor'
+
+import Filepool from 'filepool'
+import Imgpond from 'imgpond'
+
 export default {
-  components: { Minimce },
+  components: { PropsEditor, Minimce },
   data () {
     return {
       value: '<style>\n        .rich__text {\n          line-height: 1.8;\n          overflow: auto;\n        }\n        .rich__text p {\n          margin-block-end: 0;\n          margin-block-start: 0;\n        }\n        .rich__text img {\n          max-width: 100%;\n          height: auto !important;\n          vertical-align: middle;\n        }\n        .rich__text audio, .rich__text video {\n          width: 100%;\n          background-color: #000;\n        }\n      </style>',
-      text: '',
-      MobileLink: () => import('./MobileLink.vue'),
       props: {
+        text: '',
         disabled: false,
-        html2text: true,
+        html2text: false,
+        audioMenuItem: true,
         apiKey: '',
-        textMaxlength: 10,
+        textMaxlength: 30,
+        Imgpond: Imgpond.Imgpond,
+        Filepool: Filepool.Filepool,
+        MobileLink: () => import('./MobileLink.vue'),
       }
     }
   },

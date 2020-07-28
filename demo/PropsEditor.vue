@@ -4,6 +4,31 @@
     <el-collapse>
       <el-collapse-item>
         <template slot="title">
+          <span class="title">【apiKey】</span>
+          <el-tag>String</el-tag>
+        </template>
+        <el-card>
+          <div slot="header">
+            <el-input v-model="value.apiKey" clearable readonly/>
+          </div>
+          <el-tag type="success">默认值：''</el-tag>
+        </el-card>
+      </el-collapse-item>
+      <el-collapse-item>
+        <template slot="title">
+          <span class="title">【audioMenuItem】是否显示音频上传按钮</span>
+          <el-tag>Boolean</el-tag>
+        </template>
+        <el-card>
+          <div slot="header">
+            <el-switch v-model="value.audioMenuItem" :active-value="true" :inactive-value="false" disabled/>
+          </div>
+          <el-tag type="success">默认值：true</el-tag>
+          <el-tag>生效前提：注册了Filepool组件</el-tag>
+        </el-card>
+      </el-collapse-item>
+      <el-collapse-item>
+        <template slot="title">
           <span class="title">【html2text】是否开启html转普通文本功能</span>
           <el-tag>Boolean</el-tag>
         </template>
