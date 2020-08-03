@@ -9,10 +9,16 @@
 
 
 ### Installation
+![NPM](https://nodei.co/npm/minimce.png)
 ```
-yarn add minimce / npm i minimce
+yarn add minimce
 依赖项：vue element-ui plain-kit imgpond filepool
 
+全局引入：
+import Minimce from 'minimce'
+Vue.use(Minimce)
+
+局部引入：
 import Minimce from 'minimce'
 components: { Minimce }
 ```
