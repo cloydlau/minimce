@@ -21,9 +21,9 @@ import {EventBus} from 'plain-kit'
 Vue.use(EventBus)
 
 import Minimce from '../src/main.ts' //dev
-//import RichText from '../dist/minimce.umd' //prod
-//import RichText from 'minimce' //todo
-/*Vue.use(Minimce, {
+//import Minimce from '../dist/minimce.umd' //prod
+//import Minimce from 'minimce' //todo
+Vue.use(Minimce, {
   //tinymce api key
   apiKey: '',
   //是否开启html转普通文本功能
@@ -35,7 +35,7 @@ import Minimce from '../src/main.ts' //dev
   Imgpond: Imgpond.Imgpond,
   Filepool: Filepool.Filepool,
   MobileLink: () => import('./MobileLink.vue'),
-})*/
+})
 
 Vue.config.productionTip = false
 

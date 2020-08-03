@@ -1,6 +1,6 @@
 {
   "name": "minimce",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "author": "",
   "license": "LGPL-2.1-only",
   "description": "",
@@ -14,7 +14,7 @@
   "scripts": {
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lib": "vue-cli-service build --target lib --name minimce src/index.vue"
+    "lib": "vue-cli-service build --target lib --name minimce src/main.ts"
   },
   "dependencies": {
     "@tinymce/tinymce-vue": "^3.2.2",
@@ -25,8 +25,8 @@
   "peerDependencies": {
     "element-ui": "^2.13.2",
     "filepool": "^0.0.2",
-    "imgpond": "^0.2.5",
-    "plain-kit": "^0.2.13",
+    "imgpond": "^0.2.8",
+    "plain-kit": "^0.2.14",
     "vue": "^2.6.11"
   },
   "devDependencies": {
@@ -35,9 +35,9 @@
     "axios": "^0.19.2",
     "element-ui": "^2.13.2",
     "filepool": "^0.0.2",
-    "imgpond": "^0.2.5",
+    "imgpond": "^0.2.8",
     "pic-viewer": "^0.2.6",
-    "plain-kit": "^0.2.13",
+    "plain-kit": "^0.2.14",
     "sass": "^1.26.0",
     "sass-loader": "^9.0.0",
     "vue": "^2.6.11",
