@@ -20,11 +20,8 @@ Vue.use(EventBus)
 
 import Minimce from '../src/main.ts'
 /*Vue.use(Minimce, {
-  //tinymce api key
   apiKey: '',
-  //是否开启html转普通文本功能
   html2text: true,
-  //普通文本取自前多少个字符 可设置为false以获取全部内容
   textMaxlength: 10,
   audioMenuItem: false,
   Imgpond: Imgpond.Imgpond,
