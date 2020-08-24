@@ -59,7 +59,7 @@ export default {
     html2text: Boolean,
     text: String,
     textMaxlength: {
-      type: [Number, Boolean],
+      type: Number,
       default: 30
     },
   },
@@ -87,9 +87,7 @@ export default {
               })
               if (text) {
                 text = text.replace(/[\f\n\r\t\v]/g, '')
-                if (typeof this.textMaxlength === 'number') {
-                  text = text.substr(0, this.textMaxlength)
-                }
+                text = text.substr(0, this.textMaxlength)
                 this.$emit('update:text', text)
               }
             } else {

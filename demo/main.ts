@@ -12,17 +12,13 @@ Vue.use(Filepool)
 
 import Imgpond from 'imgpond'
 
-Vue.use(Imgpond, {
-  edit: false
-})
+Vue.use(Imgpond)
 
 import {EventBus} from 'plain-kit'
 
 Vue.use(EventBus)
 
-import Minimce from '../src/main.ts' //dev
-//import RichText from '../dist/minimce.umd' //prod
-//import RichText from 'minimce' //todo
+import Minimce from '../src/main.ts'
 /*Vue.use(Minimce, {
   //tinymce api key
   apiKey: '',
@@ -30,7 +26,6 @@ import Minimce from '../src/main.ts' //dev
   html2text: true,
   //普通文本取自前多少个字符 可设置为false以获取全部内容
   textMaxlength: 10,
-  //是否显示音频上传按钮
   audioMenuItem: false,
   Imgpond: Imgpond.Imgpond,
   Filepool: Filepool.Filepool,
