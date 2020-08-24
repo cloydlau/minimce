@@ -30,7 +30,7 @@ import Minimce from '../src/main.ts'
   Imgpond: Imgpond.Imgpond,
   Filepool: Filepool.Filepool,
   MobileLink: () => import('./MobileLink.vue'),
-})*/
+})
 
 Vue.config.productionTip = false
 

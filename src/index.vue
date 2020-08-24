@@ -76,6 +76,10 @@ export default {
     },
     selfValue (newVal, oldVal) {
       this.$emit('change', newVal)
+      //fix: 用于el表单中 且校验触发方式为blur时 没有生效
+      if (this.$parent?.$options?._componentTag === ('el-form-item') && this.$parent.rules?.trigger === 'blur') {
+        this.$parent.$emit('el.form.blur')
+      }
       if (this.html2text && this.throttle && this.htmlToText) {
         if (!this.getTextThrottle__) {
           this.getTextThrottle__ = this.throttle(() => {
