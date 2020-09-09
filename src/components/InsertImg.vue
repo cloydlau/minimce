@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { $validator } from 'plain-kit'
+import { validator } from 'plain-kit'
 
 export default {
   props: {
@@ -29,7 +29,7 @@ export default {
   },
   data () {
     return {
-      required: $validator.required,
+      required: validator.required,
       form: {
         imgUrl: []
       }

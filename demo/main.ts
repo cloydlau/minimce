@@ -19,7 +19,8 @@ import {EventBus} from 'plain-kit'
 Vue.use(EventBus)
 
 import Minimce from '../src/main.ts'
-/*Vue.use(Minimce, {
+
+Vue.use(Minimce, {
   apiKey: '',
   html2text: true,
   textMaxlength: 10,
