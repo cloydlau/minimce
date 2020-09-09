@@ -1,11 +1,13 @@
 # minimce / 富文本编辑器 tinymce封装
 
 
-### Feature
+### Features
 
 - √ 无缝集成imgpond/filepool 支持本地图片/本地音频/本地视频上传
 - √ 支持获取前n个字符作为缩略简介（html转普通文本） n值可配置
 - √ 全局安装/单独引入 通用参数支持全局配置
+
+<br/><br/>
 
 ### Installation
 ![NPM](https://nodei.co/npm/minimce.png)
@@ -13,9 +15,9 @@
 $ yarn add minimce
 ```
 
-**Dependencies**：vue element-ui plain-kit imgpond filepool
+Dependencies：vue element-ui plain-kit imgpond filepool
 
-<hr/>
+<br/>
 
 ```js
 import { Minimce } from 'minimce'
@@ -27,6 +29,8 @@ components: { Minimce }
 import Minimce from 'minimce'
 Vue.use(Minimce)
 ```
+
+<br/><br/>
 
 ### Quick Start
 
@@ -48,6 +52,8 @@ Vue.use(Minimce)
 | audioMenuItem | 是否显示音频上传按钮（仅在配置了Filepool时有效） | 全局，props | Boolean | | true |
 | MobileLink | 插入移动端页面链接插件（配置组件后自动开启功能） | 全局 | Vue Component | | |
 
+<br/><br/>
+
 Imgpond:
 
 > 如果觉得tinymce自带的图片上传功能不够完善 可拓展Imgpond进行使用
@@ -62,6 +68,8 @@ Vue.use(Minimce, {
 })
 ```
 
+<br/><br/>
+
 Filepool:
 
 > 如果觉得tinymce自带的文件上传功能不够完善 可拓展Filepool进行使用
@@ -75,6 +83,8 @@ Vue.use(Minimce, {
   Filepool: Filepool.Filepool //默认导出的是普通对象 Filepool.Filepool才是组件本身
 })
 ```
+
+<br/><br/>
 
 MobileLink:
 
