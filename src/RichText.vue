@@ -26,7 +26,6 @@ export default {
     value: {
       type: String,
       default: '',
-      required: true,
     },
     text: String,
   },
