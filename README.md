@@ -103,3 +103,9 @@ Vue.use(Minimce, {
   MobileLink
 })
 ```
+
+<br/><br/>
+
+### Notice
+
+- element-ui老版本可能存在Imgpond的图片无法清除的问题
