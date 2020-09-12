@@ -6,7 +6,7 @@
 *EN*
 
 - √ Offline ready.
-- √ Support for uploading local image, local audio and local video, seamless integration for Imgpond and Filepool.
+- √ Support for uploading local images, local audios and local videos, seamless integration for Imgpond and Filepool.
 - √ Support for converting HTML into text.
 - √ Register globally or within scope. Config only once for common settings.
 
