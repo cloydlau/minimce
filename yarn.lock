@@ -6011,10 +6011,25 @@ pkg-dir@^4.1.0:
   dependencies:
     find-up "^4.0.0"
 
-plain-kit@^0.3.0-beta.0, plain-kit@^0.3.0-beta.3:
+plain-kit@^0.3.0-beta.0:
   version "0.3.0-beta.3"
   resolved "https://registry.npmjs.org/plain-kit/-/plain-kit-0.3.0-beta.3.tgz#7d8970078b2b044eb290e8effa10949d4d9fa358"
   integrity sha512-+DmtqnYZy4Ngi6W+iHFv5tyCTT5HaJtg8+1fr7FvIVrXvDmPGw7+PUAwpAxJzjE/OY4t9R/+SV3BbBNA41iKWQ==
+  dependencies:
+    animate.css "^4.1.1"
+    core-js "^3.6.0"
+    dayjs "^1.8.35"
+    lodash "^4.17.20"
+    qrcode "^1.4.4"
+    qs "^6.9.4"
+    sweetalert2 "^10.0.0"
+    time-range-picker "^0.1.21"
+    vuex "^3.5.1"
+
+plain-kit@^0.3.0-beta.4:
+  version "0.3.0-beta.4"
+  resolved "https://registry.npm.taobao.org/plain-kit/download/plain-kit-0.3.0-beta.4.tgz#56fe7c6689a6c3f0bc46ff44898c9a99dce8af8b"
+  integrity sha1-Vv58Zommw/C8Rv9EiYyamdzor4s=
   dependencies:
     animate.css "^4.1.1"
     core-js "^3.6.0"
@@ -7626,6 +7641,11 @@ timsort@^0.3.0:
   version "0.3.0"
   resolved "https://registry.npmjs.org/timsort/-/timsort-0.3.0.tgz#405411a8e7e6339fe64db9a234de11dc31e02bd4"
   integrity sha1-QFQRqOfmM5/mTbmiNN4R3DHgK9Q=
+
+tinymce@^5.4.2:
+  version "5.4.2"
+  resolved "https://registry.npmjs.org/tinymce/-/tinymce-5.4.2.tgz#a1df417ea7e85697c2932269f7f93fbef30d4502"
+  integrity sha512-MRquvKxI28AiSn2ikypgJFD7LH4mQZLtgFn+yROF1bTFp92MdlLeGBrI38/O5mej3cvz27g3Pgr+3MShepbJ+w==
 
 to-arraybuffer@^1.0.0:
   version "1.0.1"

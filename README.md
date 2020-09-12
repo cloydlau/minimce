@@ -3,8 +3,18 @@
 
 ### Features
 
-- √ 无缝集成imgpond/filepool 支持本地图片/本地音频/本地视频上传
-- √ 支持获取前n个字符作为缩略简介（html转普通文本） n值可配置
+*EN*
+
+- √ Offline ready.
+- √ Support for uploading local image, local audio and local video, seamless integration for Imgpond and Filepool.
+- √ Support for converting HTML into text.
+- √ Register globally or within scope. Config only once for common settings.
+
+*CN*
+
+- √ 支持离线 断网环境可用
+- √ 支持本地图片/本地音频/本地视频上传 无缝集成imgpond/filepool
+- √ 支持html转普通文本 使用场景：将前n个字符作为缩略简介 n值可配置
 - √ 全局安装/单独引入 通用参数支持全局配置
 
 <br/><br/>
@@ -15,7 +25,9 @@
 $ yarn add minimce
 ```
 
-Dependencies：vue element-ui plain-kit imgpond filepool
+Dependencies：vue element-ui
+
+> Optional: imgpond filepool
 
 <br/>
 
@@ -34,29 +46,29 @@ Vue.use(Minimce)
 
 ### Quick Start
 
-*请将/public/tinymce-static文件夹拷贝至项目中/public文件夹下
-
 ```html
 <Minimce v-model=""/>
 ```
 
-| 参数 | 说明 | 配置方式 | 类型 | 可选值 | 默认值 |
+| Attribute | Description | Way Of Configuration | Type | Accepted Values | Default |
 | --- | --- | --- | --- | --- | --- |
 | value / v-model | 双绑 | props | String | | |
-| apiKey | tinymce api key | 全局，props | String | | |
-| html2text | 是否开启html转普通文本功能 | 全局，props | Boolean | | false |
+| apiKey | tinymce api key | global，props | String | https://www.tiny.cloud/auth/signup/ | |
+| disabled | 是否禁用（禁用模式不可编辑，保留工具栏） | props | Boolean | | |
+| readonly | 是否只读（只读模式仅展示html，相当于预览） | props | Boolean | | |
+| html2text | 是否开启html转普通文本功能 | global，props | Boolean | | false |
 | text | value对应的普通文本（仅在html2text为true时有效） | props | String | | |
-| textMaxlength | 普通文本取自前多少个字符（设置为Infinity则不设上限） | 全局，props | Number | | 30 |
-| Imgpond | 上传图片插件（配置组件后自动开启功能） | 全局 | Vue Component | | |
-| Filepool | 上传文件插件（配置组件后自动开启功能） | 全局 | Vue Component | | |
-| audioMenuItem | 是否显示音频上传按钮（仅在配置了Filepool时有效） | 全局，props | Boolean | | true |
-| MobileLink | 插入移动端页面链接插件（配置组件后自动开启功能） | 全局 | Vue Component | | |
+| textMaxlength | 普通文本取自前多少个字符（设置为Infinity则不设上限） | global，props | Number | | 30 |
+| Imgpond | 上传图片插件（配置后自动开启功能） | global | Vue Component | | |
+| Filepool | 上传文件插件（配置后自动开启功能） | global | Vue Component | | |
+| audioMenuItem | 是否显示音频上传按钮（仅在配置了Filepool时有效） | global，props | Boolean | | true |
+| MobileLink | 插入移动端页面链接插件（配置后自动开启功能） | global | Vue Component | | |
 
 <br/><br/>
 
-Imgpond:
+Imgpond
 
-> 如果觉得tinymce自带的图片上传功能不够完善 可拓展Imgpond进行使用
+> You can use Imgpond to upload local images.
 
 ```js
 import Imgpond from 'imgpond'
@@ -70,9 +82,9 @@ Vue.use(Minimce, {
 
 <br/><br/>
 
-Filepool:
+Filepool
 
-> 如果觉得tinymce自带的文件上传功能不够完善 可拓展Filepool进行使用
+> You can use Filepool to upload local audio and video.
 
 ```js
 import Filepool from 'filepool'
@@ -86,7 +98,7 @@ Vue.use(Minimce, {
 
 <br/><br/>
 
-MobileLink:
+MobileLink
 
 > tinymce的插入链接功能只能插入普通链接 如果需要定制化需求 比如想要插入的链接是移动端某个页面的链接 可以自定义一个组件
 

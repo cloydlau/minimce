@@ -1,7 +1,7 @@
 <template>
-  <Minimce v-model="selfValue"
-           :text.sync="selfText"
-           v-bind="props"
+  <RichText v-model="selfValue"
+            :text.sync="selfText"
+            v-bind="props"
   >
     <template #mobilelink="{show}" v-if="MobileLink">
       <component :is="MobileLink" :show.sync="show.mobilelink"/>
@@ -12,16 +12,16 @@
     <template #Filepool="{slotProps}" v-if="Filepool">
       <component :is="Filepool" v-bind="slotProps" v-model="slotProps['v_model'].fileUrl"/>
     </template>
-  </Minimce>
+  </RichText>
 </template>
 
 <script>
-import Minimce from './index'
+import RichText from './index'
 import { apiKey, html2text, textMaxlength, audioMenuItem, Imgpond, Filepool, MobileLink } from './config.ts'
 
 export default {
-  name: 'RichText',
-  components: { Minimce },
+  name: 'Minimce',
+  components: { RichText },
   props: {
     value: {
       type: String,

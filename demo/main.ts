@@ -18,6 +18,7 @@ import {EventBus} from 'plain-kit'
 
 Vue.use(EventBus)
 
+//import Minimce from '../dist/minimce.umd.js'
 import Minimce from '../src/main.ts'
 
 Vue.use(Minimce, {

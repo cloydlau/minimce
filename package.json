@@ -1,6 +1,6 @@
 {
   "name": "minimce",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "",
   "license": "LGPL-2.1-only",
   "description": "",
@@ -20,13 +20,11 @@
     "@tinymce/tinymce-vue": "^3.2.2",
     "core-js": "^3.6.0",
     "html-to-text": "^5.1.1",
-    "lodash": "^4.17.20"
+    "lodash": "^4.17.20",
+    "plain-kit": "^0.3.0-beta.4"
   },
   "peerDependencies": {
     "element-ui": "^2.13.2",
-    "filepool": "^0.0.2",
-    "imgpond": "^0.2.11",
-    "plain-kit": "^0.3.0-beta.3",
     "vue": "^2.6.12"
   },
   "devDependencies": {
@@ -37,9 +35,9 @@
     "filepool": "^0.0.2",
     "imgpond": "^0.2.11",
     "pic-viewer": "^0.2.7",
-    "plain-kit": "^0.3.0-beta.3",
     "sass": "^1.26.0",
     "sass-loader": "^10.0.0",
+    "tinymce": "^5.4.2",
     "vue": "^2.6.12",
     "vue-template-compiler": "^2.6.12"
   }

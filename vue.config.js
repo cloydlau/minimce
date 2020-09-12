@@ -1,12 +1,7 @@
 const path = require('path')
 
 const externals = process.env.NODE_ENV === 'development' ? {} : {
-  "axios": "axios",
   "element-ui": "element-ui",
-  "filepool": "filepool",
-  "imgpond": "imgpond",
-  "pic-viewer": "pic-viewer",
-  "plain-kit": "plain-kit",
   'vue': 'vue'
 }
 
@@ -27,6 +22,7 @@ module.exports = {
       library: 'minimce',
       libraryTarget: 'umd',
       umdNamedDefine: true,
+      libraryExport: 'default'
     },
     externals
   }

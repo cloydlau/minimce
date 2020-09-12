@@ -24,3 +24,6 @@ src/
 vue.config.js
 babel.config.js
 .browserslistrc
+public/
+demo/
+tsconfig.json

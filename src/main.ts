@@ -1,4 +1,4 @@
-import RichText from './RichText.vue'
+import Minimce from './RichText.vue'
 import {init} from './config.ts'
 
 const install = (Vue, opts) => {
@@ -6,7 +6,7 @@ const install = (Vue, opts) => {
     return
   }
   init(opts)
-  Vue.component('Minimce', RichText)
+  Vue.component(Minimce.name, Minimce)
 }
 
 if (typeof window !== 'undefined' && window.Vue) {
@@ -15,5 +15,5 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 export default {
   install,
-  RichText
+  Minimce
 }

@@ -1,11 +1,12 @@
 <template>
   <div>
-    <div v-if="disabled" v-html="selfValue" class="rich__text"/>
+    <div v-if="readonly" v-html="selfValue" class="rich__text"/>
     <div v-else v-loading="loading">
       <TinyMCE :id="tinymceId"
                v-model="selfValue"
                :init="options"
                :api-key="apiKey"
+               :disabled="disabled"
       />
       <slot name="mobilelink" :show.sync="showInsertionDialog"/>
       <InsertTel :show.sync="showInsertionDialog.tel" @insertTag="insertTag"/>
@@ -46,11 +47,29 @@
 import TinyMCE from '@tinymce/tinymce-vue'
 import InsertTel from './components/InsertTel'
 
+import 'tinymce/tinymce'
+import 'tinymce/icons/default'
+import 'tinymce/themes/silver'
+import 'tinymce/skins/ui/oxide/skin.min.css'
+
+import './static/zh_CN'
+
+//const plugins = 'autoresize|print|preview|paste|importcss|searchreplace|autolink|autosave|directionality|code|visualblocks|visualchars|fullscreen|image|link|media|template|codesample|table|charmap|hr|pagebreak|nonbreaking|anchor|toc|insertdatetime|advlist|lists|wordcount|textpattern|noneditable|help|charmap|emoticons'
+//const regExp = new RegExp(`^\.\/(${plugins})\/index\.js$`)
+
+function requireAll (requireContext) {
+  return requireContext.keys().map(requireContext)
+}
+
+//requireAll(require.context('tinymce/plugins', true, regExp)) // 报错
+requireAll(require.context('tinymce/plugins', true, /^\.\/(autoresize|print|preview|paste|importcss|searchreplace|autolink|autosave|directionality|code|visualblocks|visualchars|fullscreen|image|link|media|template|codesample|table|charmap|hr|pagebreak|nonbreaking|anchor|toc|insertdatetime|advlist|lists|wordcount|textpattern|noneditable|help|charmap|emoticons|emoticons\/js\/emojis\.min\.js)$/))
+
 export default {
   components: { TinyMCE, InsertTel },
   props: {
     value: String,
     disabled: Boolean,
+    readonly: Boolean,
     apiKey: String,
     audioMenuItem: {
       type: Boolean,
@@ -182,10 +201,10 @@ export default {
         },
         language: 'zh_CN',
         //base_url: './tinymce-static/',
-        language_url: './tinymce-static/zh_CN.js',
+        //language_url: './tinymce-static/zh_CN.js',
         //skin_url: './tinymce-static',
-        theme_url: './tinymce-static/theme.min.js',
-        content_css: './tinymce-static/content.min.css',
+        //theme_url: './tinymce-static/theme.min.js',
+        //content_css: './tinymce-static/content.min.css',
         content_style: `
           line-height: 1.8;
           overflow: auto;
@@ -204,7 +223,7 @@ export default {
           }
         `,
         min_height: 500,
-        plugins: 'print preview paste importcss searchreplace autolink autosave directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount textpattern noneditable help charmap emoticons',
+        plugins: 'autoresize print preview paste importcss searchreplace autolink autosave directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount textpattern noneditable help charmap emoticons',
         toolbar: 'undo redo | bold italic underline | fontselect fontsizeselect formatselect | forecolor backcolor | charmap emoticons | alignleft aligncenter alignright alignjustify | outdent indent | ltr rtl | numlist bullist | removeformat preview save fullscreen',
         toolbar_sticky: true,
         relative_urls: false,
