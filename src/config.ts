@@ -1,4 +1,4 @@
-let apiKey, html2text, textMaxlength, audioMenuItem, Imgpond, Filepool, MobileLink
+let apiKey, html2text, textMaxlength, audioMenuItem, Imgpond, Filepool, MobileLink, tinymceOptions
 
 export const init = (opts = {}) => {
   apiKey = opts.apiKey
@@ -8,8 +8,9 @@ export const init = (opts = {}) => {
   Imgpond = opts.Imgpond
   Filepool = opts.Filepool
   MobileLink = opts.MobileLink
+  tinymceOptions = opts.tinymceOptions
 }
 
 export {
-  apiKey, html2text, textMaxlength, audioMenuItem, Imgpond, Filepool, MobileLink
+  apiKey, html2text, textMaxlength, audioMenuItem, Imgpond, Filepool, MobileLink, tinymceOptions
 }

@@ -17,7 +17,7 @@
 
 <script>
 import RichText from './index'
-import { apiKey, html2text, textMaxlength, audioMenuItem, Imgpond, Filepool, MobileLink } from './config.ts'
+import { apiKey, html2text, textMaxlength, audioMenuItem, Imgpond, Filepool, MobileLink, tinymceOptions } from './config.ts'
 
 export default {
   name: 'Minimce',
@@ -76,6 +76,7 @@ export default {
             html2text : true,
         apiKey: this.$attrs.apiKey || apiKey,
         textMaxlength: this.$attrs.textMaxlength || textMaxlength,
+        tinymceOptions: this.$attrs.tinymceOptions || tinymceOptions,
       }
     }
   }

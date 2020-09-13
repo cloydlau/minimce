@@ -59,6 +59,7 @@ Vue.use(Minimce)
 | html2text | 是否开启html转普通文本功能 | global，props | Boolean | | false |
 | text | value对应的普通文本（仅在html2text为true时有效） | props | String | | |
 | textMaxlength | 普通文本取自前多少个字符（设置为Infinity则不设上限） | global，props | Number | | 30 |
+| tinymceOptions | tinymce配置 | global，props | Object | https://www.tiny.cloud/docs/configure/ | 除setup之外均可配置 |
 | Imgpond | 上传图片插件（配置后自动开启功能） | global | Vue Component | | |
 | Filepool | 上传文件插件（配置后自动开启功能） | global | Vue Component | | |
 | audioMenuItem | 是否显示音频上传按钮（仅在配置了Filepool时有效） | global，props | Boolean | | true |

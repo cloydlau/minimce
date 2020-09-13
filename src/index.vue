@@ -81,6 +81,9 @@ export default {
       type: Number,
       default: 30
     },
+    tinymceOptions: {
+      type: Object,
+    }
   },
   model: {
     prop: 'value',
@@ -143,9 +146,61 @@ export default {
     return {
       tinymceId: 'vue-tinymce-' + +new Date() + ((Math.random() * 1000).toFixed(0) + ''),
       selfValue: '',
-      options: {
+      loading: true,
+      showInsertionDialog: {
+        img: false,
+        audio: false,
+        video: false,
+        mobilelink: false,
+        tel: false,
+      },
+      InsertImg: null,
+      InsertAudio: null,
+      InsertVideo: null,
+    }
+  },
+  computed: {
+    options () {
+      return {
         invalid_elements: 'iframe,frame',
+        content_style: `
+          line-height: 1.8;
+          overflow: auto;
+          p {
+            margin-block-end: 0;
+            margin-block-start: 0;
+          }
+          img {
+            max-width: 100%;
+            height: auto !important;
+            vertical-align: middle;
+          }
+          audio, video {
+            width: 100%;
+            background-color: #000;
+          }
+        `,
+        min_height: 500,
+        relative_urls: false,
+        convert_urls: false,
+        plugins: 'autoresize print preview paste importcss searchreplace autolink autosave directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount textpattern noneditable help charmap emoticons',
+        toolbar: 'undo redo | bold italic underline | fontselect fontsizeselect formatselect | forecolor backcolor | charmap emoticons | alignleft aligncenter alignright alignjustify | outdent indent | ltr rtl | numlist bullist | removeformat preview save fullscreen',
+        toolbar_sticky: true,
+        menu: {
+          insert: {
+            title: 'Insert',
+            items: 'localimage localvideo localaudio | mobilelink tel | image link media template codesample inserttable | charmap emoticons hr | pagebreak nonbreaking anchor toc | insertdatetime'
+          },
+        },
+        menubar: 'file edit view insert format tools table help',
+        language: 'zh_CN',
+
+        ...this.tinymceOptions,
+
         init_instance_callback: editor => {
+          if (typeof this.tinymceOptions.init_instance_callback === 'function') {
+            this.tinymceOptions.init_instance_callback(editor)
+          }
           this.loading = false
         },
         setup: editor => {
@@ -199,55 +254,13 @@ export default {
             })
           }
         },
-        language: 'zh_CN',
         //base_url: './tinymce-static/',
         //language_url: './tinymce-static/zh_CN.js',
         //skin_url: './tinymce-static',
         //theme_url: './tinymce-static/theme.min.js',
         //content_css: './tinymce-static/content.min.css',
-        content_style: `
-          line-height: 1.8;
-          overflow: auto;
-          p {
-            margin-block-end: 0;
-            margin-block-start: 0;
-          }
-          img {
-            max-width: 100%;
-            height: auto !important;
-            vertical-align: middle;
-          }
-          audio, video {
-            width: 100%;
-            background-color: #000;
-          }
-        `,
-        min_height: 500,
-        plugins: 'autoresize print preview paste importcss searchreplace autolink autosave directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount textpattern noneditable help charmap emoticons',
-        toolbar: 'undo redo | bold italic underline | fontselect fontsizeselect formatselect | forecolor backcolor | charmap emoticons | alignleft aligncenter alignright alignjustify | outdent indent | ltr rtl | numlist bullist | removeformat preview save fullscreen',
-        toolbar_sticky: true,
-        relative_urls: false,
-        convert_urls: false,
-        menu: {
-          insert: {
-            title: 'Insert',
-            items: 'localimage localvideo localaudio | mobilelink tel | image link media template codesample inserttable | charmap emoticons hr | pagebreak nonbreaking anchor toc | insertdatetime'
-          },
-        },
-        menubar: 'file edit view insert format tools table help',
-      },
-      loading: true,
-      showInsertionDialog: {
-        img: false,
-        audio: false,
-        video: false,
-        mobilelink: false,
-        tel: false,
-      },
-      InsertImg: null,
-      InsertAudio: null,
-      InsertVideo: null,
-    }
+      }
+    },
   },
   created () {
     this.$eventBus && this.$eventBus.on('insertTag', this.insertTag)
