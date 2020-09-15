@@ -198,7 +198,7 @@ export default {
         ...this.tinymceOptions,
 
         init_instance_callback: editor => {
-          if (typeof this.tinymceOptions.init_instance_callback === 'function') {
+          if (typeof this.tinymceOptions?.init_instance_callback === 'function') {
             this.tinymceOptions.init_instance_callback(editor)
           }
           this.loading = false
