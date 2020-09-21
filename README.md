@@ -54,8 +54,8 @@ Vue.use(Minimce)
 | --- | --- | --- | --- | --- | --- |
 | value / v-model | 双绑 | props | String | | |
 | apiKey | tinymce api key | global，props | String | https://www.tiny.cloud/auth/signup/ | |
-| disabled | 是否禁用（禁用模式不可编辑，保留工具栏） | props | Boolean | | |
-| readonly | 是否只读（只读模式仅展示html，相当于预览） | props | Boolean | | |
+| disabled | 是否禁用（禁用模式不可编辑，保留工具栏） | props | Boolean | | false |
+| readonly | 是否只读（只读模式仅展示html，相当于预览） | props | Boolean | | false |
 | html2text | 是否开启html转普通文本功能 | global，props | Boolean | | false |
 | text | value对应的普通文本（仅在html2text为true时有效） | props | String | | |
 | textMaxlength | 普通文本取自前多少个字符（设置为Infinity则不设上限） | global，props | Number | | 30 |
