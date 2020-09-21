@@ -1,6 +1,6 @@
 {
   "name": "minimce",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "",
   "license": "LGPL-2.1-only",
   "description": "",
@@ -17,11 +17,11 @@
     "lib": "vue-cli-service build --target lib --name minimce src/main.ts"
   },
   "dependencies": {
-    "@tinymce/tinymce-vue": "^3.2.2",
+    "@tinymce/tinymce-vue": "^3.2.3",
     "core-js": "^3.6.0",
     "html-to-text": "^5.1.1",
     "lodash": "^4.17.20",
-    "plain-kit": "^0.3.0-beta.4"
+    "plain-kit": "^0.3.0-rc.0"
   },
   "peerDependencies": {
     "element-ui": "^2.13.2",

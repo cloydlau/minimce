@@ -61,9 +61,6 @@ function requireAll (requireContext) {
   return requireContext.keys().map(requireContext)
 }
 
-//requireAll(require.context('tinymce/plugins', true, regExp)) // 报错
-requireAll(require.context('tinymce/plugins', true, /^\.\/(autoresize|print|preview|paste|importcss|searchreplace|autolink|autosave|directionality|code|visualblocks|visualchars|fullscreen|image|link|media|template|codesample|table|charmap|hr|pagebreak|nonbreaking|anchor|toc|insertdatetime|advlist|lists|wordcount|textpattern|noneditable|help|charmap|emoticons|emoticons\/js\/emojis\.min\.js)$/))
-
 export default {
   components: { TinyMCE, InsertTel },
   props: {
@@ -183,7 +180,7 @@ export default {
         min_height: 500,
         relative_urls: false,
         convert_urls: false,
-        plugins: 'autoresize print preview paste importcss searchreplace autolink autosave directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount textpattern noneditable help charmap emoticons',
+        plugins: 'print preview paste importcss searchreplace autolink autosave directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount textpattern noneditable help charmap emoticons',
         toolbar: 'undo redo | bold italic underline | fontselect fontsizeselect formatselect | forecolor backcolor | charmap emoticons | alignleft aligncenter alignright alignjustify | outdent indent | ltr rtl | numlist bullist | removeformat preview save fullscreen',
         toolbar_sticky: true,
         menu: {
@@ -263,6 +260,9 @@ export default {
     },
   },
   created () {
+    //requireAll(require.context('tinymce/plugins', true, regExp)) // 报错
+    requireAll(require.context('tinymce/plugins', true, /^\.\/(print|preview|paste|importcss|searchreplace|autolink|autosave|directionality|code|visualblocks|visualchars|fullscreen|image|link|media|template|codesample|table|charmap|hr|pagebreak|nonbreaking|anchor|toc|insertdatetime|advlist|lists|wordcount|textpattern|noneditable|help|charmap|emoticons|emoticons\/js\/emojis\.min\.js)$/))
+
     this.$eventBus && this.$eventBus.on('insertTag', this.insertTag)
   },
   beforeDestroy () {
