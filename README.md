@@ -16,8 +16,8 @@
 - √ 支持离线 断网环境可用
 - √ 支持本地图片/本地音频/本地视频上传 无缝集成imgpond/filepool
 - √ 支持html转普通文本 使用场景：将前n个字符作为缩略简介 n值可配置
+- √ 支持element-ui中el-form的全局disabled
 - √ 全局安装/单独引入 通用参数支持全局配置
-- √ 支持el-form的全局disabled
 
 <br/><br/>
 
