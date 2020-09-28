@@ -9,6 +9,7 @@
 - √ Support for uploading local images, local audios and local videos, seamless integration for Imgpond and Filepool.
 - √ Support for converting HTML into text.
 - √ Register globally or within scope. Config only once for common settings.
+- √ Support for global disabled of el-form
 
 *CN*
 
@@ -16,6 +17,7 @@
 - √ 支持本地图片/本地音频/本地视频上传 无缝集成imgpond/filepool
 - √ 支持html转普通文本 使用场景：将前n个字符作为缩略简介 n值可配置
 - √ 全局安装/单独引入 通用参数支持全局配置
+- √ 支持el-form的全局disabled
 
 <br/><br/>
 

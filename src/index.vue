@@ -6,7 +6,7 @@
                v-model="selfValue"
                :init="options"
                :api-key="apiKey"
-               :disabled="disabled"
+               :disabled="Disabled"
       />
       <slot name="mobilelink" :show.sync="showInsertionDialog"/>
       <InsertTel :show.sync="showInsertionDialog.tel" @insertTag="insertTag"/>
@@ -63,6 +63,11 @@ function requireAll (requireContext) {
 
 export default {
   components: { TinyMCE, InsertTel },
+  inject: {
+    elForm: {
+      default: ''
+    },
+  },
   props: {
     value: String,
     disabled: Boolean,
@@ -157,6 +162,9 @@ export default {
     }
   },
   computed: {
+    Disabled () {
+      return this.disabled || (this.elForm || {}).disabled
+    },
     options () {
       return {
         invalid_elements: 'iframe,frame',
