@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div v-if="readonly" v-html="selfValue" class="rich__text"/>
+    <div v-if="readonly" v-html="value__" class="rich__text"/>
     <div v-else v-loading="loading">
       <TinyMCE :id="tinymceId"
-               v-model="selfValue"
+               v-model="value__"
                :init="options"
                :api-key="apiKey"
                :disabled="Disabled"
@@ -95,10 +95,10 @@ export default {
     value: {
       immediate: true,
       handler (newVal, oldVal) {
-        this.selfValue = newVal
+        this.value__ = newVal
       },
     },
-    selfValue (newVal, oldVal) {
+    value__ (newVal, oldVal) {
       this.$emit('change', newVal)
       //fix: 用于el表单中 且校验触发方式为blur时 没有生效
       if (this.$parent?.$options?._componentTag === ('el-form-item') && this.$parent.rules?.trigger === 'blur') {
@@ -107,8 +107,8 @@ export default {
       if (this.html2text && this.throttle && this.htmlToText) {
         if (!this.getTextThrottle__) {
           this.getTextThrottle__ = this.throttle(() => {
-            if (this.selfValue) {
-              let text = this.htmlToText.fromString(this.selfValue, {
+            if (this.value__) {
+              let text = this.htmlToText.fromString(this.value__, {
                 wordwrap: false,
                 ignoreHref: true,
                 ignoreImage: true
@@ -147,7 +147,7 @@ export default {
   data () {
     return {
       tinymceId: 'vue-tinymce-' + +new Date() + ((Math.random() * 1000).toFixed(0) + ''),
-      selfValue: '',
+      value__: '',
       loading: true,
       showInsertionDialog: {
         img: false,
