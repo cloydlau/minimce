@@ -19,7 +19,7 @@
 - √ 支持element-ui中el-form的全局disabled
 - √ 全局安装/单独引入 通用参数支持全局配置
 
-<br/><br/>
+<br/>
 
 ### Installation
 ![NPM](https://nodei.co/npm/minimce.png)
@@ -31,20 +31,19 @@ Dependencies：vue element-ui
 
 > Optional: imgpond filepool
 
-<br/>
-
-```js
-import { Minimce } from 'minimce'
-components: { Minimce }
-```
-
-**Globally:**
 ```js
 import Minimce from 'minimce'
+
+// 组件内引入
+components: { Minimce }
+// ≤0.1.2（deprecated）
+components: { Minimce.Minimce }
+
+// 全局引入
 Vue.use(Minimce)
 ```
 
-<br/><br/>
+<br/>
 
 ### Quick Start
 
@@ -52,22 +51,22 @@ Vue.use(Minimce)
 <Minimce v-model=""/>
 ```
 
-| Attribute | Description | Way Of Configuration | Type | Accepted Values | Default |
+| Attribute | Description | Configuration Mode | Type | Accepted Values | Default |
 | --- | --- | --- | --- | --- | --- |
-| value / v-model | 双绑 | props | String | | |
-| apiKey | tinymce api key | global，props | String | https://www.tiny.cloud/auth/signup/ | |
-| disabled | 是否禁用（禁用模式不可编辑，保留工具栏） | props | Boolean | | false |
-| readonly | 是否只读（只读模式仅展示html，相当于预览） | props | Boolean | | false |
-| html2text | 是否开启html转普通文本功能 | global，props | Boolean | | false |
-| text | value对应的普通文本（仅在html2text为true时有效） | props | String | | |
-| textMaxlength | 普通文本取自前多少个字符（设置为Infinity则不设上限） | global，props | Number | | 30 |
-| tinymceOptions | tinymce配置 | global，props | Object | https://www.tiny.cloud/docs/configure/ | 除setup之外均可配置 |
+| value / v-model | 双绑 | props | string | | |
+| apiKey | tinymce api key | global，props | string | https://www.tiny.cloud/auth/signup/ | |
+| disabled | 是否禁用（禁用模式不可编辑，保留工具栏） | props | boolean | | false |
+| readonly | 是否只读（只读模式仅展示html，相当于预览） | props | boolean | | false |
+| html2text | 是否开启html转普通文本功能 | global，props | boolean | | false |
+| text | value对应的普通文本（仅在html2text为true时有效） | props | string | | |
+| textMaxlength | 普通文本取自前多少个字符（设置为Infinity则不设上限） | global，props | number | | 30 |
+| tinymceOptions | tinymce配置 | global，props | object | https://www.tiny.cloud/docs/configure/ | 除setup之外均可配置 |
 | Imgpond | 上传图片插件（配置后自动开启功能） | global | Vue Component | | |
 | Filepool | 上传文件插件（配置后自动开启功能） | global | Vue Component | | |
-| audioMenuItem | 是否显示音频上传按钮（仅在配置了Filepool时有效） | global，props | Boolean | | true |
+| audioMenuItem | 是否显示音频上传按钮（仅在配置了Filepool时有效） | global，props | boolean | | true |
 | MobileLink | 插入移动端页面链接插件（配置后自动开启功能） | global | Vue Component | | |
 
-<br/><br/>
+<br/>
 
 Imgpond
 
@@ -83,7 +82,7 @@ Vue.use(Minimce, {
 })
 ```
 
-<br/><br/>
+<br/>
 
 Filepool
 
@@ -99,7 +98,7 @@ Vue.use(Minimce, {
 })
 ```
 
-<br/><br/>
+<br/>
 
 MobileLink
 
@@ -119,7 +118,7 @@ Vue.use(Minimce, {
 })
 ```
 
-<br/><br/>
+<br/>
 
 ### Notice
 

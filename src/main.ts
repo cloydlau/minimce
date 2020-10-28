@@ -1,7 +1,13 @@
 import Minimce from './RichText.vue'
-import {init} from './config.ts'
+import { init } from './config'
 
-const install = (Vue, opts) => {
+interface installInterface {
+  installed?: boolean
+
+  (Vue: any, opts?: object): void
+}
+
+const install: installInterface = (Vue, opts) => {
   if (install.installed) {
     return
   }
@@ -13,7 +19,13 @@ if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue)
 }
 
-export default {
-  install,
+// @ts-ignore
+Minimce.install = install
+
+export default Minimce
+
+// todo: deprecated
+export {
   Minimce
 }
+
