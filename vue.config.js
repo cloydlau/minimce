@@ -22,7 +22,7 @@ module.exports = {
       library: 'minimce',
       libraryTarget: 'umd',
       umdNamedDefine: true,
-      libraryExport: 'default'
+      //libraryExport: 'default'
     },
     externals
   }
