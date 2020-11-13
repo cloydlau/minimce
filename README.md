@@ -78,7 +78,7 @@ Vue.use(Imgpond)
 
 import Minimce from 'minimce'
 Vue.use(Minimce, {
-  Imgpond: Imgpond.Imgpond //默认导出的是普通对象 Imgpond.Imgpond才是组件本身
+  Imgpond
 })
 ```
 
@@ -94,7 +94,7 @@ Vue.use(Filepool)
 
 import Minimce from 'minimce'
 Vue.use(Minimce, {
-  Filepool: Filepool.Filepool //默认导出的是普通对象 Filepool.Filepool才是组件本身
+  Filepool
 })
 ```
 
