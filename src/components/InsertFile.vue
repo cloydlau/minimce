@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { $validator, warn } from 'plain-kit'
+import { validator, Swal } from 'plain-kit'
 
 export default {
   props: {
@@ -46,7 +46,7 @@ export default {
   },
   data () {
     return {
-      required: $validator.required,
+      required: validator.required,
       form: {
         imgUrl: '',
         name: '',
@@ -77,7 +77,7 @@ export default {
               this.$emit('insertTag', `<video controls controlslist="nodownload" src="${this.form.fileUrl}"></video>`)
               this.$emit('update:show', false)
             } else {
-              warn('仅支持以.mp4结尾的视频链接')
+              Swal.warn('仅支持以.mp4结尾的视频链接')
             }
           }
         }

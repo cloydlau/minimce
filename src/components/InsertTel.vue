@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { $validator } from 'plain-kit'
+import { validator } from 'plain-kit'
 
 export default {
   props: {
@@ -28,8 +28,8 @@ export default {
   },
   data () {
     return {
-      required: $validator.required,
-      tel: $validator.tel,
+      required: validator.required,
+      tel: validator.tel,
       form: {
         tel: ''
       }

@@ -1,9 +1,12 @@
 <template>
-  <el-dialog visible :close-on-click-modal="false" :show-close="false" title="minimce">
-    <Minimce v-model="value"
-             :text.sync="props.text"
-             v-bind="props"
+  <el-dialog visible :close-on-click-modal="false" :show-close="false" title="minimce" append-to-body>
+    <Minimce
+      v-model="value"
+      :text.sync="props.text"
+      v-bind="props"
     />
+    <el-button @click="set" type="primary" style="width:100%">编程式设值</el-button>
+    <el-button @click="clear" style="width:100%">清空</el-button>
     <PropsEditor v-model="props"/>
   </el-dialog>
 </template>
@@ -29,11 +32,19 @@ export default {
         audioMenuItem: true,
         apiKey: '',
         textMaxlength: 30,
-        Imgpond: Imgpond.Imgpond,
-        Filepool: Filepool.Filepool,
+        Imgpond,
+        Filepool,
         MobileLink: () => import('./MobileLink.vue'),
       }
     }
   },
+  methods: {
+    set () {
+      this.value = '123'
+    },
+    clear () {
+      this.value = ''
+    }
+  }
 }
 </script>

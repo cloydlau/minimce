@@ -14,9 +14,9 @@ import Imgpond from 'imgpond'
 
 Vue.use(Imgpond)
 
-import {EventBus} from 'plain-kit'
+import {eventBus} from 'plain-kit'
 
-Vue.use(EventBus)
+Vue.use(eventBus)
 
 //import Minimce from '../dist/minimce.umd.js'
 import Minimce from '../src/main.ts'
@@ -26,8 +26,8 @@ Vue.use(Minimce, {
   html2text: true,
   textMaxlength: 10,
   audioMenuItem: false,
-  Imgpond: Imgpond.Imgpond,
-  Filepool: Filepool.Filepool,
+  Imgpond,
+  Filepool,
   MobileLink: () => import('./MobileLink.vue'),
 })
 

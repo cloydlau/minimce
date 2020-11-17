@@ -17,27 +17,30 @@
     "lib": "vue-cli-service build --target lib --name minimce src/main.ts"
   },
   "dependencies": {
-    "@tinymce/tinymce-vue": "^3.2.3",
-    "core-js": "^3.6.0",
-    "html-to-text": "^5.1.1",
+    "@tinymce/tinymce-vue": "^3.2.6",
+    "core-js": "^3.7.0",
+    "html-to-text": "^6.0.0",
     "lodash": "^4.17.20",
-    "plain-kit": "^0.3.0-rc.0"
+    "plain-kit": "^0.4.6"
   },
   "peerDependencies": {
-    "element-ui": "^2.13.2",
+    "element-ui": "^2.14.1",
     "vue": "^2.6.12"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-typescript": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
-    "axios": "^0.20.0",
-    "element-ui": "^2.13.2",
-    "filepool": "^0.0.2",
-    "imgpond": "^0.2.11",
+    "axios": "^0.21.0",
+    "babel-plugin-import": "^1.13.1",
+    "element-ui": "^2.14.1",
+    "filepool": "^0.0.6",
+    "imgpond": "^0.3.1",
     "pic-viewer": "^0.2.7",
-    "sass": "^1.26.0",
-    "sass-loader": "^10.0.0",
-    "tinymce": "^5.4.2",
+    "sass": "^1.29.0",
+    "sass-loader": "^10.1.0",
+    "tinymce": "^5.5.1",
+    "typescript": "^4.0.0",
     "vue": "^2.6.12",
     "vue-template-compiler": "^2.6.12"
   }

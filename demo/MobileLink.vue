@@ -24,8 +24,8 @@
 </template>
 
 <script>
-import { $validator } from 'plain-kit'
-const { required } = $validator
+import { validator } from 'plain-kit'
+const { required } = validator
 import qs from 'qs'
 
 function getInitData () {
