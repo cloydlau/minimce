@@ -107,8 +107,8 @@ MobileLink
 组件通过```this.$eventBus.emit('insertTag', `<div/>`)```插入标签
 
 ```js
-import { EventBus } from 'plain-kit'
-Vue.use(EventBus) //需要事件总线通信
+import { eventBus } from 'plain-kit'
+Vue.use(eventBus) //需要事件总线通信
 
 import MobileLink from '@/components/MobileLink'
 import Minimce from 'minimce'
