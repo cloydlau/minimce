@@ -6267,14 +6267,14 @@ performance-now@^2.1.0:
   resolved "https://registry.npmjs.org/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
   integrity sha1-Ywn04OX6kT7BxpMHrjZLSzd8nns=
 
-pic-viewer@^0.2.7:
-  version "0.2.7"
-  resolved "https://registry.npmjs.org/pic-viewer/-/pic-viewer-0.2.7.tgz#5d82b432e365fa4ec299bc22c396f9574f0ae8a6"
-  integrity sha512-Smo/mgYGW53FU/MgwcqXRbeKQ6tE59R9auCwzxpq4p1ven9XkNV0dplFoS+1XqFbW6PjTCjzl12GLDaQGCGRJQ==
+pic-viewer@^0.2.8:
+  version "0.2.8"
+  resolved "https://registry.npmjs.org/pic-viewer/-/pic-viewer-0.2.8.tgz#cd210ff554e9f3bd27e72dc444ab4b6bc42b8ef1"
+  integrity sha512-OZEAigRg6k4w0OLu0wzdX3PGqZOjOEZE0yr19wxlVDaFiLjp2N4v9FJxFKVGoVbAnDGcuExVpCyOqq1UmDdDVw==
   dependencies:
-    core-js "^3.6.0"
-    viewerjs "^1.6.1"
-    vue "^2.6.11"
+    core-js "^3.7.0"
+    viewerjs "^1.8.0"
+    vue "^2.6.12"
 
 picomatch@^2.0.4, picomatch@^2.0.5, picomatch@^2.2.1:
   version "2.2.2"
@@ -8326,10 +8326,10 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-viewerjs@^1.6.1:
-  version "1.6.1"
-  resolved "https://registry.npmjs.org/viewerjs/-/viewerjs-1.6.1.tgz#719719898cbf7b63dd41763a0b4dabfa927ddfcf"
-  integrity sha512-2c6hURX1kaHNCluP0l+7nkI26/GBcQqpMRA4PGC3EsJ48lSpjYXK8C1pHC84q9kf4otANwxH2Nw8HAOk69ZTig==
+viewerjs@^1.8.0:
+  version "1.8.0"
+  resolved "https://registry.npmjs.org/viewerjs/-/viewerjs-1.8.0.tgz#8dc60b552d18c1365bec6bfef7c221ab3060f188"
+  integrity sha512-ck2geFG3Brg0FcfXIhs2kl3BMqInqW5ZFIFqKbTT/KKG2rS5UGC/47CfKQSBqwiyJVtEIe/dbt/Opu45sBz7Zw==
 
 vm-browserify@^1.0.1:
   version "1.1.2"
@@ -8396,11 +8396,6 @@ vue-template-es2015-compiler@^1.9.0:
   version "1.9.1"
   resolved "https://registry.npmjs.org/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
   integrity sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
-
-vue@^2.6.11:
-  version "2.6.11"
-  resolved "https://registry.npmjs.org/vue/-/vue-2.6.11.tgz#76594d877d4b12234406e84e35275c6d514125c5"
-  integrity sha512-VfPwgcGABbGAue9+sfrD4PuwFar7gPb1yl1UK1MwXoQPAw0BKSqWfoYCT/ThFrdEVWoI51dBuyCoiNU9bZDZxQ==
 
 vue@^2.6.12:
   version "2.6.12"

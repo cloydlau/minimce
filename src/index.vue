@@ -202,6 +202,7 @@ export default {
         },
         menubar: 'file edit view insert format tools table help',
         language: 'zh_CN',
+        media_live_embeds: true,
 
         ...this.tinymceOptions,
 
@@ -271,8 +272,9 @@ export default {
     },
   },
   created () {
-    //requireAll(require.context('tinymce/plugins', true, regExp)) // 报错
-    requireAll(require.context('tinymce/plugins', true, /^\.\/(print|preview|paste|importcss|searchreplace|autolink|autosave|directionality|code|visualblocks|visualchars|fullscreen|image|link|media|template|codesample|table|charmap|hr|pagebreak|nonbreaking|anchor|toc|insertdatetime|advlist|lists|wordcount|textpattern|noneditable|help|charmap|emoticons|emoticons\/js\/emojis\.min\.js)$/))
+    // requireAll(require.context('tinymce/plugins', true, regExp)) // 报错
+    // media插件导致video标签渲染为空白 暂时去掉
+    requireAll(require.context('tinymce/plugins', true, /^\.\/(print|preview|paste|importcss|searchreplace|autolink|autosave|directionality|code|visualblocks|visualchars|fullscreen|image|link|template|codesample|table|charmap|hr|pagebreak|nonbreaking|anchor|toc|insertdatetime|advlist|lists|wordcount|textpattern|noneditable|help|charmap|emoticons|emoticons\/js\/emojis\.min\.js)$/))
 
     this.$eventBus && this.$eventBus.on('insertTag', this.insertTag)
   },

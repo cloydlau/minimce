@@ -13,18 +13,20 @@
           <el-input v-model="form.name" maxlength="14" show-word-limit/>
         </el-form-item>
         <el-form-item label="封面" prop="imgUrl" :rules="required">
-          <slot name="Imgpond"
-                :v_model="form"
-                :count="1"
-                fixedRatio="1/1"
+          <slot
+            name="Imgpond"
+            :v_model="form"
+            :count="1"
+            fixedRatio="1/1"
           />
         </el-form-item>
       </template>
       <el-form-item label="上传文件" prop="fileUrl" :rules="required">
-        <slot name="Filepool"
-              :v_model="form"
-              :count='1'
-              :fileType="type"
+        <slot
+          name="Filepool"
+          :v_model="form"
+          :count='1'
+          :fileType="type"
         />
       </el-form-item>
     </el-form>
@@ -73,7 +75,7 @@ export default {
             this.$emit('insertTag', `<audio controls data-name="${this.form.name}" data-poster="${this.form.imgUrl}" src="${this.form.fileUrl}"></audio>`)
             this.$emit('update:show', false)
           } else if (this.type === 'video') {
-            if (this.form.fileUrl.toLowerCase().endsWith('.mp4')) {
+            if (typeof this.form.fileUrl === 'string' && this.form.fileUrl.toLowerCase().endsWith('.mp4')) {
               this.$emit('insertTag', `<video controls controlslist="nodownload" src="${this.form.fileUrl}"></video>`)
               this.$emit('update:show', false)
             } else {
@@ -88,5 +90,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+::v-deep .el-dialog {
+  min-width: 600px;
+}
 </style>

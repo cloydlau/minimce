@@ -6,15 +6,26 @@ import ElementUI from 'element-ui'
 
 Vue.use(ElementUI)
 
+import axios from 'axios'
+const request = axios.create()
+request.interceptors.response.use(response => response.config.method.toUpperCase() === 'HEAD' ? response : response.data)
+
 import Filepool from 'filepool'
 
-Vue.use(Filepool)
+Vue.use(Filepool, {
+  url: '',
+  request,
+  param: {
+    domainId: 4,
+    dir: 'video'
+  }
+})
 
 import Imgpond from 'imgpond'
 
 Vue.use(Imgpond)
 
-import {eventBus} from 'plain-kit'
+import { eventBus } from 'plain-kit'
 
 Vue.use(eventBus)
 

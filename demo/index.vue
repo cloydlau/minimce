@@ -5,8 +5,13 @@
       :text.sync="props.text"
       v-bind="props"
     />
-    <el-button @click="set" type="primary" style="width:100%">编程式设值</el-button>
-    <el-button @click="clear" style="width:100%">清空</el-button>
+
+    <br/>
+    <el-button-group>
+      <el-button @click="set" type="primary">编程式设值</el-button>
+      <el-button @click="clear">清空</el-button>
+    </el-button-group>
+
     <PropsEditor v-model="props"/>
   </el-dialog>
 </template>
@@ -48,3 +53,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+::v-deep .el-dialog {
+  min-width: 600px;
+}
+</style>
