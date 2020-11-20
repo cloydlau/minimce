@@ -191,7 +191,7 @@ export default {
         min_height: 500,
         relative_urls: false,
         convert_urls: false,
-        plugins: 'print preview paste importcss searchreplace autolink autosave directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount textpattern noneditable help charmap emoticons',
+        plugins: 'print preview paste importcss searchreplace autolink autosave directionality code visualblocks visualchars fullscreen image link template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount textpattern noneditable help charmap emoticons',
         toolbar: 'undo redo | bold italic underline | fontselect fontsizeselect formatselect | forecolor backcolor | charmap emoticons | alignleft aligncenter alignright alignjustify | outdent indent | ltr rtl | numlist bullist | removeformat preview save fullscreen',
         toolbar_sticky: true,
         menu: {

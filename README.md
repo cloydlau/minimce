@@ -36,8 +36,6 @@ import Minimce from 'minimce'
 
 // 组件内引入
 components: { Minimce }
-// ≤0.1.2（deprecated）
-components: { Minimce.Minimce }
 
 // 全局引入
 Vue.use(Minimce)
@@ -123,4 +121,4 @@ Vue.use(Minimce, {
 ### Notice
 
 - element-ui老版本可能存在Imgpond的图片无法清除的问题
-- （新版乾坤已解决该问题）tinymce有依赖window对象中的某些属性 在微前端环境中（如乾坤）对window对象做了代理 会导致报错 临时的解决方式是关闭subProject的jsSandbox
+- tinymce有依赖window对象中的某些属性 在微前端环境中（如乾坤）对window对象做了代理 会导致报错 临时的解决方式是关闭subProject的jsSandbox（新版乾坤已解决）
