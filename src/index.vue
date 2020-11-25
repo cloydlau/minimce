@@ -350,6 +350,7 @@ export default {
 </style>
 
 <style lang="scss">
+// todo: 此举为了超越el-dialog层级 但菜单的隐藏触发方式不是失焦而是外部点击 所以在菜单没有隐藏时打开的嵌套el-dialog会被菜单遮挡
 .tox-silver-sink {
   z-index: 3000 !important;
 }

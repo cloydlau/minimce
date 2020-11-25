@@ -63,10 +63,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.el-dialog__wrapper {
-  z-index: 3001 !important;
-}
-
 ::v-deep .el-dialog {
   min-width: 600px;
 }
