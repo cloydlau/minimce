@@ -1,4 +1,4 @@
-# minimce / 富文本编辑器 tinymce封装
+# minimce / 富文本编辑器（tinymce封装）
 
 
 ### Features
@@ -115,6 +115,38 @@ Vue.use(Minimce, {
   MobileLink
 })
 ```
+
+<br/>
+
+**样式**
+
+![给富文本加样式](./给富文本加样式.png)
+
+**内置样式**
+
+```
+line-height: 1.8;
+
+overflow: auto;
+
+p {
+  margin-block-end: 0;
+  margin-block-start: 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto !important;
+  vertical-align: middle;
+}
+
+audio, video {
+  width: 100%;
+  background-color: #000;
+}
+```
+
+> 可按需复制至富文本展示端使用
 
 <br/>
 
