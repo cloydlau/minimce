@@ -1,8 +1,11 @@
 <template>
-  <el-dialog :visible="show" :title="'插入'+{'audio':'音频','video':'视频'}[type]" :append-to-body="true"
-             :close-on-click-modal="false"
-             destroy-on-close
-             @close="$emit('update:show', false)"
+  <el-dialog
+    :visible="show"
+    :title="'插入'+{'audio':'音频','video':'视频'}[type]"
+    :append-to-body="true"
+    :close-on-click-modal="false"
+    destroy-on-close
+    @close="$emit('update:show', false)"
   >
     <el-form ref="rowForm"
              :model="form"
@@ -90,6 +93,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.el-dialog__wrapper {
+  z-index: 3001 !important;
+}
+
 ::v-deep .el-dialog {
   min-width: 600px;
 }

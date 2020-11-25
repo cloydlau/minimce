@@ -35,7 +35,15 @@ Vue.use(Filepool, {
 })
 
 import Imgpond from 'imgpond'
-Vue.use(Imgpond)
+Vue.use(Imgpond, {
+  request,
+  url: '',
+  param: {
+    domainId: 2,
+    dir: 'img',
+  },
+  poweredBy: 'element'
+})
 
 import { eventBus } from 'plain-kit'
 Vue.use(eventBus)
