@@ -48,9 +48,9 @@
 </template>
 
 <script>
-import TinyMCE from '@tinymce/tinymce-vue'
-import InsertTel from './components/InsertTel'
+import InsertTel from './components/InsertTel.vue'
 
+import TinyMCE from '@tinymce/tinymce-vue'
 import 'tinymce/tinymce'
 import 'tinymce/icons/default'
 import 'tinymce/themes/silver'
@@ -60,13 +60,56 @@ import './static/zh_CN'
 //const plugins = 'autoresize|print|preview|paste|importcss|searchreplace|autolink|autosave|directionality|code|visualblocks|visualchars|fullscreen|image|link|media|template|codesample|table|charmap|hr|pagebreak|nonbreaking|anchor|toc|insertdatetime|advlist|lists|wordcount|textpattern|noneditable|help|charmap|emoticons'
 //const regExp = new RegExp(`^\.\/(${plugins})\/index\.js$`)
 
-function requireAll (requireContext) {
+/*function requireAll (requireContext) {
   return requireContext.keys().map(requireContext)
-}
+}*/
 
-// requireAll(require.context('tinymce/plugins', true, regExp)) // 报错
-// media插件导致video标签渲染为空白 暂时去掉
-requireAll(require.context('tinymce/plugins', true, /^\.\/(media|print|preview|paste|importcss|searchreplace|autolink|autosave|directionality|code|visualblocks|visualchars|fullscreen|image|link|template|codesample|table|charmap|hr|pagebreak|nonbreaking|anchor|toc|insertdatetime|advlist|lists|wordcount|textpattern|noneditable|help|charmap|emoticons|emoticons\/js\/emojis\.min\.js)$/))
+//requireAll(require.context('tinymce/plugins', true, regExp)) // 报错
+//media插件导致video标签渲染为空白 暂时去掉
+//requireAll(require.context('tinymce/plugins', true, /^\.\/(media|print|preview|paste|importcss|searchreplace|autolink|autosave|directionality|code|visualblocks|visualchars|fullscreen|image|link|template|codesample|table|charmap|hr|pagebreak|nonbreaking|anchor|toc|insertdatetime|advlist|lists|wordcount|textpattern|noneditable|help|charmap|emoticons|emoticons\/js\/emojis\.min\.js)$/))
+
+//const modules = import.meta.glob('tinymce/plugins/*/index.js')
+
+import 'tinymce/plugins/media'
+import 'tinymce/plugins/print'
+import 'tinymce/plugins/preview'
+import 'tinymce/plugins/paste'
+import 'tinymce/plugins/importcss'
+import 'tinymce/plugins/searchreplace'
+import 'tinymce/plugins/autolink'
+import 'tinymce/plugins/autosave'
+import 'tinymce/plugins/directionality'
+import 'tinymce/plugins/code'
+import 'tinymce/plugins/visualblocks'
+import 'tinymce/plugins/visualchars'
+import 'tinymce/plugins/fullscreen'
+import 'tinymce/plugins/image'
+import 'tinymce/plugins/link'
+import 'tinymce/plugins/template'
+import 'tinymce/plugins/codesample'
+import 'tinymce/plugins/table'
+import 'tinymce/plugins/charmap'
+import 'tinymce/plugins/hr'
+import 'tinymce/plugins/pagebreak'
+import 'tinymce/plugins/nonbreaking'
+import 'tinymce/plugins/anchor'
+import 'tinymce/plugins/toc'
+import 'tinymce/plugins/insertdatetime'
+import 'tinymce/plugins/advlist'
+import 'tinymce/plugins/lists'
+import 'tinymce/plugins/wordcount'
+import 'tinymce/plugins/textpattern'
+import 'tinymce/plugins/noneditable'
+import 'tinymce/plugins/help'
+import 'tinymce/plugins/charmap'
+import 'tinymce/plugins/emoticons'
+import 'tinymce/plugins/emoticons/js/emojis.min'
+
+// 无法使用动态导入时
+import htmlToText from 'html-to-text'
+import { throttle } from 'lodash-es'
+import InsertImg from './components/InsertImg.vue'
+import InsertFile from './components/InsertFile.vue'
 
 export default {
   components: { TinyMCE, InsertTel },
@@ -142,13 +185,15 @@ export default {
     },
     html2text: {
       immediate: true,
-      handler (newVal, oldVal) {
+      async handler (newVal, oldVal) {
         if (newVal) {
           if (!this.htmlToText) {
-            this.htmlToText = require('html-to-text')
+            //this.htmlToText = await import('html-to-text')
+            this.htmlToText = htmlToText
           }
           if (!this.throttle) {
-            this.throttle = require('lodash/throttle')
+            //this.throttle = (await import('lodash-es')).throttle
+            this.throttle = throttle
           }
         }
       }
@@ -213,6 +258,7 @@ export default {
         menubar: 'file edit view insert format tools table help',
         language: 'zh_CN',
         media_live_embeds: true,
+        extended_valid_elements: 'img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name|referrerpolicy=no-referrer]',
 
         ...this.tinymceOptions,
 
@@ -232,7 +278,8 @@ export default {
             }
           })
           if (this.$scopedSlots.Imgpond) {
-            this.InsertImg = require('./components/InsertImg').default
+            //this.InsertImg = () => import('./components/InsertImg.vue')
+            this.InsertImg = InsertImg
             editor.ui.registry.addMenuItem('localimage', {
               text: '本地图片',
               icon: 'image',
@@ -243,7 +290,8 @@ export default {
           }
           if (this.$scopedSlots.Filepool) {
             if (this.audioMenuItem) {
-              this.InsertAudio = require('./components/InsertFile').default
+              //this.InsertAudio = () => import('./components/InsertFile.vue')
+              this.InsertAudio = InsertFile
               editor.ui.registry.addIcon('audio', `<svg t="1588903157483" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1160" width="200" height="200"><path d="M742.78 128H430.89v96h0.11v306.65c-28.24-16.34-61.03-25.69-96-25.69-106.04 0-192 85.96-192 192s85.96 192 192 192c103.68 0 188.15-82.18 191.86-184.96h0.14V224h119.78l96-96zM335 792.96c-53.02 0-96-42.98-96-96s42.98-96 96-96 96 42.98 96 96-42.98 96-96 96z" p-id="1161"></path></svg>`)
               editor.ui.registry.addMenuItem('localaudio', {
                 text: '本地音频',
@@ -254,7 +302,8 @@ export default {
               })
             }
 
-            this.InsertVideo = require('./components/InsertFile').default
+            //this.InsertVideo = () => import('./components/InsertFile.vue')
+            this.InsertVideo = InsertFile
             editor.ui.registry.addMenuItem('localvideo', {
               text: '本地视频',
               icon: 'embed',
@@ -283,7 +332,7 @@ export default {
     },
   },
   created () {
-    this.$eventBus && this.$eventBus.on('insertTag', this.insertTag)
+    this.eventBus__ && this.eventBus__.on('insertTag', this.insertTag)
   },
   beforeDestroy () {
     this.close()
@@ -294,7 +343,7 @@ export default {
   methods: {
     close () {
       window.tinymce && window.tinymce.get(this.tinymceId).setContent('')
-      this.$eventBus && this.$eventBus.off('insertTag', this.insertTag)
+      this.eventBus__ && this.eventBus__.off('insertTag', this.insertTag)
     },
     insertTag (tag) {
       window.tinymce.get(this.tinymceId).insertContent(tag)

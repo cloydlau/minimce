@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import RichText from './index'
+import RichText from './index.vue'
 import { apiKey, html2text, textMaxlength, audioMenuItem, Imgpond, Filepool, MobileLink, tinymceOptions } from './config.ts'
 
 export default {

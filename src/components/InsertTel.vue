@@ -10,7 +10,7 @@
     <el-form ref="rowForm"
              :model="form"
     >
-      <el-form-item label="" prop="tel" :rules="[required,tel(false)]">
+      <el-form-item label="" prop="tel" :rules="tel">
         <el-input v-model="form.tel" clearable/>
       </el-form-item>
     </el-form>
@@ -22,7 +22,8 @@
 </template>
 
 <script>
-import { validator } from 'plain-kit'
+import { validator, isEmpty } from 'kayran'
+const { tel } = validator
 
 export default {
   props: {
@@ -30,8 +31,20 @@ export default {
   },
   data () {
     return {
-      required: validator.required,
-      tel: validator.tel,
+      tel: {
+        required: true,
+        validator (rule, value, callback) {
+          let errInfo = ''
+          if (isEmpty(value)) {
+            errInfo = '必填项'
+          } else {
+            errInfo = tel(value, {
+              multiple: false
+            })
+          }
+          callback(errInfo ? new Error(errInfo) : undefined)
+        }
+      },
       form: {
         tel: ''
       }

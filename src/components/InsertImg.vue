@@ -10,7 +10,7 @@
     <el-form ref="rowForm"
              :model="form"
     >
-      <el-form-item label="" prop="imgUrl" :rules="required">
+      <el-form-item label="" prop="imgUrl" :rules="{required:true,message:'必填项'}">
         <slot name="Imgpond"
               :v_model="form"
               valueType="array"
@@ -25,7 +25,6 @@
 </template>
 
 <script>
-import { validator } from 'plain-kit'
 
 export default {
   props: {
@@ -33,7 +32,6 @@ export default {
   },
   data () {
     return {
-      required: validator.required,
       form: {
         imgUrl: []
       }

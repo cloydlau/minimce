@@ -19,7 +19,7 @@
 <script>
 //import { Minimce } from '../dist/minimce.umd'
 
-import PropsEditor from './PropsEditor'
+import PropsEditor from './PropsEditor.vue'
 
 import Filepool from 'filepool'
 import Imgpond from 'imgpond'

@@ -3,16 +3,6 @@
 
 ### Features
 
-*EN*
-
-- √ Offline ready.
-- √ Support for uploading local images, local audios and local videos, seamless integration for Imgpond and Filepool.
-- √ Support for converting HTML into text.
-- √ Register globally or within scope. Config only once for common settings.
-- √ Support for global disabled of el-form
-
-*CN*
-
 - √ 支持离线 断网环境可用
 - √ 支持本地图片/本地音频/本地视频上传 无缝集成imgpond/filepool
 - √ 支持html转普通文本 使用场景：将前n个字符作为缩略简介 n值可配置
@@ -27,9 +17,7 @@
 $ yarn add minimce
 ```
 
-Dependencies：vue element-ui
-
-> Optional: imgpond filepool
+Dependencies：vue element-ui imgpond? filepool?
 
 ```js
 import Minimce from 'minimce'
@@ -102,7 +90,7 @@ MobileLink
 
 > tinymce的插入链接功能只能插入普通链接 如果需要定制化需求 比如想要插入的链接是移动端某个页面的链接 可以自定义一个组件
 
-组件通过```this.$eventBus.emit('insertTag', `<div/>`)```插入标签
+组件通过```this.eventBus__.emit('insertTag', `<div/>`)```插入标签
 
 ```js
 import { eventBus } from 'plain-kit'

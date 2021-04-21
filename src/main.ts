@@ -23,9 +23,3 @@ if (typeof window !== 'undefined' && window.Vue) {
 Minimce.install = install
 
 export default Minimce
-
-// todo: deprecated
-export {
-  Minimce
-}
-

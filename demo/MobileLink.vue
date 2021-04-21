@@ -1,12 +1,17 @@
 <template>
-  <el-dialog title="插入移动端页面链接" :visible.sync="show" :close-on-click-modal="false" append-to-body destroy-on-close
-             @close="$emit('update:show', false)"
+  <el-dialog
+    title="插入移动端页面链接"
+    :visible.sync="show"
+    :close-on-click-modal="false"
+    append-to-body
+    destroy-on-close
+    @close="$emit('update:show', false)"
   >
     <el-form ref="rowForm" :model="material" label-position="right" label-width="85px">
-      <!--<el-form-item label="目标页面" prop="target" :rules="required">
+      <!--<el-form-item label="目标页面" prop="target" :rules="{required:true,message:'必填项'}">
 
       </el-form-item>-->
-      <el-form-item label="链接名称" prop="innerText" :rules="required">
+      <el-form-item label="链接名称" prop="innerText" :rules="{required:true,message:'必填项'}">
         <el-input v-model="material.innerText" maxlength="30" show-word-limit/>
       </el-form-item>
       <transition name="slide-fade">
@@ -24,13 +29,10 @@
 </template>
 
 <script>
-import { validator } from 'plain-kit'
-const { required } = validator
 import qs from 'qs'
 
 function getInitData () {
   return {
-    required,
     material: {
       target: {
         src_type: 'test'
@@ -87,7 +89,7 @@ export default {
     },
     insert () {
       this.$emit('update:show', false)
-      this.$eventBus.emit('insertTag', this.tag)
+      this.eventBus__.emit('insertTag', this.tag)
     }
   }
 }

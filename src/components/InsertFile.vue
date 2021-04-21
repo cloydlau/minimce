@@ -12,10 +12,10 @@
              label-width="85px"
     >
       <template v-if="type==='audio'">
-        <el-form-item label="名称" prop="name" :rules="required">
+        <el-form-item label="名称" prop="name" :rules="{required:true,message:'必填项'}">
           <el-input v-model="form.name" maxlength="14" show-word-limit/>
         </el-form-item>
-        <el-form-item label="封面" prop="imgUrl" :rules="required">
+        <el-form-item label="封面" prop="imgUrl" :rules="{required:true,message:'必填项'}">
           <slot
             name="Imgpond"
             :v_model="form"
@@ -24,7 +24,7 @@
           />
         </el-form-item>
       </template>
-      <el-form-item label="上传文件" prop="fileUrl" :rules="required">
+      <el-form-item label="上传文件" prop="fileUrl" :rules="{required:true,message:'必填项'}">
         <slot
           name="Filepool"
           :v_model="form"
@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import { validator, Swal } from 'plain-kit'
+import { Swal } from 'kikimore'
 
 export default {
   props: {
@@ -51,7 +51,6 @@ export default {
   },
   data () {
     return {
-      required: validator.required,
       form: {
         imgUrl: '',
         name: '',
@@ -82,7 +81,7 @@ export default {
               this.$emit('insertTag', `<video controls controlslist="nodownload" src="${this.form.fileUrl}"></video>`)
               this.$emit('update:show', false)
             } else {
-              Swal.warn('仅支持以.mp4结尾的视频链接')
+              Swal.warning('仅支持以.mp4结尾的视频链接')
             }
           }
         }

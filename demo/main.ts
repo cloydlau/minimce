@@ -45,12 +45,23 @@ Vue.use(Imgpond, {
   poweredBy: 'element'
 })
 
-import { eventBus } from 'plain-kit'
-Vue.use(eventBus)
+Vue.prototype.eventBus__ = new Vue({
+  methods: {
+    emit (event, ...args) {
+      this.$emit(event, ...args)
+    },
+    on (event, callback) {
+      this.$on(event, callback)
+    },
+    off (event, callback) {
+      this.$off(event, callback)
+    }
+  }
+})
 
-//import Minimce from '../dist/minimce.umd.js'
-import Minimce from '../src/main.ts'
-
+//import '../dist/style.css'
+import Minimce from '../dist/minimce.umd.min.js'
+//import Minimce from '../src/main.ts'
 Vue.use(Minimce, {
   apiKey: '',
   html2text: true,
