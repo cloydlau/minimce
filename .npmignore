@@ -27,3 +27,6 @@ babel.config.js
 public/
 demo/
 tsconfig.json
+/cdn-demo.html
+
+/.env.development

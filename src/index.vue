@@ -55,7 +55,10 @@ import 'tinymce/tinymce'
 import 'tinymce/icons/default'
 import 'tinymce/themes/silver'
 import 'tinymce/skins/ui/oxide/skin.min.css'
-import './static/zh_CN'
+
+import './static/v5.7.1-108/zh_CN'
+import './static/v5.7.1-108/wordimport'
+import './static/v5.7.1-108/powerpaste.min'
 
 //const plugins = 'autoresize|print|preview|paste|importcss|searchreplace|autolink|autosave|directionality|code|visualblocks|visualchars|fullscreen|image|link|media|template|codesample|table|charmap|hr|pagebreak|nonbreaking|anchor|toc|insertdatetime|advlist|lists|wordcount|textpattern|noneditable|help|charmap|emoticons'
 //const regExp = new RegExp(`^\.\/(${plugins})\/index\.js$`)
@@ -73,7 +76,6 @@ import './static/zh_CN'
 import 'tinymce/plugins/media'
 import 'tinymce/plugins/print'
 import 'tinymce/plugins/preview'
-import 'tinymce/plugins/paste'
 import 'tinymce/plugins/importcss'
 import 'tinymce/plugins/searchreplace'
 import 'tinymce/plugins/autolink'
@@ -104,6 +106,8 @@ import 'tinymce/plugins/help'
 import 'tinymce/plugins/charmap'
 import 'tinymce/plugins/emoticons'
 import 'tinymce/plugins/emoticons/js/emojis.min'
+
+//import 'tinymce/plugins/paste'
 
 // 无法使用动态导入时
 import htmlToText from 'html-to-text'
@@ -222,6 +226,12 @@ export default {
     },
     options () {
       return {
+        powerpaste_html_import: 'prompt',
+        powerpaste_word_import: 'clean',
+        paste_postprocess (pluginApi, data) {
+        },
+        paste_preprocess (pluginApi, data) {
+        },
         invalid_elements: 'iframe,frame',
         // 含'tinymce/skins/ui/oxide/content.min.css'
         content_style: `
@@ -246,8 +256,8 @@ export default {
         min_height: 500,
         relative_urls: false,
         convert_urls: false,
-        plugins: 'print preview paste importcss searchreplace autolink autosave directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount textpattern noneditable help charmap emoticons',
-        toolbar: 'undo redo | bold italic underline | fontselect fontsizeselect formatselect | forecolor backcolor | charmap emoticons | alignleft aligncenter alignright alignjustify | outdent indent | ltr rtl | numlist bullist | removeformat preview save fullscreen',
+        plugins: 'print preview powerpaste importcss searchreplace autolink autosave directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount textpattern noneditable help charmap emoticons',
+        toolbar: 'undo redo pastetext | bold italic underline | fontselect fontsizeselect formatselect | forecolor backcolor | charmap emoticons | alignleft aligncenter alignright alignjustify | outdent indent | ltr rtl | numlist bullist | removeformat preview save fullscreen',
         toolbar_sticky: true,
         menu: {
           insert: {
