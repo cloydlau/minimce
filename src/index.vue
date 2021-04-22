@@ -1,8 +1,9 @@
 <template>
   <div>
-    <div v-if="readonly" v-html="value__" class="rich__text"/>
+    <div v-if="readonly" v-html="value__" class="minimce"/>
     <div v-else v-loading="loading">
       <TinyMCE
+        v-if="ready"
         :id="tinymceId"
         v-model="value__"
         :init="options"
@@ -57,8 +58,6 @@ import 'tinymce/themes/silver'
 import 'tinymce/skins/ui/oxide/skin.min.css'
 
 import './static/v5.7.1-108/zh_CN'
-import './static/v5.7.1-108/wordimport'
-import './static/v5.7.1-108/powerpaste.min'
 
 //const plugins = 'autoresize|print|preview|paste|importcss|searchreplace|autolink|autosave|directionality|code|visualblocks|visualchars|fullscreen|image|link|media|template|codesample|table|charmap|hr|pagebreak|nonbreaking|anchor|toc|insertdatetime|advlist|lists|wordcount|textpattern|noneditable|help|charmap|emoticons'
 //const regExp = new RegExp(`^\.\/(${plugins})\/index\.js$`)
@@ -106,8 +105,9 @@ import 'tinymce/plugins/help'
 import 'tinymce/plugins/charmap'
 import 'tinymce/plugins/emoticons'
 import 'tinymce/plugins/emoticons/js/emojis.min'
-
-//import 'tinymce/plugins/paste'
+import 'tinymce/plugins/save'
+import 'tinymce/plugins/imagetools'
+import 'tinymce/plugins/quickbars'
 
 // 无法使用动态导入时
 import htmlToText from 'html-to-text'
@@ -139,7 +139,8 @@ export default {
     },
     tinymceOptions: {
       type: Object,
-    }
+    },
+    premium: Boolean
   },
   model: {
     prop: 'value',
@@ -207,6 +208,7 @@ export default {
     return {
       tinymceId: 'vue-tinymce-' + +new Date() + ((Math.random() * 1000).toFixed(0) + ''),
       value__: '',
+      ready: false,
       loading: true,
       showInsertionDialog: {
         img: false,
@@ -226,11 +228,24 @@ export default {
     },
     options () {
       return {
-        powerpaste_html_import: 'prompt',
-        powerpaste_word_import: 'clean',
-        paste_postprocess (pluginApi, data) {
-        },
-        paste_preprocess (pluginApi, data) {
+        ...this.premium ? {
+          skin: 'fabric',
+          content_css: 'fabric',
+          icons: 'material',
+          powerpaste_html_import: 'clean',
+          powerpaste_word_import: 'clean',
+          paste_postprocess (pluginApi, data) {
+          },
+          paste_preprocess (pluginApi, data) {
+          },
+          plugins: 'print preview powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker imagetools textpattern noneditable help formatpainter permanentpen pageembed charmap tinycomments mentions quickbars linkchecker emoticons advtable',
+          mobile: {
+            plugins: 'print preview powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker textpattern noneditable help formatpainter pageembed charmap mentions quickbars linkchecker emoticons advtable'
+          },
+          toolbar: 'undo redo pastetext | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | a11ycheck ltr rtl | showcomments addcomment',
+        } : {
+          plugins: 'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
+          toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
         },
         invalid_elements: 'iframe,frame',
         // 含'tinymce/skins/ui/oxide/content.min.css'
@@ -256,8 +271,6 @@ export default {
         min_height: 500,
         relative_urls: false,
         convert_urls: false,
-        plugins: 'print preview powerpaste importcss searchreplace autolink autosave directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount textpattern noneditable help charmap emoticons',
-        toolbar: 'undo redo pastetext | bold italic underline | fontselect fontsizeselect formatselect | forecolor backcolor | charmap emoticons | alignleft aligncenter alignright alignjustify | outdent indent | ltr rtl | numlist bullist | removeformat preview save fullscreen',
         toolbar_sticky: true,
         menu: {
           insert: {
@@ -266,9 +279,12 @@ export default {
           },
         },
         menubar: 'file edit view insert format tools table help',
-        language: 'zh_CN',
+        image_advtab: true,
+        image_caption: true,
         media_live_embeds: true,
+        toolbar_mode: 'sliding',
         extended_valid_elements: 'img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name|referrerpolicy=no-referrer]',
+        language: 'zh_CN',
 
         ...this.tinymceOptions,
 
@@ -341,8 +357,17 @@ export default {
       }
     },
   },
-  created () {
-    this.eventBus__ && this.eventBus__.on('insertTag', this.insertTag)
+  async created () {
+    if (this.premium) {
+      await import('./static/v5.7.1-108/wordimport')
+      await import('./static/v5.7.1-108/powerpaste.min')
+    } else {
+      await import('tinymce/plugins/paste')
+    }
+
+    this.eventBus__?.on('insertTag', this.insertTag)
+
+    this.ready = true
   },
   beforeDestroy () {
     this.close()
@@ -360,25 +385,25 @@ export default {
     },
     addStyle (html) {
       window.tinymce.get(this.tinymceId).setContent(`<style>
-        .rich__text {
+        .minimce {
           line-height: 1.8;
           overflow: auto;
         }
-        .rich__text p {
+        .minimce p {
           margin-block-end: 0;
           margin-block-start: 0;
         }
-        .rich__text img {
+        .minimce img {
           max-width: 100%;
           height: auto !important;
           vertical-align: middle;
         }
-        .rich__text audio, .rich__text video {
+        .minimce audio, .minimce video {
           width: 100%;
           background-color: #000;
         }
       </style>`.replace(/[\f\n\r\t\v]/g, '') +
-        `<div class="rich__text">${html}</div>`)
+        `<div class="minimce">${html}</div>`)
     }
   }
 }
@@ -386,7 +411,7 @@ export default {
 
 <style lang="scss" scoped>
 //for disabled
-.rich__text {
+.minimce {
   line-height: 1.8;
   overflow: auto;
 
