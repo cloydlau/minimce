@@ -1,7 +1,8 @@
 <template>
-  <RichText v-model="selfValue"
-            :text.sync="selfText"
-            v-bind="props"
+  <RichText
+    v-model="selfValue"
+    :text.sync="selfText"
+    v-bind="props"
   >
     <template #mobilelink="{show}" v-if="MobileLink">
       <component :is="MobileLink" :show.sync="show.mobilelink"/>
@@ -17,7 +18,7 @@
 
 <script>
 import RichText from './index.vue'
-import { apiKey, html2text, textMaxlength, audioMenuItem, Imgpond, Filepool, MobileLink, tinymceOptions } from './config.ts'
+import globalProps from './config.ts'
 
 export default {
   name: 'Minimce',
@@ -54,6 +55,12 @@ export default {
     event: 'change'
   },
   data () {
+    const {
+      Imgpond,
+      Filepool,
+      MobileLink,
+    } = globalProps
+
     return {
       MobileLink: MobileLink || this.$attrs.MobileLink,
       Imgpond: Imgpond || this.$attrs.Imgpond,
@@ -64,6 +71,15 @@ export default {
   },
   computed: {
     props () {
+      const {
+        plan,
+        apiKey,
+        html2text,
+        textMaxlength,
+        audioMenuItem,
+        tinymceOptions
+      } = globalProps
+
       return {
         ...this.$attrs,
         audioMenuItem: typeof this.$attrs.audioMenuItem === 'boolean' ?
@@ -77,6 +93,7 @@ export default {
         apiKey: this.$attrs.apiKey || apiKey,
         textMaxlength: this.$attrs.textMaxlength || textMaxlength,
         tinymceOptions: this.$attrs.tinymceOptions || tinymceOptions,
+        plan
       }
     }
   }

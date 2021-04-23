@@ -1,6 +1,5 @@
 # minimce / 富文本编辑器（tinymce封装）
 
-
 ### Features
 
 - √ 支持离线 断网环境可用
@@ -12,7 +11,9 @@
 <br/>
 
 ### Installation
+
 ![NPM](https://nodei.co/npm/minimce.png)
+
 ``` bash
 $ yarn add minimce
 ```
@@ -34,6 +35,7 @@ Vue.use(Minimce)
 ### Quick Start
 
 ```html
+
 <Minimce v-model=""/>
 ```
 
@@ -41,12 +43,13 @@ Vue.use(Minimce)
 | --- | --- | --- | --- | --- | --- |
 | value / v-model | 双绑 | props | string | | |
 | apiKey | tinymce api key | global，props | string | https://www.tiny.cloud/auth/signup/ | |
+| plan | tinymce plan（默认启用plan包含的所有插件，tinydrive、mediaembed除外） | global | string | 'core'/'essential'/'professional'/'custom' 参考https://www.tiny.cloud/pricing | 'core' |
 | disabled | 是否禁用（禁用模式不可编辑，保留工具栏） | props | boolean | | false |
 | readonly | 是否只读（只读模式仅展示html，相当于预览） | props | boolean | | false |
 | html2text | 是否开启html转普通文本功能 | global，props | boolean | | false |
 | text | value对应的普通文本（仅在html2text为true时有效） | props | string | | |
 | textMaxlength | 普通文本取自前多少个字符（设置为Infinity则不设上限） | global，props | number | | 30 |
-| tinymceOptions | tinymce配置 | global，props | object | https://www.tiny.cloud/docs/configure/ | 除setup之外均可配置 |
+| tinymceOptions | tinymce配置 | global，props | object/function | https://www.tiny.cloud/docs/configure/ | 除setup之外均可配置 |
 | Imgpond | 上传图片插件（配置后自动开启功能） | global | Vue Component | | |
 | Filepool | 上传文件插件（配置后自动开启功能） | global | Vue Component | | |
 | audioMenuItem | 是否显示音频上传按钮（仅在配置了Filepool时有效） | global，props | boolean | | true |
@@ -93,8 +96,20 @@ MobileLink
 组件通过```this.eventBus__.emit('insertTag', `<div/>`)```插入标签
 
 ```js
-import { eventBus } from 'plain-kit'
-Vue.use(eventBus) //需要事件总线通信
+// 事件通信
+Vue.prototype.eventBus__ = new Vue({
+  methods: {
+    emit (event, ...args) {
+      this.$emit(event, ...args)
+    },
+    on (event, callback) {
+      this.$on(event, callback)
+    },
+    off (event, callback) {
+      this.$off(event, callback)
+    }
+  }
+})
 
 import MobileLink from '@/components/MobileLink'
 import Minimce from 'minimce'

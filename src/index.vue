@@ -53,10 +53,7 @@ import InsertTel from './components/InsertTel.vue'
 
 import TinyMCE from '@tinymce/tinymce-vue'
 import 'tinymce/tinymce'
-import 'tinymce/icons/default'
 import 'tinymce/themes/silver'
-import 'tinymce/skins/ui/oxide/skin.min.css'
-
 import './static/v5.7.1-108/zh_CN'
 
 //const plugins = 'autoresize|print|preview|paste|importcss|searchreplace|autolink|autosave|directionality|code|visualblocks|visualchars|fullscreen|image|link|media|template|codesample|table|charmap|hr|pagebreak|nonbreaking|anchor|toc|insertdatetime|advlist|lists|wordcount|textpattern|noneditable|help|charmap|emoticons'
@@ -115,6 +112,8 @@ import { throttle } from 'lodash-es'
 import InsertImg from './components/InsertImg.vue'
 import InsertFile from './components/InsertFile.vue'
 
+const plans = ['core', 'essential', 'professional', 'custom']
+
 export default {
   components: { TinyMCE, InsertTel },
   inject: {
@@ -138,9 +137,13 @@ export default {
       default: 30
     },
     tinymceOptions: {
-      type: Object,
+      type: [Object, Function],
     },
-    premium: Boolean
+    plan: {
+      type: String,
+      default: 'core',
+      validator: value => plans.includes(value)
+    }
   },
   model: {
     prop: 'value',
@@ -223,30 +226,47 @@ export default {
     }
   },
   computed: {
+    planLevel () {
+      return plans.indexOf(this.plan)
+    },
     Disabled () {
       return this.disabled || (this.elForm || {}).disabled
     },
     options () {
-      return {
-        ...this.premium ? {
-          skin: 'fabric',
-          content_css: 'fabric',
-          icons: 'material',
+      const defaultOptions = {
+        // core
+        plugins: 'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
+        toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
+        ...this.planLevel > 0 && {
+          //...localStorage['minimce-skin'] && { skin: localStorage['minimce-skin'] },
+          //...localStorage['minimce-icons'] && { icons: localStorage['minimce-icons'] },
           powerpaste_html_import: 'clean',
           powerpaste_word_import: 'clean',
           paste_postprocess (pluginApi, data) {
           },
           paste_preprocess (pluginApi, data) {
           },
-          plugins: 'print preview powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker imagetools textpattern noneditable help formatpainter permanentpen pageembed charmap tinycomments mentions quickbars linkchecker emoticons advtable',
+          //plugins: 'print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount imagetools textpattern noneditable help formatpainter permanentpen pageembed charmap quickbars emoticons advtable',
           mobile: {
-            plugins: 'print preview powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker textpattern noneditable help formatpainter pageembed charmap mentions quickbars linkchecker emoticons advtable'
+            plugins: 'print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount textpattern noneditable help formatpainter pageembed charmap quickbars emoticons advtable'
           },
-          toolbar: 'undo redo pastetext | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | a11ycheck ltr rtl | showcomments addcomment',
-        } : {
-          plugins: 'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
-          toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
+          toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | ltr rtl',
         },
+        ...this.planLevel > 1 && {
+          plugins: 'print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker imagetools textpattern noneditable help formatpainter permanentpen pageembed charmap quickbars linkchecker emoticons advtable',
+          mobile: {
+            plugins: 'print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker textpattern noneditable help formatpainter pageembed charmap quickbars linkchecker emoticons advtable'
+          },
+          toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | a11ycheck ltr rtl',
+        },
+        ...this.planLevel > 2 && {
+          plugins: 'print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker imagetools textpattern noneditable help formatpainter permanentpen pageembed charmap tinycomments mentions quickbars linkchecker emoticons advtable',
+          mobile: {
+            plugins: 'print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker textpattern noneditable help formatpainter pageembed charmap mentions quickbars linkchecker emoticons advtable'
+          },
+          toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | a11ycheck ltr rtl | showcomments addcomment',
+        },
+
         invalid_elements: 'iframe,frame',
         // 含'tinymce/skins/ui/oxide/content.min.css'
         content_style: `
@@ -277,6 +297,10 @@ export default {
             title: 'Insert',
             items: 'localimage localvideo localaudio | mobilelink tel | image link media template codesample inserttable | charmap emoticons hr | pagebreak nonbreaking anchor toc | insertdatetime'
           },
+          view: {
+            title: 'View',
+            items: 'code | visualaid visualchars visualblocks | spellchecker | preview fullscreen | skin icons'
+          }
         },
         menubar: 'file edit view insert format tools table help',
         image_advtab: true,
@@ -285,9 +309,6 @@ export default {
         toolbar_mode: 'sliding',
         extended_valid_elements: 'img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name|referrerpolicy=no-referrer]',
         language: 'zh_CN',
-
-        ...this.tinymceOptions,
-
         init_instance_callback: editor => {
           if (typeof this.tinymceOptions?.init_instance_callback === 'function') {
             this.tinymceOptions.init_instance_callback(editor)
@@ -295,6 +316,85 @@ export default {
           this.loading = false
         },
         setup: editor => {
+          /*if (this.planLevel > 0) {
+            /!**
+             * 皮肤
+             *!/
+            let skinsList = [
+              '默认',
+              'material-classic',
+              'material-outline',
+              'bootstrap',
+              'fabric',
+              'borderless',
+              'small',
+              'jam',
+              'naked',
+              'outside',
+              'snow',
+            ]
+            skinsList.map(text => {
+              editor.ui.registry.addToggleMenuItem(`toggleMenuItem-skin-${text}`, {
+                text,
+                active: (localStorage['minimce-skin'] || '默认') === text,
+                /!*onSetup: function (api) {
+                  api.setActive(toggleState)
+                  return function () {}
+                },*!/
+                onAction: () => {
+                  if (text === '默认') {
+                    localStorage.removeItem('minimce-skin')
+                  } else {
+                    localStorage['minimce-skin'] = text
+                  }
+                  this.reload()
+                },
+              })
+            })
+            editor.ui.registry.addNestedMenuItem('skin', {
+              text: '皮肤',
+              getSubmenuItems: () => skinsList.map(text => `toggleMenuItem-skin-${text}`)
+            })
+
+            /!**
+             * 图标风格
+             *!/
+            let iconsList = [
+              '默认',
+              'jam',
+              'small',
+            ]
+            if (!iconsList.includes(localStorage['minimce-skin'])) {
+              iconsList = [
+                ...iconsList,
+                'bootstrap',
+                'material',
+                'thin',
+              ]
+            }
+            iconsList.map(text => {
+              editor.ui.registry.addToggleMenuItem(`toggleMenuItem-icons-${text}`, {
+                text,
+                active: (localStorage['minimce-icons'] || '默认') === text,
+                onAction: () => {
+                  if (text === '默认') {
+                    localStorage.removeItem('minimce-icons')
+                  } else {
+                    localStorage['minimce-icons'] = text
+                  }
+                  this.reload()
+                },
+              })
+            })
+            editor.ui.registry.addNestedMenuItem('icons', {
+              text: '图标风格',
+              getSubmenuItems: () => iconsList.map(text => `toggleMenuItem-icons-${text}`)
+            })
+          }*/
+
+          /**
+           * 电话号码
+           */
           editor.ui.registry.addIcon('tel', `<svg t="1593331139446" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="10282" width="200" height="200"><path d="M780.207 868.621c0 48.892-40.51 89.402-89.402 89.402L333.195 958.023c-48.892 0-89.402-40.511-89.402-89.402L243.793 153.402c0-48.891 40.51-89.402 89.402-89.402l357.609 0c48.893 0 89.402 40.511 89.402 89.402L780.206 868.621zM713.155 265.155c0-11.875-10.478-22.351-22.351-22.351L333.195 242.804c-11.874 0-22.351 10.476-22.351 22.351l0 491.713c0 11.874 10.477 22.351 22.351 22.351l357.609 0c11.873 0 22.351-10.477 22.351-22.351L713.155 265.155zM567.877 153.402 456.124 153.402c-6.286 0-11.175 4.89-11.175 11.176 0 6.284 4.889 11.174 11.175 11.174l111.753 0c6.285 0 11.175-4.89 11.175-11.174C579.052 158.292 574.162 153.402 567.877 153.402zM512 812.744c-30.732 0-55.876 25.145-55.876 55.877s25.145 55.877 55.876 55.877c30.732 0 55.877-25.145 55.877-55.877S542.732 812.744 512 812.744z" p-id="10283"></path></svg>`)
           editor.ui.registry.addMenuItem('tel', {
             text: '电话号码',
@@ -303,6 +403,10 @@ export default {
               this.showInsertionDialog.tel = true
             }
           })
+
+          /**
+           * 本地图片
+           */
           if (this.$scopedSlots.Imgpond) {
             //this.InsertImg = () => import('./components/InsertImg.vue')
             this.InsertImg = InsertImg
@@ -314,6 +418,10 @@ export default {
               }
             })
           }
+
+          /**
+           * 本地音视频
+           */
           if (this.$scopedSlots.Filepool) {
             if (this.audioMenuItem) {
               //this.InsertAudio = () => import('./components/InsertFile.vue')
@@ -338,6 +446,10 @@ export default {
               }
             })
           }
+
+          /**
+           * 移动端页面链接
+           */
           if (this.$scopedSlots.mobilelink) {
             editor.ui.registry.addMenuItem('mobilelink', {
               text: '移动端页面链接',
@@ -355,14 +467,58 @@ export default {
         // 由于content.css应用于iframe内部 所以直接import不生效 必须在这里指定 但是组件外部也同样需要将该文件放入public才能访问到 所以只能使用content_style
         // content_css: './tinymce-static/content.min.css',
       }
+
+      return typeof this.tinymceOptions === 'function' ?
+        this.tinymceOptions(defaultOptions) : {
+          ...defaultOptions,
+          ...this.tinymceOptions
+        }
     },
   },
   async created () {
-    if (this.premium) {
-      await import('./static/v5.7.1-108/wordimport')
-      await import('./static/v5.7.1-108/powerpaste.min')
-    } else {
+    //if (this.planLevel > 0 && localStorage['minimce-skin']) {
+    //  await import(`./static/v5.7.1-108/skin/${localStorage['minimce-skin']}.min.css`)
+    //  await import(`./static/v5.7.1-108/skin/${localStorage['minimce-skin']}-content.min.css`)
+    //} else {
+    await import('tinymce/skins/ui/oxide/skin.min.css')
+    //}
+
+    //if (this.planLevel > 0 && localStorage['minimce-icons']) {
+    //  await import(`./static/v5.7.1-108/skin/${localStorage['minimce-icons']}.js`)
+    //} else {
+    await import('tinymce/icons/default')
+    //}
+
+    if (this.planLevel === 0) {
       await import('tinymce/plugins/paste')
+    } else {
+      await import('./static/v5.7.1-108/plugins/essential/wordimport')
+      await import('./static/v5.7.1-108/plugins/essential/powerpaste.min')
+      await import('./static/v5.7.1-108/plugins/essential/advtable.min')
+      await import('./static/v5.7.1-108/plugins/essential/casechange.min')
+      await import('./static/v5.7.1-108/plugins/essential/checklist.min')
+      await import('./static/v5.7.1-108/plugins/essential/formatpainter.min')
+      await import('./static/v5.7.1-108/plugins/essential/pageembed.min')
+      await import('./static/v5.7.1-108/plugins/essential/permanentpen.min')
+      //await import('./static/v5.7.1-108/essential/advcode.min')
+      //await import('./static/v5.7.1-108/essential/mediaembed.content.min.css')
+      //await import('./static/v5.7.1-108/essential/mediaembed.min')
+
+      if (this.planLevel > 1) {
+        await import('./static/v5.7.1-108/plugins/professional/a11ychecker.min')
+        await import('./static/v5.7.1-108/plugins/professional/a11ychecker-stub.min')
+        await import('./static/v5.7.1-108/plugins/professional/linkchecker.min')
+        await import('./static/v5.7.1-108/plugins/professional/linkchecker-stub.min')
+        await import('./static/v5.7.1-108/plugins/professional/tinymcespellchecker.min')
+        await import('./static/v5.7.1-108/plugins/professional/tinymcespellchecker-stub.min')
+      }
+
+      if (this.planLevel > 2) {
+        await import('./static/v5.7.1-108/plugins/custom/mentions.min')
+        await import('./static/v5.7.1-108/plugins/custom/mentions-stub.min')
+        await import('./static/v5.7.1-108/plugins/custom/tinycomments.min')
+        await import('./static/v5.7.1-108/plugins/custom/tinycomments-stub.min')
+      }
     }
 
     this.eventBus__?.on('insertTag', this.insertTag)
@@ -376,6 +532,13 @@ export default {
     this.close()
   },
   methods: {
+    reload () {
+      this.loading = true
+      this.ready = false
+      this.$nextTick(() => {
+        this.ready = true
+      })
+    },
     close () {
       window.tinymce && window.tinymce.get(this.tinymceId).setContent('')
       this.eventBus__ && this.eventBus__.off('insertTag', this.insertTag)

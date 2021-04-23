@@ -62,9 +62,13 @@ Vue.prototype.eventBus__ = new Vue({
 //import '../dist/style.css'
 //import Minimce from '../dist/minimce.umd.min.js'
 import Minimce from '../src/main.ts'
-import { jsonToFormData } from 'kayran'
+//import { jsonToFormData } from 'kayran'
+import { getAxiosShortcut } from 'admate'
+const { POST } = getAxiosShortcut(axios)
+
 Vue.use(Minimce, {
   apiKey: process.env.VUE_APP_API_KEY,
+  plan: 'essential',
   html2text: true,
   textMaxlength: 10,
   audioMenuItem: false,
@@ -79,18 +83,16 @@ Vue.use(Minimce, {
         blobInfo.filename(),
         { type: blob.type }
       )
-      axios.post(
-        process.env.VUE_APP_UPLOAD_API,
-        jsonToFormData({
-          domainId: 0,
-          dir: 'img',
-          file
-        }),
-        {
-          headers: {
-            'Authorization': process.env.VUE_APP_UPLOAD_API_TOKEN
-          }
-        }).then(res => {
+
+      POST.upload(process.env.VUE_APP_UPLOAD_API, {
+        domainId: 0,
+        dir: 'img',
+        file
+      }, {
+        headers: {
+          'Authorization': process.env.VUE_APP_UPLOAD_API_TOKEN
+        }
+      }).then(res => {
         if (typeof res.data?.data === 'string') {
           success(res.data.data)
         } else {
@@ -99,6 +101,26 @@ Vue.use(Minimce, {
       }).catch(err => {
         failure(String(err))
       })
+
+      /*axios.post(
+        process.env.VUE_APP_UPLOAD_API,
+        jsonToFormData({
+          domainId: 0,
+          dir: 'img',
+          file
+        }), {
+        headers: {
+          'Authorization': process.env.VUE_APP_UPLOAD_API_TOKEN
+        }
+      }).then(res => {
+        if (typeof res.data?.data === 'string') {
+          success(res.data.data)
+        } else {
+          failure(res.data?.message)
+        }
+      }).catch(err => {
+        failure(String(err))
+      })*/
     },
   }
 })
