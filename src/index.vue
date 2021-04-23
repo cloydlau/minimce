@@ -226,18 +226,18 @@ export default {
     }
   },
   computed: {
-    planLevel () {
+    planGrade () {
       return plans.indexOf(this.plan)
     },
     Disabled () {
-      return this.disabled || (this.elForm || {}).disabled
+      return this.disabled || this.elForm?.disabled
     },
     options () {
       const defaultOptions = {
         // core
         plugins: 'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
         toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
-        ...this.planLevel > 0 && {
+        ...this.planGrade > 0 && {
           //...localStorage['minimce-skin'] && { skin: localStorage['minimce-skin'] },
           //...localStorage['minimce-icons'] && { icons: localStorage['minimce-icons'] },
           powerpaste_html_import: 'clean',
@@ -252,14 +252,14 @@ export default {
           },
           toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | ltr rtl',
         },
-        ...this.planLevel > 1 && {
+        ...this.planGrade > 1 && {
           plugins: 'print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker imagetools textpattern noneditable help formatpainter permanentpen pageembed charmap quickbars linkchecker emoticons advtable',
           mobile: {
             plugins: 'print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker textpattern noneditable help formatpainter pageembed charmap quickbars linkchecker emoticons advtable'
           },
           toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | a11ycheck ltr rtl',
         },
-        ...this.planLevel > 2 && {
+        ...this.planGrade > 2 && {
           plugins: 'print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker imagetools textpattern noneditable help formatpainter permanentpen pageembed charmap tinycomments mentions quickbars linkchecker emoticons advtable',
           mobile: {
             plugins: 'print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker textpattern noneditable help formatpainter pageembed charmap mentions quickbars linkchecker emoticons advtable'
@@ -316,7 +316,7 @@ export default {
           this.loading = false
         },
         setup: editor => {
-          /*if (this.planLevel > 0) {
+          /*if (this.planGrade > 0) {
             /!**
              * 皮肤
              *!/
@@ -476,20 +476,20 @@ export default {
     },
   },
   async created () {
-    //if (this.planLevel > 0 && localStorage['minimce-skin']) {
+    //if (this.planGrade > 0 && localStorage['minimce-skin']) {
     //  await import(`./static/v5.7.1-108/skin/${localStorage['minimce-skin']}.min.css`)
     //  await import(`./static/v5.7.1-108/skin/${localStorage['minimce-skin']}-content.min.css`)
     //} else {
     await import('tinymce/skins/ui/oxide/skin.min.css')
     //}
 
-    //if (this.planLevel > 0 && localStorage['minimce-icons']) {
+    //if (this.planGrade > 0 && localStorage['minimce-icons']) {
     //  await import(`./static/v5.7.1-108/skin/${localStorage['minimce-icons']}.js`)
     //} else {
     await import('tinymce/icons/default')
     //}
 
-    if (this.planLevel === 0) {
+    if (this.planGrade === 0) {
       await import('tinymce/plugins/paste')
     } else {
       await import('./static/v5.7.1-108/plugins/essential/wordimport')
@@ -504,7 +504,7 @@ export default {
       //await import('./static/v5.7.1-108/essential/mediaembed.content.min.css')
       //await import('./static/v5.7.1-108/essential/mediaembed.min')
 
-      if (this.planLevel > 1) {
+      if (this.planGrade > 1) {
         await import('./static/v5.7.1-108/plugins/professional/a11ychecker.min')
         await import('./static/v5.7.1-108/plugins/professional/a11ychecker-stub.min')
         await import('./static/v5.7.1-108/plugins/professional/linkchecker.min')
@@ -513,7 +513,7 @@ export default {
         await import('./static/v5.7.1-108/plugins/professional/tinymcespellchecker-stub.min')
       }
 
-      if (this.planLevel > 2) {
+      if (this.planGrade > 2) {
         await import('./static/v5.7.1-108/plugins/custom/mentions.min')
         await import('./static/v5.7.1-108/plugins/custom/mentions-stub.min')
         await import('./static/v5.7.1-108/plugins/custom/tinycomments.min')
