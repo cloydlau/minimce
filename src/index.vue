@@ -49,6 +49,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import InsertTel from './components/InsertTel.vue'
 
 import TinyMCE from '@tinymce/tinymce-vue'
@@ -209,6 +210,7 @@ export default {
   },
   data () {
     return {
+      key: 1,
       tinymceId: 'vue-tinymce-' + +new Date() + ((Math.random() * 1000).toFixed(0) + ''),
       value__: '',
       ready: false,
@@ -238,15 +240,11 @@ export default {
         plugins: 'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
         toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
         ...this.planGrade > 0 && {
-          //...localStorage['minimce-skin'] && { skin: localStorage['minimce-skin'] },
-          //...localStorage['minimce-icons'] && { icons: localStorage['minimce-icons'] },
-          powerpaste_html_import: 'clean',
-          powerpaste_word_import: 'clean',
-          paste_postprocess (pluginApi, data) {
-          },
-          paste_preprocess (pluginApi, data) {
-          },
-          //plugins: 'print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount imagetools textpattern noneditable help formatpainter permanentpen pageembed charmap quickbars emoticons advtable',
+          ...localStorage['minimce-skin'] && { skin: localStorage['minimce-skin'] },
+          ...localStorage['minimce-icons'] && { icons: localStorage['minimce-icons'] },
+          powerpaste_html_import: 'merge',
+          powerpaste_word_import: 'merge',
+          plugins: 'print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount imagetools textpattern noneditable help formatpainter permanentpen pageembed charmap quickbars emoticons advtable',
           mobile: {
             plugins: 'print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount textpattern noneditable help formatpainter pageembed charmap quickbars emoticons advtable'
           },
@@ -299,7 +297,7 @@ export default {
           },
           view: {
             title: 'View',
-            items: 'code | visualaid visualchars visualblocks | spellchecker | preview fullscreen | skin icons'
+            items: 'code | visualaid visualchars visualblocks | spellchecker | preview fullscreen | icons skin'
           }
         },
         menubar: 'file edit view insert format tools table help',
@@ -316,35 +314,47 @@ export default {
           this.loading = false
         },
         setup: editor => {
-          /*if (this.planGrade > 0) {
-            /!**
+          if (this.planGrade > 0) {
+            /**
              * 皮肤
-             *!/
-            let skinsList = [
+             */
+            let iconsList = [
               '默认',
+              'jam',
+              'small',
+            ]
+            let skinsList = [
+              'oxide',
               'material-classic',
               'material-outline',
               'bootstrap',
               'fabric',
               'borderless',
-              'small',
-              'jam',
               'naked',
               'outside',
               'snow',
             ]
+            if (localStorage['minimce-icons'] === undefined || iconsList.includes(localStorage['minimce-icons'])) {
+              skinsList = [
+                ...skinsList,
+                'small',
+                'jam',
+              ]
+            }
             skinsList.map(text => {
               editor.ui.registry.addToggleMenuItem(`toggleMenuItem-skin-${text}`, {
                 text,
-                active: (localStorage['minimce-skin'] || '默认') === text,
-                /!*onSetup: function (api) {
+                active: (localStorage['minimce-skin'] || 'oxide') === text,
+                /*onSetup: function (api) {
                   api.setActive(toggleState)
                   return function () {}
-                },*!/
+                },*/
                 onAction: () => {
-                  if (text === '默认') {
+                  if (text === 'oxide') {
+                    delete this.options.skin
                     localStorage.removeItem('minimce-skin')
                   } else {
+                    this.options.skin = text
                     localStorage['minimce-skin'] = text
                   }
                   this.reload()
@@ -356,14 +366,9 @@ export default {
               getSubmenuItems: () => skinsList.map(text => `toggleMenuItem-skin-${text}`)
             })
 
-            /!**
+            /**
              * 图标风格
-             *!/
-            let iconsList = [
-              '默认',
-              'jam',
-              'small',
-            ]
+             */
             if (!iconsList.includes(localStorage['minimce-skin'])) {
               iconsList = [
                 ...iconsList,
@@ -378,8 +383,10 @@ export default {
                 active: (localStorage['minimce-icons'] || '默认') === text,
                 onAction: () => {
                   if (text === '默认') {
+                    delete this.options.icons
                     localStorage.removeItem('minimce-icons')
                   } else {
+                    this.options.icons = text
                     localStorage['minimce-icons'] = text
                   }
                   this.reload()
@@ -390,7 +397,7 @@ export default {
               text: '图标风格',
               getSubmenuItems: () => iconsList.map(text => `toggleMenuItem-icons-${text}`)
             })
-          }*/
+          }
 
           /**
            * 电话号码
@@ -468,58 +475,18 @@ export default {
         // content_css: './tinymce-static/content.min.css',
       }
 
-      return typeof this.tinymceOptions === 'function' ?
+      return Vue.observable(typeof this.tinymceOptions === 'function' ?
         this.tinymceOptions(defaultOptions) : {
           ...defaultOptions,
           ...this.tinymceOptions
         }
+      )
     },
   },
-  async created () {
-    //if (this.planGrade > 0 && localStorage['minimce-skin']) {
-    //  await import(`./static/v5.7.1-108/skin/${localStorage['minimce-skin']}.min.css`)
-    //  await import(`./static/v5.7.1-108/skin/${localStorage['minimce-skin']}-content.min.css`)
-    //} else {
-    await import('tinymce/skins/ui/oxide/skin.min.css')
-    //}
-
-    //if (this.planGrade > 0 && localStorage['minimce-icons']) {
-    //  await import(`./static/v5.7.1-108/skin/${localStorage['minimce-icons']}.js`)
-    //} else {
-    await import('tinymce/icons/default')
-    //}
-
-    if (this.planGrade === 0) {
-      await import('tinymce/plugins/paste')
-    } else {
-      await import('./static/v5.7.1-108/plugins/essential/wordimport')
-      await import('./static/v5.7.1-108/plugins/essential/powerpaste.min')
-      await import('./static/v5.7.1-108/plugins/essential/advtable.min')
-      await import('./static/v5.7.1-108/plugins/essential/casechange.min')
-      await import('./static/v5.7.1-108/plugins/essential/checklist.min')
-      await import('./static/v5.7.1-108/plugins/essential/formatpainter.min')
-      await import('./static/v5.7.1-108/plugins/essential/pageembed.min')
-      await import('./static/v5.7.1-108/plugins/essential/permanentpen.min')
-      //await import('./static/v5.7.1-108/essential/advcode.min')
-      //await import('./static/v5.7.1-108/essential/mediaembed.content.min.css')
-      //await import('./static/v5.7.1-108/essential/mediaembed.min')
-
-      if (this.planGrade > 1) {
-        await import('./static/v5.7.1-108/plugins/professional/a11ychecker.min')
-        await import('./static/v5.7.1-108/plugins/professional/a11ychecker-stub.min')
-        await import('./static/v5.7.1-108/plugins/professional/linkchecker.min')
-        await import('./static/v5.7.1-108/plugins/professional/linkchecker-stub.min')
-        await import('./static/v5.7.1-108/plugins/professional/tinymcespellchecker.min')
-        await import('./static/v5.7.1-108/plugins/professional/tinymcespellchecker-stub.min')
-      }
-
-      if (this.planGrade > 2) {
-        await import('./static/v5.7.1-108/plugins/custom/mentions.min')
-        await import('./static/v5.7.1-108/plugins/custom/mentions-stub.min')
-        await import('./static/v5.7.1-108/plugins/custom/tinycomments.min')
-        await import('./static/v5.7.1-108/plugins/custom/tinycomments-stub.min')
-      }
-    }
+  created () {
+    this.importSkin()
+    this.importIcons()
+    this.importPlugins()
 
     this.eventBus__?.on('insertTag', this.insertTag)
 
@@ -532,12 +499,62 @@ export default {
     this.close()
   },
   methods: {
-    reload () {
+    importSkin () {
+      if (this.planGrade > 0 && localStorage['minimce-skin']) {
+        require(`./static/v5.7.1-108/skin/${localStorage['minimce-skin']}.min.css`).default
+        require(`./static/v5.7.1-108/skin/${localStorage['minimce-skin']}-content.min.css`).default
+      } else {
+        require('tinymce/skins/ui/oxide/skin.min.css').default
+      }
+    },
+    importIcons () {
+      require('tinymce/icons/default').default
+      if (this.planGrade > 0 && localStorage['minimce-icons']) {
+        // 将与默认图标进行合并
+        require(`./static/v5.7.1-108/icons/${localStorage['minimce-icons']}.js`).default
+      }
+    },
+    importPlugins () {
+      if (this.planGrade === 0) {
+        require('tinymce/plugins/paste').default
+      } else {
+        require('./static/v5.7.1-108/plugins/essential/powerpaste-zh_CN').default
+        require('./static/v5.7.1-108/plugins/essential/powerpaste-wordimport').default
+        require('./static/v5.7.1-108/plugins/essential/powerpaste.min').default
+        require('./static/v5.7.1-108/plugins/essential/advtable.min').default
+        require('./static/v5.7.1-108/plugins/essential/casechange.min').default
+        require('./static/v5.7.1-108/plugins/essential/checklist.min').default
+        require('./static/v5.7.1-108/plugins/essential/formatpainter.min').default
+        require('./static/v5.7.1-108/plugins/essential/pageembed.min').default
+        require('./static/v5.7.1-108/plugins/essential/permanentpen.min').default
+        //require('./static/v5.7.1-108/essential/advcode.min').default
+        //require('./static/v5.7.1-108/essential/mediaembed.content.min.css').default
+        //require('./static/v5.7.1-108/essential/mediaembed.min').default
+
+        if (this.planGrade > 1) {
+          require('./static/v5.7.1-108/plugins/professional/a11ychecker.min').default
+          require('./static/v5.7.1-108/plugins/professional/a11ychecker-stub.min').default
+          require('./static/v5.7.1-108/plugins/professional/linkchecker.min').default
+          require('./static/v5.7.1-108/plugins/professional/linkchecker-stub.min').default
+          require('./static/v5.7.1-108/plugins/professional/tinymcespellchecker.min').default
+          require('./static/v5.7.1-108/plugins/professional/tinymcespellchecker-stub.min').default
+        }
+
+        if (this.planGrade > 2) {
+          require('./static/v5.7.1-108/plugins/custom/mentions.min').default
+          require('./static/v5.7.1-108/plugins/custom/mentions-stub.min').default
+          require('./static/v5.7.1-108/plugins/custom/tinycomments.min').default
+          require('./static/v5.7.1-108/plugins/custom/tinycomments-stub.min').default
+        }
+      }
+    },
+    async reload () {
+      /*this.importSkin()
       this.loading = true
       this.ready = false
-      this.$nextTick(() => {
-        this.ready = true
-      })
+      await this.$nextTick()
+      this.ready = true*/
+      window.location.reload()
     },
     close () {
       window.tinymce && window.tinymce.get(this.tinymceId).setContent('')

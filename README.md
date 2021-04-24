@@ -2,11 +2,18 @@
 
 ### Features
 
-- √ 支持离线 断网环境可用
-- √ 支持本地图片/本地音频/本地视频上传 无缝集成imgpond/filepool
-- √ 支持html转普通文本 使用场景：将前n个字符作为缩略简介 n值可配置
-- √ 支持element-ui中el-form的全局disabled
-- √ 全局安装/单独引入 通用参数支持全局配置
+- √ 离线使用
+- √ 本地图片/本地音频/本地视频上传 无缝集成 `imgpond` / `filepool`
+- √ html转普通文本 使用场景：将前n个字符作为缩略简介 n值可配置
+- √ `premium` 插件
+- √ 换肤/换图标风格（`essential` 以上的 `plan` 可用）
+- √ 全局或局部引入 通用参数支持全局配置
+
+`element-ui` 集成说明：
+
+- `element-ui` 是以外置依赖的方式引入的 所以不必担心代码体积和版本不一致等问题
+- 集成风格是非侵入式的
+- 适配 `element-ui` 的 `el-form` 组件 支持 `el-form` 的全局disabled
 
 <br/>
 
@@ -14,16 +21,12 @@
 
 ![NPM](https://nodei.co/npm/minimce.png)
 
-``` bash
-$ yarn add minimce
-```
-
 Dependencies：vue element-ui imgpond? filepool?
 
 ```js
 import Minimce from 'minimce'
 
-// 组件内引入
+// 局部引入
 components: { Minimce }
 
 // 全局引入
@@ -32,7 +35,7 @@ Vue.use(Minimce)
 
 <br/>
 
-### Quick Start
+### Get started
 
 ```html
 
@@ -157,3 +160,6 @@ audio, video {
 
 - element-ui老版本可能存在Imgpond的图片无法清除的问题
 - tinymce有依赖window对象中的某些属性 在微前端环境中（如乾坤）对window对象做了代理 会导致报错 临时的解决方式是关闭subProject的jsSandbox（新版乾坤已解决）
+- PowerPaste
+  - When using the Windows operating system, copying and pasting content from Microsoft Word 2013 (or later) in “Protected View” will result in plain, unformatted text. This is due to how Protected View interacts with the clipboard.
+  - Due to browser limitations, PowerPaste is not able to support all image types supported by Microsoft Word and Microsoft Excel. When powerpaste_keep_unsupported_src is set to true, PowerPaste will store the original src of unsupported images in a data-image-src attribute on the pasted image element. This enables developers to add further image support via post-processing.
