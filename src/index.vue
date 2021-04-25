@@ -531,9 +531,9 @@ export default {
         require('tinymce/plugins/paste').default
       } else {
         // 增强粘贴：主要是office粘贴
-        require('./static/v5.7.1-108/plugins/essential/powerpaste/plugin.min').default
-        require('./static/v5.7.1-108/plugins/essential/powerpaste/langs/zh_CN').default
-        require('./static/v5.7.1-108/plugins/essential/powerpaste/js/wordimport').default
+        require('./assets/v5.7.1-108/plugins/essential/powerpaste/plugin.min').default
+        require('./assets/v5.7.1-108/plugins/essential/powerpaste/langs/zh_CN').default
+        require('./assets/v5.7.1-108/plugins/essential/powerpaste/js/wordimport').default
         // 表格排序
         // todo: 汉化失败
         require('./assets/v5.7.1-108/plugins/essential/advtable.min').default
