@@ -31,3 +31,6 @@ tsconfig.json
 
 /.env.development
 *.xmind
+*.html
+/*.ts
+pnpm-lock.yaml
