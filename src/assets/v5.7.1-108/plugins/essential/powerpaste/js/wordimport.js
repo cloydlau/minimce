@@ -2226,7 +2226,7 @@ c=a.indexOf(ec),e=0===(c<0?1:0)?c:b,f=gd.length;return(a.indexOf(gd)+f|0)===e?1:
 gf(a){var
 b=a.split(hb),c=[0,bz];return b.reduce(tM(function(a,b,d,c){return a?ge(a[1][b]):a}),c)}function
 gg(a){if(a){var
-b=a[1],c="data-main",d=ck(b.getAttribute(c));if(d){var
+b=a[1],c="data-main",d=ck(b&&b.getAttribute(c));if(d){var
 e=d[1];b.removeAttribute(c);return cn(tb,gf(e))}return 0}return 0}var
 te=[Q,function(g){var
 d=fe.getElementsByTagName(S),b=0,a=0,e=d.length;for(;;){if(a<e){var

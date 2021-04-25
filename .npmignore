@@ -30,3 +30,4 @@ tsconfig.json
 /cdn-demo.html
 
 /.env.development
+*.xmind

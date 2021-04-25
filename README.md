@@ -98,11 +98,11 @@ MobileLink
 
 > tinymce的插入链接功能只能插入普通链接 如果需要定制化需求 比如想要插入的链接是移动端某个页面的链接 可以自定义一个组件
 
-组件通过```this.eventBus__.emit('insertTag', `<div/>`)```插入标签
+组件通过```this.$eventBus.emit('insertTag', `<div/>`)```插入标签
 
 ```js
 // 事件通信
-Vue.prototype.eventBus__ = new Vue({
+Vue.prototype.$eventBus = new Vue({
   methods: {
     emit (event, ...args) {
       this.$emit(event, ...args)

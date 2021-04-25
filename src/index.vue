@@ -138,7 +138,10 @@ export default {
     plan: {
       type: String,
       validator: value => plans.includes(value)
-    }
+    },
+    /*eventBus: {
+      validator: value => value instanceof Vue
+    }*/
   },
   model: {
     prop: 'value',
@@ -495,7 +498,7 @@ export default {
     this.importSkin()
     this.importIcons()
     this.importPlugins()
-    this.eventBus__?.on('insertTag', this.insertTag)
+    this.$eventBus?.on('insertTag', this.insertTag)
     this.ready = true
     console.log(`[${name}] options:`, this.options)
   },
@@ -579,7 +582,7 @@ export default {
     },
     close () {
       window.tinymce && window.tinymce.get(this.tinymceId).setContent('')
-      this.eventBus__ && this.eventBus__.off('insertTag', this.insertTag)
+      this.$eventBus?.off('insertTag', this.insertTag)
     },
     insertTag (tag) {
       window.tinymce.get(this.tinymceId).insertContent(tag)

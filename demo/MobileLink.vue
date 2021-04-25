@@ -89,7 +89,7 @@ export default {
     },
     insert () {
       this.$emit('update:show', false)
-      this.eventBus__.emit('insertTag', this.tag)
+      this.$eventBus.emit('insertTag', this.tag)
     }
   }
 }

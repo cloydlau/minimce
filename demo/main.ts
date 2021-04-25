@@ -45,7 +45,7 @@ Vue.use(Imgpond, {
   poweredBy: 'element'
 })
 
-Vue.prototype.eventBus__ = new Vue({
+Vue.prototype.$eventBus = new Vue({
   methods: {
     emit (event, ...args) {
       this.$emit(event, ...args)

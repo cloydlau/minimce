@@ -93,6 +93,7 @@ export default {
       const {
         plan,
         apiKey,
+        eventBus,
         html2text,
         textMaxlength,
         tinymceOptions
@@ -105,6 +106,7 @@ export default {
         textMaxlength: getFinalProp(textMaxlength, this.$attrs.textMaxlength, 30),
         tinymceOptions: getFinalProp(tinymceOptions, this.$attrs.tinymceOptions),
         plan: getFinalProp(plan, this.$attrs.plan, 'core'),
+        eventBus: getFinalProp(eventBus, this.$attrs.eventBus)
       }
     }
   },
