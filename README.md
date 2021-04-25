@@ -4,19 +4,17 @@
 
 - √ 离线使用
 - √ 本地图片/本地音频/本地视频上传 无缝集成 `imgpond` / `filepool`
-- √ html转普通文本 使用场景：将前n个字符作为缩略简介 n值可配置
-- √ 全局或局部引入 通用参数支持全局配置
+- √ html转普通文本
+- √ 全局或局部引入 支持全局配置
+- √ 默认启用 [TinyMCE Plan](https://www.tiny.cloud/pricing) 对应的全套插件
+  - [premium] 不含 `mediaembed` 需自行配置
+  - [premium] 暂不含 `advcode`
+- √ 为 `essential` 以上的 `plan` 提供换肤、换图标风格工具栏选项
 
 `element-ui` 集成说明：
-
 - `element-ui` 是以外置依赖的方式引入的 所以不必担心代码体积和版本不一致等问题
 - 集成风格是非侵入式的
 - 适配 `element-ui` 的 `el-form` 组件 支持 `el-form` 的全局disabled
-
-`essential` 以上的 [TinyMCE Plan](https://www.tiny.cloud/pricing) 可用：
-
-- √ `premium` 插件（`mediaembed` / `advcode` 暂时除外）
-- √ 换肤、换图标风格
 
 <br/>
 
@@ -26,24 +24,43 @@
 
 Dependencies：vue element-ui imgpond? filepool?
 
-```js
+```ts
+// 全局引入
+
 import Minimce from 'minimce'
 
-// 局部引入
-components: { Minimce }
+Vue.use(Minimce,{
+  // 全局配置
+})
+```
 
-// 全局引入
-Vue.use(Minimce)
+```vue
+<!-- 局部引入 -->
+<template>
+  <Minimce v-bind="config"/>
+</template>
+
+<script>
+import Minimce from 'minimce'
+
+export default {
+  components: { Minimce },
+  data () {
+    return {
+      config:{
+        // 局部配置
+      }
+    }
+  }
+}
+</script>
 ```
 
 <br/>
 
 ### Get started
 
-```html
-
-<Minimce v-model=""/>
-```
+#### Props
 
 | Attribute | Description | Configuration Mode | Type | Accepted Values | Default |
 | --- | --- | --- | --- | --- | --- |
@@ -98,29 +115,19 @@ MobileLink
 
 > tinymce的插入链接功能只能插入普通链接 如果需要定制化需求 比如想要插入的链接是移动端某个页面的链接 可以自定义一个组件
 
-组件通过```this.$eventBus.emit('insertTag', `<div/>`)```插入标签
+组件通过 `eventBus.$emit('insertTag', `<div/>`)` 插入标签
 
 ```js
 // 事件通信
-Vue.prototype.$eventBus = new Vue({
-  methods: {
-    emit (event, ...args) {
-      this.$emit(event, ...args)
-    },
-    on (event, callback) {
-      this.$on(event, callback)
-    },
-    off (event, callback) {
-      this.$off(event, callback)
-    }
-  }
-})
+const eventBus = new Vue()
+export { eventBus } // 用于其它组件与Minimce进行通信
 
 import MobileLink from '@/components/MobileLink'
 import Minimce from 'minimce'
 
 Vue.use(Minimce, {
-  MobileLink
+  MobileLink,
+  eventBus
 })
 ```
 

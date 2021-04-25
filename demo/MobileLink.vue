@@ -30,6 +30,7 @@
 
 <script>
 import qs from 'qs'
+import { eventBus } from './main'
 
 function getInitData () {
   return {
@@ -89,7 +90,7 @@ export default {
     },
     insert () {
       this.$emit('update:show', false)
-      this.$eventBus.emit('insertTag', this.tag)
+      eventBus.$emit('insertTag', this.tag)
     }
   }
 }

@@ -45,19 +45,8 @@ Vue.use(Imgpond, {
   poweredBy: 'element'
 })
 
-Vue.prototype.$eventBus = new Vue({
-  methods: {
-    emit (event, ...args) {
-      this.$emit(event, ...args)
-    },
-    on (event, callback) {
-      this.$on(event, callback)
-    },
-    off (event, callback) {
-      this.$off(event, callback)
-    }
-  }
-})
+const eventBus = new Vue()
+export { eventBus } // 用于其它组件与Minimce进行通信
 
 //import '../dist/style.css'
 //import Minimce from '../dist/minimce.umd.min.js'
@@ -74,6 +63,7 @@ Vue.use(Minimce, {
   Imgpond,
   Filepool,
   MobileLink: () => import('./MobileLink.vue'),
+  eventBus,
   tinymceOptions: {
     images_upload_handler (blobInfo, success, failure) {
       const blob = blobInfo.blob()

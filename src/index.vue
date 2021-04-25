@@ -139,9 +139,9 @@ export default {
       type: String,
       validator: value => plans.includes(value)
     },
-    /*eventBus: {
+    eventBus: {
       validator: value => value instanceof Vue
-    }*/
+    }
   },
   model: {
     prop: 'value',
@@ -498,7 +498,7 @@ export default {
     this.importSkin()
     this.importIcons()
     this.importPlugins()
-    this.$eventBus?.on('insertTag', this.insertTag)
+    this.eventBus?.$on('insertTag', this.insertTag)
     this.ready = true
     console.log(`[${name}] options:`, this.options)
   },
@@ -555,6 +555,7 @@ export default {
         // 增强媒体嵌入：需要搭配后端服务
         //require('./assets/v5.7.1-108/plugins/essential/mediaembed.content.min.css').default
         //require('./assets/v5.7.1-108/plugins/essential/mediaembed.min').default
+        // 增强代码片段编辑：语法高亮/元素匹配/元素闭合/代码折叠/多选/多行光标/查找替换
         // 开启方式：将options-plugins中code替换为advcode
         //require('./assets/v5.7.1-108/plugins/essential/advcode/customeditor.min').default
         //require('./assets/v5.7.1-108/plugins/essential/advcode/codemirror.min').default
@@ -582,7 +583,7 @@ export default {
     },
     close () {
       window.tinymce && window.tinymce.get(this.tinymceId).setContent('')
-      this.$eventBus?.off('insertTag', this.insertTag)
+      this.eventBus?.$off('insertTag', this.insertTag)
     },
     insertTag (tag) {
       window.tinymce.get(this.tinymceId).insertContent(tag)
