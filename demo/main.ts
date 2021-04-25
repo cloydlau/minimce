@@ -71,7 +71,6 @@ Vue.use(Minimce, {
   plan: 'essential',
   html2text: true,
   textMaxlength: 10,
-  audioMenuItem: false,
   Imgpond,
   Filepool,
   MobileLink: () => import('./MobileLink.vue'),

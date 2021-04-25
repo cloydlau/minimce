@@ -1,8 +1,10 @@
 <template>
   <RichText
+    v-if="inOperation"
     v-model="selfValue"
     :text.sync="selfText"
     v-bind="props"
+    @reload="reload"
   >
     <template #mobilelink="{show}" v-if="MobileLink">
       <component :is="MobileLink" :show.sync="show.mobilelink"/>
@@ -19,6 +21,22 @@
 <script>
 import RichText from './index.vue'
 import globalProps from './config.ts'
+
+/**
+ * 参数有全局参数、实例参数和默认值之分 取哪个取决于用户传了哪个：
+ *   1. 怎么判断用户传没传？ —— 以该参数是否全等于undefined作为标识
+ *   2. 如果传了多个，权重顺序是怎样的？ —— 实例＞全局＞默认
+ *
+ * @param {any} globalProp - 全局参数
+ * @param {any} prop - 实例参数
+ * @param {any} defaultValue - 默认值
+ * @return {any} 最终
+ */
+function getFinalProp (globalProp, prop, defaultValue) {
+  return prop !== undefined ? prop :
+    globalProp !== undefined ? globalProp :
+      defaultValue
+}
 
 export default {
   name: 'Minimce',
@@ -62,6 +80,7 @@ export default {
     } = globalProps
 
     return {
+      inOperation: true,
       MobileLink: MobileLink || this.$attrs.MobileLink,
       Imgpond: Imgpond || this.$attrs.Imgpond,
       Filepool: Filepool || this.$attrs.Filepool,
@@ -76,25 +95,25 @@ export default {
         apiKey,
         html2text,
         textMaxlength,
-        audioMenuItem,
         tinymceOptions
       } = globalProps
 
       return {
         ...this.$attrs,
-        audioMenuItem: typeof this.$attrs.audioMenuItem === 'boolean' ?
-          this.$attrs.audioMenuItem :
-          typeof audioMenuItem === 'boolean' ?
-            audioMenuItem : true,
-        html2text: typeof this.$attrs.html2text === 'boolean' ?
-          this.$attrs.html2text :
-          typeof html2text === 'boolean' ?
-            html2text : true,
-        apiKey: this.$attrs.apiKey || apiKey,
-        textMaxlength: this.$attrs.textMaxlength || textMaxlength,
-        tinymceOptions: this.$attrs.tinymceOptions || tinymceOptions,
-        plan
+        html2text: getFinalProp(html2text, ['', true].includes(this.$attrs.html2text), false),
+        apiKey: getFinalProp(apiKey, this.$attrs.apiKey, ''),
+        textMaxlength: getFinalProp(textMaxlength, this.$attrs.textMaxlength, 30),
+        tinymceOptions: getFinalProp(tinymceOptions, this.$attrs.tinymceOptions),
+        plan: getFinalProp(plan, this.$attrs.plan, 'core'),
       }
+    }
+  },
+  methods: {
+    async reload () {
+      /*this.inOperation = false
+      await this.$nextTick()
+      this.inOperation = true*/
+      window.location.reload()
     }
   }
 }

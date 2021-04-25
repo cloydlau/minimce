@@ -6,9 +6,6 @@
       <el-form-item label="apiKey">
         <el-input v-model="value.apiKey" clearable readonly/>
       </el-form-item>
-      <el-form-item label="audioMenuItem">
-        <el-switch v-model="value.audioMenuItem" :active-value="true" :inactive-value="false" disabled/>
-      </el-form-item>
       <el-form-item label="html2text">
         <el-switch v-model="value.html2text" :active-value="true" :inactive-value="false"/>
       </el-form-item>

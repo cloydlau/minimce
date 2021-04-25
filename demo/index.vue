@@ -34,7 +34,6 @@ export default {
         readonly: false,
         disabled: false,
         html2text: false,
-        audioMenuItem: true,
         apiKey: '',
         textMaxlength: 30,
         Imgpond,
