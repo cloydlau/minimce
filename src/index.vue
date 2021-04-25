@@ -56,7 +56,7 @@ import { name } from '../package.json'
 import TinyMCE from '@tinymce/tinymce-vue'
 import 'tinymce/tinymce'
 import 'tinymce/themes/silver'
-import './static/v5.7.1-108/zh_CN'
+import './assets/v5.7.1-108/zh_CN'
 
 //const plugins = 'autoresize|print|preview|paste|importcss|searchreplace|autolink|autosave|directionality|code|visualblocks|visualchars|fullscreen|image|link|media|template|codesample|table|charmap|hr|pagebreak|nonbreaking|anchor|toc|insertdatetime|advlist|lists|wordcount|textpattern|noneditable|help|charmap|emoticons'
 //const regExp = new RegExp(`^\.\/(${plugins})\/index\.js$`)
@@ -507,12 +507,12 @@ export default {
   },
   methods: {
     importSkin () {
-      require('./static/v5.7.1-108/skin/default-content.min.css').default
+      require('./assets/v5.7.1-108/skin/default-content.min.css').default
 
       const skin = localStorage[`${name}-skin`]
       if (this.planGrade > 0 && skin) {
-        require(`./static/v5.7.1-108/skin/${skin}.min.css`).default
-        require(`./static/v5.7.1-108/skin/${skin}-content.min.css`).default
+        require(`./assets/v5.7.1-108/skin/${skin}.min.css`).default
+        require(`./assets/v5.7.1-108/skin/${skin}-content.min.css`).default
       } else {
         require('tinymce/skins/ui/oxide/skin.min.css').default
       }
@@ -523,7 +523,7 @@ export default {
       const icons = localStorage[`${name}-icons`]
       if (this.planGrade > 0 && icons) {
         // 将与默认图标进行合并
-        require(`./static/v5.7.1-108/icons/${icons}.js`).default
+        require(`./assets/v5.7.1-108/icons/${icons}.js`).default
       }
     },
     importPlugins () {
@@ -536,41 +536,41 @@ export default {
         require('./static/v5.7.1-108/plugins/essential/powerpaste/js/wordimport').default
         // 表格排序
         // todo: 汉化失败
-        require('./static/v5.7.1-108/plugins/essential/advtable.min').default
+        require('./assets/v5.7.1-108/plugins/essential/advtable.min').default
         // 一键转换大小写、首字母大写
-        require('./static/v5.7.1-108/plugins/essential/casechange.min').default
+        require('./assets/v5.7.1-108/plugins/essential/casechange.min').default
         // 插入清单
-        require('./static/v5.7.1-108/plugins/essential/checklist.min').default
+        require('./assets/v5.7.1-108/plugins/essential/checklist.min').default
         // 格式刷
-        require('./static/v5.7.1-108/plugins/essential/formatpainter.min').default
+        require('./assets/v5.7.1-108/plugins/essential/formatpainter.min').default
         // 永久笔：允许预设一套文字格式 应用于新输入的内容
-        require('./static/v5.7.1-108/plugins/essential/permanentpen.min').default
+        require('./assets/v5.7.1-108/plugins/essential/permanentpen.min').default
         if (!/\biframe\b/.test(this.options.invalid_elements)) {
           // 插入iframe：以可视化的方式插入子页面
-          require('./static/v5.7.1-108/plugins/essential/pageembed.min').default
+          require('./assets/v5.7.1-108/plugins/essential/pageembed.min').default
         }
         // 增强媒体嵌入：需要搭配后端服务
-        //require('./static/v5.7.1-108/plugins/essential/mediaembed.content.min.css').default
-        //require('./static/v5.7.1-108/plugins/essential/mediaembed.min').default
+        //require('./assets/v5.7.1-108/plugins/essential/mediaembed.content.min.css').default
+        //require('./assets/v5.7.1-108/plugins/essential/mediaembed.min').default
         // 开启方式：将options-plugins中code替换为advcode
-        //require('./static/v5.7.1-108/plugins/essential/advcode/customeditor.min').default
-        //require('./static/v5.7.1-108/plugins/essential/advcode/codemirror.min').default
-        //require('./static/v5.7.1-108/plugins/essential/advcode/plugin.min').default
+        //require('./assets/v5.7.1-108/plugins/essential/advcode/customeditor.min').default
+        //require('./assets/v5.7.1-108/plugins/essential/advcode/codemirror.min').default
+        //require('./assets/v5.7.1-108/plugins/essential/advcode/plugin.min').default
 
         if (this.planGrade > 1) {
-          require('./static/v5.7.1-108/plugins/professional/a11ychecker.min').default
-          require('./static/v5.7.1-108/plugins/professional/a11ychecker-stub.min').default
-          require('./static/v5.7.1-108/plugins/professional/linkchecker.min').default
-          require('./static/v5.7.1-108/plugins/professional/linkchecker-stub.min').default
-          require('./static/v5.7.1-108/plugins/professional/tinymcespellchecker.min').default
-          require('./static/v5.7.1-108/plugins/professional/tinymcespellchecker-stub.min').default
+          require('./assets/v5.7.1-108/plugins/professional/a11ychecker.min').default
+          require('./assets/v5.7.1-108/plugins/professional/a11ychecker-stub.min').default
+          require('./assets/v5.7.1-108/plugins/professional/linkchecker.min').default
+          require('./assets/v5.7.1-108/plugins/professional/linkchecker-stub.min').default
+          require('./assets/v5.7.1-108/plugins/professional/tinymcespellchecker.min').default
+          require('./assets/v5.7.1-108/plugins/professional/tinymcespellchecker-stub.min').default
         }
 
         if (this.planGrade > 2) {
-          require('./static/v5.7.1-108/plugins/custom/mentions.min').default
-          require('./static/v5.7.1-108/plugins/custom/mentions-stub.min').default
-          require('./static/v5.7.1-108/plugins/custom/tinycomments.min').default
-          require('./static/v5.7.1-108/plugins/custom/tinycomments-stub.min').default
+          require('./assets/v5.7.1-108/plugins/custom/mentions.min').default
+          require('./assets/v5.7.1-108/plugins/custom/mentions-stub.min').default
+          require('./assets/v5.7.1-108/plugins/custom/tinycomments.min').default
+          require('./assets/v5.7.1-108/plugins/custom/tinycomments-stub.min').default
         }
       }
     },
