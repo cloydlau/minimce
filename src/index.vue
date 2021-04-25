@@ -555,7 +555,7 @@ export default {
         // 增强媒体嵌入：需要搭配后端服务
         //require('./assets/v5.7.1-108/plugins/essential/mediaembed.content.min.css').default
         //require('./assets/v5.7.1-108/plugins/essential/mediaembed.min').default
-        // 增强代码片段编辑：语法高亮/元素匹配/元素闭合/代码折叠/多选/多行光标/查找替换
+        // 增强代码编辑：语法高亮/元素匹配/元素闭合/代码折叠/多选/多行光标/查找替换
         // 开启方式：将options-plugins中code替换为advcode
         //require('./assets/v5.7.1-108/plugins/essential/advcode/customeditor.min').default
         //require('./assets/v5.7.1-108/plugins/essential/advcode/codemirror.min').default
