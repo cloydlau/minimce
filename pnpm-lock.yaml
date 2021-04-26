@@ -5,7 +5,7 @@ specifiers:
   '@vue/cli-plugin-babel': ^4.5.12
   '@vue/cli-plugin-typescript': ^4.5.12
   '@vue/cli-service': ^4.5.12
-  admate: ^0.2.1
+  admate: ^0.2.2
   axios: ^0.21.1
   core-js: ^3.11.0
   element-ui: ^2.15.1
@@ -13,7 +13,7 @@ specifiers:
   html-to-text: ^7.1.1
   imgpond: ^0.3.2
   kayran: ^0.1.0
-  kikimore: ^0.0.13
+  kikimore: ^0.1.1
   lodash-es: ^4.17.21
   pic-viewer: ^0.2.12
   qs: ^6.10.1
@@ -28,14 +28,14 @@ specifiers:
 dependencies:
   '@tinymce/tinymce-vue': 3.2.8_vue@2.6.12
   html-to-text: 7.1.1
-  kikimore: 0.0.13_element-ui@2.15.1+vue@2.6.12
+  kikimore: 0.1.1_element-ui@2.15.1+vue@2.6.12
   lodash-es: 4.17.21
 
 devDependencies:
   '@vue/cli-plugin-babel': 4.5.12_08f6923167e8915a6e44610899c9e3f1
   '@vue/cli-plugin-typescript': 4.5.12_0e45c0c42f1a4b578ee09e1ab981c68b
   '@vue/cli-service': 4.5.12_cf059d9143d6f8a9641090832233a2fc
-  admate: 0.2.1
+  admate: 0.2.2
   axios: 0.21.1
   core-js: 3.11.0
   element-ui: 2.15.1_vue@2.6.12
@@ -1828,10 +1828,10 @@ packages:
     engines: {node: '>= 0.12.0'}
     dev: true
 
-  /admate/0.2.1:
-    resolution: {integrity: sha512-cdbZ0HcpWa5l5iznPbHTkzEGGL01xb4h2EKFbjNdqPh7nkytiKsY/o+bD1QyNim4nTe/eyiJBHgWuL4xSrPBVA==}
+  /admate/0.2.2:
+    resolution: {integrity: sha512-KiiUcDMRPXyPLTKwfp3ra/0iT7aVYEYxpDcE/Y/DpYz/A0BkPz0UEZYnah54qQxcCVc682+IQLxlzRawAQqcNw==}
     dependencies:
-      kayran: 0.0.2
+      kayran: 0.1.0
       lodash-es: 4.17.21
       qs: 6.10.1
     dev: true
@@ -2071,7 +2071,7 @@ packages:
     hasBin: true
     dependencies:
       browserslist: 4.16.5
-      caniuse-lite: 1.0.30001214
+      caniuse-lite: 1.0.30001216
       colorette: 1.2.2
       normalize-range: 0.1.2
       num2fraction: 1.2.2
@@ -2373,7 +2373,7 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001214
+      caniuse-lite: 1.0.30001216
       colorette: 1.2.2
       electron-to-chromium: 1.3.720
       escalade: 3.1.1
@@ -2569,13 +2569,13 @@ packages:
     resolution: {integrity: sha512-bsTwuIg/BZZK/vreVTYYbSWoe2F+71P7K5QGEX+pT250DZbfU1MQ5prOKpPR+LL6uWKK3KMwMCAS74QB3Um1uw==}
     dependencies:
       browserslist: 4.16.5
-      caniuse-lite: 1.0.30001214
+      caniuse-lite: 1.0.30001216
       lodash.memoize: 4.1.2
       lodash.uniq: 4.5.0
     dev: true
 
-  /caniuse-lite/1.0.30001214:
-    resolution: {integrity: sha512-O2/SCpuaU3eASWVaesQirZv1MSjUNOvmugaD8zNSJqw6Vv5SGwoOpA9LJs3pNPfM745nxqPvfZY3MQKY4AKHYg==}
+  /caniuse-lite/1.0.30001216:
+    resolution: {integrity: sha512-1uU+ww/n5WCJRwUcc9UH/W6925Se5aNnem/G5QaSDga2HzvjYMs8vRbekGUN/PnTZ7ezTHcxxTEb9fgiMYwH6Q==}
     dev: true
 
   /case-sensitive-paths-webpack-plugin/2.4.0:
@@ -5273,22 +5273,14 @@ packages:
       verror: 1.10.0
     dev: true
 
-  /kayran/0.0.2:
-    resolution: {integrity: sha512-GdGIwkUnu6BKVpJpI9tIONsnLfrR4r58BhBjzBz8kHe5GzoladAYW1M2KCphonTqnWq3R+LFFG8yhMR/zZSr6w==}
-    dependencies:
-      lodash: 4.17.21
-      lodash-es: 4.17.21
-      qs: 6.10.1
-    dev: true
-
   /kayran/0.1.0:
     resolution: {integrity: sha512-W0EqvNwV8LvBoI5WaGudTWqwuyGnroCIwn2Kwfm5/lqwnrCulYppBGKR6RvYu6YiVT53a1N7lYKF2PJJ7k1E3g==}
     dependencies:
       lodash-es: 4.17.21
       qs: 6.10.1
 
-  /kikimore/0.0.13_element-ui@2.15.1+vue@2.6.12:
-    resolution: {integrity: sha512-HpTDLwJyCEEDoqeWF2I/lno7cGAToIOkyhhJyv+oX2icOobJXIqVV2Mj1VK4LAkb5DrlJQh32h50y4iWM6ivEw==}
+  /kikimore/0.1.1_element-ui@2.15.1+vue@2.6.12:
+    resolution: {integrity: sha512-iIg3ANOhRetspUvlP+b8KYKjPMX4aMJdnTww1o5mN+iAJE4yEfsahLSR3T8jgd1EifQg8i0L5qMWd6RX5yDVMg==}
     peerDependencies:
       element-ui: '2'
       vue: '2'
