@@ -203,6 +203,14 @@ export default {
           }
         }
       }
+    },
+    eventBus: {
+      immediate: true,
+      handler (n, o) {
+        if (n) {
+          n.$on('insertTag', this.insertTag)
+        }
+      }
     }
   },
   data () {
@@ -498,7 +506,6 @@ export default {
     this.importSkin()
     this.importIcons()
     this.importPlugins()
-    this.eventBus?.$on('insertTag', this.insertTag)
     this.ready = true
     console.log(`[${name}] options:`, this.options)
   },
@@ -533,7 +540,7 @@ export default {
       if (this.planGrade === 0) {
         require('tinymce/plugins/paste').default
       } else {
-        // 增强粘贴：主要是office粘贴
+        // 增强粘贴：主要用于office文档粘贴
         require('./assets/v5.7.1-108/plugins/essential/powerpaste/plugin.min').default
         require('./assets/v5.7.1-108/plugins/essential/powerpaste/langs/zh_CN').default
         require('./assets/v5.7.1-108/plugins/essential/powerpaste/js/wordimport').default

@@ -58,8 +58,6 @@ const { POST } = getAxiosShortcut(axios)
 Vue.use(Minimce, {
   apiKey: process.env.VUE_APP_API_KEY,
   plan: 'essential',
-  html2text: true,
-  textMaxlength: 10,
   Imgpond,
   Filepool,
   MobileLink: () => import('./MobileLink.vue'),

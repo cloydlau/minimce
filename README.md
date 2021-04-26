@@ -1,24 +1,28 @@
-# minimce / 富文本编辑器（tinymce封装）
+# minimce / 富文本编辑器
 
-### Features
+Offline, optionated rich-text editor powered by [tinymce](https://github.com/tinymce/tinymce).
+
+<br>
+
+## Features
 
 - √ 离线使用
-- √ 本地图片/本地音频/本地视频上传 无缝集成 `imgpond` / `filepool`
-- √ html转普通文本
-- √ 全局或局部引入 支持全局配置
+- √ 本地图片/音频/视频上传 无缝集成 `imgpond` / `filepool`
+- √ 全局或局部引入 参数支持全局或局部配置（双向绑定参数仅支持局部配置）
 - √ 默认启用 [TinyMCE Plan](https://www.tiny.cloud/pricing) 对应的全套插件
-  - [premium] 不含 `mediaembed` 需自行配置
-  - [premium] 暂不含 `advcode`
+    - [premium] 不含 `mediaembed` 需自行配置
+    - [premium] 暂不含 `advcode`
 - √ 为 `essential` 以上的 `plan` 提供换肤、换图标风格工具栏选项
 
 `element-ui` 集成说明：
+
 - `element-ui` 是以外置依赖的方式引入的 所以不必担心代码体积和版本不一致等问题
 - 集成风格是非侵入式的
 - 适配 `element-ui` 的 `el-form` 组件 支持 `el-form` 的全局disabled
 
 <br/>
 
-### Installation
+## Installation
 
 ![NPM](https://nodei.co/npm/minimce.png)
 
@@ -29,13 +33,14 @@ Dependencies：vue element-ui imgpond? filepool?
 
 import Minimce from 'minimce'
 
-Vue.use(Minimce,{
+Vue.use(Minimce, {
   // 全局配置
 })
 ```
 
 ```vue
 <!-- 局部引入 -->
+
 <template>
   <Minimce v-bind="config"/>
 </template>
@@ -47,7 +52,7 @@ export default {
   components: { Minimce },
   data () {
     return {
-      config:{
+      config: {
         // 局部配置
       }
     }
@@ -58,24 +63,19 @@ export default {
 
 <br/>
 
-### Get started
+## Props
 
-#### Props
-
-| Attribute | Description | Configuration Mode | Type | Accepted Values | Default |
-| --- | --- | --- | --- | --- | --- |
-| value / v-model | 双绑 | props | string | | |
-| apiKey | tinymce api key | global，props | string | https://www.tiny.cloud/auth/signup/ | |
-| plan | tinymce plan（默认启用plan包含的所有插件，tinydrive、mediaembed除外） | global | string | 'core'/'essential'/'professional'/'custom' 参考https://www.tiny.cloud/pricing | 'core' |
-| disabled | 是否禁用（禁用模式不可编辑，保留工具栏） | props | boolean | | false |
-| readonly | 是否只读（只读模式仅展示html，相当于预览） | props | boolean | | false |
-| html2text | 是否开启html转普通文本功能 | global，props | boolean | | false |
-| text | value对应的普通文本（仅在html2text为true时有效） | props | string | | |
-| textMaxlength | 普通文本取自前多少个字符（设置为Infinity则不设上限） | global，props | number | | 30 |
-| tinymceOptions | tinymce配置 | global，props | object/function | https://www.tiny.cloud/docs/configure/ | 除setup之外均可配置 |
-| Imgpond | 上传图片插件（配置后自动开启功能） | global | Vue Component | | |
-| Filepool | 上传文件插件（配置后自动开启功能） | global | Vue Component | | |
-| MobileLink | 插入移动端页面链接插件（配置后自动开启功能） | global | Vue Component | | |
+| Attribute | Description | Type | Accepted Values | Default |
+| --- | --- | --- | --- | --- |
+| value / v-model | html格式的输入内容 | string | | |
+| apiKey | tinymce api key | string | https://www.tiny.cloud/auth/signup/ | |
+| plan | tinymce plan（默认启用plan包含的全套插件，mediaembed除外） | string | 'core'/'essential'/'professional'/'custom' 参考https://www.tiny.cloud/pricing | 'core' |
+| disabled | 是否禁用（禁用模式不可编辑，保留工具栏） | boolean | | false |
+| readonly | 是否只读（只读模式仅展示html，相当于预览） | boolean | | false |
+| tinymceOptions | tinymce配置 | object / function | https://www.tiny.cloud/docs/configure/ | 除setup之外均可配置 |
+| Imgpond | 上传图片插件（配置后自动开启功能） | Vue Component | | |
+| Filepool | 上传文件插件（配置后自动开启功能） | Vue Component | | |
+| MobileLink | 插入移动端页面链接插件（配置后自动开启功能） | Vue Component | | |
 
 <br/>
 
@@ -135,7 +135,7 @@ Vue.use(Minimce, {
 
 **样式**
 
-![给富文本加样式](./style.png)
+![样式](./style.png)
 
 **内置样式**
 
@@ -165,7 +165,7 @@ audio, video {
 
 <br/>
 
-### 屏蔽指定html元素
+## 屏蔽指定html元素
 
 ```js
 import Minimce from 'minimce'
@@ -178,7 +178,7 @@ Vue.use(Minimce, {
 
 <br/>
 
-### PowerPaste (premium插件)
+## PowerPaste (premium插件)
 
 - 配置
 
@@ -217,19 +217,17 @@ Vue.use(Minimce, {
 ```
 
 - 兼容性
-  ![PowerPaste插件兼容性](./PowerPaste插件兼容性.png)
+  ![PowerPaste插件兼容性](./powerpaste-compatibility.png)
 
-- When using the Windows operating system, copying and pasting content from Microsoft Word 2013 (or later) in “Protected
-  View” will result in plain, unformatted text. This is due to how Protected View interacts with the clipboard.
+- [tinymce官方] 由于浏览器限制，`PowerPaste` 插件**无法支持微软Word和Excel文档所支持的所有图片类型**。但将 `powerpaste_keep_unsupported_src` 参数开启时，`PowerPaste` 仍会把不支持图片的原始链接存储在 `data-image-src` 属性中，以便开发者通过 `post-processing` 钩子做进一步处理。
 
-- Due to browser limitations, PowerPaste is not able to support all image types supported by Microsoft Word and
-  Microsoft Excel. When powerpaste_keep_unsupported_src is set to true, PowerPaste will store the original src of
-  unsupported images in a data-image-src attribute on the pasted image element. This enables developers to add further
-  image support via post-processing.
+- [tinymce官方] 在Windows系统、2013或以后版本的微软Word文档中，复制粘贴**受保护视图**的内容，将仅得到<font color="#dd0000">**无格式的普通文本**</font>，这是受保护视图与剪贴板的交互机制决定的。
+
+- [tinymce官方] 由于微软Excel网页版（`Office Live` 的一部分）的限制，粘贴来源于微软Excel网页版的内容将仅得到<font color="#dd0000">**无格式的普通文本**</font>。
 
 <br/>
 
-### Notice
+## Notice
 
 - element-ui老版本可能存在Imgpond的图片无法清除的问题
 - tinymce有依赖window对象中的某些属性 在微前端环境中（如乾坤）对window对象做了代理 会导致报错 临时的解决方式是关闭subProject的jsSandbox（新版乾坤已解决）

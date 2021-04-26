@@ -30,10 +30,12 @@ import globalProps from './config.ts'
  * @param {any} globalProp - 全局参数
  * @param {any} prop - 实例参数
  * @param {any} defaultValue - 默认值
- * @return {any} 最终
+ * @return {any} 最终值
  */
 function getFinalProp (globalProp, prop, defaultValue) {
-  return prop !== undefined ? prop :
+  return prop !== undefined ?
+    typeof defaultValue === 'boolean' ? ['', true].includes(prop) :
+      prop :
     globalProp !== undefined ? globalProp :
       defaultValue
 }
@@ -93,6 +95,8 @@ export default {
       const {
         plan,
         apiKey,
+        disabled,
+        readonly,
         eventBus,
         html2text,
         textMaxlength,
@@ -101,7 +105,9 @@ export default {
 
       return {
         ...this.$attrs,
-        html2text: getFinalProp(html2text, ['', true].includes(this.$attrs.html2text), false),
+        disabled: getFinalProp(disabled, this.$attrs.disabled, false),
+        readonly: getFinalProp(readonly, this.$attrs.readonly, false),
+        html2text: getFinalProp(html2text, this.$attrs.html2text, false),
         apiKey: getFinalProp(apiKey, this.$attrs.apiKey, ''),
         textMaxlength: getFinalProp(textMaxlength, this.$attrs.textMaxlength, 30),
         tinymceOptions: getFinalProp(tinymceOptions, this.$attrs.tinymceOptions),
