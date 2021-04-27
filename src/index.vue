@@ -51,6 +51,7 @@
 <script>
 import Vue from 'vue'
 import InsertTel from './components/InsertTel.vue'
+import { Swal } from 'kikimore'
 import { name } from '../package.json'
 
 import TinyMCE from '@tinymce/tinymce-vue'
@@ -286,10 +287,16 @@ export default {
           const meta = document.createElement('meta')
           meta.name = 'referrer'
           meta.content = 'no-referrer'
-          document.querySelector(`#${this.tinymceId}_ifr`)?.contentDocument.head.appendChild(meta)
-          if (typeof this.tinymceOptions?.init_instance_callback === 'function') {
-            this.tinymceOptions.init_instance_callback(editor)
+          const ifrDoc = document.querySelector(`#${this.tinymceId}_ifr`)?.contentDocument
+          if (ifrDoc) {
+            ifrDoc.head.appendChild(meta)
+
+            if (this.planGrade > 0) {
+              ifrDoc.querySelector(`#tinymce`)?.addEventListener('paste', this.onPaste)
+            }
           }
+
+          this.tinymceOptions?.init_instance_callback?.(editor)
           this.loading = false
         },
         // base_url: './tinymce-static/',
@@ -516,6 +523,36 @@ export default {
     this.close()
   },
   methods: {
+    onPaste (e) {
+      if (!localStorage['minimce-powerpaste-warning-disabled']) {
+        Swal.confirm({
+          titleText: '强力粘贴功能已开启',
+          html: `
+<div>
+  <h4>强力粘贴支持Office文档，但存在以下限制：</h4>
+  <ul style="text-align:left">
+    <li><font color="#dd0000">不完全支持WPS</font></li>
+      <ul style="margin-bottom:1rem">
+        <li>客户端：粘贴图文混合内容时，图片无法正常显示（<b>图片需要单独粘贴/上传</b>）</li>
+        <li>网页版：无法粘贴文字、可单独粘贴图片</li>
+      </ul>
+    <li style="margin-bottom:1rem">受浏览器限制，强力粘贴<font color="#dd0000">无法支持微软Word和Excel文档所支持的<b>所有</b>图片类型</font></li>
+    <li style="margin-bottom:1rem">粘贴微软Word文档（Windows系统、≥2013版本）中<font color="#dd0000">受保护视图</font>的内容，将仅得到<b>无格式的普通文本</b>，这是受保护视图与剪贴板的交互机制决定的</li>
+    <li>受微软Excel网页版限制，粘贴<font color="#dd0000">微软Excel网页版</font>的内容将仅得到<b>无格式的普通文本</b></li>
+  </ul>
+</div>
+                    `,
+          timer: 2000000,
+          width: 800,
+          icon: 'success',
+          confirmButtonText: `我知道了`,
+          cancelButtonText: `不再提示`,
+          showCancelButton: true,
+        }).catch(e => {
+          localStorage['minimce-powerpaste-warning-disabled'] = 'true'
+        })
+      }
+    },
     importSkin () {
       require('./assets/v5.7.1-108/skin/default-content.min.css').default
 
@@ -591,6 +628,7 @@ export default {
     close () {
       window.tinymce && window.tinymce.get(this.tinymceId).setContent('')
       this.eventBus?.$off('insertTag', this.insertTag)
+      
     },
     insertTag (tag) {
       window.tinymce.get(this.tinymceId).insertContent(tag)

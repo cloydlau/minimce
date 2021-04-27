@@ -27,7 +27,7 @@
   "dependencies": {
     "@tinymce/tinymce-vue": "^3.2.8",
     "html-to-text": "^7.1.1",
-    "kikimore": "^0.1.1",
+    "kikimore": "^0.1.2",
     "lodash-es": "^4.17.21"
   },
   "peerDependencies": {

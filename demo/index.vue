@@ -2,7 +2,6 @@
   <el-dialog visible :close-on-click-modal="false" :show-close="false" title="minimce" append-to-body>
     <Minimce
       v-model="value"
-      :text.sync="props.text"
       v-bind="props"
     />
 
@@ -30,12 +29,9 @@ export default {
     return {
       value: '<style>\n        .rich__text {\n          line-height: 1.8;\n          overflow: auto;\n        }\n        .rich__text p {\n          margin-block-end: 0;\n          margin-block-start: 0;\n        }\n        .rich__text img {\n          max-width: 100%;\n          height: auto !important;\n          vertical-align: middle;\n        }\n        .rich__text audio, .rich__text video {\n          width: 100%;\n          background-color: #000;\n        }\n      </style>',
       props: {
-        text: '',
         readonly: false,
         disabled: false,
-        html2text: false,
-        apiKey: '',
-        textMaxlength: 30,
+        apiKey: process.env.VUE_APP_API_KEY,
         Imgpond,
         Filepool,
         MobileLink: () => import('./MobileLink.vue'),

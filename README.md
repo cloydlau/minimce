@@ -219,11 +219,11 @@ Vue.use(Minimce, {
 - 兼容性
   ![PowerPaste插件兼容性](./powerpaste-compatibility.png)
 
-- [tinymce官方] 由于浏览器限制，`PowerPaste` 插件**无法支持微软Word和Excel文档所支持的所有图片类型**。但将 `powerpaste_keep_unsupported_src` 参数开启时，`PowerPaste` 仍会把不支持图片的原始链接存储在 `data-image-src` 属性中，以便开发者通过 `post-processing` 钩子做进一步处理。
+- [tinymce官方] 由于浏览器限制，`PowerPaste` 插件<font color="#dd0000">无法支持微软Word和Excel文档所支持的**所有**图片类型</font>。但将 `powerpaste_keep_unsupported_src` 参数开启时，`PowerPaste` 仍会把不支持图片的原始链接存储在 `data-image-src` 属性中，以便开发者通过 `post-processing` 钩子做进一步处理。
 
-- [tinymce官方] 在Windows系统、2013或以后版本的微软Word文档中，复制粘贴**受保护视图**的内容，将仅得到<font color="#dd0000">**无格式的普通文本**</font>，这是受保护视图与剪贴板的交互机制决定的。
+- [tinymce官方] 在Windows系统、2013或以后版本的微软Word文档中，复制粘贴<font color="#dd0000">受保护视图</font>的内容，将仅得到**无格式的普通文本**，这是受保护视图与剪贴板的交互机制决定的。
 
-- [tinymce官方] 由于微软Excel网页版（`Office Live` 的一部分）的限制，粘贴来源于微软Excel网页版的内容将仅得到<font color="#dd0000">**无格式的普通文本**</font>。
+- [tinymce官方] 由于微软Excel网页版（`Office Live` 的一部分）的限制，粘贴来源于<font color="#dd0000">微软Excel网页版</font>的内容将仅得到**无格式的普通文本**。
 
 <br/>
 

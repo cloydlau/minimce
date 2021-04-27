@@ -4,20 +4,8 @@
 
     <el-form>
       <el-form-item label="apiKey">
-        <el-input v-model="value.apiKey" clearable readonly/>
+        <el-input v-model="value.apiKey" clearable/>
       </el-form-item>
-      <el-form-item label="html2text">
-        <el-switch v-model="value.html2text" :active-value="true" :inactive-value="false"/>
-      </el-form-item>
-      <div v-show="value.html2text">
-        <el-form-item label="text">
-          <el-input v-model="value.text" type="textarea" :autosize="{minRows:3}" maxlength="1000" show-word-limit
-                    clearable/>
-        </el-form-item>
-        <el-form-item label="textMaxlength">
-          <el-input-number v-model="value.textMaxlength" :min="1" :precision="0"/>
-        </el-form-item>
-      </div>
       <el-form-item label="disabled">
         <el-switch v-model="value.disabled"
                    :active-value="true"

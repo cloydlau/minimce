@@ -56,7 +56,7 @@ import { getAxiosShortcut } from 'admate'
 const { POST } = getAxiosShortcut(axios)
 
 Vue.use(Minimce, {
-  apiKey: process.env.VUE_APP_API_KEY,
+  apiKey: '',
   plan: 'essential',
   Imgpond,
   Filepool,
