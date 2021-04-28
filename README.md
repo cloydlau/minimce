@@ -10,7 +10,7 @@ Offline, optionated rich-text editor powered by [tinymce](https://github.com/tin
 - √ 本地图片/音频/视频上传 无缝集成 `imgpond` / `filepool`
 - √ 全局或局部引入 参数支持全局或局部配置（双向绑定参数仅支持局部配置）
 - √ 默认启用 [TinyMCE Plan](https://www.tiny.cloud/pricing) 对应的全套插件
-    - [premium] 不含 `mediaembed` 需自行配置
+    - [premium] 由于 `mediaembed` 需要搭配后端服务 请自行配置
     - [premium] 暂不含 `advcode`
 - √ 为 `essential` 以上的 `plan` 提供换肤、换图标风格工具栏选项
 
@@ -176,6 +176,8 @@ Vue.use(Minimce, {
 })
 ```
 
+> 默认屏蔽 `iframe` 原因：小程序中不能访问没有配置的业务域名
+
 <br/>
 
 ## PowerPaste (premium插件)
@@ -219,15 +221,17 @@ Vue.use(Minimce, {
 - 兼容性
   ![PowerPaste插件兼容性](./powerpaste-compatibility.png)
 
-- [tinymce官方] 由于浏览器限制，`PowerPaste` 插件<font color="#dd0000">无法支持微软Word和Excel文档所支持的**所有**图片类型</font>。但将 `powerpaste_keep_unsupported_src` 参数开启时，`PowerPaste` 仍会把不支持图片的原始链接存储在 `data-image-src` 属性中，以便开发者通过 `post-processing` 钩子做进一步处理。
+- [tinymce官方] 受浏览器限制，`PowerPaste` 插件<font color="#dd0000">无法支持微软Word和Excel文档所支持的**所有**图片类型</font>
+  。但将 `powerpaste_keep_unsupported_src` 参数开启时，`PowerPaste` 仍会把不支持图片的原始链接存储在 `data-image-src`
+  属性中，以便开发者通过 `post-processing` 钩子做进一步处理。
 
-- [tinymce官方] 在Windows系统、2013或以后版本的微软Word文档中，复制粘贴<font color="#dd0000">受保护视图</font>的内容，将仅得到**无格式的普通文本**，这是受保护视图与剪贴板的交互机制决定的。
+- [tinymce官方] 粘贴微软Word文档（Windows系统、≥2013版本）中<font color="#dd0000">受保护视图</font>的内容，将仅得到**无格式的普通文本**，这是受保护视图与剪贴板的交互机制决定的。
 
-- [tinymce官方] 由于微软Excel网页版（`Office Live` 的一部分）的限制，粘贴来源于<font color="#dd0000">微软Excel网页版</font>的内容将仅得到**无格式的普通文本**。
+- [tinymce官方] 受微软Excel网页版限制，粘贴<font color="#dd0000">微软Excel网页版</font>的内容将仅得到**无格式的普通文本**。
 
 <br/>
 
 ## Notice
 
-- element-ui老版本可能存在Imgpond的图片无法清除的问题
-- tinymce有依赖window对象中的某些属性 在微前端环境中（如乾坤）对window对象做了代理 会导致报错 临时的解决方式是关闭subProject的jsSandbox（新版乾坤已解决）
+- `element-ui` 老版本可能存在 `Imgpond` 的图片无法清除的问题
+- `tinymce` 有依赖window对象中的某些属性 在微前端环境中（如 `乾坤`）对window对象做了代理 会导致报错 临时的解决方式是关闭subProject的jsSandbox（新版 `乾坤` 已解决）
