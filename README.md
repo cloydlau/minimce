@@ -120,7 +120,7 @@ MobileLink
 ```js
 // 事件通信
 const eventBus = new Vue()
-export { eventBus } // 用于其它组件与Minimce进行通信
+export { eventBus } // 用于其它组件与Minimce通信
 
 import MobileLink from '@/components/MobileLink'
 import Minimce from 'minimce'
@@ -176,7 +176,12 @@ Vue.use(Minimce, {
 })
 ```
 
-> 默认屏蔽 `iframe` 原因：小程序中不能访问没有配置的业务域名
+**默认屏蔽 `iframe` 原因**
+
+- 允许用户引入未知的 `iframe` 存在执行未知脚本等安全隐患
+- 小程序侧不支持 `iframe`
+- 小程序侧 `web-view` 中使用 `iframe` 需要配置业务域名
+- 给微信公众号H5侧带来授权问题
 
 <br/>
 

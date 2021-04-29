@@ -7,18 +7,16 @@ specifiers:
   '@vue/cli-service': ^4.5.12
   admate: ^0.2.2
   axios: ^0.21.1
-  core-js: ^3.11.0
+  core-js: ^3.11.1
   element-ui: ^2.15.1
   filepool: ^0.1.0
-  html-to-text: ^7.1.1
   imgpond: ^0.3.2
   kayran: ^0.1.0
   kikimore: ^0.1.2
-  lodash-es: ^4.17.21
   pic-viewer: ^0.2.12
   qs: ^6.10.1
   regenerator-runtime: ^0.13.7
-  sass: ^1.32.11
+  sass: ^1.32.12
   sass-loader: ^10.1.1
   tinymce: ^5.7.1
   typescript: ^4.2.4
@@ -27,9 +25,7 @@ specifiers:
 
 dependencies:
   '@tinymce/tinymce-vue': 3.2.8_vue@2.6.12
-  html-to-text: 7.1.1
   kikimore: 0.1.2_element-ui@2.15.1+vue@2.6.12
-  lodash-es: 4.17.21
 
 devDependencies:
   '@vue/cli-plugin-babel': 4.5.12_08f6923167e8915a6e44610899c9e3f1
@@ -37,7 +33,7 @@ devDependencies:
   '@vue/cli-service': 4.5.12_cf059d9143d6f8a9641090832233a2fc
   admate: 0.2.2
   axios: 0.21.1
-  core-js: 3.11.0
+  core-js: 3.11.1
   element-ui: 2.15.1_vue@2.6.12
   filepool: 0.1.0_4afeb36ed3018f8eabbc5d3080b0d94d
   imgpond: 0.3.2_9ccb91b32887030ffd00f5d602b9162f
@@ -45,8 +41,8 @@ devDependencies:
   pic-viewer: 0.2.12
   qs: 6.10.1
   regenerator-runtime: 0.13.7
-  sass: 1.32.11
-  sass-loader: 10.1.1_sass@1.32.11
+  sass: 1.32.12
+  sass-loader: 10.1.1_sass@1.32.12
   tinymce: 5.7.1
   typescript: 4.2.4
   vue: 2.6.12
@@ -1018,7 +1014,7 @@ packages:
       babel-plugin-polyfill-corejs2: 0.2.0_@babel+core@7.13.16
       babel-plugin-polyfill-corejs3: 0.2.0_@babel+core@7.13.16
       babel-plugin-polyfill-regenerator: 0.2.0_@babel+core@7.13.16
-      core-js-compat: 3.11.0
+      core-js-compat: 3.11.1
       semver: 6.3.0
     transitivePeerDependencies:
       - supports-color
@@ -1075,7 +1071,7 @@ packages:
 
   /@hapi/address/2.1.4:
     resolution: {integrity: sha512-QD1PhQk+s31P1ixsX0H0Suoupp3VMXzIVMSwobR3F3MSUO2YCV0B7xqLcUw/Bh8yuvd3LhpyqLQWTNcRmp6IdQ==}
-    deprecated: This version has been deprecated and is no longer supported or maintained
+    deprecated: Moved to 'npm install @sideway/address'
     dev: true
 
   /@hapi/bourne/1.3.2:
@@ -1090,7 +1086,7 @@ packages:
 
   /@hapi/joi/15.1.1:
     resolution: {integrity: sha512-entf8ZMOK8sc+8YfeOlM8pCfg3b5+WZIKBfUaaJT8UsjAAPjartzxIYm3TIbjvA4u+u++KbcXD38k682nVHDAQ==}
-    deprecated: joi is leaving the @hapi organization and moving back to 'joi' (https://github.com/sideway/joi/issues/2411)
+    deprecated: Switch to 'npm install joi'
     dependencies:
       '@hapi/address': 2.1.4
       '@hapi/bourne': 1.3.2
@@ -1277,7 +1273,7 @@ packages:
       '@types/express': 4.17.11
       '@types/serve-static': 1.13.9
       '@types/webpack': 4.41.27
-      http-proxy-middleware: 1.3.0_debug@4.3.1
+      http-proxy-middleware: 1.3.1_debug@4.3.1
     transitivePeerDependencies:
       - debug
     dev: true
@@ -1367,8 +1363,8 @@ packages:
       '@vue/babel-plugin-jsx': 1.0.5_@babel+core@7.13.16
       '@vue/babel-preset-jsx': 1.2.4_@babel+core@7.13.16
       babel-plugin-dynamic-import-node: 2.3.3
-      core-js: 3.11.0
-      core-js-compat: 3.11.0
+      core-js: 3.11.1
+      core-js-compat: 3.11.1
       semver: 6.3.0
       vue: 2.6.12
     transitivePeerDependencies:
@@ -1594,7 +1590,7 @@ packages:
       pnp-webpack-plugin: 1.6.4_typescript@4.2.4
       portfinder: 1.0.28
       postcss-loader: 3.0.0
-      sass-loader: 10.1.1_sass@1.32.11
+      sass-loader: 10.1.1_sass@1.32.12
       ssri: 7.1.0
       terser-webpack-plugin: 2.3.8_webpack@4.46.0
       thread-loader: 2.1.3_webpack@4.46.0
@@ -2071,7 +2067,7 @@ packages:
     hasBin: true
     dependencies:
       browserslist: 4.16.5
-      caniuse-lite: 1.0.30001218
+      caniuse-lite: 1.0.30001219
       colorette: 1.2.2
       normalize-range: 0.1.2
       num2fraction: 1.2.2
@@ -2148,7 +2144,7 @@ packages:
     dependencies:
       '@babel/core': 7.13.16
       '@babel/helper-define-polyfill-provider': 0.2.0_@babel+core@7.13.16
-      core-js-compat: 3.11.0
+      core-js-compat: 3.11.1
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -2373,9 +2369,9 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001218
+      caniuse-lite: 1.0.30001219
       colorette: 1.2.2
-      electron-to-chromium: 1.3.722
+      electron-to-chromium: 1.3.723
       escalade: 3.1.1
       node-releases: 1.1.71
     dev: true
@@ -2569,13 +2565,13 @@ packages:
     resolution: {integrity: sha512-bsTwuIg/BZZK/vreVTYYbSWoe2F+71P7K5QGEX+pT250DZbfU1MQ5prOKpPR+LL6uWKK3KMwMCAS74QB3Um1uw==}
     dependencies:
       browserslist: 4.16.5
-      caniuse-lite: 1.0.30001218
+      caniuse-lite: 1.0.30001219
       lodash.memoize: 4.1.2
       lodash.uniq: 4.5.0
     dev: true
 
-  /caniuse-lite/1.0.30001218:
-    resolution: {integrity: sha512-0ASydOWSy3bB88FbDpJSTt+PfDwnMqrym3yRZfqG8EXSQ06OZhF+q5wgYP/EN+jJMERItNcDQUqMyNjzZ+r5+Q==}
+  /caniuse-lite/1.0.30001219:
+    resolution: {integrity: sha512-c0yixVG4v9KBc/tQ2rlbB3A/bgBFRvl8h8M4IeUbqCca4gsiCfvtaheUssbnux/Mb66Vjz7x8yYjDgYcNQOhyQ==}
     dev: true
 
   /case-sensitive-paths-webpack-plugin/2.4.0:
@@ -2956,8 +2952,8 @@ packages:
       webpack-log: 2.0.0
     dev: true
 
-  /core-js-compat/3.11.0:
-    resolution: {integrity: sha512-3wsN9YZJohOSDCjVB0GequOyHax8zFiogSX3XWLE28M1Ew7dTU57tgHjIylSBKSIouwmLBp3g61sKMz/q3xEGA==}
+  /core-js-compat/3.11.1:
+    resolution: {integrity: sha512-aZ0e4tmlG/aOBHj92/TuOuZwp6jFvn1WNabU5VOVixzhu5t5Ao+JZkQOPlgNXu6ynwLrwJxklT4Gw1G1VGEh+g==}
     dependencies:
       browserslist: 4.16.5
       semver: 7.0.0
@@ -2969,8 +2965,8 @@ packages:
     requiresBuild: true
     dev: true
 
-  /core-js/3.11.0:
-    resolution: {integrity: sha512-bd79DPpx+1Ilh9+30aT5O1sgpQd4Ttg8oqkqi51ZzhedMM1omD2e6IOF48Z/DzDCZ2svp49tN/3vneTK6ZBkXw==}
+  /core-js/3.11.1:
+    resolution: {integrity: sha512-k93Isqg7e4txZWMGNYwevZL9MiogLk8pd1PtwrmFmi8IBq4GXqUaVW/a33Llt6amSI36uSjd0GWwc9pTT9ALlQ==}
     requiresBuild: true
     dev: true
 
@@ -3309,6 +3305,8 @@ packages:
   /deepmerge/4.2.2:
     resolution: {integrity: sha512-FJ3UgI4gIl+PHZm53knsuSFpE+nESMr7M4v9QcgB7S63Kj/6WqMiFQJpBBYz1Pt+66bZpP3Q7Lye0Oo9MPKEdg==}
     engines: {node: '>=0.10.0'}
+    dev: true
+    optional: true
 
   /default-gateway/4.2.0:
     resolution: {integrity: sha512-h6sMrVB1VMWVrW13mSc6ia/DwYYw5MN6+exNu1OaJeFac5aSAvwM7lZ0NVfTABuSkQelr4h5oebg3KB1XPdjgA==}
@@ -3451,14 +3449,6 @@ packages:
       entities: 2.2.0
     dev: true
 
-  /dom-serializer/1.3.1:
-    resolution: {integrity: sha512-Pv2ZluG5ife96udGgEDovOOOA5UELkltfJpnIExPrAk1LTvecolUGn6lIaoLh86d83GiB86CjzciMd9BuRB71Q==}
-    dependencies:
-      domelementtype: 2.2.0
-      domhandler: 4.2.0
-      entities: 2.2.0
-    dev: false
-
   /domain-browser/1.2.0:
     resolution: {integrity: sha512-jnjyiM6eRyZl2H+W8Q/zLMA481hzi0eszAaBUzIVnmYVDBbnLxVNnfu1HgEBvCbL+71FrxMl3E6lpKH7Ge3OXA==}
     engines: {node: '>=0.4', npm: '>=1.2'}
@@ -3470,6 +3460,7 @@ packages:
 
   /domelementtype/2.2.0:
     resolution: {integrity: sha512-DtBMo82pv1dFtUmHyr48beiuq792Sxohr+8Hm9zoxklYPfa6n0Z3Byjj2IV7bmr2IyqClnqEQhfgHJJ5QF0R5A==}
+    dev: true
 
   /domhandler/2.4.2:
     resolution: {integrity: sha512-JiK04h0Ht5u/80fdLMCEmV4zkNh2BcoMFBmZ/91WtYZ8qVXSKjiw7fXMgFPnHcSZgOo3XdinHvmnDUeMf5R4wA==}
@@ -3477,27 +3468,12 @@ packages:
       domelementtype: 1.3.1
     dev: true
 
-  /domhandler/4.2.0:
-    resolution: {integrity: sha512-zk7sgt970kzPks2Bf+dwT/PLzghLnsivb9CcxkvR8Mzr66Olr0Ofd8neSbglHJHaHa2MadfoSdNlKYAaafmWfA==}
-    engines: {node: '>= 4'}
-    dependencies:
-      domelementtype: 2.2.0
-    dev: false
-
   /domutils/1.7.0:
     resolution: {integrity: sha512-Lgd2XcJ/NjEw+7tFvfKxOzCYKZsdct5lczQ2ZaQY8Djz7pfAD3Gbp8ySJWtreII/vDlMVmxwa6pHmdxIYgttDg==}
     dependencies:
       dom-serializer: 0.2.2
       domelementtype: 1.3.1
     dev: true
-
-  /domutils/2.6.0:
-    resolution: {integrity: sha512-y0BezHuy4MDYxh6OvolXYsH+1EMGmFbwv5FKW7ovwMG6zTPWqNPq3WF9ayZssFq+UlKdffGLbOEaghNdaOm1WA==}
-    dependencies:
-      dom-serializer: 1.3.1
-      domelementtype: 2.2.0
-      domhandler: 4.2.0
-    dev: false
 
   /dot-prop/5.3.0:
     resolution: {integrity: sha512-QM8q3zDe58hqUqjraQOmzZ1LIH9SWQJTlEKCH4kJ2oQvLZk7RbQXvtDM2XEq3fwkV9CCvvH4LA0AV+ogFsBM2Q==}
@@ -3550,8 +3526,8 @@ packages:
     requiresBuild: true
     dev: true
 
-  /electron-to-chromium/1.3.722:
-    resolution: {integrity: sha512-aAsc906l0RBsVTsGTK+KirVfey9eNtxyejdkbNzkISGxb7AFna3Kf0qvsp8tMttzBt9Bz3HddtYQ+++/PZtRYA==}
+  /electron-to-chromium/1.3.723:
+    resolution: {integrity: sha512-L+WXyXI7c7+G1V8ANzRsPI5giiimLAUDC6Zs1ojHHPhYXb3k/iTABFmWjivEtsWrRQymjnO66/rO2ZTABGdmWg==}
     dev: true
 
   /element-ui/2.15.1_vue@2.6.12:
@@ -3623,6 +3599,7 @@ packages:
 
   /entities/2.2.0:
     resolution: {integrity: sha512-p92if5Nz619I0w+akJrLZH0MX0Pb5DX39XOwQTtXSdQQOaYH03S1uIQp4mhOZtAXrxq4ViO67YTiLBo2638o9A==}
+    dev: true
 
   /errno/0.1.8:
     resolution: {integrity: sha512-dJ6oBr5SQ1VSd9qkk7ByRgb/1SH4JZjCHSW/mr63/QcXO9zLVxvJ6Oy13nio03rxpSnVDDjFor75SjVeZWPW/A==}
@@ -3977,7 +3954,7 @@ packages:
       vue: ^2.6.12
     dependencies:
       axios: 0.21.1
-      core-js: 3.11.0
+      core-js: 3.11.1
       element-ui: 2.15.1_vue@2.6.12
       filepond: 4.27.0
       filepond-plugin-file-validate-type: 1.2.6_filepond@4.27.0
@@ -4453,6 +4430,7 @@ packages:
   /he/1.2.0:
     resolution: {integrity: sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==}
     hasBin: true
+    dev: true
 
   /hex-color-regex/1.1.0:
     resolution: {integrity: sha512-l9sfDFsuqtOqKDsQdqrMRk0U85RZc0RtOR9yPI7mRVOa4FsR/BVnZ0shmQRM96Ji99kYZP/7hn1cedc1+ApsTQ==}
@@ -4524,17 +4502,6 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /html-to-text/7.1.1:
-    resolution: {integrity: sha512-c9QWysrfnRZevVpS8MlE7PyOdSuIOjg8Bt8ZE10jMU/BEngA6j3llj4GRfAmtQzcd1FjKE0sWu5IHXRUH9YxIQ==}
-    engines: {node: '>=10.23.2'}
-    hasBin: true
-    dependencies:
-      deepmerge: 4.2.2
-      he: 1.2.0
-      htmlparser2: 6.1.0
-      minimist: 1.2.5
-    dev: false
-
   /html-webpack-plugin/3.2.0_webpack@4.46.0:
     resolution: {integrity: sha1-sBq71yOsqqeze2r0SS69oD2d03s=}
     engines: {node: '>=6.9'}
@@ -4562,15 +4529,6 @@ packages:
       inherits: 2.0.4
       readable-stream: 3.6.0
     dev: true
-
-  /htmlparser2/6.1.0:
-    resolution: {integrity: sha512-gyyPk6rgonLFEDGoeRgQNaEUvdJ4ktTmmUh/h2t7s+M8oPpIPxgNACWa+6ESR57kXstwqPiCut0V8NRpcwgU7A==}
-    dependencies:
-      domelementtype: 2.2.0
-      domhandler: 4.2.0
-      domutils: 2.6.0
-      entities: 2.2.0
-    dev: false
 
   /http-deceiver/1.2.7:
     resolution: {integrity: sha1-+nFolEq5pRnTN8sL7HKE3D5yPYc=}
@@ -4624,8 +4582,8 @@ packages:
       - debug
     dev: true
 
-  /http-proxy-middleware/1.3.0_debug@4.3.1:
-    resolution: {integrity: sha512-nHn8lcFNmxCalzHGXMn0ojKunXC9twBvJ+y7QNhvK/ep7ZDOXvO7Gph01rSwsMOrG4m6N72gAAWXMYhPZvK6OA==}
+  /http-proxy-middleware/1.3.1_debug@4.3.1:
+    resolution: {integrity: sha512-13eVVDYS4z79w7f1+NPllJtOQFx/FdUW4btIvVRMaRlUY9VGstAbo5MOhLEuUgZFRHn3x50ufn25zkj/boZnEg==}
     engines: {node: '>=8.0.0'}
     dependencies:
       '@types/http-proxy': 1.17.5
@@ -4708,14 +4666,13 @@ packages:
       filepond-plugin-file-validate-type: 1.2.6_filepond@4.27.0
       filepond-plugin-image-preview: 4.6.6_filepond@4.27.0
       pic-viewer: 0.2.12
-      plain-kit: 0.5.0-rc.3_4afeb36ed3018f8eabbc5d3080b0d94d
+      plain-kit: 0.4.17_4afeb36ed3018f8eabbc5d3080b0d94d
       sortablejs: 1.13.0
       vue: 2.6.12
       vue-cropperjs: 5.0.0_vue@2.6.12
       vue-filepond: 7.0.0_filepond@4.27.0+vue@2.6.12
     transitivePeerDependencies:
       - axios
-      - element-form-verify
       - time-range-picker
       - vant
     dev: true
@@ -5658,6 +5615,7 @@ packages:
 
   /minimist/1.2.5:
     resolution: {integrity: sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==}
+    dev: true
 
   /minipass-collect/1.0.2:
     resolution: {integrity: sha512-6T6lH0H8OG9kITm/Jm6tdooIbogG9e0tLgpY6mphXSm/A9u8Nq1ryBG+Qspiub9LjWlBPsPS3tWQ/Botq4FdxA==}
@@ -6342,27 +6300,6 @@ packages:
       time-range-picker: '*'
       vant: '*'
       vue: '*'
-    dependencies:
-      animate.css: 4.1.1
-      axios: 0.21.1
-      dayjs: 1.10.4
-      element-ui: 2.15.1_vue@2.6.12
-      lodash: 4.17.21
-      qrcode: 1.4.4
-      qs: 6.10.1
-      sweetalert2: 10.16.6
-      vue: 2.6.12
-    dev: true
-
-  /plain-kit/0.5.0-rc.3_4afeb36ed3018f8eabbc5d3080b0d94d:
-    resolution: {integrity: sha512-+R8mZJA9GKB3PbHXV86RMB74ogpxVcPssvfIg+/teSQtqTPxAGBnkNzr8uj4sdX+SkOGUY9DAtMzY40YA0N4Yw==}
-    peerDependencies:
-      axios: '0'
-      element-form-verify: '0'
-      element-ui: '2'
-      time-range-picker: '0'
-      vant: '2'
-      vue: '2'
     dependencies:
       animate.css: 4.1.1
       axios: 0.21.1
@@ -7189,7 +7126,7 @@ packages:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
     dev: true
 
-  /sass-loader/10.1.1_sass@1.32.11:
+  /sass-loader/10.1.1_sass@1.32.12:
     resolution: {integrity: sha512-W6gVDXAd5hR/WHsPicvZdjAWHBcEJ44UahgxcIE196fW2ong0ZHMPO1kZuI5q0VlvMQZh32gpv69PLWQm70qrw==}
     engines: {node: '>= 10.13.0'}
     peerDependencies:
@@ -7208,13 +7145,13 @@ packages:
       klona: 2.0.4
       loader-utils: 2.0.0
       neo-async: 2.6.2
-      sass: 1.32.11
+      sass: 1.32.12
       schema-utils: 3.0.0
       semver: 7.3.5
     dev: true
 
-  /sass/1.32.11:
-    resolution: {integrity: sha512-O9tRcob/fegUVSIV1ihLLZcftIOh0AF1VpKgusUfLqnb2jQ0GLDwI5ivv1FYWivGv8eZ/AwntTyTzjcHu0c/qw==}
+  /sass/1.32.12:
+    resolution: {integrity: sha512-zmXn03k3hN0KaiVTjohgkg98C3UowhL1/VSGdj4/VAAiMKGQOE80PFPxFP2Kyq0OUskPKcY5lImkhBKEHlypJA==}
     engines: {node: '>=8.9.0'}
     hasBin: true
     dependencies:

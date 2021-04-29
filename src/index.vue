@@ -111,8 +111,8 @@ import 'tinymce/plugins/imagetools'
 import 'tinymce/plugins/quickbars'
 
 // 无法使用动态导入时
-import htmlToText from 'html-to-text'
-import { throttle } from 'lodash-es'
+//import htmlToText from 'html-to-text'
+//import { throttle } from 'lodash-es'
 import InsertImg from './components/InsertImg.vue'
 import InsertFile from './components/InsertFile.vue'
 
@@ -131,7 +131,7 @@ export default {
     disabled: Boolean,
     readonly: Boolean,
     apiKey: String,
-    html2text: Boolean,
+    //html2text: Boolean,
     text: String,
     textMaxlength: Number,
     tinymceOptions: {
@@ -165,7 +165,7 @@ export default {
           this.$parent.$emit('el.form.blur')
         })
       }
-      if (this.html2text && this.throttle && this.htmlToText) {
+      /*if (this.html2text && this.throttle && this.htmlToText) {
         if (!this.getTextThrottle__) {
           this.getTextThrottle__ = this.throttle(() => {
             if (this.value__) {
@@ -189,9 +189,9 @@ export default {
         }
 
         this.getTextThrottle__()
-      }
+      }*/
     },
-    html2text: {
+    /*html2text: {
       immediate: true,
       async handler (newVal, oldVal) {
         if (newVal) {
@@ -205,7 +205,7 @@ export default {
           }
         }
       }
-    },
+    },*/
     eventBus: {
       immediate: true,
       handler (n, o) {
@@ -217,7 +217,7 @@ export default {
   },
   data () {
     return {
-      eventRemover: [],
+      //eventRemover: [],
       tinymceId: 'vue-tinymce-' + +new Date() + ((Math.random() * 1000).toFixed(0) + ''),
       value__: '',
       ready: false,
@@ -278,21 +278,26 @@ export default {
           },
         },
         menubar: 'file edit view insert format tools table help',
-        image_advtab: true,
+        //image_advtab: true, // todo: 存在不跟随页面滚动的bug
         image_caption: true,
         media_live_embeds: true,
         toolbar_mode: 'sliding',
-        extended_valid_elements: 'img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name|referrerpolicy=no-referrer]',
+        //extended_valid_elements: 'img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name|referrerpolicy=no-referrer]',
         language: 'zh_CN',
         init_instance_callback: editor => {
-          const meta = document.createElement('meta')
-          meta.name = 'referrer'
-          meta.content = 'no-referrer'
+          //const meta = document.createElement('meta')
+          //meta.name = 'referrer'
+          //meta.content = 'no-referrer'
           const ifrDoc = document.querySelector(`#${this.tinymceId}_ifr`)?.contentDocument
           if (ifrDoc) {
-            ifrDoc.head.appendChild(meta)
+            //ifrDoc.head.appendChild(meta)
 
-            if (this.planGrade > 0) {
+            /*ifrDoc.addEventListener('error', ({ target }) => {
+              if (target.tagName === 'IMG' && target.src) {
+              }
+            }, true)*/
+
+            /*if (this.planGrade > 0) {
               const el = ifrDoc.querySelector(`#tinymce`)
               if (el) {
                 el.addEventListener('paste', this.onPaste)
@@ -300,7 +305,7 @@ export default {
                   el.removeEventListener('paste', this.onPaste)
                 })
               }
-            }
+            }*/
           }
 
           this.tinymceOptions?.init_instance_callback?.(editor)
@@ -333,6 +338,23 @@ export default {
           ...this.planGrade > 0 && {
             ...localStorage[`${name}-skin`] && { skin: localStorage[`${name}-skin`] },
             ...localStorage[`${name}-icons`] && { icons: localStorage[`${name}-icons`] },
+            //powerpaste_keep_unsupported_src: true, // todo: If your application has access to the file system, setting powerpaste_keep_unsupported_src to true may allow you to replace unsupported images during post-processing using the original file paths.
+            paste_postprocess: (pluginApi, data) => {
+              // 可能的值：
+              // 'html', 'msoffice', 'googledocs', 'image', 'imagedrop', 'plaintext', 'text', or 'invalid'
+              switch (data.source) {
+                case 'msoffice':
+                  this.onPaste()
+                  break
+                case 'html':
+                  //const imgList = data.node.querySelectorAll('img')
+              }
+              console.log(data.node, data.mode, data.source)
+              // Apply custom filtering by mutating data.node
+              /*const additionalNode = document.createElement('div')
+              additionalNode.innerHTML = '<p>This will go before the pasted content.</p>'
+              data.node.insertBefore(additionalNode, data.node.firstElementChild)*/
+            },
             powerpaste_html_import: 'merge',
             powerpaste_word_import: 'merge',
             plugins: `print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount imagetools textpattern noneditable help formatpainter permanentpen${allowIframe ? ' pageembed' : ''} charmap quickbars emoticons advtable`,
@@ -535,19 +557,17 @@ export default {
         Swal.confirm({
           titleText: '强力粘贴功能已开启',
           html: `
-<div>
-  <h4>强力粘贴支持Office文档，但存在以下限制：</h4>
-  <ul style="text-align:left">
-    <li><font color="#dd0000">不完全支持WPS</font></li>
-      <ul style="margin-bottom:1rem">
-        <li>客户端：粘贴图文混合内容时，图片无法正常显示（<b>图片需要单独粘贴/上传</b>）</li>
-        <li>网页版：无法粘贴文字，可单独粘贴图片</li>
-      </ul>
-    <li style="margin-bottom:1rem">受浏览器限制，强力粘贴<b>无法支持微软Word和Excel文档所支持的<font color="#dd0000">所有</font>图片类型</b></li>
-    <li style="margin-bottom:1rem">粘贴微软Word文档（Windows系统、≥2013版本）中<font color="#dd0000">受保护视图</font>的内容，将仅得到<b>无格式的普通文本</b>，这是受保护视图与剪贴板的交互机制决定的</li>
-    <li>受微软Excel网页版限制，粘贴<font color="#dd0000">微软Excel网页版</font>的内容将仅得到<b>无格式的普通文本</b></li>
-  </ul>
-</div>
+<h4>强力粘贴支持Office文档，但存在以下限制：</h4>
+<ul style="text-align:left">
+  <li><font color="#dd0000">不完全支持WPS</font></li>
+    <ul style="margin-bottom:1rem">
+      <li>客户端：粘贴图文混合内容时，图片无法正常显示（<b>图片需要单独粘贴/上传</b>）</li>
+      <li>网页版：无法粘贴文字，可单独粘贴图片</li>
+    </ul>
+  <li style="margin-bottom:1rem">受浏览器限制，强力粘贴<b>无法支持微软Word和Excel文档所支持的<font color="#dd0000">所有</font>图片类型</b></li>
+  <li style="margin-bottom:1rem">粘贴微软Word文档（Windows系统、≥2013版本）中<font color="#dd0000">受保护视图</font>的内容，将仅得到<b>无格式的普通文本</b>，这是受保护视图与剪贴板的交互机制决定的</li>
+  <li>受微软Excel网页版限制，粘贴<font color="#dd0000">微软Excel网页版</font>的内容将仅得到<b>无格式的普通文本</b></li>
+</ul>
                     `,
           timer: 20000,
           width: 800,
@@ -635,7 +655,7 @@ export default {
     close () {
       window.tinymce && window.tinymce.get(this.tinymceId).setContent('')
       this.eventBus?.$off('insertTag', this.insertTag)
-      this.eventRemover.map(v => v())
+      //this.eventRemover.map(v => v())
     },
     insertTag (tag) {
       window.tinymce.get(this.tinymceId).insertContent(tag)

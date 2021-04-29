@@ -98,7 +98,7 @@ export default {
         disabled,
         readonly,
         eventBus,
-        html2text,
+        //html2text,
         textMaxlength,
         tinymceOptions
       } = globalProps
@@ -107,7 +107,7 @@ export default {
         ...this.$attrs,
         disabled: getFinalProp(disabled, this.$attrs.disabled, false),
         readonly: getFinalProp(readonly, this.$attrs.readonly, false),
-        html2text: getFinalProp(html2text, this.$attrs.html2text, false),
+        //html2text: getFinalProp(html2text, this.$attrs.html2text, false),
         apiKey: getFinalProp(apiKey, this.$attrs.apiKey, ''),
         textMaxlength: getFinalProp(textMaxlength, this.$attrs.textMaxlength, 30),
         tinymceOptions: getFinalProp(tinymceOptions, this.$attrs.tinymceOptions),

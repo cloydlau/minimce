@@ -26,9 +26,7 @@
   },
   "dependencies": {
     "@tinymce/tinymce-vue": "^3.2.8",
-    "html-to-text": "^7.1.1",
-    "kikimore": "^0.1.2",
-    "lodash-es": "^4.17.21"
+    "kikimore": "^0.1.2"
   },
   "peerDependencies": {
     "element-ui": "^2.15.1",
@@ -40,7 +38,7 @@
     "@vue/cli-service": "^4.5.12",
     "admate": "^0.2.2",
     "axios": "^0.21.1",
-    "core-js": "^3.11.0",
+    "core-js": "^3.11.1",
     "element-ui": "^2.15.1",
     "filepool": "^0.1.0",
     "imgpond": "^0.3.2",
@@ -48,7 +46,7 @@
     "pic-viewer": "^0.2.12",
     "qs": "^6.10.1",
     "regenerator-runtime": "^0.13.7",
-    "sass": "^1.32.11",
+    "sass": "^1.32.12",
     "sass-loader": "^10.1.1",
     "tinymce": "^5.7.1",
     "typescript": "^4.2.4",
