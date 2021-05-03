@@ -26,7 +26,8 @@
   },
   "dependencies": {
     "@tinymce/tinymce-vue": "^3.2.8",
-    "kikimore": "^0.1.2"
+    "kikimore": "^0.1.2",
+    "mammoth": "^1.4.16"
   },
   "peerDependencies": {
     "element-ui": "^2.15.1",
@@ -36,7 +37,7 @@
     "@vue/cli-plugin-babel": "^4.5.12",
     "@vue/cli-plugin-typescript": "^4.5.12",
     "@vue/cli-service": "^4.5.12",
-    "admate": "^0.2.2",
+    "admate": "^0.3.0",
     "axios": "^0.21.1",
     "core-js": "^3.11.1",
     "element-ui": "^2.15.1",

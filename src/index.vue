@@ -44,6 +44,15 @@
           <slot name="Filepool" :slotProps="slotProps"/>
         </template>
       </component>
+      <component
+        :is="InsertWord"
+        @insertTag="insertTag"
+        :show.sync="showInsertionDialog.word"
+      >
+        <template v-slot:Filepool="slotProps">
+          <slot name="Filepool" :slotProps="slotProps"/>
+        </template>
+      </component>
     </div>
   </div>
 </template>
@@ -115,6 +124,7 @@ import 'tinymce/plugins/quickbars'
 //import { throttle } from 'lodash-es'
 import InsertImg from './components/InsertImg.vue'
 import InsertFile from './components/InsertFile.vue'
+import InsertWord from './components/InsertWord.vue'
 
 const plans = ['core', 'essential', 'professional', 'custom']
 const defaultPremiumSkin = 'material-classic'
@@ -228,10 +238,12 @@ export default {
         video: false,
         mobilelink: false,
         tel: false,
+        word: false,
       },
       InsertImg: null,
       InsertAudio: null,
       InsertVideo: null,
+      InsertWord: null,
       tinymceOptions_default: {
         // core
         plugins: 'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
@@ -266,7 +278,7 @@ export default {
           // https://www.tiny.cloud/docs/configure/editor-appearance/#examplethetinymcedefaultmenuitems
           insert: {
             title: 'Insert',
-            items: 'localimage localvideo localaudio | mobilelink tel | image link media template codesample inserttable | charmap emoticons hr | pagebreak nonbreaking anchor toc | insertdatetime'
+            items: 'localimage localvideo localaudio word | mobilelink tel | image link media template codesample inserttable | charmap emoticons hr | pagebreak nonbreaking anchor toc | insertdatetime'
           },
           view: {
             title: 'View',
@@ -347,7 +359,7 @@ export default {
                   this.onPaste()
                   break
                 case 'html':
-                  //const imgList = data.node.querySelectorAll('img')
+                //const imgList = data.node.querySelectorAll('img')
               }
               console.log(data.node, data.mode, data.source)
               // Apply custom filtering by mutating data.node
@@ -465,6 +477,7 @@ export default {
                 getSubmenuItems: () => iconsList.map(text => `toggleMenuItem-icons-${text}`)
               })
             }
+            // 官方图标库：https://www.tiny.cloud/docs/advanced/editor-icon-identifiers/
 
             /**
              * 电话号码
@@ -519,6 +532,15 @@ export default {
                   this.showInsertionDialog.video = true
                 }
               })
+
+              this.InsertWord = InsertWord
+              editor.ui.registry.addMenuItem('word', {
+                text: 'Word文档',
+                icon: 'new-document',
+                onAction: () => {
+                  this.showInsertionDialog.word = true
+                }
+              })
             }
 
             /**
@@ -559,14 +581,14 @@ export default {
           html: `
 <h4>强力粘贴支持Office文档，但存在以下限制：</h4>
 <ul style="text-align:left">
-  <li><font color="#dd0000">不完全支持WPS</font></li>
+  <li><span style="color:#dd0000">不完全支持WPS</span></li>
     <ul style="margin-bottom:1rem">
       <li>客户端：粘贴图文混合内容时，图片无法正常显示（<b>图片需要单独粘贴/上传</b>）</li>
       <li>网页版：无法粘贴文字，可单独粘贴图片</li>
     </ul>
-  <li style="margin-bottom:1rem">受浏览器限制，强力粘贴<b>无法支持微软Word和Excel文档所支持的<font color="#dd0000">所有</font>图片类型</b></li>
-  <li style="margin-bottom:1rem">粘贴微软Word文档（Windows系统、≥2013版本）中<font color="#dd0000">受保护视图</font>的内容，将仅得到<b>无格式的普通文本</b>，这是受保护视图与剪贴板的交互机制决定的</li>
-  <li>受微软Excel网页版限制，粘贴<font color="#dd0000">微软Excel网页版</font>的内容将仅得到<b>无格式的普通文本</b></li>
+  <li style="margin-bottom:1rem">受浏览器限制，强力粘贴<b>无法支持微软Word和Excel文档所支持的<span style="color:#dd0000">所有</span>图片类型</b></li>
+  <li style="margin-bottom:1rem">粘贴微软Word文档（Windows系统、≥2013版本）中<span style="color:#dd0000">受保护视图</font>的内容，将仅得到<b>无格式的普通文本</b>，这是受保护视图与剪贴板的交互机制决定的</li>
+  <li>受微软Excel网页版限制，粘贴<span style="color:#dd0000">微软Excel网页版</span>的内容将仅得到<b>无格式的普通文本</b></li>
 </ul>
                     `,
           timer: 20000,

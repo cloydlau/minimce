@@ -24,7 +24,7 @@
           />
         </el-form-item>
       </template>
-      <el-form-item label="上传文件" prop="fileUrl" :rules="{required:true,message:'必填项'}">
+      <el-form-item label="上传文件" prop="file" :rules="{required:true,message:'必填项'}">
         <slot
           name="Filepool"
           :v_model="form"
@@ -54,7 +54,7 @@ export default {
       form: {
         imgUrl: '',
         name: '',
-        fileUrl: ''
+        file: ''
       }
     }
   },
@@ -64,7 +64,7 @@ export default {
         this.form = {
           imgUrl: '',
           name: '',
-          fileUrl: ''
+          file: ''
         }
       }
     }
@@ -74,11 +74,11 @@ export default {
       this.$refs.rowForm.validate(valid => {
         if (valid) {
           if (this.type === 'audio') {
-            this.$emit('insertTag', `<audio controls data-name="${this.form.name}" data-poster="${this.form.imgUrl}" src="${this.form.fileUrl}"></audio>`)
+            this.$emit('insertTag', `<audio controls data-name="${this.form.name}" data-poster="${this.form.imgUrl}" src="${this.form.file}"></audio>`)
             this.$emit('update:show', false)
           } else if (this.type === 'video') {
-            if (typeof this.form.fileUrl === 'string' && this.form.fileUrl.toLowerCase().endsWith('.mp4')) {
-              this.$emit('insertTag', `<video controls controlslist="nodownload" src="${this.form.fileUrl}"></video>`)
+            if (typeof this.form.file === 'string' && this.form.file.toLowerCase().endsWith('.mp4')) {
+              this.$emit('insertTag', `<video controls controlslist="nodownload" src="${this.form.file}"></video>`)
               this.$emit('update:show', false)
             } else {
               Swal.warning('仅支持以.mp4结尾的视频链接')

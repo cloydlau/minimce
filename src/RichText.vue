@@ -13,7 +13,7 @@
       <component :is="Imgpond" v-bind="slotProps" v-model="slotProps['v_model'].imgUrl"/>
     </template>
     <template #Filepool="{slotProps}" v-if="Filepool">
-      <component :is="Filepool" v-bind="slotProps" v-model="slotProps['v_model'].fileUrl"/>
+      <component :is="Filepool" v-bind="slotProps" v-model="slotProps['v_model'].file"/>
     </template>
   </RichText>
 </template>

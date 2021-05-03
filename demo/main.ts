@@ -32,6 +32,12 @@ Vue.use(Filepool, {
       })
     })
   },
+  fileTypeCatalog: {
+    word: {
+      maxSize: 100,
+      accept: '.docx',
+    },
+  }
 })
 
 import Imgpond from 'imgpond'
@@ -57,7 +63,7 @@ const { POST } = getAxiosShortcut(axios)
 
 Vue.use(Minimce, {
   apiKey: '',
-  plan: 'essential',
+  //plan: 'essential',
   Imgpond,
   Filepool,
   MobileLink: () => import('./MobileLink.vue'),
