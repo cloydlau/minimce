@@ -126,6 +126,8 @@ import InsertImg from './components/InsertImg.vue'
 import InsertFile from './components/InsertFile.vue'
 import InsertWord from './components/InsertWord.vue'
 
+import qs from 'qs'
+
 const plans = ['core', 'essential', 'professional', 'custom']
 const defaultPremiumSkin = 'material-classic'
 
@@ -359,7 +361,41 @@ export default {
                   this.onPaste()
                   break
                 case 'html':
-                //const imgList = data.node.querySelectorAll('img')
+                  const imgList = data.node.querySelectorAll('img')
+                  if (imgList.length) {
+                    this.loading = true
+                    for (let [i, v] of imgList.entries()) {
+                      const imgSrc = v.src
+                      v.src = ''
+                      //v.src = `http://localhost/__proxy__?url=${v.src}`
+                      fetch(`http://localhost:8888/__proxy__?url=${imgSrc}`
+                        /*+ qs.stringify({
+                          url: v.src,
+                        }, { addQueryPrefix: true })*/
+                        , {
+                          method: 'GET',
+                          responseType: 'blob',
+                          mode: 'cors',
+                        })
+                      .then(res => {
+                        console.log(res)
+                        return res.blob()
+                      })
+                      .then(blob => {
+                        console.log(blob)
+                        v.onload = e => {
+                          window.URL.revokeObjectURL(v.src)
+                        }
+                        v.src = window.URL.createObjectURL(blob)
+                        console.log(v.src)
+                      })
+                      .finally(e => {
+                        if (i === imgList.length - 1) {
+                          this.loading = false
+                        }
+                      })
+                    }
+                  }
               }
               console.log(data.node, data.mode, data.source)
               // Apply custom filtering by mutating data.node

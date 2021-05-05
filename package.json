@@ -39,7 +39,7 @@
     "@vue/cli-service": "^4.5.12",
     "admate": "^0.3.0",
     "axios": "^0.21.1",
-    "core-js": "^3.11.1",
+    "core-js": "^3.11.2",
     "element-ui": "^2.15.1",
     "filepool": "^0.1.0",
     "imgpond": "^0.3.2",
