@@ -227,8 +227,7 @@ Vue.use(Minimce, {
   ![PowerPaste插件兼容性](./powerpaste-compatibility.png)
 
 - [tinymce官方] 受浏览器限制，`PowerPaste` 插件**无法支持微软Word和Excel文档所支持的<font color="#dd0000">所有</font>图片类型**
-  。但将 `powerpaste_keep_unsupported_src` 参数开启时，`PowerPaste` 仍会把不支持图片的原始链接存储在 `data-image-src`
-  属性中，以便开发者通过 `post-processing` 钩子做进一步处理。
+  。举个例子，浏览器禁止以编程方式访问文件系统，所以无法解析文档中使用 `file://` 协议的图片（比如WPS使用的就是此协议）。
 
 - [tinymce官方] 粘贴微软Word文档（Windows系统、≥2013版本）中<font color="#dd0000">受保护视图</font>的内容，将仅得到**无格式的普通文本**，这是受保护视图与剪贴板的交互机制决定的。
 

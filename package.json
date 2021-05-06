@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@tinymce/tinymce-vue": "^3.2.8",
+    "kayran": "^0.1.1",
     "kikimore": "^0.1.2",
     "mammoth": "^1.4.16"
   },
@@ -39,11 +40,10 @@
     "@vue/cli-service": "^4.5.12",
     "admate": "^0.3.0",
     "axios": "^0.21.1",
-    "core-js": "^3.11.2",
+    "core-js": "^3.11.3",
     "element-ui": "^2.15.1",
     "filepool": "^0.1.0",
     "imgpond": "^0.3.2",
-    "kayran": "^0.1.0",
     "pic-viewer": "^0.2.12",
     "qs": "^6.10.1",
     "regenerator-runtime": "^0.13.7",
