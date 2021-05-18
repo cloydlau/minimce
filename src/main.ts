@@ -1,6 +1,10 @@
 import Minimce from './RichText.vue'
 import { init } from './config'
 
+/*import Vue from 'vue'
+import ElementFormVerify from 'element-form-verify'
+Vue.use(ElementFormVerify)*/
+
 interface installInterface {
   installed?: boolean
 

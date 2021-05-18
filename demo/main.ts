@@ -34,7 +34,6 @@ Vue.use(Filepool, {
   },
   fileTypeCatalog: {
     word: {
-      maxSize: 100,
       accept: '.docx',
     },
   }
@@ -69,10 +68,9 @@ Vue.use(Minimce, {
   MobileLink: () => import('./MobileLink.vue'),
   eventBus,
   tinymceOptions: {
-    images_upload_handler (blobInfo, success, failure) {
-      console.log('\n-------------------------\n')
-      console.log(1)
-      console.log('-------------------------\n\n')
+    images_upload_handler (blobInfo, success, failure, progress) {
+      // img的src为blob或base64时触发
+      console.log('images_upload_handler', blobInfo)
       const blob = blobInfo.blob()
       const file = new File(
         [blob],

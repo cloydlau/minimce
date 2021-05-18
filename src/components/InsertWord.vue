@@ -15,9 +15,10 @@
         <slot
           name="Filepool"
           :v_model="form"
-          :count="1"
           fileType="word"
           :upload="false"
+          valueType="array"
+          :count="10"
         />
       </el-form-item>
     </el-form>
@@ -31,6 +32,7 @@
 
 <script>
 import mammoth from 'mammoth'
+import { awaitFor } from 'kayran'
 import { Swal } from 'kikimore'
 import { name } from '../../package.json'
 
@@ -44,48 +46,59 @@ export default {
       form: {
         file: null
       },
-      loading: false
-    }
-  },
-  watch: {
-    show (n, o) {
-      if (!n) {
-        this.form = {
-          file: null
-        }
-      }
+      loading: false,
+      allSettled: true,
     }
   },
   methods: {
     onSubmit () {
-      this.$refs.rowForm.validate(valid => {
+      this.$refs.rowForm.validate(async valid => {
         if (valid) {
           this.loading = true
-          const reader = new FileReader()
-          reader.onload = e => {
-            const arrayBuffer = e.target.result
-            if (arrayBuffer.byteLength) {
-              mammoth.convertToHtml({ arrayBuffer })
-              .then(e => {
-                console.log(`${name}-Word解析结果：`, e)
-                const { messages, value } = e
-                if (value) {
-                  this.$emit('insertTag', value)
-                  this.$emit('update:show', false)
+          const results = await Promise.allSettled(this.form.file.map(v =>
+            new Promise((resolve, reject) => {
+              const reader = new FileReader()
+              reader.onload = async e => {
+                const arrayBuffer = e.target.result
+                if (arrayBuffer.byteLength) {
+                  const [res, err] = await awaitFor(mammoth.convertToHtml({ arrayBuffer }))
+                  if (err) {
+                    reject(err)
+                  } else {
+                    const { messages, value } = res
+                    console.log(`[${name}] ${v.name} 解析结果：`, res)
+                    if (value) {
+                      resolve(value)
+                    } else {
+                      reject(`${v.name} 内容为空`)
+                    }
+                  }
                 } else {
-                  Swal.warning('文档内容为空')
+                  reject(`${v.name} 内容为空`)
                 }
-              })
-              .done(e => {
-                this.form.file = null
-                this.loading = false
-              })
+              }
+              reader.readAsArrayBuffer(v)
+            })
+          ))
+
+          results.map(result => {
+            const { status, value, reason } = result
+            if (status === 'fulfilled') {
+              this.$emit('insertTag', value)
             } else {
-              this.loading = false
-              Swal.warning('文档内容为空')
+              if (reason) {
+                Swal.warning(reason)
+              }
+              this.allSettled = false
             }
+          })
+
+          this.form.file = null
+          this.loading = false
+          if (this.allSettled) {
+            this.$emit('update:show', false)
           }
-          reader.readAsArrayBuffer(this.form.file)
+          this.allSettled = true
         }
       })
     }
