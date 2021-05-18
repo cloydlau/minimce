@@ -31,9 +31,10 @@ tsconfig.json
 
 /.env.development
 *.xmind
-*.html
 /*.ts
 pnpm-lock.yaml
 /dist/*.common.*
 /dist/*.umd.js
 /dist/*.umd.js.map
+/dist/*.html
+/*.html
