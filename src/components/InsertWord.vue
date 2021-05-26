@@ -18,7 +18,6 @@
           fileType="word"
           :upload="false"
           valueType="array"
-          :count="10"
         />
       </el-form-item>
     </el-form>
@@ -32,7 +31,7 @@
 
 <script>
 import mammoth from 'mammoth'
-import { awaitFor } from 'kayran'
+import { waitFor } from 'kayran'
 import { Swal } from 'kikimore'
 import { name } from '../../package.json'
 
@@ -61,7 +60,7 @@ export default {
               reader.onload = async e => {
                 const arrayBuffer = e.target.result
                 if (arrayBuffer.byteLength) {
-                  const [res, err] = await awaitFor(mammoth.convertToHtml({ arrayBuffer }))
+                  const [res, err] = await waitFor(mammoth.convertToHtml({ arrayBuffer }))
                   if (err) {
                     reject(err)
                   } else {

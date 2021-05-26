@@ -126,8 +126,6 @@ import InsertImg from './components/InsertImg.vue'
 import InsertFile from './components/InsertFile.vue'
 import InsertWord from './components/InsertWord.vue'
 
-import qs from 'qs'
-
 const plans = ['core', 'essential', 'professional', 'custom']
 const defaultPremiumSkin = 'material-classic'
 
@@ -353,56 +351,6 @@ export default {
             ...localStorage[`${name}-skin`] && { skin: localStorage[`${name}-skin`] },
             ...localStorage[`${name}-icons`] && { icons: localStorage[`${name}-icons`] },
             //powerpaste_keep_unsupported_src: true, // todo: If your application has access to the file system, setting powerpaste_keep_unsupported_src to true may allow you to replace unsupported images during post-processing using the original file paths.
-            paste_postprocess: (pluginApi, data) => {
-              // 可能的值：
-              // 'html', 'msoffice', 'googledocs', 'image', 'imagedrop', 'plaintext', 'text', or 'invalid'
-              switch (data.source) {
-                case 'msoffice':
-                  this.onPaste()
-                  break
-                case 'html':
-                  const imgList = data.node.querySelectorAll('img')
-                  if (imgList.length) {
-                    this.loading = true
-                    for (let [i, v] of imgList.entries()) {
-                      const imgSrc = v.src
-                      v.src = ''
-                      //v.src = `http://localhost/__proxy__?url=${v.src}`
-                      fetch(`http://localhost:8888/__proxy__?url=${imgSrc}`
-                        /*+ qs.stringify({
-                          url: v.src,
-                        }, { addQueryPrefix: true })*/
-                        , {
-                          method: 'GET',
-                          responseType: 'blob',
-                          mode: 'cors',
-                        })
-                      .then(res => {
-                        console.log(res)
-                        return res.blob()
-                      })
-                      .then(blob => {
-                        console.log(blob)
-                        v.onload = e => {
-                          window.URL.revokeObjectURL(v.src)
-                        }
-                        v.src = window.URL.createObjectURL(blob)
-                        console.log(v.src)
-                      })
-                      .finally(e => {
-                        if (i === imgList.length - 1) {
-                          this.loading = false
-                        }
-                      })
-                    }
-                  }
-              }
-              console.log(data.node, data.mode, data.source)
-              // Apply custom filtering by mutating data.node
-              /*const additionalNode = document.createElement('div')
-              additionalNode.innerHTML = '<p>This will go before the pasted content.</p>'
-              data.node.insertBefore(additionalNode, data.node.firstElementChild)*/
-            },
             powerpaste_html_import: 'merge',
             powerpaste_word_import: 'merge',
             plugins: `print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount imagetools textpattern noneditable help formatpainter permanentpen${allowIframe ? ' pageembed' : ''} charmap quickbars emoticons advtable`,

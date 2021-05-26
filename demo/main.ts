@@ -116,6 +116,80 @@ Vue.use(Minimce, {
         failure(String(err))
       })*/
     },
+    // 加async报错
+    urlconverter_callback: (url, node, on_save, name) => {
+      console.log('urlconverter_callback', url, node, on_save, name)
+      /*if (node === 'img') {
+        const res = await fetch(`${process.env.VUE_APP_DYNAMIC_PROXY_URL}${window.encodeURI(url)}`, {
+          method: 'GET',
+          responseType: 'blob',
+          mode: 'cors',
+        })
+        const blob = await res.blob()
+        console.log(blob)
+        url = window.URL.createObjectURL(blob)
+        console.log(url)
+      }*/
+
+      // Return new URL
+      return url
+    },
+    paste_postprocess: async (pluginApi, data) => {
+      // node不支持异步修改
+      console.log('paste_postprocess', data.node, data.mode, data.source)
+
+      // 可能的值：
+      // 'html', 'msoffice', 'googledocs', 'image', 'imagedrop', 'plaintext', 'text', or 'invalid'
+
+      // Apply custom filtering by mutating data.node
+      /*const additionalNode = document.createElement('div')
+      additionalNode.innerHTML = '<p>This will go before the pasted content.</p>'
+      data.node.insertBefore(additionalNode, data.node.firstElementChild)*/
+
+      switch (data.source) {
+        case 'msoffice':
+          //this.onPaste()
+          break
+        case 'html':
+          //this.loading = true
+          for (let v of data.node.querySelectorAll('img') || []) {
+            const imgSrc = v.src
+            v.src = `${process.env.VUE_APP_DYNAMIC_PROXY_URL}${window.encodeURIComponent(imgSrc)}`
+            /*const res = await fetch(`${process.env.VUE_APP_DYNAMIC_PROXY_URL}${window.encodeURIComponent(imgSrc)}`, {
+              method: 'GET',
+              responseType: 'blob',
+              mode: 'cors',
+            })
+
+            const blob = await res.blob()
+
+            console.log(blob)
+
+            v.src = window.URL.createObjectURL(blob)
+
+            console.log(v.src)*/
+
+            /*.then(res => {
+              console.log(res)
+              return res.blob()
+            })
+            .then(blob => {
+              console.log(blob)
+              v.onload = e => {
+                window.URL.revokeObjectURL(v.src)
+              }
+              v.src = window.URL.createObjectURL(blob)
+              console.log(v.src)
+            })
+            .finally(e => {
+              if (i === imgList.length - 1) {
+                this.loading = false
+                console.log(imgList)
+              }
+            })*/
+          }
+      }
+    },
   }
 })
 
