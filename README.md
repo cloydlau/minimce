@@ -9,10 +9,10 @@ Offline, optionated rich-text editor powered by [tinymce](https://github.com/tin
 - √ 离线使用
 - √ 插入Word文档（.docx） 兼容微软、WPS
 - √ 本地图片/音频/视频上传 无缝集成 `filepool`
-- √ 全局或局部引入 参数支持全局或局部配置（双向绑定参数仅支持局部配置）
+- √ 全局或局部引入 参数支持全局或局部配置
 - √ 默认启用 [TinyMCE Plan](https://www.tiny.cloud/pricing) 对应的全套插件
-  - [premium] 由于 `mediaembed` 需要搭配后端服务 请自行配置
-  - [premium] 暂不含 `advcode`
+    - [premium] 由于 `mediaembed` 需要搭配后端服务 请自行配置
+    - [premium] 暂不含 `advcode`
 - √ 为 `essential` 以上的 `plan` 提供换肤、换图标风格工具栏选项
 
 `element-ui` 集成说明：
