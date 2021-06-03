@@ -2,7 +2,6 @@
   <RichText
     v-if="inOperation"
     v-model="selfValue"
-    :text.sync="selfText"
     v-bind="props"
     @reload="reload"
   >
@@ -21,23 +20,38 @@
 <script>
 import RichText from './index.vue'
 import globalProps from './config.ts'
+import { isPlainObject, assignInWith, cloneDeep } from 'lodash-es'
 
 /**
  * 参数有全局参数、实例参数和默认值之分 取哪个取决于用户传了哪个：
  *   1. 怎么判断用户传没传？ —— 以该参数是否全等于undefined作为标识
  *   2. 如果传了多个，权重顺序是怎样的？ —— 实例＞全局＞默认
  *
- * @param {any} globalProp - 全局参数
  * @param {any} prop - 实例参数
+ * @param {any} globalProps - 全局参数（可以有多个）
  * @param {any} defaultValue - 默认值
  * @return {any} 最终值
  */
-function getFinalProp (globalProp, prop, defaultValue) {
-  return prop !== undefined ?
-    typeof defaultValue === 'boolean' ? ['', true].includes(prop) :
-      prop :
-    globalProp !== undefined ? globalProp :
-      defaultValue
+export function getFinalProp () {
+  const args = Array.from(arguments)
+  const defaultValue = args[args.length - 1]
+  let result = defaultValue
+  //console.log('传参：', cloneDeep(args))
+  for (let i = 0; i < args.length - 1; i++) {
+    const prop = args[i]
+    if (prop !== undefined) {
+      if (i === 0 && typeof (defaultValue) === 'boolean') {
+        result = ['', true].includes(prop) ? true : prop
+      } else if (isPlainObject(prop)) {
+        result = assignInWith(...args, (objValue, srcValue) => objValue === undefined ? srcValue : objValue)
+      } else {
+        result = prop
+      }
+      break
+    }
+  }
+  //console.log('生效：', result)
+  return result
 }
 
 export default {
@@ -48,7 +62,6 @@ export default {
       type: String,
       default: '',
     },
-    text: String,
   },
   watch: {
     value: {
@@ -60,15 +73,6 @@ export default {
     selfValue (newVal) {
       this.$emit('change', newVal)
     },
-    text: {
-      immediate: true,
-      handler (newVal) {
-        this.selfText = newVal
-      }
-    },
-    selfText (newVal) {
-      this.$emit('update:text', newVal)
-    }
   },
   model: {
     prop: 'value',
@@ -76,18 +80,17 @@ export default {
   },
   data () {
     const {
+      MobileLink,
       Imgpond,
       Filepool,
-      MobileLink,
     } = globalProps
 
     return {
       inOperation: true,
-      MobileLink: MobileLink || this.$attrs.MobileLink,
-      Imgpond: Imgpond || this.$attrs.Imgpond,
-      Filepool: Filepool || this.$attrs.Filepool,
+      MobileLink: getFinalProp(this.$attrs.MobileLink, MobileLink),
+      Imgpond: getFinalProp(this.$attrs.Imgpond, Imgpond),
+      Filepool: getFinalProp(this.$attrs.Filepool, Filepool),
       selfValue: '',
-      selfText: '',
     }
   },
   computed: {
@@ -98,21 +101,17 @@ export default {
         disabled,
         readonly,
         eventBus,
-        //html2text,
-        textMaxlength,
         tinymceOptions
       } = globalProps
 
       return {
         ...this.$attrs,
-        disabled: getFinalProp(disabled, this.$attrs.disabled, false),
-        readonly: getFinalProp(readonly, this.$attrs.readonly, false),
-        //html2text: getFinalProp(html2text, this.$attrs.html2text, false),
-        apiKey: getFinalProp(apiKey, this.$attrs.apiKey, ''),
-        textMaxlength: getFinalProp(textMaxlength, this.$attrs.textMaxlength, 30),
-        tinymceOptions: getFinalProp(tinymceOptions, this.$attrs.tinymceOptions),
-        plan: getFinalProp(plan, this.$attrs.plan, 'core'),
-        eventBus: getFinalProp(eventBus, this.$attrs.eventBus)
+        disabled: getFinalProp(this.$attrs.disabled, disabled, false),
+        readonly: getFinalProp(this.$attrs.readonly, readonly, false),
+        apiKey: getFinalProp(this.$attrs.apiKey, apiKey, ''),
+        tinymceOptions: getFinalProp(this.$attrs.tinymceOptions, tinymceOptions,),
+        plan: getFinalProp(this.$attrs.plan, plan, 'core'),
+        eventBus: getFinalProp(this.$attrs.eventBus, eventBus,)
       }
     }
   },

@@ -63,9 +63,6 @@ const { POST } = getAxiosShortcut(axios)
 Vue.use(Minimce, {
   apiKey: '',
   plan: 'essential',
-  Imgpond,
-  Filepool,
-  MobileLink: () => import('./MobileLink.vue'),
   eventBus,
   tinymceOptions: {
     images_upload_handler (blobInfo, success, failure, progress) {

@@ -7,11 +7,12 @@ Offline, optionated rich-text editor powered by [tinymce](https://github.com/tin
 ## Features
 
 - √ 离线使用
-- √ 本地图片/音频/视频上传 无缝集成 `imgpond` / `filepool`
+- √ 插入Word文档（.docx） 兼容微软、WPS
+- √ 本地图片/音频/视频上传 无缝集成 `filepool`
 - √ 全局或局部引入 参数支持全局或局部配置（双向绑定参数仅支持局部配置）
 - √ 默认启用 [TinyMCE Plan](https://www.tiny.cloud/pricing) 对应的全套插件
-    - [premium] 由于 `mediaembed` 需要搭配后端服务 请自行配置
-    - [premium] 暂不含 `advcode`
+  - [premium] 由于 `mediaembed` 需要搭配后端服务 请自行配置
+  - [premium] 暂不含 `advcode`
 - √ 为 `essential` 以上的 `plan` 提供换肤、换图标风格工具栏选项
 
 `element-ui` 集成说明：
@@ -20,7 +21,7 @@ Offline, optionated rich-text editor powered by [tinymce](https://github.com/tin
 - 集成风格是非侵入式的
 - 适配 `element-ui` 的 `el-form` 组件 支持 `el-form` 的全局disabled
 
-<br/>
+<br>
 
 ## Installation
 
@@ -61,7 +62,7 @@ export default {
 </script>
 ```
 
-<br/>
+<br>
 
 ## Props
 
@@ -73,13 +74,14 @@ export default {
 | disabled | 是否禁用（禁用模式不可编辑，保留工具栏） | boolean | | false |
 | readonly | 是否只读（只读模式仅展示html，相当于预览） | boolean | | false |
 | tinymceOptions | tinymce配置 | object / function | https://www.tiny.cloud/docs/configure/ | 除setup之外均可配置 |
-| Imgpond | 上传图片插件（配置后自动开启功能） | Vue Component | | |
-| Filepool | 上传文件插件（配置后自动开启功能） | Vue Component | | |
-| MobileLink | 插入移动端页面链接插件（配置后自动开启功能） | Vue Component | | |
+| eventBus | 事件总线 | Vue instance | | |
+| Imgpond* | 上传图片插件（配置后自动开启功能） | Vue component | | |
+| Filepool* | 上传文件插件（配置后自动开启功能） | Vue component | | |
+| MobileLink* | 插入移动端页面链接插件（配置后自动开启功能） | Vue component | | |
 
-<br/>
+<br>
 
-Imgpond
+### Imgpond
 
 > You can use Imgpond to upload local images.
 
@@ -93,9 +95,7 @@ Vue.use(Minimce, {
 })
 ```
 
-<br/>
-
-Filepool
+### Filepool
 
 > You can use Filepool to upload local audio and video.
 
@@ -109,9 +109,7 @@ Vue.use(Minimce, {
 })
 ```
 
-<br/>
-
-MobileLink
+### MobileLink
 
 > tinymce的插入链接功能只能插入普通链接 如果需要定制化需求 比如想要插入的链接是移动端某个页面的链接 可以自定义一个组件
 
@@ -131,9 +129,21 @@ Vue.use(Minimce, {
 })
 ```
 
-<br/>
+<br>
 
-**样式**
+## Config rules
+
+- 双向绑定参数（`v-model`, `*.sync`）仅支持局部配置
+- 其余参数均支持全局或局部配置
+
+权重：
+
+- 局部配置高于全局配置
+- 对于对象类型的参数 局部配置会与全局配置进行合并 同名属性会被局部配置覆盖
+
+<br>
+
+## 内容样式
 
 ![样式](./style.png)
 
@@ -163,7 +173,7 @@ audio, video {
 
 > 可按需复制至富文本展示端使用
 
-<br/>
+<br>
 
 ## 屏蔽指定html元素
 
@@ -183,13 +193,25 @@ Vue.use(Minimce, {
 - 小程序侧 `web-view` 中使用 `iframe` 需要配置业务域名
 - 给微信公众号H5侧带来授权问题
 
-<br/>
+<br>
 
-## PowerPaste (premium插件)
+## Word文档
 
-- 配置
+### 插入
+
+tinymce提供了premium插件 `PowerPaste` ，可用于粘贴word文档，但兼容性一般，尤其是不支持 `WPS`
+
+minimce提供插入word文档功能，兼容微软、WPS，可在一定程度上替代PowerPaste
+
+注意：粘贴可以片段粘贴，插入只能整个文档插入
+
+<br>
+
+### 粘贴
 
 ```js
+// PowerPaste配置示例
+
 import Minimce from 'minimce'
 import axios from 'axios'
 import { getAxiosShortcut } from 'admate'
@@ -226,14 +248,30 @@ Vue.use(Minimce, {
 - 兼容性
   ![PowerPaste插件兼容性](./powerpaste-compatibility.png)
 
-- [tinymce官方] 受浏览器限制，`PowerPaste` 插件**无法支持微软Word和Excel文档所支持的<font color="#dd0000">所有</font>图片类型**
-  。举个例子，浏览器禁止以编程方式访问文件系统，所以无法解析文档中使用 `file://` 协议的图片（比如WPS使用的就是此协议）。
+- 受浏览器限制，`PowerPaste` 插件**无法支持微软Word和Excel文档所支持的<font color="#dd0000">所有</font>图片类型**
+  。举个例子，浏览器禁止以编程方式访问文件系统，所以无法解析文档中使用 `file://` 协议的图片（WPS使用的就是此协议）。
 
-- [tinymce官方] 粘贴微软Word文档（Windows系统、≥2013版本）中<font color="#dd0000">受保护视图</font>的内容，将仅得到**无格式的普通文本**，这是受保护视图与剪贴板的交互机制决定的。
+- 粘贴微软Word文档（Windows系统、≥2013版本）中<font color="#dd0000">受保护视图</font>的内容，将仅得到**无格式的普通文本**，这是受保护视图与剪贴板的交互机制决定的。
 
-- [tinymce官方] 受微软Excel网页版限制，粘贴<font color="#dd0000">微软Excel网页版</font>的内容将仅得到**无格式的普通文本**。
+- 受微软Excel网页版限制，粘贴<font color="#dd0000">微软Excel网页版</font>的内容将仅得到**无格式的普通文本**。
 
-<br/>
+<br>
+
+## 粘贴网页内容（html）
+
+如果用户复制第三方网站的内容到编辑框内，静态资源（如图片）可能无法正常显示，这是因为：
+
+1. 第三方网站没有开启静态资源的跨域访问
+
+2. 第三方网站对静态资源做了referrer校验
+
+tinymce的 `urlconverter_callback`, `paste_postprocess` API不支持异步操作，所以批量转存图片可行性低
+
+技术上是可以解决的，可以通过nginx动态代理配合前面提到的两个API来处理
+
+请自行评估相关风险
+
+<br>
 
 ## Notice
 

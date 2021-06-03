@@ -141,9 +141,6 @@ export default {
     disabled: Boolean,
     readonly: Boolean,
     apiKey: String,
-    //html2text: Boolean,
-    text: String,
-    textMaxlength: Number,
     tinymceOptions: {
       type: [Object, Function],
     },
