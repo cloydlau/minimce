@@ -7,9 +7,10 @@
     destroy-on-close
     @close="$emit('update:show', false)"
   >
-    <el-form ref="rowForm"
-             :model="form"
-             label-width="85px"
+    <el-form
+      ref="rowForm"
+      :model="form"
+      label-width="auto"
     >
       <template v-if="type==='audio'">
         <el-form-item label="名称" prop="name" :rules="{required:true,message:'必填项'}">
@@ -24,7 +25,7 @@
           />
         </el-form-item>
       </template>
-      <el-form-item label="上传文件" prop="file" :rules="{required:true,message:'必填项'}">
+      <el-form-item label="文件" prop="file" :rules="{required:true,message:'必填项'}">
         <slot
           name="Filepool"
           :v_model="form"
