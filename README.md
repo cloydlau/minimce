@@ -195,19 +195,17 @@ Vue.use(Minimce, {
 
 <br>
 
-## Word文档
-
-### 插入
+## 粘贴Word文档
 
 tinymce提供了premium插件 `PowerPaste` ，可用于粘贴word文档，但兼容性一般，尤其是不支持 `WPS`
 
-minimce提供插入word文档功能，兼容微软、WPS，可在一定程度上替代PowerPaste
+minimce提供<b>插入</b>word文档功能，兼容微软、WPS，可在一定程度上替代PowerPaste
 
 注意：粘贴可以片段粘贴，插入只能整个文档插入
 
 <br>
 
-### 粘贴
+### PowerPaste
 
 ```js
 // PowerPaste配置示例
@@ -257,7 +255,7 @@ Vue.use(Minimce, {
 
 <br>
 
-## 粘贴网页内容（html）
+## 粘贴网页（html）
 
 如果用户复制第三方网站的内容到编辑框内，静态资源（如图片）可能无法正常显示，这是因为：
 
