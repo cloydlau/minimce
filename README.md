@@ -175,7 +175,7 @@ audio, video {
 
 <br>
 
-## 屏蔽指定html元素
+## 屏蔽指定的html元素
 
 ```js
 import Minimce from 'minimce'
@@ -197,15 +197,17 @@ Vue.use(Minimce, {
 
 ## 粘贴Word文档
 
-tinymce提供了premium插件 `PowerPaste` ，可用于粘贴word文档，但兼容性一般，尤其是不支持 `WPS`
+### 自带插入Word文档功能
 
-minimce提供<b>插入</b>word文档功能，兼容微软、WPS，可在一定程度上替代PowerPaste
+tinymce提供了premium插件 `PowerPaste` ，可用于粘贴Word文档，但兼容性一般，尤其是不支持 `WPS`
+
+minimce提供插入Word文档功能，兼容微软、WPS，可在一定程度上替代PowerPaste
 
 注意：粘贴可以片段粘贴，插入只能整个文档插入
 
 <br>
 
-### PowerPaste
+### PowerPaste插件
 
 ```js
 // PowerPaste配置示例
@@ -255,7 +257,16 @@ Vue.use(Minimce, {
 
 <br>
 
-## 粘贴网页（html）
+## 粘贴网页内容（html）
+
+### 格式
+
+粘贴的网页内容默认会保留一定的源格式（可选择粘贴为文本，或手动清除格式）， 启用 `PowerPaste`
+插件后，对格式的处理将会更加完善。详见https://www.tiny.cloud/docs/enterprise/system-requirements/#improvedhtmlcleaning
+
+<br>
+
+### 图片
 
 如果用户复制第三方网站的内容到编辑框内，静态资源（如图片）可能无法正常显示，这是因为：
 
