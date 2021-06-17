@@ -261,8 +261,15 @@ Vue.use(Minimce, {
 
 ### 格式
 
-粘贴的网页内容默认会保留一定的源格式（可选择粘贴为文本，或手动清除格式）， 启用 `PowerPaste`
+粘贴的网页内容默认会保留一定的源格式， 启用 `PowerPaste`
 插件后，对格式的处理将会更加完善。详见https://www.tiny.cloud/docs/enterprise/system-requirements/#improvedhtmlcleaning
+
+::: tip  
+如需获取纯文本，选中 `编辑` - `粘贴为文本` 再进行粘贴
+
+`清除格式` 按钮得到的<font color="#dd0000">不是</font>纯文本，可以自定义清除效果：
+https://www.tiny.cloud/docs/configure/content-formatting/#removingaformat
+:::
 
 <br>
 
