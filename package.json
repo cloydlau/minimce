@@ -1,6 +1,6 @@
 {
   "name": "minimce",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "Offline, optionated rich-text editor powered by tinymce",
   "keywords": [
     "tinymce",
@@ -32,13 +32,13 @@
   "dependencies": {
     "@tinymce/tinymce-vue": "^3.2.8",
     "kayran": "^0.2.2",
-    "kikimore": "^0.1.12",
+    "kikimore": "^0.1.13",
     "lodash-es": "^4.17.21",
     "mammoth": "^1.4.17"
   },
   "peerDependencies": {
     "element-ui": "2",
-    "vue": "2"
+    "vue": "2.6.12"
   },
   "devDependencies": {
     "@types/lodash-es": "^4.17.4",
@@ -51,14 +51,14 @@
     "element-ui": "^2.15.2",
     "filepool": "^0.1.0",
     "imgpond": "^0.3.4",
-    "pic-viewer": "^0.3.7",
+    "pic-viewer": "^0.3.10",
     "qs": "^6.10.1",
     "regenerator-runtime": "^0.13.7",
     "sass": "^1.35.1",
     "sass-loader": "^10.2.0",
     "tinymce": "^5.8.1",
-    "typescript": "^4.3.3",
-    "vue": "^2.6.14",
-    "vue-template-compiler": "^2.6.14"
+    "typescript": "^4.3.4",
+    "vue": "2.6.12",
+    "vue-template-compiler": "2.6.12"
   }
 }
