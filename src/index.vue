@@ -297,11 +297,11 @@ export default {
           //const meta = document.createElement('meta')
           //meta.name = 'referrer'
           //meta.content = 'no-referrer'
-          const ifrDoc = document.querySelector(`#${this.tinymceId}_ifr`)?.contentDocument
+          /*const ifrDoc = document.querySelector(`#${this.tinymceId}_ifr`)?.contentDocument
           if (ifrDoc) {
             //ifrDoc.head.appendChild(meta)
 
-            /*ifrDoc.addEventListener('error', ({ target }) => {
+            ifrDoc.addEventListener('error', ({ target }) => {
               if (target.tagName === 'IMG' && target.src) {
               }
             }, true)*/
@@ -314,8 +314,8 @@ export default {
                   el.removeEventListener('paste', this.onPaste)
                 })
               }
-            }*/
-          }
+            }
+          }*/
 
           this.tinymceOptions?.init_instance_callback?.(editor)
           this.loading = false
