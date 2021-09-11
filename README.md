@@ -28,7 +28,7 @@ Offline, optionated rich-text editor powered by [tinymce](https://github.com/tin
 ![NPM](https://nodei.co/npm/minimce.png)
 
 ```bash
-pnpm add minimce @tinymce/tinymce-vue@3 vue element-ui filepool? imgpond?
+pnpm add minimce @tinymce/tinymce-vue@3 vue@2 element-ui filepool? imgpond?
 ```
 
 ```ts
