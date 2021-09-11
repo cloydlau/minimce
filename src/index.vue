@@ -306,16 +306,16 @@ export default {
               }
             }, true)*/
 
-            /*if (this.planGrade > 0) {
-              const el = ifrDoc.querySelector(`#tinymce`)
-              if (el) {
-                el.addEventListener('paste', this.onPaste)
-                this.eventRemover.push(() => {
-                  el.removeEventListener('paste', this.onPaste)
-                })
-              }
+          /*if (this.planGrade > 0) {
+            const el = ifrDoc.querySelector(`#tinymce`)
+            if (el) {
+              el.addEventListener('paste', this.onPaste)
+              this.eventRemover.push(() => {
+                el.removeEventListener('paste', this.onPaste)
+              })
             }
-          }*/
+          }
+        }*/
 
           this.tinymceOptions?.init_instance_callback?.(editor)
           this.loading = false

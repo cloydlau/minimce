@@ -27,7 +27,7 @@ Offline, optionated rich-text editor powered by [tinymce](https://github.com/tin
 
 ![NPM](https://nodei.co/npm/minimce.png)
 
-Dependencies：vue element-ui imgpond? filepool?
+Dependencies：vue element-ui @tinymce/tinymce-vue@3 filepool? imgpond?
 
 ```ts
 // 全局引入

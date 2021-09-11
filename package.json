@@ -30,34 +30,35 @@
     "ri": "rd /s /q .\\node_modules && pnpm i"
   },
   "dependencies": {
-    "@tinymce/tinymce-vue": "^3.2.8",
-    "kayran": "^0.3.2",
-    "kikimore": "^0.2.4",
-    "lodash-es": "^4.17.21",
-    "mammoth": "^1.4.17"
+    "kayran": "latest",
+    "kikimore": "latest",
+    "lodash-es": "latest",
+    "mammoth": "latest"
   },
   "peerDependencies": {
-    "element-ui": "2",
-    "vue": "2.6.12"
+    "@tinymce/tinymce-vue": "3",
+    "element-ui": "latest",
+    "vue": "2"
   },
   "devDependencies": {
-    "@types/lodash-es": "^4.17.4",
-    "@vue/cli-plugin-babel": "^4.5.13",
-    "@vue/cli-plugin-typescript": "^4.5.13",
-    "@vue/cli-service": "^4.5.13",
-    "admate": "^0.4.0",
-    "axios": "^0.21.1",
-    "core-js": "^3.15.2",
-    "element-ui": "^2.15.3",
-    "filepool": "^0.1.0",
-    "imgpond": "^0.3.4",
-    "pic-viewer": "^0.3.10",
-    "qs": "^6.10.1",
-    "regenerator-runtime": "^0.13.7",
-    "sass": "^1.35.2",
+    "@tinymce/tinymce-vue": "^3.2.8",
+    "@types/lodash-es": "latest",
+    "@vue/cli-plugin-babel": "latest",
+    "@vue/cli-plugin-typescript": "latest",
+    "@vue/cli-service": "latest",
+    "admate": "latest",
+    "axios": "latest",
+    "core-js": "latest",
+    "element-ui": "latest",
+    "filepool": "latest",
+    "imgpond": "latest",
+    "pic-viewer": "latest",
+    "qs": "latest",
+    "regenerator-runtime": "latest",
+    "sass": "latest",
     "sass-loader": "^10.2.0",
-    "tinymce": "^5.8.2",
-    "typescript": "^4.3.5",
+    "tinymce": "latest",
+    "typescript": "latest",
     "vue": "2.6.12",
     "vue-template-compiler": "2.6.12"
   }
