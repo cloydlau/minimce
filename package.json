@@ -13,7 +13,8 @@
     "wps",
     "doc",
     "docx",
-    "office"
+    "office",
+    "WYSIWYG"
   ],
   "author": "cloydlau",
   "license": "LGPL-2.1-only",
