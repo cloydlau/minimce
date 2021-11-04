@@ -57,7 +57,7 @@ export { eventBus } // 用于其它组件与Minimce进行通信
 //import Minimce from '../dist/minimce.umd.min.js'
 import Minimce from '../src/main.ts'
 //import { jsonToFormData } from 'kayran'
-import { createAxiosShortcut } from 'admate'
+import createAxiosShortcut from 'axios-shortcut'
 const { POST } = createAxiosShortcut(axios)
 
 Vue.use(Minimce, {

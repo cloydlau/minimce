@@ -37,8 +37,8 @@
     "mammoth": "latest"
   },
   "peerDependencies": {
-    "@tinymce/tinymce-vue": "3",
-    "element-ui": "latest",
+    "tinymce": "5",
+    "element-ui": "2",
     "vue": "2"
   },
   "devDependencies": {
@@ -47,8 +47,8 @@
     "@vue/cli-plugin-babel": "latest",
     "@vue/cli-plugin-typescript": "latest",
     "@vue/cli-service": "latest",
-    "admate": "latest",
     "axios": "latest",
+    "axios-shortcut": "latest",
     "core-js": "latest",
     "element-ui": "latest",
     "filepool": "latest",
@@ -60,6 +60,7 @@
     "sass-loader": "^10.2.0",
     "tinymce": "latest",
     "typescript": "latest",
+    "viewerjs": "latest",
     "vue": "2.6.12",
     "vue-template-compiler": "2.6.12"
   }
