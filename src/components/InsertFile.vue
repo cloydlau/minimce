@@ -43,7 +43,8 @@
 </template>
 
 <script>
-import { Swal } from 'kikimore'
+import 'sweetalert2/dist/sweetalert2.min.css'
+import Swal from 'sweetalert2'
 
 export default {
   props: {
@@ -82,7 +83,15 @@ export default {
               this.$emit('insertTag', `<video controls controlslist="nodownload" src="${this.form.file}"></video>`)
               this.$emit('update:show', false)
             } else {
-              Swal.warning('仅支持以.mp4结尾的视频链接')
+              Swal.fire({
+                titleText: '仅支持以.mp4结尾的视频链接',
+                icon: 'warning',
+                backdrop: false,
+                timer: 5000,
+                customClass: {
+                  container: '__minimce__',
+                },
+              })
             }
           }
         }

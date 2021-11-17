@@ -62,17 +62,17 @@ export default {
       inOperation: true,
       MobileLink__: getFinalProp(
         [this.MobileLink, MobileLink], {
-          name: 'Vue Instance'
+          name: 'MobileLink'
         }
       ),
       Imgpond__: getFinalProp(
         [this.Imgpond, Imgpond], {
-          name: 'Vue Instance'
+          name: 'Imgpond'
         }
       ),
       Filepool__: getFinalProp(
         [this.Filepool, Filepool], {
-          name: 'Vue Instance'
+          name: 'Filepool'
         }),
       selfValue: '',
     }
@@ -91,21 +91,28 @@ export default {
       return {
         ...this.$attrs,
         disabled: getFinalProp([this.disabled, disabled, false], {
+          name: 'disabled',
           type: 'boolean'
         }),
         readonly: getFinalProp([this.readonly, readonly, false], {
+          name: 'readonly',
           type: 'boolean'
         }),
         apiKey: getFinalProp([this.$attrs.apiKey, apiKey, ''], {
+          name: 'apiKey',
           type: 'string'
         }),
         tinymceOptions: getFinalProp([this.$attrs.tinymceOptions, tinymceOptions,], {
+          name: 'tinymceOptions',
           type: 'object'
         }),
         plan: getFinalProp([this.$attrs.plan, plan, 'core'], {
+          name: 'plan',
           type: 'string'
         }),
-        eventBus: getFinalProp([this.$attrs.eventBus, eventBus,])
+        eventBus: getFinalProp([this.$attrs.eventBus, eventBus,], {
+          name: 'eventBus',
+        })
       }
     }
   },

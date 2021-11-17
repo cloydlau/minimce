@@ -14,7 +14,7 @@ Vue.use(Filepool, {
   upload ({ file, jsonToFormData, }) {
     return new Promise((resolve, reject) => {
       request({
-        url: '',
+        url: process.env.VUE_APP_UPLOAD_API,
         method: 'POST',
         data: jsonToFormData({
           file,
@@ -36,7 +36,7 @@ Vue.use(Filepool, {
     word: {
       accept: '.docx',
     },
-  }
+  },
 })
 
 import Imgpond from 'imgpond'

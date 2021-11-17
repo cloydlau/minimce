@@ -30,10 +30,11 @@
 </template>
 
 <script>
-import mammoth from 'mammoth'
+import mammoth from 'mammoth/mammoth.browser.min.js'
 import { waitFor } from 'kayran'
-import { Swal } from 'kikimore'
 import { name } from '../../package.json'
+import 'sweetalert2/dist/sweetalert2.min.css'
+import Swal from 'sweetalert2'
 
 export default {
   props: {
@@ -43,7 +44,7 @@ export default {
   data () {
     return {
       form: {
-        file: null
+        file: []
       },
       loading: false,
       allSettled: true,
@@ -56,6 +57,10 @@ export default {
           this.loading = true
           const results = await Promise.allSettled(this.form.file.map(v =>
             new Promise((resolve, reject) => {
+              if (v.name.endsWith('.doc') && v.type === 'application/msword') {
+                reject('不支持 doc 格式')
+              }
+
               const reader = new FileReader()
               reader.onload = async e => {
                 const arrayBuffer = e.target.result
@@ -86,13 +91,22 @@ export default {
               this.$emit('insertTag', value)
             } else {
               if (reason) {
-                Swal.warning(reason)
+                console.error(reason)
+                Swal.fire({
+                  titleText: typeof reason === 'string' ? reason : '解析失败',
+                  icon: 'warning',
+                  backdrop: false,
+                  timer: 5000,
+                  customClass: {
+                    container: '__minimce__',
+                  },
+                })
               }
               this.allSettled = false
             }
           })
 
-          this.form.file = null
+          this.form.file = []
           this.loading = false
           if (this.allSettled) {
             this.$emit('update:show', false)

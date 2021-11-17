@@ -1,6 +1,6 @@
 {
   "name": "minimce",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "Offline, optionated rich-text editor powered by tinymce",
   "keywords": [
     "tinymce",
@@ -32,13 +32,13 @@
   },
   "dependencies": {
     "kayran": "latest",
-    "kikimore": "latest",
     "lodash-es": "latest",
-    "mammoth": "latest"
+    "mammoth": "latest",
+    "sweetalert2": "latest"
   },
   "peerDependencies": {
-    "tinymce": "5",
     "element-ui": "2",
+    "tinymce": "5",
     "vue": "2"
   },
   "devDependencies": {

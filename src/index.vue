@@ -60,8 +60,10 @@
 <script>
 import Vue from 'vue'
 import InsertTel from './components/InsertTel.vue'
-import { Swal } from 'kikimore'
 import { name } from '../package.json'
+
+import 'sweetalert2/dist/sweetalert2.min.css'
+import Swal from 'sweetalert2'
 
 import TinyMCE from '@tinymce/tinymce-vue'
 import 'tinymce/tinymce'
@@ -557,7 +559,10 @@ export default {
   methods: {
     onPaste (e) {
       if (!localStorage['minimce-powerpaste-warning-disabled']) {
-        Swal.confirm({
+        Swal.fire({
+          customClass: {
+            container: '__minimce__',
+          },
           titleText: '强力粘贴功能已开启',
           html: `
 <h4>强力粘贴支持Office文档，但存在以下限制：</h4>
@@ -578,8 +583,10 @@ export default {
           confirmButtonText: `我知道了`,
           cancelButtonText: `不再提示`,
           showCancelButton: true,
-        }).catch(e => {
-          localStorage['minimce-powerpaste-warning-disabled'] = 'true'
+        }).then(e => {
+          if (!e.isConfirmed) {
+            localStorage['minimce-powerpaste-warning-disabled'] = 'true'
+          }
         })
       }
     },
@@ -717,5 +724,9 @@ export default {
 // todo: 此举为了超越el-dialog层级 但菜单的隐藏触发方式不是失焦而是外部点击 所以在菜单没有隐藏时打开的嵌套el-dialog会被菜单遮挡
 .tox-silver-sink {
   z-index: 3000 !important;
+}
+
+.swal2-container {
+  z-index: 99999;
 }
 </style>
