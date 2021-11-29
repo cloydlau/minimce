@@ -104,7 +104,8 @@ export default {
         }),
         tinymceOptions: getFinalProp([this.$attrs.tinymceOptions, tinymceOptions,], {
           name: 'tinymceOptions',
-          type: 'object'
+          type: 'object',
+          camelCase: false,
         }),
         plan: getFinalProp([this.$attrs.plan, plan, 'core'], {
           name: 'plan',

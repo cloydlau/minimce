@@ -21,9 +21,7 @@
 
 <script>
 import PropsEditor from './PropsEditor.vue'
-
 import Filepool from 'filepool'
-import Imgpond from 'imgpond'
 
 export default {
   components: { PropsEditor },
@@ -36,7 +34,7 @@ export default {
         readonly: false,
         disabled: false,
         apiKey: process.env.VUE_APP_API_KEY,
-        Imgpond,
+        //Imgpond,
         Filepool,
         MobileLink: () => import('./MobileLink.vue'),
       }

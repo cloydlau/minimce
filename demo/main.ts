@@ -39,17 +39,6 @@ Vue.use(Filepool, {
   },
 })
 
-import Imgpond from 'imgpond'
-Vue.use(Imgpond, {
-  request,
-  url: '',
-  param: {
-    domainId: 2,
-    dir: 'img',
-  },
-  poweredBy: 'element'
-})
-
 const eventBus = new Vue()
 export { eventBus } // 用于其它组件与Minimce进行通信
 
@@ -64,7 +53,17 @@ Vue.use(Minimce, {
   apiKey: '',
   //plan: 'essential',
   eventBus,
-  /*tinymceOptions: {
+  tinymceOptions: {
+    setup: editor => {
+      editor.ui.registry.addMenuItem('localimage', {
+        text: '本地图片',
+        icon: 'image',
+        onAction: () => {
+          //this.showInsertionDialog.img = true
+          console.log(1)
+        }
+      })
+    },
     images_upload_handler (blobInfo, success, failure, progress) {
       // img的src为blob或base64时触发
       console.log('images_upload_handler', blobInfo)
@@ -93,7 +92,7 @@ Vue.use(Minimce, {
         failure(String(err))
       })
 
-      /!*axios.post(
+      /*axios.post(
         process.env.VUE_APP_UPLOAD_API,
         jsonToFormData({
           domainId: 0,
@@ -111,12 +110,12 @@ Vue.use(Minimce, {
         }
       }).catch(err => {
         failure(String(err))
-      })*!/
+      })*/
     },
     // 加async报错
     urlconverter_callback: (url, node, on_save, name) => {
       console.log('urlconverter_callback', url, node, on_save, name)
-      /!*if (node === 'img') {
+      /*if (node === 'img') {
         const res = await fetch(`${process.env.VUE_APP_DYNAMIC_PROXY_URL}${window.encodeURI(url)}`, {
           method: 'GET',
           responseType: 'blob',
@@ -126,7 +125,7 @@ Vue.use(Minimce, {
         console.log(blob)
         url = window.URL.createObjectURL(blob)
         console.log(url)
-      }*!/
+      }*/
 
       // Return new URL
       return url
@@ -139,9 +138,9 @@ Vue.use(Minimce, {
       // 'html', 'msoffice', 'googledocs', 'image', 'imagedrop', 'plaintext', 'text', or 'invalid'
 
       // Apply custom filtering by mutating data.node
-      /!*const additionalNode = document.createElement('div')
+      /*const additionalNode = document.createElement('div')
       additionalNode.innerHTML = '<p>This will go before the pasted content.</p>'
-      data.node.insertBefore(additionalNode, data.node.firstElementChild)*!/
+      data.node.insertBefore(additionalNode, data.node.firstElementChild)*/
 
       switch (data.source) {
         case 'msoffice':
@@ -152,7 +151,7 @@ Vue.use(Minimce, {
           for (let v of data.node.querySelectorAll('img') || []) {
             const imgSrc = v.src
             v.src = `${process.env.VUE_APP_DYNAMIC_PROXY_URL}${window.encodeURIComponent(imgSrc)}`
-            /!*const res = await fetch(`${process.env.VUE_APP_DYNAMIC_PROXY_URL}${window.encodeURIComponent(imgSrc)}`, {
+            /*const res = await fetch(`${process.env.VUE_APP_DYNAMIC_PROXY_URL}${window.encodeURIComponent(imgSrc)}`, {
               method: 'GET',
               responseType: 'blob',
               mode: 'cors',
@@ -164,9 +163,9 @@ Vue.use(Minimce, {
 
             v.src = window.URL.createObjectURL(blob)
 
-            console.log(v.src)*!/
+            console.log(v.src)*/
 
-            /!*.then(res => {
+            /*.then(res => {
               console.log(res)
               return res.blob()
             })
@@ -183,11 +182,11 @@ Vue.use(Minimce, {
                 this.loading = false
                 console.log(imgList)
               }
-            })*!/
+            })*/
           }
       }
     },
-  }*/
+  }
 })
 
 Vue.config.productionTip = false

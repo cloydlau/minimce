@@ -10,10 +10,14 @@
     <el-form ref="rowForm"
              :model="form"
     >
-      <el-form-item label="" prop="imgUrl" :rules="{required:true,message:'必填项'}">
-        <slot name="Imgpond"
-              :v_model="form"
-              valueType="array"
+      <el-form-item
+        prop="imgUrl"
+        :rules="{required:true,message:'必填项'}"
+      >
+        <slot
+          name="Imgpond"
+          :v_model="form"
+          valueType="array"
         />
       </el-form-item>
     </el-form>
@@ -25,7 +29,6 @@
 </template>
 
 <script>
-
 export default {
   props: {
     show: Boolean,
