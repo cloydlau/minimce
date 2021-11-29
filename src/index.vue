@@ -61,6 +61,7 @@
 import Vue from 'vue'
 import InsertTel from './components/InsertTel.vue'
 import { name } from '../package.json'
+import { getFinalProp } from 'kayran'
 
 import 'sweetalert2/dist/sweetalert2.min.css'
 import Swal from 'sweetalert2'
@@ -143,16 +144,14 @@ export default {
     disabled: Boolean,
     readonly: Boolean,
     apiKey: String,
-    tinymceOptions: {
-      type: [Object, Function],
-    },
+    tinymceOptions: {},
     plan: {
       type: String,
       validator: value => plans.includes(value)
     },
     eventBus: {
       validator: value => value instanceof Vue
-    }
+    },
   },
   model: {
     prop: 'value',
@@ -243,7 +242,17 @@ export default {
       InsertAudio: null,
       InsertVideo: null,
       InsertWord: null,
-      tinymceOptions_default: {
+    }
+  },
+  computed: {
+    planGrade () {
+      return plans.indexOf(this.plan)
+    },
+    Disabled () {
+      return this.disabled || this.elForm?.disabled
+    },
+    options () {
+      return getFinalProp([this.tinymceOptions, {
         // core
         plugins: 'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
         toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
@@ -319,7 +328,6 @@ export default {
           }
         }*/
 
-          this.tinymceOptions?.init_instance_callback?.(editor)
           this.loading = false
         },
         // base_url: './tinymce-static/',
@@ -328,219 +336,214 @@ export default {
         // theme_url: './tinymce-static/theme.min.js',
         // 由于content.css应用于iframe内部 所以直接import不生效 必须在这里指定 但是组件外部也同样需要将该文件放入public才能访问到 所以只能使用content_style
         // content_css: './tinymce-static/content.min.css',
-      }
-    }
-  },
-  computed: {
-    planGrade () {
-      return plans.indexOf(this.plan)
-    },
-    Disabled () {
-      return this.disabled || this.elForm?.disabled
-    },
-    options () {
-      const invalid_elements_final = this.tinymceOptions_default.invalid_elements || this.tinymceOptions.invalid_elements
-      const allowIframe = !/\biframe\b/.test(invalid_elements_final)
-      const allowAudio = !/\baudio\b/.test(invalid_elements_final)
-
-      return Vue.observable(typeof this.tinymceOptions === 'function' ?
-        this.tinymceOptions(this.tinymceOptions_default) : {
-          ...this.tinymceOptions_default,
-          ...this.planGrade > 0 && {
-            ...localStorage[`${name}-skin`] && { skin: localStorage[`${name}-skin`] },
-            ...localStorage[`${name}-icons`] && { icons: localStorage[`${name}-icons`] },
-            //powerpaste_keep_unsupported_src: true, // todo: If your application has access to the file system, setting powerpaste_keep_unsupported_src to true may allow you to replace unsupported images during post-processing using the original file paths.
-            powerpaste_html_import: 'merge',
-            powerpaste_word_import: 'merge',
-            plugins: `print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount imagetools textpattern noneditable help formatpainter permanentpen${allowIframe ? ' pageembed' : ''} charmap quickbars emoticons advtable`,
-            mobile: {
-              plugins: `print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount textpattern noneditable help formatpainter${allowIframe ? ' pageembed' : ''} charmap quickbars emoticons advtable`
-            },
-            toolbar: `undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media${allowIframe ? ' pageembed' : ''} template link anchor codesample | ltr rtl`,
+        ...this.planGrade > 0 && {
+          ...localStorage[`${name}-skin`] && { skin: localStorage[`${name}-skin`] },
+          ...localStorage[`${name}-icons`] && { icons: localStorage[`${name}-icons`] },
+          //powerpaste_keep_unsupported_src: true, // todo: If your application has access to the file system, setting powerpaste_keep_unsupported_src to true may allow you to replace unsupported images during post-processing using the original file paths.
+          powerpaste_html_import: 'merge',
+          powerpaste_word_import: 'merge',
+          plugins: `print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount imagetools textpattern noneditable help formatpainter permanentpen${allowIframe ? ' pageembed' : ''} charmap quickbars emoticons advtable`,
+          mobile: {
+            plugins: `print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount textpattern noneditable help formatpainter${allowIframe ? ' pageembed' : ''} charmap quickbars emoticons advtable`
           },
-          ...this.planGrade > 1 && {
-            plugins: `print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker imagetools textpattern noneditable help formatpainter permanentpen${allowIframe ? ' pageembed' : ''} charmap quickbars linkchecker emoticons advtable`,
-            mobile: {
-              plugins: `print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker textpattern noneditable help formatpainter${allowIframe ? ' pageembed' : ''} charmap quickbars linkchecker emoticons advtable`
-            },
-            toolbar: `undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media${allowIframe ? ' pageembed' : ''} template link anchor codesample | a11ycheck ltr rtl`,
+          toolbar: `undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media${allowIframe ? ' pageembed' : ''} template link anchor codesample | ltr rtl`,
+        },
+        ...this.planGrade > 1 && {
+          plugins: `print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker imagetools textpattern noneditable help formatpainter permanentpen${allowIframe ? ' pageembed' : ''} charmap quickbars linkchecker emoticons advtable`,
+          mobile: {
+            plugins: `print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker textpattern noneditable help formatpainter${allowIframe ? ' pageembed' : ''} charmap quickbars linkchecker emoticons advtable`
           },
-          ...this.planGrade > 2 && {
-            plugins: `print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker imagetools textpattern noneditable help formatpainter permanentpen${allowIframe ? ' pageembed' : ''} charmap tinycomments mentions quickbars linkchecker emoticons advtable`,
-            mobile: {
-              plugins: `print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker textpattern noneditable help formatpainter${allowIframe ? ' pageembed' : ''} charmap mentions quickbars linkchecker emoticons advtable`,
-            },
-            toolbar: `undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media${allowIframe ? ' pageembed' : ''} template link anchor codesample | a11ycheck ltr rtl | showcomments addcomment`,
+          toolbar: `undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media${allowIframe ? ' pageembed' : ''} template link anchor codesample | a11ycheck ltr rtl`,
+        },
+        ...this.planGrade > 2 && {
+          plugins: `print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker imagetools textpattern noneditable help formatpainter permanentpen${allowIframe ? ' pageembed' : ''} charmap tinycomments mentions quickbars linkchecker emoticons advtable`,
+          mobile: {
+            plugins: `print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker textpattern noneditable help formatpainter${allowIframe ? ' pageembed' : ''} charmap mentions quickbars linkchecker emoticons advtable`,
           },
-          setup: editor => {
-            if (this.planGrade > 0) {
-              /**
-               * 皮肤
-               */
-              let iconsList = [
-                '默认',
-                'jam',
-                'small',
-              ]
-              let skinsList = [
-                'oxide',
-                'material-classic',
-                'material-outline', // todo: 无法切换
-                'bootstrap',
-                'fabric',
-                'borderless',
-                'naked',
-                'outside',
-                'snow',
-              ]
-              if (localStorage[`${name}-icons`] === undefined || iconsList.includes(localStorage[`${name}-icons`])) {
-                skinsList = [
-                  ...skinsList,
-                  'small',
-                  'jam',
-                ]
-              }
-              skinsList.map(text => {
-                editor.ui.registry.addToggleMenuItem(`toggleMenuItem-skin-${text}`, {
-                  text,
-                  active: (localStorage[`${name}-skin`] || 'oxide') === text,
-                  /*onSetup: api => {
-                    if (!localStorage[`${name}-skin`]) {
-                      localStorage[`${name}-skin`] = defaultPremiumSkin
-                      api.setActive(true)
-                    }
-                    return function () {}
-                  },*/
-                  onAction: () => {
-                    if (text === 'oxide') {
-                      delete this.options.skin
-                      localStorage.removeItem(`${name}-skin`)
-                    } else {
-                      this.options.skin = text
-                      localStorage[`${name}-skin`] = text
-                    }
-                    this.reload()
-                  },
-                })
-              })
-              editor.ui.registry.addNestedMenuItem('skin', {
-                text: '皮肤',
-                getSubmenuItems: () => skinsList.map(text => `toggleMenuItem-skin-${text}`)
-              })
-
-              /**
-               * 图标风格
-               */
-              if (!iconsList.includes(localStorage[`${name}-skin`])) {
-                iconsList = [
-                  ...iconsList,
-                  'bootstrap',
-                  'material',
-                  'thin',
-                ]
-              }
-              iconsList.map(text => {
-                editor.ui.registry.addToggleMenuItem(`toggleMenuItem-icons-${text}`, {
-                  text,
-                  active: (localStorage[`${name}-icons`] || '默认') === text,
-                  onAction: () => {
-                    if (text === '默认') {
-                      delete this.options.icons
-                      localStorage.removeItem(`${name}-icons`)
-                    } else {
-                      this.options.icons = text
-                      localStorage[`${name}-icons`] = text
-                    }
-                    this.reload()
-                  },
-                })
-              })
-              editor.ui.registry.addNestedMenuItem('icons', {
-                text: '图标风格',
-                getSubmenuItems: () => iconsList.map(text => `toggleMenuItem-icons-${text}`)
-              })
-            }
-            // 官方图标库：https://www.tiny.cloud/docs/advanced/editor-icon-identifiers/
-
+          toolbar: `undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media${allowIframe ? ' pageembed' : ''} template link anchor codesample | a11ycheck ltr rtl | showcomments addcomment`,
+        },
+        setup: editor => {
+          if (this.planGrade > 0) {
             /**
-             * 电话号码
+             * 皮肤
              */
-            editor.ui.registry.addIcon('tel', `<svg t="1593331139446" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="10282" width="200" height="200"><path d="M780.207 868.621c0 48.892-40.51 89.402-89.402 89.402L333.195 958.023c-48.892 0-89.402-40.511-89.402-89.402L243.793 153.402c0-48.891 40.51-89.402 89.402-89.402l357.609 0c48.893 0 89.402 40.511 89.402 89.402L780.206 868.621zM713.155 265.155c0-11.875-10.478-22.351-22.351-22.351L333.195 242.804c-11.874 0-22.351 10.476-22.351 22.351l0 491.713c0 11.874 10.477 22.351 22.351 22.351l357.609 0c11.873 0 22.351-10.477 22.351-22.351L713.155 265.155zM567.877 153.402 456.124 153.402c-6.286 0-11.175 4.89-11.175 11.176 0 6.284 4.889 11.174 11.175 11.174l111.753 0c6.285 0 11.175-4.89 11.175-11.174C579.052 158.292 574.162 153.402 567.877 153.402zM512 812.744c-30.732 0-55.876 25.145-55.876 55.877s25.145 55.877 55.876 55.877c30.732 0 55.877-25.145 55.877-55.877S542.732 812.744 512 812.744z" p-id="10283"></path></svg>`)
-            editor.ui.registry.addMenuItem('tel', {
-              text: '电话号码',
-              icon: 'tel',
-              onAction: () => {
-                this.showInsertionDialog.tel = true
-              }
+            let iconsList = [
+              '默认',
+              'jam',
+              'small',
+            ]
+            let skinsList = [
+              'oxide',
+              'material-classic',
+              'material-outline', // todo: 无法切换
+              'bootstrap',
+              'fabric',
+              'borderless',
+              'naked',
+              'outside',
+              'snow',
+            ]
+            if (localStorage[`${name}-icons`] === undefined || iconsList.includes(localStorage[`${name}-icons`])) {
+              skinsList = [
+                ...skinsList,
+                'small',
+                'jam',
+              ]
+            }
+            skinsList.map(text => {
+              editor.ui.registry.addToggleMenuItem(`toggleMenuItem-skin-${text}`, {
+                text,
+                active: (localStorage[`${name}-skin`] || 'oxide') === text,
+                /*onSetup: api => {
+                if (!localStorage[`${name}-skin`]) {
+                  localStorage[`${name}-skin`] = defaultPremiumSkin
+                  api.setActive(true)
+                }
+                return function () {}
+              },*/
+                onAction: () => {
+                  if (text === 'oxide') {
+                    delete this.options.skin
+                    localStorage.removeItem(`${name}-skin`)
+                  } else {
+                    this.options.skin = text
+                    localStorage[`${name}-skin`] = text
+                  }
+                  this.reload()
+                },
+              })
+            })
+            editor.ui.registry.addNestedMenuItem('skin', {
+              text: '皮肤',
+              getSubmenuItems: () => skinsList.map(text => `toggleMenuItem-skin-${text}`)
             })
 
             /**
-             * 本地图片
+             * 图标风格
              */
-            if (this.$scopedSlots.Imgpond) {
-              //this.InsertImg = () => import('./components/InsertImg.vue')
-              this.InsertImg = InsertImg
-              editor.ui.registry.addMenuItem('localimage', {
-                text: '本地图片',
-                icon: 'image',
-                onAction: () => {
-                  this.showInsertionDialog.img = true
-                }
-              })
+            if (!iconsList.includes(localStorage[`${name}-skin`])) {
+              iconsList = [
+                ...iconsList,
+                'bootstrap',
+                'material',
+                'thin',
+              ]
             }
-
-            /**
-             * 本地音视频
-             */
-            if (this.$scopedSlots.Filepool) {
-              if (allowAudio) {
-                //this.InsertAudio = () => import('./components/InsertFile.vue')
-                this.InsertAudio = InsertFile
-                editor.ui.registry.addIcon('audio', `<svg t="1588903157483" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1160" width="200" height="200"><path d="M742.78 128H430.89v96h0.11v306.65c-28.24-16.34-61.03-25.69-96-25.69-106.04 0-192 85.96-192 192s85.96 192 192 192c103.68 0 188.15-82.18 191.86-184.96h0.14V224h119.78l96-96zM335 792.96c-53.02 0-96-42.98-96-96s42.98-96 96-96 96 42.98 96 96-42.98 96-96 96z" p-id="1161"></path></svg>`)
-                editor.ui.registry.addMenuItem('localaudio', {
-                  text: '本地音频',
-                  icon: 'audio',
-                  onAction: () => {
-                    this.showInsertionDialog.audio = true
+            iconsList.map(text => {
+              editor.ui.registry.addToggleMenuItem(`toggleMenuItem-icons-${text}`, {
+                text,
+                active: (localStorage[`${name}-icons`] || '默认') === text,
+                onAction: () => {
+                  if (text === '默认') {
+                    delete this.options.icons
+                    localStorage.removeItem(`${name}-icons`)
+                  } else {
+                    this.options.icons = text
+                    localStorage[`${name}-icons`] = text
                   }
-                })
+                  this.reload()
+                },
+              })
+            })
+            editor.ui.registry.addNestedMenuItem('icons', {
+              text: '图标风格',
+              getSubmenuItems: () => iconsList.map(text => `toggleMenuItem-icons-${text}`)
+            })
+          }
+          // 官方图标库：https://www.tiny.cloud/docs/advanced/editor-icon-identifiers/
+
+          /**
+           * 电话号码
+           */
+          editor.ui.registry.addIcon('tel', `<svg t="1593331139446" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="10282" width="200" height="200"><path d="M780.207 868.621c0 48.892-40.51 89.402-89.402 89.402L333.195 958.023c-48.892 0-89.402-40.511-89.402-89.402L243.793 153.402c0-48.891 40.51-89.402 89.402-89.402l357.609 0c48.893 0 89.402 40.511 89.402 89.402L780.206 868.621zM713.155 265.155c0-11.875-10.478-22.351-22.351-22.351L333.195 242.804c-11.874 0-22.351 10.476-22.351 22.351l0 491.713c0 11.874 10.477 22.351 22.351 22.351l357.609 0c11.873 0 22.351-10.477 22.351-22.351L713.155 265.155zM567.877 153.402 456.124 153.402c-6.286 0-11.175 4.89-11.175 11.176 0 6.284 4.889 11.174 11.175 11.174l111.753 0c6.285 0 11.175-4.89 11.175-11.174C579.052 158.292 574.162 153.402 567.877 153.402zM512 812.744c-30.732 0-55.876 25.145-55.876 55.877s25.145 55.877 55.876 55.877c30.732 0 55.877-25.145 55.877-55.877S542.732 812.744 512 812.744z" p-id="10283"></path></svg>`)
+          editor.ui.registry.addMenuItem('tel', {
+            text: '电话号码',
+            icon: 'tel',
+            onAction: () => {
+              this.showInsertionDialog.tel = true
+            }
+          })
+
+          /**
+           * 本地图片
+           */
+          if (this.$scopedSlots.Imgpond) {
+            //this.InsertImg = () => import('./components/InsertImg.vue')
+            this.InsertImg = InsertImg
+            editor.ui.registry.addMenuItem('localimage', {
+              text: '本地图片',
+              icon: 'image',
+              onAction: () => {
+                this.showInsertionDialog.img = true
               }
+            })
+          }
 
-              //this.InsertVideo = () => import('./components/InsertFile.vue')
-              this.InsertVideo = InsertFile
-              editor.ui.registry.addMenuItem('localvideo', {
-                text: '本地视频',
-                icon: 'embed',
+          /**
+           * 本地音视频
+           */
+          if (this.$scopedSlots.Filepool) {
+            if (allowAudio) {
+              //this.InsertAudio = () => import('./components/InsertFile.vue')
+              this.InsertAudio = InsertFile
+              editor.ui.registry.addIcon('audio', `<svg t="1588903157483" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1160" width="200" height="200"><path d="M742.78 128H430.89v96h0.11v306.65c-28.24-16.34-61.03-25.69-96-25.69-106.04 0-192 85.96-192 192s85.96 192 192 192c103.68 0 188.15-82.18 191.86-184.96h0.14V224h119.78l96-96zM335 792.96c-53.02 0-96-42.98-96-96s42.98-96 96-96 96 42.98 96 96-42.98 96-96 96z" p-id="1161"></path></svg>`)
+              editor.ui.registry.addMenuItem('localaudio', {
+                text: '本地音频',
+                icon: 'audio',
                 onAction: () => {
-                  this.showInsertionDialog.video = true
-                }
-              })
-
-              this.InsertWord = InsertWord
-              editor.ui.registry.addMenuItem('word', {
-                text: 'Word文档',
-                icon: 'new-document',
-                onAction: () => {
-                  this.showInsertionDialog.word = true
-                }
-              })
-            }
-
-            /**
-             * 移动端页面链接
-             */
-            if (this.$scopedSlots.mobilelink) {
-              editor.ui.registry.addMenuItem('mobilelink', {
-                text: '移动端页面链接',
-                icon: 'link',
-                onAction: () => {
-                  this.showInsertionDialog.mobilelink = true
+                  this.showInsertionDialog.audio = true
                 }
               })
             }
-          },
-          ...this.tinymceOptions,
-        })
+
+            //this.InsertVideo = () => import('./components/InsertFile.vue')
+            this.InsertVideo = InsertFile
+            editor.ui.registry.addMenuItem('localvideo', {
+              text: '本地视频',
+              icon: 'embed',
+              onAction: () => {
+                this.showInsertionDialog.video = true
+              }
+            })
+
+            this.InsertWord = InsertWord
+            editor.ui.registry.addMenuItem('word', {
+              text: 'Word文档',
+              icon: 'new-document',
+              onAction: () => {
+                this.showInsertionDialog.word = true
+              }
+            })
+          }
+
+          /**
+           * 移动端页面链接
+           */
+          if (this.$scopedSlots.mobilelink) {
+            editor.ui.registry.addMenuItem('mobilelink', {
+              text: '移动端页面链接',
+              icon: 'link',
+              onAction: () => {
+                this.showInsertionDialog.mobilelink = true
+              }
+            })
+          }
+        }
+      }], {
+        // userProp是参数1的计算结果
+        default: userProp => {
+          const allowIframe = !/\biframe\b/.test(userProp.invalid_elements)
+          const allowAudio = !/\baudio\b/.test(userProp.invalid_elements)
+          return {
+
+            a: {
+              c: userProp.a.a === 1 ? 1 : null
+            }
+          }
+        },
+        defaultIsDynamic: true,
+      })
+
     },
   },
   created () {

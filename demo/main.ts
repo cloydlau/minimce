@@ -45,6 +45,7 @@ export { eventBus } // 用于其它组件与Minimce进行通信
 //import '../dist/style.css'
 //import Minimce from '../dist/minimce.umd.min.js'
 import Minimce from '../src/main.ts'
+import { initImageInsertionDialog, openImageInsertionDialog } from './ImageInsertion/index.js'
 //import { jsonToFormData } from 'kayran'
 import createAxiosShortcut from 'axios-shortcut'
 const { POST } = createAxiosShortcut(axios)
@@ -54,13 +55,19 @@ Vue.use(Minimce, {
   //plan: 'essential',
   eventBus,
   tinymceOptions: {
+    menu: {
+      insert: {
+        title: 'Insert',
+        items: 'localimage localvideo localaudio word | mobilelink tel | image link media template codesample inserttable | charmap emoticons hr | pagebreak nonbreaking anchor toc | insertdatetime'
+      },
+    },
     setup: editor => {
+      initImageInsertionDialog()
       editor.ui.registry.addMenuItem('localimage', {
         text: '本地图片',
         icon: 'image',
         onAction: () => {
-          //this.showInsertionDialog.img = true
-          console.log(1)
+          openImageInsertionDialog()
         }
       })
     },
