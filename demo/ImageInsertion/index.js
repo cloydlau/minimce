@@ -14,6 +14,9 @@ export function initImageInsertionDialog (options) {
       mounted () {
         resolve(this)
       },
+      destroyed () {
+        reject(this)
+      },
       ...options,
     })
 
@@ -27,6 +30,5 @@ export function initImageInsertionDialog (options) {
 }
 
 export function openImageInsertionDialog () {
-  console.log(instance)
-  instance.show = true
+  instance.$children[0].show = true
 }

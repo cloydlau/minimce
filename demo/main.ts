@@ -57,7 +57,6 @@ Vue.use(Minimce, {
   tinymceOptions: {
     menu: {
       insert: {
-        title: 'Insert',
         items: 'localimage localvideo localaudio word | mobilelink tel | image link media template codesample inserttable | charmap emoticons hr | pagebreak nonbreaking anchor toc | insertdatetime'
       },
     },

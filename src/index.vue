@@ -72,7 +72,7 @@ import 'tinymce/themes/silver'
 import './assets/v5.7.1-108/zh_CN'
 import './assets/v5.7.1-108/zh_CN_extended'
 
-//const plugins = 'autoresize|print|preview|paste|importcss|searchreplace|autolink|autosave|directionality|code|visualblocks|visualchars|fullscreen|image|link|media|template|codesample|table|charmap|hr|pagebreak|nonbreaking|anchor|toc|insertdatetime|advlist|lists|wordcount|textpattern|noneditable|help|charmap|emoticons'
+//const plugins = 'autoresize|print|preview|paste|importcss|searchreplace|autolink|autosave|directionality|code|visualblocks|visualchars|fullscreen|image|link|media|template|codesample|table|charmap|hr|pagebreak|nonbreaking|anchor|insertdatetime|advlist|lists|wordcount|textpattern|noneditable|help|charmap|emoticons'
 //const regExp = new RegExp(`^\.\/(${plugins})\/index\.js$`)
 
 /*function requireAll (requireContext) {
@@ -81,7 +81,7 @@ import './assets/v5.7.1-108/zh_CN_extended'
 
 //requireAll(require.context('tinymce/plugins', true, regExp)) // 报错
 //media插件导致video标签渲染为空白 暂时去掉
-//requireAll(require.context('tinymce/plugins', true, /^\.\/(media|print|preview|paste|importcss|searchreplace|autolink|autosave|directionality|code|visualblocks|visualchars|fullscreen|image|link|template|codesample|table|charmap|hr|pagebreak|nonbreaking|anchor|toc|insertdatetime|advlist|lists|wordcount|textpattern|noneditable|help|charmap|emoticons|emoticons\/js\/emojis\.min\.js)$/))
+//requireAll(require.context('tinymce/plugins', true, /^\.\/(media|print|preview|paste|importcss|searchreplace|autolink|autosave|directionality|code|visualblocks|visualchars|fullscreen|image|link|template|codesample|table|charmap|hr|pagebreak|nonbreaking|anchor|insertdatetime|advlist|lists|wordcount|textpattern|noneditable|help|charmap|emoticons|emoticons\/js\/emojis\.min\.js)$/))
 
 //const modules = import.meta.glob('tinymce/plugins/*/index.js')
 
@@ -107,7 +107,6 @@ import 'tinymce/plugins/hr'
 import 'tinymce/plugins/pagebreak'
 import 'tinymce/plugins/nonbreaking'
 import 'tinymce/plugins/anchor'
-import 'tinymce/plugins/toc'
 import 'tinymce/plugins/insertdatetime'
 import 'tinymce/plugins/advlist'
 import 'tinymce/plugins/lists'
@@ -119,8 +118,11 @@ import 'tinymce/plugins/charmap'
 import 'tinymce/plugins/emoticons'
 import 'tinymce/plugins/emoticons/js/emojis.min'
 import 'tinymce/plugins/save'
-import 'tinymce/plugins/imagetools'
 import 'tinymce/plugins/quickbars'
+
+// will be removed in TinyMCE 6.0. See https://www.tiny.cloud/docs/release-notes/6.0-upcoming-changes/ for more information
+//import 'tinymce/plugins/imagetools'
+//import 'tinymce/plugins/toc'
 
 // 无法使用动态导入时
 //import htmlToText from 'html-to-text'
@@ -254,7 +256,7 @@ export default {
     options () {
       return getFinalProp([this.tinymceOptions, {
         // core
-        plugins: 'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
+        plugins: 'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists wordcount textpattern noneditable help charmap quickbars emoticons',
         toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
         invalid_elements: 'iframe,frame',
         // 含'tinymce/skins/ui/oxide/content.min.css'
@@ -286,7 +288,7 @@ export default {
           // https://www.tiny.cloud/docs/configure/editor-appearance/#examplethetinymcedefaultmenuitems
           insert: {
             title: 'Insert',
-            items: 'localimage localvideo localaudio word | mobilelink tel | image link media template codesample inserttable | charmap emoticons hr | pagebreak nonbreaking anchor toc | insertdatetime'
+            items: 'localimage localvideo localaudio word | mobilelink tel | image link media template codesample inserttable | charmap emoticons hr | pagebreak nonbreaking anchor | insertdatetime'
           },
           view: {
             title: 'View',
@@ -318,15 +320,15 @@ export default {
             }, true)*/
 
           /*if (this.planGrade > 0) {
-            const el = ifrDoc.querySelector(`#tinymce`)
-            if (el) {
-              el.addEventListener('paste', this.onPaste)
-              this.eventRemover.push(() => {
-                el.removeEventListener('paste', this.onPaste)
-              })
+              const el = ifrDoc.querySelector(`#tinymce`)
+              if (el) {
+                el.addEventListener('paste', this.onPaste)
+                this.eventRemover.push(() => {
+                  el.removeEventListener('paste', this.onPaste)
+                })
+              }
             }
-          }
-        }*/
+          }*/
 
           this.loading = false
         },
@@ -336,32 +338,6 @@ export default {
         // theme_url: './tinymce-static/theme.min.js',
         // 由于content.css应用于iframe内部 所以直接import不生效 必须在这里指定 但是组件外部也同样需要将该文件放入public才能访问到 所以只能使用content_style
         // content_css: './tinymce-static/content.min.css',
-        ...this.planGrade > 0 && {
-          ...localStorage[`${name}-skin`] && { skin: localStorage[`${name}-skin`] },
-          ...localStorage[`${name}-icons`] && { icons: localStorage[`${name}-icons`] },
-          //powerpaste_keep_unsupported_src: true, // todo: If your application has access to the file system, setting powerpaste_keep_unsupported_src to true may allow you to replace unsupported images during post-processing using the original file paths.
-          powerpaste_html_import: 'merge',
-          powerpaste_word_import: 'merge',
-          plugins: `print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount imagetools textpattern noneditable help formatpainter permanentpen${allowIframe ? ' pageembed' : ''} charmap quickbars emoticons advtable`,
-          mobile: {
-            plugins: `print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount textpattern noneditable help formatpainter${allowIframe ? ' pageembed' : ''} charmap quickbars emoticons advtable`
-          },
-          toolbar: `undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media${allowIframe ? ' pageembed' : ''} template link anchor codesample | ltr rtl`,
-        },
-        ...this.planGrade > 1 && {
-          plugins: `print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker imagetools textpattern noneditable help formatpainter permanentpen${allowIframe ? ' pageembed' : ''} charmap quickbars linkchecker emoticons advtable`,
-          mobile: {
-            plugins: `print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker textpattern noneditable help formatpainter${allowIframe ? ' pageembed' : ''} charmap quickbars linkchecker emoticons advtable`
-          },
-          toolbar: `undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media${allowIframe ? ' pageembed' : ''} template link anchor codesample | a11ycheck ltr rtl`,
-        },
-        ...this.planGrade > 2 && {
-          plugins: `print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker imagetools textpattern noneditable help formatpainter permanentpen${allowIframe ? ' pageembed' : ''} charmap tinycomments mentions quickbars linkchecker emoticons advtable`,
-          mobile: {
-            plugins: `print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker textpattern noneditable help formatpainter${allowIframe ? ' pageembed' : ''} charmap mentions quickbars linkchecker emoticons advtable`,
-          },
-          toolbar: `undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media${allowIframe ? ' pageembed' : ''} template link anchor codesample | a11ycheck ltr rtl | showcomments addcomment`,
-        },
         setup: editor => {
           if (this.planGrade > 0) {
             /**
@@ -483,18 +459,18 @@ export default {
            * 本地音视频
            */
           if (this.$scopedSlots.Filepool) {
-            if (allowAudio) {
-              //this.InsertAudio = () => import('./components/InsertFile.vue')
-              this.InsertAudio = InsertFile
-              editor.ui.registry.addIcon('audio', `<svg t="1588903157483" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1160" width="200" height="200"><path d="M742.78 128H430.89v96h0.11v306.65c-28.24-16.34-61.03-25.69-96-25.69-106.04 0-192 85.96-192 192s85.96 192 192 192c103.68 0 188.15-82.18 191.86-184.96h0.14V224h119.78l96-96zM335 792.96c-53.02 0-96-42.98-96-96s42.98-96 96-96 96 42.98 96 96-42.98 96-96 96z" p-id="1161"></path></svg>`)
-              editor.ui.registry.addMenuItem('localaudio', {
-                text: '本地音频',
-                icon: 'audio',
-                onAction: () => {
-                  this.showInsertionDialog.audio = true
-                }
-              })
-            }
+            //if (allowAudio) {
+            //this.InsertAudio = () => import('./components/InsertFile.vue')
+            this.InsertAudio = InsertFile
+            editor.ui.registry.addIcon('audio', `<svg t="1588903157483" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1160" width="200" height="200"><path d="M742.78 128H430.89v96h0.11v306.65c-28.24-16.34-61.03-25.69-96-25.69-106.04 0-192 85.96-192 192s85.96 192 192 192c103.68 0 188.15-82.18 191.86-184.96h0.14V224h119.78l96-96zM335 792.96c-53.02 0-96-42.98-96-96s42.98-96 96-96 96 42.98 96 96-42.98 96-96 96z" p-id="1161"></path></svg>`)
+            editor.ui.registry.addMenuItem('localaudio', {
+              text: '本地音频',
+              icon: 'audio',
+              onAction: () => {
+                this.showInsertionDialog.audio = true
+              }
+            })
+            //}
 
             //this.InsertVideo = () => import('./components/InsertFile.vue')
             this.InsertVideo = InsertFile
@@ -530,18 +506,40 @@ export default {
           }
         }
       }], {
-        // userProp是参数1的计算结果
         default: userProp => {
           const allowIframe = !/\biframe\b/.test(userProp.invalid_elements)
-          const allowAudio = !/\baudio\b/.test(userProp.invalid_elements)
+          //const allowAudio = !/\baudio\b/.test(userProp.invalid_elements)
           return {
-
-            a: {
-              c: userProp.a.a === 1 ? 1 : null
-            }
+            ...this.planGrade > 0 && {
+              ...localStorage[`${name}-skin`] && { skin: localStorage[`${name}-skin`] },
+              ...localStorage[`${name}-icons`] && { icons: localStorage[`${name}-icons`] },
+              //powerpaste_keep_unsupported_src: true, // todo: If your application has access to the file system, setting powerpaste_keep_unsupported_src to true may allow you to replace unsupported images during post-processing using the original file paths.
+              powerpaste_html_import: 'merge',
+              powerpaste_word_import: 'merge',
+              plugins: `print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists checklist wordcount textpattern noneditable help formatpainter permanentpen${allowIframe ? ' pageembed' : ''} charmap quickbars emoticons advtable`,
+              mobile: {
+                plugins: `print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists checklist wordcount textpattern noneditable help formatpainter${allowIframe ? ' pageembed' : ''} charmap quickbars emoticons advtable`
+              },
+              toolbar: `undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media${allowIframe ? ' pageembed' : ''} template link anchor codesample | ltr rtl`,
+            },
+            ...this.planGrade > 1 && {
+              plugins: `print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker textpattern noneditable help formatpainter permanentpen${allowIframe ? ' pageembed' : ''} charmap quickbars linkchecker emoticons advtable`,
+              mobile: {
+                plugins: `print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker textpattern noneditable help formatpainter${allowIframe ? ' pageembed' : ''} charmap quickbars linkchecker emoticons advtable`
+              },
+              toolbar: `undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media${allowIframe ? ' pageembed' : ''} template link anchor codesample | a11ycheck ltr rtl`,
+            },
+            ...this.planGrade > 2 && {
+              plugins: `print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker textpattern noneditable help formatpainter permanentpen${allowIframe ? ' pageembed' : ''} charmap tinycomments mentions quickbars linkchecker emoticons advtable`,
+              mobile: {
+                plugins: `print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker textpattern noneditable help formatpainter${allowIframe ? ' pageembed' : ''} charmap mentions quickbars linkchecker emoticons advtable`,
+              },
+              toolbar: `undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media${allowIframe ? ' pageembed' : ''} template link anchor codesample | a11ycheck ltr rtl | showcomments addcomment`,
+            },
           }
         },
         defaultIsDynamic: true,
+        camelCase: false,
       })
 
     },

@@ -4,7 +4,7 @@ Offline, optionated rich-text editor powered by [tinymce](https://github.com/tin
 
 <br>
 
-## Features
+## 特性
 
 - √ 离线使用
 - √ 插入Word文档（.docx） 兼容微软、WPS
@@ -23,12 +23,12 @@ Offline, optionated rich-text editor powered by [tinymce](https://github.com/tin
 
 <br>
 
-## Installation
+## 安装
 
 ![NPM](https://nodei.co/npm/minimce.png)
 
 ```bash
-pnpm add minimce @tinymce/tinymce-vue@3 vue@2 element-ui filepool? imgpond?
+npm add minimce @tinymce/tinymce-vue@3 vue@2 element-ui filepool? imgpond?
 ```
 
 ```ts
@@ -66,7 +66,7 @@ export default {
 
 <br>
 
-## Props
+## 参数
 
 | Attribute | Description | Type | Accepted Values | Default |
 | --- | --- | --- | --- | --- |
@@ -77,13 +77,13 @@ export default {
 | readonly | 是否只读（只读模式仅展示html，相当于预览） | boolean | | false |
 | tinymceOptions | tinymce配置 | object / function | https://www.tiny.cloud/docs/configure/ | 除setup之外均可配置 |
 | eventBus | 事件总线 | Vue instance | | |
-| Imgpond* | 上传图片插件（配置后自动开启功能） | Vue component | | |
-| Filepool* | 上传文件插件（配置后自动开启功能） | Vue component | | |
-| MobileLink* | 插入移动端页面链接插件（配置后自动开启功能） | Vue component | | |
+| Imgpond（即将废弃） | 上传图片插件（配置后自动开启功能） | Vue component | | |
+| Filepool（即将废弃） | 上传文件插件（配置后自动开启功能） | Vue component | | |
+| MobileLink（即将废弃） | 插入移动端页面链接插件（配置后自动开启功能） | Vue component | | |
 
 <br>
 
-### Imgpond
+### Imgpond（即将废弃）
 
 > You can use Imgpond to upload local images.
 
@@ -97,7 +97,7 @@ Vue.use(Minimce, {
 })
 ```
 
-### Filepool
+### Filepool（即将废弃）
 
 > You can use Filepool to upload local audio and video.
 
@@ -111,7 +111,7 @@ Vue.use(Minimce, {
 })
 ```
 
-### MobileLink
+### MobileLink（即将废弃）
 
 > tinymce的插入链接功能只能插入普通链接 如果需要定制化需求 比如想要插入的链接是移动端某个页面的链接 可以自定义一个组件
 
@@ -133,7 +133,7 @@ Vue.use(Minimce, {
 
 <br>
 
-## Config rules
+## 参数配置规则
 
 - 双向绑定参数（`v-model`, `*.sync`）仅支持局部配置
 - 其余参数均支持全局或局部配置
@@ -142,6 +142,12 @@ Vue.use(Minimce, {
 
 - 局部配置高于全局配置
 - 对于对象类型的参数 局部配置会与全局配置进行合并 同名属性会被局部配置覆盖
+
+<br>
+
+## 添加自定义菜单
+
+[示例代码: 添加一个“插入本地图片”的菜单项](https://github.com/cloydlau/minimce/tree/master/demo/ImageInsertion)
 
 <br>
 
