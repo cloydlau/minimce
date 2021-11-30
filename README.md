@@ -1,6 +1,6 @@
 # minimce
 
-可离线使用、支持 Word 文档插入的富文本编辑器，基于 [tinymce](https://github.com/tinymce/tinymce).
+可离线使用、支持 Word 文档插入的富文本编辑器，基于 [tinymce](https://github.com/tinymce/tinymce) 。
 
 <br>
 
