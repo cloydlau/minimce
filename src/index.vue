@@ -540,8 +540,13 @@ export default {
         },
         defaultIsDynamic: true,
         camelCase: false,
+        mergeFunction: (accumulator, item) => (...args) => {
+          accumulator(...args)
+          item?.(...args)
+        },
+        name: 'tinymceOptions',
+        type: 'object',
       })
-
     },
   },
   created () {
