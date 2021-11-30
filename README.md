@@ -1,11 +1,12 @@
 # minimce
 
-可离线使用、灵活可配的富文本编辑器，基于 [tinymce](https://github.com/tinymce/tinymce).
+可离线使用、支持 Word 文档插入的富文本编辑器，基于 [tinymce](https://github.com/tinymce/tinymce).
 
 <br>
 
 ## 特性
 
+- 灵活可配
 - 可离线使用
 - 支持插入 Word 文档（.docx），兼容 Microsoft Office、WPS
 - 支持自定义菜单项
