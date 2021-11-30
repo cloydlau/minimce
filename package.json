@@ -31,6 +31,7 @@
     "ri": "rd /s /q .\\node_modules && pnpm i"
   },
   "dependencies": {
+    "@tinymce/tinymce-vue": "^3.2.8",
     "kayran": "latest",
     "lodash-es": "latest",
     "mammoth": "latest",
@@ -42,7 +43,6 @@
     "vue": "2"
   },
   "devDependencies": {
-    "@tinymce/tinymce-vue": "^3.2.8",
     "@types/lodash-es": "latest",
     "@vue/cli-plugin-babel": "latest",
     "@vue/cli-plugin-typescript": "latest",

@@ -1,8 +1,9 @@
 const path = require('path')
 
 const externals = process.env.NODE_ENV === 'development' ? {} : {
-  "element-ui": "element-ui",
-  'vue': 'vue'
+  'element-ui': 'element-ui',
+  'tinymce': 'tinymce',
+  'vue': 'vue',
 }
 
 module.exports = {

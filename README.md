@@ -23,7 +23,7 @@
 ![NPM](https://nodei.co/npm/minimce.png)
 
 ```bash
-npm add minimce @tinymce/tinymce-vue@3 vue@2 element-ui filepool? imgpond?
+npm add minimce tinymce vue@2 element-ui
 ```
 
 ```ts
