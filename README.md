@@ -10,9 +10,8 @@
 - 支持插入 Word 文档（.docx），兼容 Microsoft Office、WPS
 - 支持自定义菜单项
 - 默认启用 [TinyMCE Plan](https://www.tiny.cloud/pricing) 对应的全套插件
-    - [premium] 由于 `mediaembed` 需要搭配后端服务 请自行配置
-    - [premium] 暂不含 `advcode`
-- 为 `essential` 以上的 `plan` 提供换肤、换图标风格工具栏选项
+    - [premium] 由于 mediaembed 需要搭配后端服务，请自行配置
+- 为 essential 以上的 plan 提供换肤、换图标风格工具栏选项
 - 适配 [element-ui](https://github.com/ElemeFE/element) （只读状态默认跟随 el-form）
 - 全局或局部引入，参数支持全局或局部配置
 
@@ -153,6 +152,10 @@ Vue.use(Minimce, {
 ### 插入小程序页面链接
 
 [示例代码](https://github.com/cloydlau/minimce/tree/master/demo/MobileLink)
+
+### 菜单图标
+
+如果 [官方图标库](https://www.tiny.cloud/docs/advanced/editor-icon-identifiers/) 里没有，可以自行 [添加图标](https://www.tiny.cloud/docs/api/tinymce.editor.ui/tinymce.editor.ui.registry/#addicon)
 
 <br>
 

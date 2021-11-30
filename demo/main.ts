@@ -54,18 +54,18 @@ const { POST } = createAxiosShortcut(axios)
 
 Vue.use(Minimce, {
   apiKey: '',
-  plan: 'essential',
+  plan: 'custom',
   eventBus,
   tinymceOptions: {
     menu: {
       insert: {
-        items: 'localimage localvideo localaudio word | mobilelink tel | image link media template codesample inserttable | charmap emoticons hr | pagebreak nonbreaking anchor toc | insertdatetime'
+        items: 'localimage localvideo localaudio docx | link mobilelink tel | template codesample inserttable | charmap emoticons hr | pagebreak nonbreaking anchor toc | insertdatetime'
       },
     },
     setup: editor => {
       ImageInsertion.init()
       editor.ui.registry.addMenuItem('localimage', {
-        text: '本地图片',
+        text: '图片',
         icon: 'image',
         onAction: () => {
           ImageInsertion.open()
@@ -74,7 +74,7 @@ Vue.use(Minimce, {
 
       FileInsertion.init()
       editor.ui.registry.addMenuItem('localaudio', {
-        text: '本地音频',
+        text: '音频',
         icon: 'arrow-right',
         onAction: () => {
           FileInsertion.open({
@@ -83,7 +83,7 @@ Vue.use(Minimce, {
         }
       })
       editor.ui.registry.addMenuItem('localvideo', {
-        text: '本地视频',
+        text: '视频',
         icon: 'embed',
         onAction: () => {
           FileInsertion.open({
@@ -94,7 +94,7 @@ Vue.use(Minimce, {
 
       MobileLink.init()
       editor.ui.registry.addMenuItem('mobilelink', {
-        text: '移动端页面链接',
+        text: '小程序页面链接',
         icon: 'link',
         onAction: () => {
           MobileLink.open()

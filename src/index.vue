@@ -69,8 +69,8 @@ import Swal from 'sweetalert2'
 import TinyMCE from '@tinymce/tinymce-vue'
 import 'tinymce/tinymce'
 import 'tinymce/themes/silver'
-import './assets/v5.7.1-108/zh_CN'
-import './assets/v5.7.1-108/zh_CN_extended'
+import './assets/5.10.2-126/langs/zh_CN'
+import './assets/5.10.2-126/langs/zh_CN_extended'
 
 //const plugins = 'autoresize|print|preview|paste|importcss|searchreplace|autolink|autosave|directionality|code|visualblocks|visualchars|fullscreen|image|link|media|template|codesample|table|charmap|hr|pagebreak|nonbreaking|anchor|insertdatetime|advlist|lists|wordcount|textpattern|noneditable|help|charmap|emoticons'
 //const regExp = new RegExp(`^\.\/(${plugins})\/index\.js$`)
@@ -283,7 +283,7 @@ export default {
           // https://www.tiny.cloud/docs/configure/editor-appearance/#examplethetinymcedefaultmenuitems
           insert: {
             title: 'Insert',
-            items: 'localimage localvideo localaudio word | mobilelink tel | image link media template codesample inserttable | charmap emoticons hr | pagebreak nonbreaking anchor | insertdatetime'
+            items: 'localimage localvideo localaudio docx | link mobilelink tel | image media template codesample inserttable | charmap emoticons hr | pagebreak nonbreaking anchor | insertdatetime'
           },
           view: {
             title: 'View',
@@ -298,7 +298,7 @@ export default {
         //image_advtab: true, // todo: 存在不跟随页面滚动的bug
         image_caption: true,
         // 开启时，拖拉拽调整视频大小会报错
-        media_live_embeds: true,
+        media_live_embeds: false,
         toolbar_mode: 'sliding',
         //extended_valid_elements: 'img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name|referrerpolicy=no-referrer]',
         language: 'zh_CN',
@@ -422,7 +422,6 @@ export default {
               getSubmenuItems: () => iconsList.map(text => `toggleMenuItem-icons-${text}`)
             })
           }
-          // 官方图标库：https://www.tiny.cloud/docs/advanced/editor-icon-identifiers/
 
           /**
            * 电话号码
@@ -433,6 +432,18 @@ export default {
             icon: 'tel',
             onAction: () => {
               this.showInsertionDialog.tel = true
+            }
+          })
+
+          /**
+           * 插入 Word 文档
+           */
+          this.InsertWord = InsertWord
+          editor.ui.registry.addMenuItem('docx', {
+            text: 'Word 文档',
+            icon: 'new-document',
+            onAction: () => {
+              this.showInsertionDialog.word = true
             }
           })
 
@@ -494,18 +505,6 @@ export default {
               }
             })
           }
-
-          /**
-           * 插入 Word 文档
-           */
-          this.InsertWord = InsertWord
-          editor.ui.registry.addMenuItem('word', {
-            text: 'Word 文档',
-            icon: 'new-document',
-            onAction: () => {
-              this.showInsertionDialog.word = true
-            }
-          })
         }
       }], {
         default: userProp => {
@@ -518,23 +517,23 @@ export default {
               //powerpaste_keep_unsupported_src: true, // todo: If your application has access to the file system, setting powerpaste_keep_unsupported_src to true may allow you to replace unsupported images during post-processing using the original file paths.
               powerpaste_html_import: 'merge',
               powerpaste_word_import: 'merge',
-              plugins: `print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists checklist wordcount textpattern noneditable help formatpainter permanentpen${allowIframe ? ' pageembed' : ''} charmap quickbars emoticons advtable`,
+              plugins: `print preview powerpaste casechange importcss searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists checklist wordcount textpattern noneditable help formatpainter permanentpen${allowIframe ? ' pageembed' : ''} charmap quickbars emoticons advtable`,
               mobile: {
-                plugins: `print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists checklist wordcount textpattern noneditable help formatpainter${allowIframe ? ' pageembed' : ''} charmap quickbars emoticons advtable`
+                plugins: `print preview powerpaste casechange importcss searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists checklist wordcount textpattern noneditable help formatpainter${allowIframe ? ' pageembed' : ''} charmap quickbars emoticons advtable`
               },
               toolbar: `undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media${allowIframe ? ' pageembed' : ''} template link anchor codesample | ltr rtl`,
             },
             ...this.planGrade > 1 && {
-              plugins: `print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker textpattern noneditable help formatpainter permanentpen${allowIframe ? ' pageembed' : ''} charmap quickbars linkchecker emoticons advtable`,
+              plugins: `print preview powerpaste casechange importcss searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker textpattern noneditable help formatpainter permanentpen${allowIframe ? ' pageembed' : ''} charmap quickbars linkchecker emoticons advtable`,
               mobile: {
-                plugins: `print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker textpattern noneditable help formatpainter${allowIframe ? ' pageembed' : ''} charmap quickbars linkchecker emoticons advtable`
+                plugins: `print preview powerpaste casechange importcss searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker textpattern noneditable help formatpainter${allowIframe ? ' pageembed' : ''} charmap quickbars linkchecker emoticons advtable`
               },
               toolbar: `undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media${allowIframe ? ' pageembed' : ''} template link anchor codesample | a11ycheck ltr rtl`,
             },
             ...this.planGrade > 2 && {
-              plugins: `print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker textpattern noneditable help formatpainter permanentpen${allowIframe ? ' pageembed' : ''} charmap tinycomments mentions quickbars linkchecker emoticons advtable`,
+              plugins: `print preview powerpaste casechange importcss searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker textpattern noneditable help formatpainter permanentpen${allowIframe ? ' pageembed' : ''} charmap tinycomments mentions quickbars linkchecker emoticons advtable`,
               mobile: {
-                plugins: `print preview powerpaste casechange importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker textpattern noneditable help formatpainter${allowIframe ? ' pageembed' : ''} charmap mentions quickbars linkchecker emoticons advtable`,
+                plugins: `print preview powerpaste casechange importcss searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker textpattern noneditable help formatpainter${allowIframe ? ' pageembed' : ''} charmap mentions quickbars linkchecker emoticons advtable`,
               },
               toolbar: `undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media${allowIframe ? ' pageembed' : ''} template link anchor codesample | a11ycheck ltr rtl | showcomments addcomment`,
             },
@@ -599,12 +598,12 @@ export default {
       }
     },
     importSkin () {
-      require('./assets/v5.7.1-108/skin/default-content.min.css').default
+      require('./assets/5.7.1-108/skin/default-content.min.css').default
 
       const skin = localStorage[`${name}-skin`]
       if (this.planGrade > 0 && skin) {
-        require(`./assets/v5.7.1-108/skin/${skin}.min.css`).default
-        require(`./assets/v5.7.1-108/skin/${skin}-content.min.css`).default
+        require(`./assets/5.7.1-108/skin/${skin}.min.css`).default
+        require(`./assets/5.7.1-108/skin/${skin}-content.min.css`).default
       } else {
         require('tinymce/skins/ui/oxide/skin.min.css').default
       }
@@ -615,7 +614,7 @@ export default {
       const icons = localStorage[`${name}-icons`]
       if (this.planGrade > 0 && icons) {
         // 将与默认图标进行合并
-        require(`./assets/v5.7.1-108/icons/${icons}.js`).default
+        require(`./assets/5.7.1-108/icons/${icons}.js`).default
       }
     },
     importPlugins () {
@@ -623,47 +622,34 @@ export default {
         require('tinymce/plugins/paste').default
       } else {
         // 增强粘贴：主要用于office文档粘贴
-        require('./assets/v5.7.1-108/plugins/essential/powerpaste/plugin.min').default
-        require('./assets/v5.7.1-108/plugins/essential/powerpaste/langs/zh_CN').default
-        require('./assets/v5.7.1-108/plugins/essential/powerpaste/js/wordimport').default
+        require('./assets/5.10.2-126/plugins/powerpaste/plugin.min').default
         // 表格排序
         // todo: 汉化失败
-        require('./assets/v5.7.1-108/plugins/essential/advtable.min').default
+        require('./assets/5.10.2-126/plugins/advtable/plugin.min').default
         // 一键转换大小写、首字母大写
-        require('./assets/v5.7.1-108/plugins/essential/casechange.min').default
+        require('./assets/5.10.2-126/plugins/casechange/plugin.min').default
         // 插入清单
-        require('./assets/v5.7.1-108/plugins/essential/checklist.min').default
+        require('./assets/5.10.2-126/plugins/checklist/plugin.min').default
         // 格式刷
-        require('./assets/v5.7.1-108/plugins/essential/formatpainter.min').default
+        require('./assets/5.10.2-126/plugins/formatpainter/plugin.min').default
         // 永久笔：允许预设一套文字格式 应用于新输入的内容
-        require('./assets/v5.7.1-108/plugins/essential/permanentpen.min').default
+        require('./assets/5.10.2-126/plugins/permanentpen/plugin.min').default
         if (!/\biframe\b/.test(this.options.invalid_elements)) {
           // 插入iframe：以可视化的方式插入子页面
-          require('./assets/v5.7.1-108/plugins/essential/pageembed.min').default
+          require('./assets/5.10.2-126/plugins/pageembed/plugin.min').default
         }
-        // 增强媒体嵌入：需要搭配后端服务
-        //require('./assets/v5.7.1-108/plugins/essential/mediaembed.content.min.css').default
-        //require('./assets/v5.7.1-108/plugins/essential/mediaembed.min').default
         // 增强代码编辑：语法高亮/元素匹配/元素闭合/代码折叠/多选/多行光标/查找替换
-        // 开启方式：将options-plugins中code替换为advcode
-        //require('./assets/v5.7.1-108/plugins/essential/advcode/customeditor.min').default
-        //require('./assets/v5.7.1-108/plugins/essential/advcode/codemirror.min').default
-        //require('./assets/v5.7.1-108/plugins/essential/advcode/plugin.min').default
+        require('./assets/5.10.2-126/plugins/advcode/plugin.min').default
 
         if (this.planGrade > 1) {
-          require('./assets/v5.7.1-108/plugins/professional/a11ychecker.min').default
-          require('./assets/v5.7.1-108/plugins/professional/a11ychecker-stub.min').default
-          require('./assets/v5.7.1-108/plugins/professional/linkchecker.min').default
-          require('./assets/v5.7.1-108/plugins/professional/linkchecker-stub.min').default
-          require('./assets/v5.7.1-108/plugins/professional/tinymcespellchecker.min').default
-          require('./assets/v5.7.1-108/plugins/professional/tinymcespellchecker-stub.min').default
+          require('./assets/5.10.2-126/plugins/a11ychecker/plugin.min').default
+          require('./assets/5.10.2-126/plugins/linkchecker/plugin.min').default
+          require('./assets/5.10.2-126/plugins/tinymcespellchecker/plugin.min').default
         }
 
         if (this.planGrade > 2) {
-          require('./assets/v5.7.1-108/plugins/custom/mentions.min').default
-          require('./assets/v5.7.1-108/plugins/custom/mentions-stub.min').default
-          require('./assets/v5.7.1-108/plugins/custom/tinycomments.min').default
-          require('./assets/v5.7.1-108/plugins/custom/tinycomments-stub.min').default
+          require('./assets/5.10.2-126/plugins/mentions/plugin.min').default
+          require('./assets/5.10.2-126/plugins/tinycomments/plugin.min').default
         }
       }
     },
