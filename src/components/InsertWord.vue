@@ -13,6 +13,7 @@
       multiple
       :auto-upload="false"
       :on-change="onChange"
+      style="width:100%;"
     >
       <i class="el-icon-upload"></i>
       <div class="el-upload__text">将 docx 文件拖到此处，或<em>点击上传</em></div>
@@ -41,6 +42,15 @@ export default {
       files: [],
       loading: false,
       allSettled: true,
+    }
+  },
+  watch: {
+    show (n) {
+      if (!n) {
+        this.$nextTick(() => {
+          this.files = []
+        })
+      }
     }
   },
   methods: {
@@ -100,7 +110,6 @@ export default {
         }
       })
 
-      this.files = []
       this.loading = false
       if (this.allSettled) {
         this.$emit('update:show', false)
