@@ -1,25 +1,20 @@
-# minimce / 富文本编辑器
+# minimce
 
-Offline, optionated rich-text editor powered by [tinymce](https://github.com/tinymce/tinymce).
+可离线使用、灵活可配的富文本编辑器，基于 [tinymce](https://github.com/tinymce/tinymce).
 
 <br>
 
 ## 特性
 
-- √ 离线使用
-- √ 插入Word文档（.docx） 兼容微软、WPS
-- √ 本地图片/音频/视频上传 无缝集成 `filepool`
-- √ 全局或局部引入 参数支持全局或局部配置
-- √ 默认启用 [TinyMCE Plan](https://www.tiny.cloud/pricing) 对应的全套插件
+- 可离线使用
+- 支持插入Word文档（.docx），兼容微软、WPS
+- 支持自定义菜单项，如本地图片/音频/视频上传
+- 默认启用 [TinyMCE Plan](https://www.tiny.cloud/pricing) 对应的全套插件
     - [premium] 由于 `mediaembed` 需要搭配后端服务 请自行配置
     - [premium] 暂不含 `advcode`
-- √ 为 `essential` 以上的 `plan` 提供换肤、换图标风格工具栏选项
-
-`element-ui` 集成说明：
-
-- `element-ui` 是以外置依赖的方式引入的 所以不必担心代码体积和版本不一致等问题
-- 集成风格是非侵入式的
-- 适配 `element-ui` 的 `el-form` 组件 支持 `el-form` 的全局disabled
+- 为 `essential` 以上的 `plan` 提供换肤、换图标风格工具栏选项
+- 适配 [element-ui](https://github.com/ElemeFE/element) （只读状态默认跟随 el-form）
+- 全局或局部引入，参数支持全局或局部配置
 
 <br>
 
@@ -83,7 +78,7 @@ export default {
 
 <br>
 
-### Imgpond（即将废弃）
+**Imgpond（即将废弃）**
 
 > You can use Imgpond to upload local images.
 
@@ -97,7 +92,7 @@ Vue.use(Minimce, {
 })
 ```
 
-### Filepool（即将废弃）
+**Filepool（即将废弃）**
 
 > You can use Filepool to upload local audio and video.
 
@@ -111,7 +106,7 @@ Vue.use(Minimce, {
 })
 ```
 
-### MobileLink（即将废弃）
+**MobileLink（即将废弃）**
 
 > tinymce的插入链接功能只能插入普通链接 如果需要定制化需求 比如想要插入的链接是移动端某个页面的链接 可以自定义一个组件
 
