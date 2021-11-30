@@ -134,7 +134,7 @@ export default {
     .el-upload {
       width: 100%;
 
-      &.el-upload-dragger {
+      &>.el-upload-dragger {
         width: 100%;
       }
     }
