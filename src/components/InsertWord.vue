@@ -14,6 +14,7 @@
       :auto-upload="false"
       :on-change="onChange"
       style="width:100%;"
+      ref="elUploadRef"
     >
       <i class="el-icon-upload"></i>
       <div class="el-upload__text">将 docx 文件拖到此处，或<em>点击上传</em></div>
@@ -110,6 +111,8 @@ export default {
         }
       })
 
+      this.files = []
+      this.$refs.elUploadRef.clearFiles()
       this.loading = false
       if (this.allSettled) {
         this.$emit('update:show', false)
@@ -127,6 +130,14 @@ export default {
   & > .el-dialog__body {
     display: flex;
     justify-content: center;
+
+    .el-upload {
+      width: 100%;
+
+      &.el-upload-dragger {
+        width: 100%;
+      }
+    }
   }
 }
 </style>
