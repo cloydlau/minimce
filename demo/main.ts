@@ -54,7 +54,7 @@ const { POST } = createAxiosShortcut(axios)
 
 Vue.use(Minimce, {
   apiKey: '',
-  //plan: 'essential',
+  plan: 'essential',
   eventBus,
   tinymceOptions: {
     menu: {
@@ -150,9 +150,9 @@ Vue.use(Minimce, {
       })*/
     },
     // 加async报错
-    urlconverter_callback: (url, node, on_save, name) => {
+    /*urlconverter_callback: (url, node, on_save, name) => {
       console.log('urlconverter_callback', url, node, on_save, name)
-      /*if (node === 'img') {
+      /!*if (node === 'img') {
         const res = await fetch(`${process.env.VUE_APP_DYNAMIC_PROXY_URL}${window.encodeURI(url)}`, {
           method: 'GET',
           responseType: 'blob',
@@ -162,7 +162,7 @@ Vue.use(Minimce, {
         console.log(blob)
         url = window.URL.createObjectURL(blob)
         console.log(url)
-      }*/
+      }*!/
 
       // Return new URL
       return url
@@ -175,9 +175,9 @@ Vue.use(Minimce, {
       // 'html', 'msoffice', 'googledocs', 'image', 'imagedrop', 'plaintext', 'text', or 'invalid'
 
       // Apply custom filtering by mutating data.node
-      /*const additionalNode = document.createElement('div')
+      /!*const additionalNode = document.createElement('div')
       additionalNode.innerHTML = '<p>This will go before the pasted content.</p>'
-      data.node.insertBefore(additionalNode, data.node.firstElementChild)*/
+      data.node.insertBefore(additionalNode, data.node.firstElementChild)*!/
 
       switch (data.source) {
         case 'msoffice':
@@ -188,7 +188,7 @@ Vue.use(Minimce, {
           for (let v of data.node.querySelectorAll('img') || []) {
             const imgSrc = v.src
             v.src = `${process.env.VUE_APP_DYNAMIC_PROXY_URL}${window.encodeURIComponent(imgSrc)}`
-            /*const res = await fetch(`${process.env.VUE_APP_DYNAMIC_PROXY_URL}${window.encodeURIComponent(imgSrc)}`, {
+            /!*const res = await fetch(`${process.env.VUE_APP_DYNAMIC_PROXY_URL}${window.encodeURIComponent(imgSrc)}`, {
               method: 'GET',
               responseType: 'blob',
               mode: 'cors',
@@ -200,9 +200,9 @@ Vue.use(Minimce, {
 
             v.src = window.URL.createObjectURL(blob)
 
-            console.log(v.src)*/
+            console.log(v.src)*!/
 
-            /*.then(res => {
+            /!*.then(res => {
               console.log(res)
               return res.blob()
             })
@@ -219,10 +219,10 @@ Vue.use(Minimce, {
                 this.loading = false
                 console.log(imgList)
               }
-            })*/
+            })*!/
           }
       }
-    },
+    },*/
   }
 })
 

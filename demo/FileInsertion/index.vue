@@ -79,11 +79,11 @@ export default {
       this.$refs.formRef.validate(valid => {
         if (valid) {
           if (this.type === 'audio') {
-            eventBus.$emit('insertTag', `<audio controls data-name="${this.form.name}" data-poster="${this.form.imgUrl}" src="${this.form.file}"></audio>`)
+            eventBus.$emit('insertTag', `<audio controls data-name="${this.formData.name}" data-poster="${this.formData.imgUrl}" src="${this.formData.file}"></audio>`)
             this.show = false
           } else if (this.type === 'video') {
-            if (typeof this.form.file === 'string' && this.form.file.toLowerCase().endsWith('.mp4')) {
-              eventBus.$emit('insertTag', `<video controls controlslist="nodownload" src="${this.form.file}"></video>`)
+            if (typeof this.formData.file === 'string' && this.formData.file.toLowerCase().endsWith('.mp4')) {
+              eventBus.$emit('insertTag', `<video controls controlslist="nodownload" src="${this.formData.file}"></video>`)
               this.show = false
             } else {
               Swal.fire({

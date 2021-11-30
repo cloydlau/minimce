@@ -7,7 +7,7 @@
     destroy-on-close
     @close="show=false"
   >
-    <el-form ref="rowForm" :model="material" label-position="right" label-width="85px">
+    <el-form ref="formRef" :model="material" label-position="right" label-width="85px">
       <!--<el-form-item label="目标页面" prop="target" :rules="{required:true,message:'必填项'}">
 
       </el-form-item>-->
@@ -61,7 +61,7 @@ export default {
       deep: true,
       handler (newVal) {
         if (this.show) {
-          this.$refs.rowForm.validate(valid => {
+          this.$refs.formRef.validate(valid => {
             if (valid) {
               this.tag = `<a href="${this.material.target.src_type + qs.stringify({ id: this.material.target.id }, { addQueryPrefix: true })}">${this.material.innerText}</a>`
             }
@@ -95,5 +95,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+::v-deep .el-dialog {
+  min-width: 600px;
+}
 </style>
