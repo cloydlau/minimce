@@ -440,6 +440,7 @@ export default {
             }
           })
 
+          // todo: deprecated
           /**
            * 本地图片
            */
@@ -455,6 +456,7 @@ export default {
             })
           }
 
+          // todo: deprecated
           /**
            * 本地音视频
            */
@@ -481,17 +483,9 @@ export default {
                 this.showInsertionDialog.video = true
               }
             })
-
-            this.InsertWord = InsertWord
-            editor.ui.registry.addMenuItem('word', {
-              text: 'Word文档',
-              icon: 'new-document',
-              onAction: () => {
-                this.showInsertionDialog.word = true
-              }
-            })
           }
 
+          // todo: deprecated
           /**
            * 移动端页面链接
            */
@@ -504,6 +498,18 @@ export default {
               }
             })
           }
+
+          /**
+           * 插入 Word 文档
+           */
+          this.InsertWord = InsertWord
+          editor.ui.registry.addMenuItem('word', {
+            text: 'Word 文档',
+            icon: 'new-document',
+            onAction: () => {
+              this.showInsertionDialog.word = true
+            }
+          })
         }
       }], {
         default: userProp => {
@@ -571,16 +577,16 @@ export default {
           },
           titleText: '强力粘贴功能已开启',
           html: `
-<h4>强力粘贴支持Office文档，但存在以下限制：</h4>
+<h4>强力粘贴支持 Office 文档，但存在以下限制：</h4>
 <ul style="text-align:left">
-  <li><span style="color:#dd0000">不完全支持WPS</span></li>
+  <li><span style="color:#dd0000">不完全支持 WPS</span></li>
     <ul style="margin-bottom:1rem">
       <li>客户端：粘贴图文混合内容时，图片无法正常显示（<b>图片需要单独粘贴/上传</b>）</li>
       <li>网页版：无法粘贴文字，可单独粘贴图片</li>
     </ul>
-  <li style="margin-bottom:1rem">受浏览器限制，强力粘贴<b>无法支持微软Word和Excel文档所支持的<span style="color:#dd0000">所有</span>图片类型</b></li>
-  <li style="margin-bottom:1rem">粘贴微软Word文档（Windows系统、≥2013版本）中<span style="color:#dd0000">受保护视图</font>的内容，将仅得到<b>无格式的普通文本</b>，这是受保护视图与剪贴板的交互机制决定的</li>
-  <li>受微软Excel网页版限制，粘贴<span style="color:#dd0000">微软Excel网页版</span>的内容将仅得到<b>无格式的普通文本</b></li>
+  <li style="margin-bottom:1rem">受浏览器限制，强力粘贴<b>无法支持微软 Word 和 Excel 文档所支持的<span style="color:#dd0000">所有</span>图片类型</b></li>
+  <li style="margin-bottom:1rem">粘贴微软 Word 文档（Windows 系统、≥2013版本）中<span style="color:#dd0000">受保护视图</font>的内容，将仅得到<b>无格式的普通文本</b>，这是受保护视图与剪贴板的交互机制决定的</li>
+  <li>受微软 Excel 网页版限制，粘贴<span style="color:#dd0000">微软 Excel 网页版</span>的内容将仅得到<b>无格式的普通文本</b></li>
 </ul>
                     `,
           timer: 20000,

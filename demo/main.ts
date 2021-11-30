@@ -45,7 +45,9 @@ export { eventBus } // 用于其它组件与Minimce进行通信
 //import '../dist/style.css'
 //import Minimce from '../dist/minimce.umd.min.js'
 import Minimce from '../src/main.ts'
-import { initImageInsertionDialog, openImageInsertionDialog } from './ImageInsertion/index.js'
+import * as ImageInsertion from './ImageInsertion/index.js'
+import * as FileInsertion from './FileInsertion/index.js'
+import * as MobileLink from './MobileLink/index.js'
 //import { jsonToFormData } from 'kayran'
 import createAxiosShortcut from 'axios-shortcut'
 const { POST } = createAxiosShortcut(axios)
@@ -61,12 +63,41 @@ Vue.use(Minimce, {
       },
     },
     setup: editor => {
-      initImageInsertionDialog()
+      ImageInsertion.init()
       editor.ui.registry.addMenuItem('localimage', {
         text: '本地图片',
         icon: 'image',
         onAction: () => {
-          openImageInsertionDialog()
+          ImageInsertion.open()
+        }
+      })
+
+      FileInsertion.init()
+      editor.ui.registry.addMenuItem('localaudio', {
+        text: '本地音频',
+        icon: 'arrow-right',
+        onAction: () => {
+          FileInsertion.open({
+            type: 'audio'
+          })
+        }
+      })
+      editor.ui.registry.addMenuItem('localvideo', {
+        text: '本地视频',
+        icon: 'embed',
+        onAction: () => {
+          FileInsertion.open({
+            type: 'video'
+          })
+        }
+      })
+
+      MobileLink.init()
+      editor.ui.registry.addMenuItem('mobilelink', {
+        text: '移动端页面链接',
+        icon: 'link',
+        onAction: () => {
+          MobileLink.open()
         }
       })
     },

@@ -1,6 +1,6 @@
 {
   "name": "minimce",
-  "version": "0.2.9",
+  "version": "0.2.10",
   "description": "Offline, flexible rich-text editor powered by tinymce",
   "keywords": [
     "tinymce",

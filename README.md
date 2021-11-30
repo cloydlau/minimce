@@ -7,8 +7,8 @@
 ## 特性
 
 - 可离线使用
-- 支持插入Word文档（.docx），兼容微软、WPS
-- 支持自定义菜单项，如本地图片/音频/视频上传
+- 支持插入 Word 文档（.docx），兼容 Microsoft Office、WPS
+- 支持自定义菜单项
 - 默认启用 [TinyMCE Plan](https://www.tiny.cloud/pricing) 对应的全套插件
     - [premium] 由于 `mediaembed` 需要搭配后端服务 请自行配置
     - [premium] 暂不含 `advcode`
@@ -142,7 +142,17 @@ Vue.use(Minimce, {
 
 ## 添加自定义菜单
 
-[示例代码: 添加一个“插入本地图片”的菜单项](https://github.com/cloydlau/minimce/tree/master/demo/ImageInsertion)
+### 插入图片
+
+[示例代码](https://github.com/cloydlau/minimce/tree/master/demo/ImageInsertion)
+
+### 插入音视频
+
+[示例代码](https://github.com/cloydlau/minimce/tree/master/demo/FileInsertion)
+
+### 插入小程序页面链接
+
+[示例代码](https://github.com/cloydlau/minimce/tree/master/demo/MobileLink)
 
 <br>
 

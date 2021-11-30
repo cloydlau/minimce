@@ -1,11 +1,11 @@
 <template>
   <el-dialog
     title="插入移动端页面链接"
-    :visible.sync="show"
+    :visible="show"
     :close-on-click-modal="false"
     append-to-body
     destroy-on-close
-    @close="$emit('update:show', false)"
+    @close="show=false"
   >
     <el-form ref="rowForm" :model="material" label-position="right" label-width="85px">
       <!--<el-form-item label="目标页面" prop="target" :rules="{required:true,message:'必填项'}">
@@ -22,7 +22,7 @@
     </el-form>
 
     <div slot="footer" class="dialog-footer">
-      <el-button @click="$emit('update:show', false)">关 闭</el-button>
+      <el-button @click="show=false">关 闭</el-button>
       <el-button type="primary" @click="insert" v-if="tag">确 定</el-button>
     </div>
   </el-dialog>
@@ -30,10 +30,11 @@
 
 <script>
 import qs from 'qs'
-import { eventBus } from './main'
+import { eventBus } from '../main'
 
 function getInitData () {
   return {
+    show: false,
     material: {
       target: {
         src_type: 'test'
@@ -51,9 +52,6 @@ function getInitData () {
 
 export default {
   name: 'MobileLink',
-  props: {
-    show: Boolean,
-  },
   //components: { GlobalSearch },
   data () {
     return getInitData()
@@ -89,8 +87,8 @@ export default {
       }
     },
     insert () {
-      this.$emit('update:show', false)
       eventBus.$emit('insertTag', this.tag)
+      this.show = false
     }
   }
 }

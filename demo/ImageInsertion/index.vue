@@ -5,6 +5,7 @@
     :append-to-body="true"
     :close-on-click-modal="false"
     destroy-on-close
+    @close="show=false"
   >
     <el-form ref="formRef" :model="formData">
       <el-form-item
