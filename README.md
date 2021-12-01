@@ -6,7 +6,6 @@
 
 ## 特性
 
-- 灵活可配
 - 可离线使用
 - 支持插入 Word 文档（.docx），兼容 Microsoft Office、WPS
 - 支持自定义菜单项
