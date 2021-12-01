@@ -1,12 +1,14 @@
 import Vue from 'vue'
 import component from './index.vue'
+//import store from '@/store'
 
 let instance
 
 function init (options) {
   return new Promise((resolve, reject) => {
     const Constructor = Vue.extend({
-      render: h => h(component)
+      render: h => h(component),
+      //store,
     })
 
     instance = new Constructor({
