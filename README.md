@@ -10,8 +10,7 @@
 - 可离线使用
 - 支持插入 Word 文档（.docx），兼容 Microsoft Office、WPS
 - 支持自定义菜单项
-- 默认启用 [TinyMCE Plan](https://www.tiny.cloud/pricing) 对应的全套插件
-    - [premium] 由于 mediaembed 需要搭配后端服务，请自行配置
+- 默认启用 [TinyMCE Plan](https://www.tiny.cloud/pricing) 对应的全套插件（mediaembed 除外，需搭配后端服务）
 - 为 essential 以上的 plan 提供换肤、换图标风格工具栏选项
 - 适配 [element-ui](https://github.com/ElemeFE/element) （只读状态默认跟随 el-form）
 - 全局或局部引入，参数支持全局或局部配置
