@@ -69,7 +69,7 @@ export default {
 | plan | tinymce plan（默认启用plan包含的全套插件，mediaembed除外） | string | 'core'/'essential'/'professional'/'custom' 参考https://www.tiny.cloud/pricing | 'core' |
 | disabled | 是否禁用（禁用模式不可编辑，保留工具栏） | boolean | | false |
 | readonly | 是否只读（只读模式仅展示html，相当于预览） | boolean | | false |
-| tinymceOptions | tinymce配置 | object / function | https://www.tiny.cloud/docs/configure/ | 除setup之外均可配置 |
+| tinymceOptions | tinymce配置 | object | https://www.tiny.cloud/docs/configure/ | 除setup之外均可配置 |
 | eventBus | 事件总线 | Vue instance | | |
 | Imgpond（即将废弃） | 上传图片插件（配置后自动开启功能） | Vue component | | |
 | Filepool（即将废弃） | 上传文件插件（配置后自动开启功能） | Vue component | | |
