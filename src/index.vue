@@ -555,7 +555,7 @@ export default {
     this.importIcons()
     this.importPlugins()
     this.ready = true
-    console.log(`[${name}] options:`, this.options)
+    //console.log(`[${name}] options:`, this.options)
   },
   beforeDestroy () {
     this.close()
@@ -598,7 +598,7 @@ export default {
       }
     },
     importSkin () {
-      require('./assets/5.7.1-108/skin/default-content.min.css').default
+      //require('./assets/5.7.1-108/skin/default-content.min.css').default
 
       const skin = localStorage[`${name}-skin`]
       if (this.planGrade > 0 && skin) {
