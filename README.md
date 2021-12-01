@@ -305,8 +305,3 @@ tinymce的 `urlconverter_callback`, `paste_postprocess` API不支持异步操作
 请自行评估相关风险
 
 <br>
-
-## Notice
-
-- `element-ui` 老版本可能存在 `Imgpond` 的图片无法清除的问题
-- `tinymce` 有依赖window对象中的某些属性 在微前端环境中（如 `乾坤`）对window对象做了代理 会导致报错 临时的解决方式是关闭subProject的jsSandbox（新版 `乾坤` 已解决）
