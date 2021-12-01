@@ -180,11 +180,6 @@ img {
   height: auto !important;
   vertical-align: middle;
 }
-
-audio, video {
-  width: 100%;
-  background-color: #000;
-}
 ```
 
 > 可按需复制至富文本展示端使用
