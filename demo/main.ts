@@ -102,6 +102,7 @@ Vue.use(Minimce, {
       })
     },
     images_upload_handler (blobInfo, success, failure, progress) {
+      const loading = Vue.prototype.$loading()
       // img的src为blob或base64时触发
       console.log('images_upload_handler', blobInfo)
       const blob = blobInfo.blob()
@@ -127,6 +128,8 @@ Vue.use(Minimce, {
         }
       }).catch(err => {
         failure(String(err))
+      }).finally(() => {
+        loading.close()
       })
 
       /*axios.post(
