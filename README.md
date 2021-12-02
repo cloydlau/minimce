@@ -61,7 +61,7 @@ export default {
 
 ## 参数
 
-| Attribute | Description | Type | Accepted Values | Default |
+| 名称 | 说明 | 类型 | 可选值 | 默认值 |
 | --- | --- | --- | --- | --- |
 | value / v-model | HTML 格式的输入内容 | string | | |
 | apiKey | TinyMCE API key | string | https://www.tiny.cloud/auth/signup/ | |
