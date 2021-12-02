@@ -255,8 +255,9 @@ export default {
     },
     options () {
       return getFinalProp([this.tinymceOptions, {
-        branding: false,
         // core
+        branding: false,
+        quickbars_insert_toolbar: false,
         plugins: 'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists wordcount textpattern noneditable help charmap quickbars emoticons',
         toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
         invalid_elements: 'iframe,frame',
@@ -278,7 +279,6 @@ export default {
         min_height: 500,
         relative_urls: false,
         convert_urls: false,
-        toolbar_sticky: true,
         menu: {
           // 默认值：
           // https://www.tiny.cloud/docs/configure/editor-appearance/#examplethetinymcedefaultmenuitems
@@ -296,11 +296,12 @@ export default {
           },
         },
         menubar: 'file edit view insert format tools table help',
-        //image_advtab: true, // todo: 存在不跟随页面滚动的bug
+        image_advtab: true,
         image_caption: true,
-        // 开启时，拖拉拽调整视频大小会报错
+        // 开启时，出现两个 bug：1. 部分菜单项失效；2. 拖拉拽调整视频大小会错位
         media_live_embeds: false,
         toolbar_mode: 'sliding',
+        toolbar_sticky: true,
         //extended_valid_elements: 'img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name|referrerpolicy=no-referrer]',
         language: 'zh_CN',
         init_instance_callback: editor => {
@@ -625,7 +626,6 @@ export default {
         // 增强粘贴：主要用于office文档粘贴
         require('./assets/5.10.2-126/plugins/powerpaste/plugin.min').default
         // 表格排序
-        // todo: 汉化失败
         require('./assets/5.10.2-126/plugins/advtable/plugin.min').default
         // 一键转换大小写、首字母大写
         require('./assets/5.10.2-126/plugins/casechange/plugin.min').default
@@ -707,7 +707,7 @@ export default {
 </style>
 
 <style lang="scss">
-// todo: 此举为了超越el-dialog层级 但菜单的隐藏触发方式不是失焦而是外部点击 所以在菜单没有隐藏时打开的嵌套el-dialog会被菜单遮挡
+// todo: 此举为了超越 el-dialog 层级，但菜单的隐藏触发方式不是失焦而是外部点击，所以在菜单没有隐藏时打开的嵌套 el-dialog 会被菜单遮挡
 .tox-silver-sink {
   z-index: 3000 !important;
 }

@@ -1,6 +1,6 @@
 {
   "name": "minimce",
-  "version": "0.2.14",
+  "version": "0.2.15",
   "description": "Offline, Word documents insertion supported richtext editor powered by TinyMCE",
   "keywords": [
     "tinymce",
