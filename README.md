@@ -1,6 +1,6 @@
-# minimce
+# MiniMCE
 
-可离线使用、支持 Word 文档插入的富文本编辑器，基于 [tinymce](https://github.com/tinymce/tinymce) 。
+可离线使用、支持 Word 文档插入的富文本编辑器，基于 [TinyMCE](https://github.com/tinymce/tinymce) 。
 
 <br>
 
@@ -63,12 +63,12 @@ export default {
 
 | Attribute | Description | Type | Accepted Values | Default |
 | --- | --- | --- | --- | --- |
-| value / v-model | html格式的输入内容 | string | | |
-| apiKey | tinymce api key | string | https://www.tiny.cloud/auth/signup/ | |
-| plan | tinymce plan（默认启用plan包含的全套插件，mediaembed除外） | string | 'core'/'essential'/'professional'/'custom' 参考https://www.tiny.cloud/pricing | 'core' |
-| disabled | 是否禁用（禁用模式不可编辑，保留工具栏） | boolean | | false |
-| readonly | 是否只读（只读模式仅展示html，相当于预览） | boolean | | false |
-| tinymceOptions | tinymce配置 | object | https://www.tiny.cloud/docs/configure/ | 除setup之外均可配置 |
+| value / v-model | HTML 格式的输入内容 | string | | |
+| apiKey | TinyMCE api key | string | https://www.tiny.cloud/auth/signup/ | |
+| plan | TinyMCE plan（默认启用 plan 包含的全套插件，mediaembed 除外） | string | `'core'` / `'essential'` / `'professional'` / `'custom'`，参考 https://www.tiny.cloud/pricing | `'core'` |
+| disabled | 是否禁用（禁用模式不可编辑，保留工具栏） | boolean | | `false` |
+| readonly | 是否只读（只读模式仅展示 HTML，相当于预览） | boolean | | `false` |
+| tinymceOptions | TinyMCE 配置 | object | https://www.tiny.cloud/docs/configure/ | |
 | eventBus | 事件总线 | Vue instance | | |
 | Imgpond（即将废弃） | 上传图片插件（配置后自动开启功能） | Vue component | | |
 | Filepool（即将废弃） | 上传文件插件（配置后自动开启功能） | Vue component | | |
@@ -106,7 +106,7 @@ Vue.use(Minimce, {
 
 **MobileLink（即将废弃）**
 
-> tinymce的插入链接功能只能插入普通链接 如果需要定制化需求 比如想要插入的链接是移动端某个页面的链接 可以自定义一个组件
+> TinyMCE 的插入链接功能只能插入普通链接 如果需要定制化需求 比如想要插入的链接是移动端某个页面的链接 可以自定义一个组件
 
 组件通过 `eventBus.$emit('insertTag', '<div/>')` 插入标签
 
@@ -185,7 +185,7 @@ img {
 
 <br>
 
-## 屏蔽指定的html元素
+## 屏蔽指定的 HTML 元素
 
 ```js
 import Minimce from 'minimce'
@@ -196,11 +196,11 @@ Vue.use(Minimce, {
 })
 ```
 
-**默认屏蔽 `iframe` 原因**
+**默认屏蔽 iframe 原因**
 
-- 允许用户引入未知的 `iframe` 存在执行未知脚本等安全隐患
-- 小程序侧不支持 `iframe`
-- 小程序侧 `web-view` 中使用 `iframe` 需要配置业务域名
+- 允许用户引入未知的 iframe 存在执行未知脚本等安全隐患
+- 小程序侧不支持 iframe
+- 小程序侧 web-view 中使用 iframe 需要配置业务域名
 - 给微信公众号H5侧带来授权问题
 
 <br>
@@ -209,18 +209,18 @@ Vue.use(Minimce, {
 
 ### 自带插入Word文档功能
 
-tinymce提供了premium插件 `PowerPaste` ，可用于粘贴Word文档，但兼容性一般，尤其是不支持 `WPS`
+TinyMCE 提供了premium 插件 PowerPaste，可用于粘贴 Word 文档，但兼容性一般，尤其是不支持 WPS
 
-minimce提供插入Word文档功能，兼容微软、WPS，可在一定程度上替代PowerPaste
+MiniMCE 提供插入 Word 文档功能，兼容 Microsoft Office、WPS，可在一定程度上替代 PowerPaste
 
 注意：粘贴可以片段粘贴，插入只能整个文档插入
 
 <br>
 
-### PowerPaste插件
+### PowerPaste 插件
 
 ```js
-// PowerPaste配置示例
+// PowerPaste 配置示例
 
 import Minimce from 'minimce'
 import axios from 'axios'
@@ -256,28 +256,28 @@ Vue.use(Minimce, {
 ```
 
 - 兼容性
-  ![PowerPaste插件兼容性](./powerpaste-compatibility.png)
+  ![PowerPaste 插件兼容性](./powerpaste-compatibility.png)
 
-- 受浏览器限制，`PowerPaste` 插件**无法支持微软Word和Excel文档所支持的<font color="#dd0000">所有</font>图片类型**
+- 受浏览器限制，PowerPaste 插件**无法支持微软 Word 和 Excel 文档所支持的<font color="#dd0000">所有</font>图片类型**
   。举个例子，浏览器禁止以编程方式访问文件系统，所以无法解析文档中使用 `file://` 协议的图片（WPS使用的就是此协议）。
 
-- 粘贴微软Word文档（Windows系统、≥2013版本）中<font color="#dd0000">受保护视图</font>的内容，将仅得到**无格式的普通文本**，这是受保护视图与剪贴板的交互机制决定的。
+- 粘贴微软 Word 文档（Windows系统、≥2013版本）中<font color="#dd0000">受保护视图</font>的内容，将仅得到**无格式的普通文本**，这是受保护视图与剪贴板的交互机制决定的。
 
-- 受微软Excel网页版限制，粘贴<font color="#dd0000">微软Excel网页版</font>的内容将仅得到**无格式的普通文本**。
+- 受微软 Excel 网页版限制，粘贴<font color="#dd0000">微软 Excel 网页版</font>的内容将仅得到**无格式的普通文本**。
 
 <br>
 
-## 粘贴网页内容（html）
+## 粘贴网页内容（HTML）
 
 ### 格式
 
-粘贴的网页内容默认会保留一定的源格式， 启用 `PowerPaste`
+粘贴的网页内容默认会保留一定的源格式， 启用 PowerPaste
 插件后，对格式的处理将会更加完善。详见https://www.tiny.cloud/docs/enterprise/system-requirements/#improvedhtmlcleaning
 
 ::: tip  
-如需获取纯文本，选中 `编辑` - `粘贴为文本` 再进行粘贴
+如需获取纯文本，选中 **编辑** - **粘贴为文本** 再进行粘贴
 
-`清除格式` 按钮得到的<font color="#dd0000">不是</font>纯文本，可以自定义清除效果：
+**清除格式** 按钮得到的<font color="#dd0000">不是</font>纯文本，可以自定义清除效果：
 https://www.tiny.cloud/docs/configure/content-formatting/#removingaformat
 :::
 
@@ -289,11 +289,11 @@ https://www.tiny.cloud/docs/configure/content-formatting/#removingaformat
 
 1. 第三方网站没有开启静态资源的跨域访问
 
-2. 第三方网站对静态资源做了referrer校验
+2. 第三方网站对静态资源做了 referrer 校验
 
-tinymce的 `urlconverter_callback`, `paste_postprocess` API不支持异步操作，所以批量转存图片可行性低
+TinyMCE 的 urlconverter_callback, paste_postprocess API 不支持异步操作，所以批量转存图片可行性低
 
-技术上是可以解决的，可以通过nginx动态代理配合前面提到的两个API来处理
+技术上是可以解决的，可以通过 nginx 动态代理配合前面提到的两个 API 来处理
 
 请自行评估相关风险
 
