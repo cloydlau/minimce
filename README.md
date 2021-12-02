@@ -64,7 +64,7 @@ export default {
 | Attribute | Description | Type | Accepted Values | Default |
 | --- | --- | --- | --- | --- |
 | value / v-model | HTML 格式的输入内容 | string | | |
-| apiKey | TinyMCE api key | string | https://www.tiny.cloud/auth/signup/ | |
+| apiKey | TinyMCE API key | string | https://www.tiny.cloud/auth/signup/ | |
 | plan | TinyMCE plan（默认启用 plan 包含的全套插件，mediaembed 除外） | string | `'core'` / `'essential'` / `'professional'` / `'custom'`，参考 https://www.tiny.cloud/pricing | `'core'` |
 | disabled | 是否禁用（禁用模式不可编辑，保留工具栏） | boolean | | `false` |
 | readonly | 是否只读（只读模式仅展示 HTML，相当于预览） | boolean | | `false` |
