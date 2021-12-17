@@ -76,7 +76,20 @@ export default {
 
 <br>
 
-**Imgpond（即将废弃）**
+### eventBus
+
+```ts
+// 事件通信
+const eventBus = new Vue()
+
+Vue.use(Minimce, {
+  eventBus
+})
+
+export { eventBus } // 暴露 eventBus，用于其它组件与 Minimce 通信
+```
+
+### Imgpond（即将废弃）
 
 > You can use Imgpond to upload local images.
 
@@ -90,7 +103,7 @@ Vue.use(Minimce, {
 })
 ```
 
-**Filepool（即将废弃）**
+### Filepool（即将废弃）
 
 > You can use Filepool to upload local audio and video.
 
@@ -104,25 +117,11 @@ Vue.use(Minimce, {
 })
 ```
 
-**MobileLink（即将废弃）**
+### MobileLink（即将废弃）
 
 > TinyMCE 的插入链接功能只能插入普通链接 如果需要定制化需求 比如想要插入的链接是移动端某个页面的链接 可以自定义一个组件
 
 组件通过 `eventBus.$emit('insertTag', '<div/>')` 插入标签
-
-```js
-// 事件通信
-const eventBus = new Vue()
-export { eventBus } // 用于其它组件与Minimce通信
-
-import MobileLink from '@/components/MobileLink'
-import Minimce from 'minimce'
-
-Vue.use(Minimce, {
-  MobileLink,
-  eventBus
-})
-```
 
 <br>
 
@@ -205,9 +204,9 @@ Vue.use(Minimce, {
 
 <br>
 
-## 粘贴Word文档
+## 粘贴 Word 文档
 
-### 自带插入Word文档功能
+### 自带插入 Word 文档功能
 
 TinyMCE 提供了premium 插件 PowerPaste，可用于粘贴 Word 文档，但兼容性一般，尤其是不支持 WPS
 
