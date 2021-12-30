@@ -16,6 +16,14 @@
 
 <br>
 
+## TODO at v0.3
+
+- 基于 Vue-Demi 重构，同时支持 Vue 2 + Vue 3
+- 打包工具基于 Vite + unocss 重构
+- 移除 element-ui 外置依赖
+
+<br>
+
 ## 安装
 
 ![NPM](https://nodei.co/npm/minimce.png)
