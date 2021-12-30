@@ -223,8 +223,8 @@ MiniMCE 提供插入 Word 文档功能，兼容 Microsoft Office、WPS，可在�
 
 import Minimce from 'minimce'
 import axios from 'axios'
-import { getAxiosShortcut } from 'admate'
-const { POST } = getAxiosShortcut(axios)
+import createAxiosShortcut from 'axios-shortcut'
+const { POST } = createAxiosShortcut(axios)
 
 Vue.use(Minimce, {
   apiKey: process.env.VUE_APP_API_KEY,
