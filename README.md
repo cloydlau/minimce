@@ -19,7 +19,7 @@
 ## TODO at v0.3
 
 - 基于 Vue-Demi 重构，同时支持 Vue 2 + Vue 3
-- 打包工具基于 Vite + unocss 重构
+- 打包工具基于 Vite + UnoCSS 重构
 - 移除 element-ui 外置依赖
 
 <br>
@@ -29,7 +29,7 @@
 ![NPM](https://nodei.co/npm/minimce.png)
 
 ```bash
-npm add minimce tinymce vue@2 element-ui
+npm add minimce tinymce element-ui
 ```
 
 ```ts
