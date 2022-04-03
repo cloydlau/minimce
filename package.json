@@ -27,8 +27,11 @@
   "scripts": {
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build --target lib --name minimce src/main.ts",
-    "clean": "rd /s /q .\\node_modules",
-    "ri": "rd /s /q .\\node_modules && pnpm i"
+    "c": "rd /s /q .\\node_modules",
+    "ri": "npm run clean && pnpm i",
+    "u": "node scripts/upgrade.js",
+    "r": "node scripts/release.js",
+    "rs": "node scripts/release.js --straightforward"
   },
   "dependencies": {
     "@tinymce/tinymce-vue": "^3.2.8",
