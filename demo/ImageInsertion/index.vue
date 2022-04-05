@@ -1,11 +1,12 @@
 <template>
   <el-dialog
-    :visible="show"
+    v-model="show"
     title="插入图片"
     :append-to-body="true"
     :close-on-click-modal="false"
     destroy-on-close
     @close="show=false"
+    width="600px"
   >
     <el-form ref="formRef" :model="formData">
       <el-form-item
@@ -56,7 +57,7 @@ export default {
       this.$refs.formRef.validate(valid => {
         if (valid) {
           this.formData.src.map(v => {
-            eventBus.$emit('insertTag', `<img src=${v}>`)
+            eventBus.$emit('MiniMCE:insertContent', `<img src=${v}>`)
           })
           this.show = false
         }
@@ -67,7 +68,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-::v-deep .el-dialog {
-  min-width: 600px;
-}
+
 </style>

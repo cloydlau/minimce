@@ -1,11 +1,12 @@
 <template>
   <el-dialog
     title="插入移动端页面链接"
-    :visible="show"
+    v-model="show"
     :close-on-click-modal="false"
     append-to-body
     destroy-on-close
     @close="show=false"
+    width="600px"
   >
     <el-form ref="formRef" :model="material" label-position="right" label-width="85px">
       <!--<el-form-item label="目标页面" prop="target" :rules="{required:true,message:'必填项'}">
@@ -87,7 +88,7 @@ export default {
       }
     },
     insert () {
-      eventBus.$emit('insertTag', this.tag)
+      eventBus.$emit('MiniMCE:insertContent', this.tag)
       this.show = false
     }
   }
@@ -95,7 +96,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-::v-deep .el-dialog {
-  min-width: 600px;
-}
+
 </style>

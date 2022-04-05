@@ -1,11 +1,12 @@
 <template>
   <el-dialog
-    :visible="show"
+    v-model="show"
     :title="'插入'+{'audio':'音频','video':'视频'}[type]"
     :append-to-body="true"
     :close-on-click-modal="false"
     destroy-on-close
     @close="show=false"
+    width="600px"
   >
     <el-form
       ref="formRef"
@@ -79,11 +80,11 @@ export default {
       this.$refs.formRef.validate(valid => {
         if (valid) {
           if (this.type === 'audio') {
-            eventBus.$emit('insertTag', `<audio controls data-name="${this.formData.name}" data-poster="${this.formData.imgUrl}" src="${this.formData.file}"></audio>`)
+            eventBus.$emit('MiniMCE:insertContent', `<audio controls data-name="${this.formData.name}" data-poster="${this.formData.imgUrl}" src="${this.formData.file}"></audio>`)
             this.show = false
           } else if (this.type === 'video') {
             if (typeof this.formData.file === 'string' && this.formData.file.toLowerCase().endsWith('.mp4')) {
-              eventBus.$emit('insertTag', `<video controls controlslist="nodownload" src="${this.formData.file}"></video>`)
+              eventBus.$emit('MiniMCE:insertContent', `<video controls controlslist="nodownload" src="${this.formData.file}"></video>`)
               this.show = false
             } else {
               Swal.fire({
@@ -105,7 +106,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-::v-deep .el-dialog {
-  min-width: 600px;
-}
+
 </style>

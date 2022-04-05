@@ -1,26 +1,17 @@
 # MiniMCE
 
-可离线使用、支持 Word 文档插入的富文本编辑器，基于 [TinyMCE](https://github.com/tinymce/tinymce) 。
+可离线使用、支持 Word 文档插入的富文本编辑器，基于 [TinyMCE](https://github.com/tinymce/tinymce) v6（最新版）。
 
 <br>
 
 ## 特性
 
+- 同时支持 Vue 2 & Vue 3
 - 可离线使用
 - 支持插入 Word 文档（.docx），兼容 Microsoft Office、WPS
-- 支持自定义菜单项
-- 默认启用 [TinyMCE Plan](https://www.tiny.cloud/pricing) 对应的全套插件（mediaembed 除外，需搭配后端服务）
-- 为 essential 以上的 plan 提供换肤、换图标风格工具栏选项
-- 适配 [element-ui](https://github.com/ElemeFE/element) （只读状态默认跟随 el-form）
+- 适配 [element-plus](https://github.com/element-plus/element-plus) & [element-ui](https://github.com/ElemeFE/element)
+  （只读状态默认跟随 el-form）
 - 全局或局部引入，参数支持全局或局部配置
-
-<br>
-
-## TODO at v0.3
-
-- 基于 Vue-Demi 重构，同时支持 Vue 2 + Vue 3
-- 打包工具基于 Vite + UnoCSS 重构
-- 移除 element-ui 外置依赖
 
 <br>
 
@@ -29,38 +20,47 @@
 ![NPM](https://nodei.co/npm/minimce.png)
 
 ```bash
-npm add minimce tinymce element-ui
+npm add minimce
 ```
 
+### 全局引入
+
 ```ts
-// 全局引入
+// Vue 3
 
-import Minimce from 'minimce'
+import 'minimce/dist/style.css'
+import MiniMCE from 'minimce'
 
-Vue.use(Minimce, {
+app.use(MiniMCE, {
   // 全局配置
 })
 ```
 
+```ts
+// Vue 2
+
+import 'minimce/dist/style.css'
+import MiniMCE from 'minimce'
+
+Vue.use(MiniMCE, {
+  // 全局配置
+})
+```
+
+### 局部引入
+
 ```vue
-<!-- 局部引入 -->
 
 <template>
-  <Minimce v-bind="config"/>
+  <MiniMCE v-bind="{/* 局部配置 */}"/>
 </template>
 
 <script>
-import Minimce from 'minimce'
+import 'minimce/dist/style.css'
+import MiniMCE from 'minimce'
 
 export default {
-  components: { Minimce },
-  data () {
-    return {
-      config: {
-        // 局部配置
-      }
-    }
-  }
+  components: { MiniMCE },
 }
 </script>
 ```
@@ -69,67 +69,31 @@ export default {
 
 ## 参数
 
-| 名称 | 说明 | 类型 | 可选值 | 默认值 |
-| --- | --- | --- | --- | --- |
-| value / v-model | HTML 格式的输入内容 | string | | |
-| apiKey | TinyMCE API key | string | https://www.tiny.cloud/auth/signup/ | |
-| plan | TinyMCE plan（默认启用 plan 包含的全套插件，mediaembed 除外） | string | `'core'` / `'essential'` / `'professional'` / `'custom'`，参考 https://www.tiny.cloud/pricing | `'core'` |
-| disabled | 是否禁用（禁用模式不可编辑，保留工具栏） | boolean | | `false` |
-| readonly | 是否只读（只读模式仅展示 HTML，相当于预览） | boolean | | `false` |
-| tinymceOptions | TinyMCE 配置 | object | https://www.tiny.cloud/docs/configure/ | |
-| eventBus | 事件总线 | Vue instance | | |
-| Imgpond（即将废弃） | 上传图片插件（配置后自动开启功能） | Vue component | | |
-| Filepool（即将废弃） | 上传文件插件（配置后自动开启功能） | Vue component | | |
-| MobileLink（即将废弃） | 插入移动端页面链接插件（配置后自动开启功能） | Vue component | | |
+| 名称               | 说明 | 类型                                                                 | 可选值 | 默认值 |
+|------------------| --- |--------------------------------------------------------------------| --- | --- |
+| value / v-model  | HTML 格式的输入内容 | string                                                             | | |
+| apiKey           | TinyMCE API key | string                                                             | https://www.tiny.cloud/auth/signup/ | |
+| disabled         | 是否禁用（禁用模式不可编辑，保留工具栏） | boolean                                                            | | `false` |
+| readonly         | 是否只读（只读模式仅展示 HTML，相当于预览） | boolean                                                            | | `false` |
+| init             | TinyMCE 配置 | object                                                             | https://www.tiny.cloud/docs/configure/ | |
+| eventBus         | 事件总线 | [mitt](https://github.com/developit/mitt) instance（Vue 官方推荐的事件总线库） | | |
 
 <br>
 
-### eventBus
+### 事件总线
+
+> 通常用于外部组件向富文本插入标签
 
 ```ts
 // 事件通信
 const eventBus = new Vue()
 
-Vue.use(Minimce, {
+Vue.use(MiniMCE, {
   eventBus
 })
 
-export { eventBus } // 暴露 eventBus，用于其它组件与 Minimce 通信
+export { eventBus } // 暴露 eventBus，用于其它组件与 MiniMCE 通信
 ```
-
-### Imgpond（即将废弃）
-
-> You can use Imgpond to upload local images.
-
-```js
-import Imgpond from 'imgpond'
-Vue.use(Imgpond)
-
-import Minimce from 'minimce'
-Vue.use(Minimce, {
-  Imgpond
-})
-```
-
-### Filepool（即将废弃）
-
-> You can use Filepool to upload local audio and video.
-
-```js
-import Filepool from 'filepool'
-Vue.use(Filepool)
-
-import Minimce from 'minimce'
-Vue.use(Minimce, {
-  Filepool
-})
-```
-
-### MobileLink（即将废弃）
-
-> TinyMCE 的插入链接功能只能插入普通链接 如果需要定制化需求 比如想要插入的链接是移动端某个页面的链接 可以自定义一个组件
-
-组件通过 `eventBus.$emit('insertTag', '<div/>')` 插入标签
 
 <br>
 
@@ -159,9 +123,14 @@ Vue.use(Minimce, {
 
 [示例代码](https://github.com/cloydlau/minimce/tree/master/demo/MobileLink)
 
+### 插入电话链接
+
+[示例代码](https://github.com/cloydlau/minimce/tree/master/demo/Tel)
+
 ### 菜单图标
 
-如果 [官方图标库](https://www.tiny.cloud/docs/advanced/editor-icon-identifiers/) 里没有，可以自行 [添加图标](https://www.tiny.cloud/docs/api/tinymce.editor.ui/tinymce.editor.ui.registry/#addicon)
+如果 [官方图标库](https://www.tiny.cloud/docs/advanced/editor-icon-identifiers/)
+里没有，可以自行 [添加图标](https://www.tiny.cloud/docs/api/tinymce.editor.ui/tinymce.editor.ui.registry/#addicon)
 
 <br>
 
@@ -195,8 +164,9 @@ img {
 ## 屏蔽指定的 HTML 元素
 
 ```js
-import Minimce from 'minimce'
-Vue.use(Minimce, {
+import MiniMCE from 'minimce'
+
+Vue.use(MiniMCE, {
   tinymceOptions: {
     invalid_elements: 'iframe,frame,audio' // 默认值：'iframe,frame'
   }
@@ -229,12 +199,13 @@ MiniMCE 提供插入 Word 文档功能，兼容 Microsoft Office、WPS，可在�
 ```js
 // PowerPaste 配置示例
 
-import Minimce from 'minimce'
+import MiniMCE from 'minimce'
 import axios from 'axios'
 import createAxiosShortcut from 'axios-shortcut'
+
 const { POST } = createAxiosShortcut(axios)
 
-Vue.use(Minimce, {
+Vue.use(MiniMCE, {
   apiKey: process.env.VUE_APP_API_KEY,
   plan: 'essential',
   tinymceOptions: {

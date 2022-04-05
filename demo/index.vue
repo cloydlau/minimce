@@ -1,47 +1,38 @@
 <template>
-  <el-dialog visible :close-on-click-modal="false" :show-close="false" title="minimce" append-to-body>
-    <Minimce
+  <el-dialog modelValue :close-on-click-modal="false" :show-close="false" title="MiniMCE" append-to-body
+             :close-on-press-escape="false" width="600px">
+    <MiniMCE
       v-if="onOperation"
-      v-model="value"
+      v-model="modelValue"
       v-bind="props"
     />
 
-    <br/>
+    <br>
     <el-button-group>
-      <el-button @click="value='123'">编程式设值</el-button>
-      <el-button @click="value=''">清空</el-button>
+      <el-button @click="modelValue='123'">编程式设值</el-button>
+      <el-button @click="modelValue=''">清空</el-button>
       <el-button @click="onOperation=true" v-if="onOperation===false">挂载</el-button>
       <el-button @click="onOperation=false" v-else>销毁</el-button>
-      <el-button @click="()=>{localStorage.clear()}">清缓存</el-button>
+      <el-button @click="()=>{window.localStorage.clear()}">清缓存</el-button>
     </el-button-group>
 
-    <PropsEditor v-model="props"/>
+    <p>{{ modelValue }}</p>
+    <p>{{ props }}</p>
   </el-dialog>
 </template>
 
-<script>
-import PropsEditor from './PropsEditor.vue'
+<script setup>
+import { ref } from 'vue-demi'
 
-export default {
-  components: { PropsEditor },
-  data () {
-    return {
-      localStorage,
-      onOperation: true,
-      value: '<style>\n        .rich__text {\n          line-height: 1.8;\n          overflow: auto;\n        }\n        .rich__text p {\n          margin-block-end: 0;\n          margin-block-start: 0;\n        }\n        .rich__text img {\n          max-width: 100%;\n          height: auto !important;\n          vertical-align: middle;\n        }\n        .rich__text audio, .rich__text video {\n          width: 100%;\n          background-color: #000;\n        }\n      </style>',
-      props: {
-        readonly: false,
-        disabled: false,
-        apiKey: process.env.VUE_APP_API_KEY,
-      }
-    }
-  },
-  methods: {}
-}
+const onOperation = ref(true)
+const modelValue = ref('初始值')
+const props = ref({
+  readonly: false,
+  disabled: false,
+  apiKey: import.meta.env.VITE_APP_API_KEY,
+})
 </script>
 
 <style lang="scss" scoped>
-::v-deep .el-dialog {
-  min-width: 600px;
-}
+
 </style>

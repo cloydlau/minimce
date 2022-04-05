@@ -25,8 +25,10 @@
   },
   "main": "./dist/minimce.umd.min.js",
   "scripts": {
-    "dev": "vue-cli-service serve",
-    "build": "vue-cli-service build --target lib --name minimce src/main.ts",
+    "dev": "vue-demi-switch 3 && vite",
+    "dev:2": "vue-demi-switch 2 && vite",
+    "build": "vite build",
+    "serve": "vite preview",
     "c": "rd /s /q .\\node_modules",
     "ri": "npm run clean && pnpm i",
     "u": "node scripts/upgrade.js",
@@ -34,37 +36,40 @@
     "rs": "node scripts/release.js --straightforward"
   },
   "dependencies": {
-    "@tinymce/tinymce-vue": "^3.2.8",
+    "@tinymce/tinymce-vue": "latest",
+    "@tinymce/tinymce-vue2": "npm:@tinymce/tinymce-vue@^3.2.8",
     "kayran": "latest",
     "lodash-es": "latest",
     "mammoth": "latest",
-    "sweetalert2": "latest"
+    "mitt": "latest",
+    "sweetalert2": "latest",
+    "tinymce": "latest",
+    "uuid": "latest",
+    "vue-demi": "latest"
   },
   "peerDependencies": {
-    "element-ui": "2",
-    "tinymce": "5",
-    "vue": "2"
+    "@vue/composition-api": "1",
+    "vue": "^2.0.0 || >=3.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@vue/composition-api": {
+      "optional": true
+    }
   },
   "devDependencies": {
-    "@types/lodash-es": "latest",
-    "@vue/cli-plugin-babel": "latest",
-    "@vue/cli-plugin-typescript": "latest",
-    "@vue/cli-service": "latest",
-    "axios": "latest",
-    "axios-shortcut": "latest",
-    "core-js": "latest",
-    "element-ui": "latest",
-    "filepool": "latest",
-    "imgpond": "latest",
-    "pic-viewer": "latest",
-    "qs": "latest",
-    "regenerator-runtime": "latest",
+    "@vitejs/plugin-vue": "latest",
+    "@vue/compiler-sfc": "latest",
+    "chalk": "^4.1.2",
+    "element-plus": "latest",
+    "enquirer": "latest",
+    "execa": "^4.1.0",
+    "minimist": "latest",
     "sass": "latest",
-    "sass-loader": "^10.2.0",
-    "tinymce": "latest",
+    "semver": "latest",
     "typescript": "latest",
-    "viewerjs": "latest",
-    "vue": "2.6.12",
-    "vue-template-compiler": "2.6.12"
+    "unocss": "latest",
+    "vite": "latest",
+    "vitest": "latest",
+    "vue": "latest"
   }
 }
