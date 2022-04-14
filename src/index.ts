@@ -21,7 +21,7 @@ import insertWord from './components/insert-word'
 import Spin from './components/Spin.vue'
 import globalConfig from './config.ts'
 import { getFinalProp } from 'kayran'
-import { v1 as uuidv1 } from 'uuid'
+import { v4 as uuidv4 } from 'uuid'
 //const plugins = 'autoresize|print|preview|paste|importcss|searchreplace|autolink|autosave|directionality|code|visualblocks|visualchars|fullscreen|image|link|media|template|codesample|table|charmap|hr|pagebreak|nonbreaking|anchor|insertdatetime|advlist|lists|wordcount|textpattern|noneditable|help|charmap|emoticons'
 //const regExp = new RegExp(`^\.\/(${plugins})\/index\.js$`)
 /*function requireAll (requireContext) {
@@ -113,7 +113,7 @@ export default defineComponent({
   },
   setup (props, { attrs, slots, emit }) {
     const loading = ref(true)
-    const tinymceId = ref('minimce-' + uuidv1())
+    const tinymceId = ref('minimce-' + uuidv4())
     const showTelInsertion = ref(false)
     const showWordInsertion = ref(false)
     const elForm = inject('elForm', { disabled: false })
