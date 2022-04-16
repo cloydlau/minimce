@@ -3,7 +3,6 @@
  * - pnpm add chalk@^4.1.2 enquirer execa@^4.1.0 minimist semver -D: 需要安装的依赖
  * - "release": "node scripts/release.js": package.json - scripts
  * - pnpm release: 打包 + 发布 + Push + Tag
- * - pnpm release -- --skipBuild: 跳过打包
  */
 
 const args = require('minimist')(process.argv.slice(2))
@@ -96,7 +95,7 @@ async function main () {
 
     // build all packages with types
     step('\nBuilding...')
-    if (!skipBuild && !isDryRun) {
+    if (!isDryRun) {
       await run('pnpm', ['run', 'build'])
       // test generated dts files
       //step('\nVerifying type declarations...')
@@ -185,6 +184,9 @@ async function publishPackage (pkgName, version, runIfNotDry) {
     }
   }
   await runIfNotDry('pnpm', ['config', 'set', 'registry', 'https://registry.npmmirror.com/'])
+
+  runIfNotDry('cnpm', ['sync', pkgName])
+  runIfNotDry('explorer', [`https://npmmirror.com/sync/${pkgName}`])
 }
 
 main().catch(async err => {

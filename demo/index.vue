@@ -1,24 +1,19 @@
 <template>
-  <el-dialog modelValue :close-on-click-modal="false" :show-close="false" title="MiniMCE" append-to-body
-             :close-on-press-escape="false" width="600px">
-    <MiniMCE
-      v-if="onOperation"
-      v-model="modelValue"
-      v-bind="props"
-    />
+  <MiniMCE
+    v-if="onOperation"
+    v-model="modelValue"
+    v-bind="props"
+  />
 
-    <br>
-    <el-button-group>
-      <el-button @click="modelValue='123'">编程式设值</el-button>
-      <el-button @click="modelValue=''">清空</el-button>
-      <el-button @click="onOperation=true" v-if="onOperation===false">挂载</el-button>
-      <el-button @click="onOperation=false" v-else>销毁</el-button>
-      <el-button @click="()=>{window.localStorage.clear()}">清缓存</el-button>
-    </el-button-group>
+  <br>
+  <button @click="modelValue='123'">编程式设值</button>
+  <button @click="modelValue=''">清空</button>
+  <button @click="onOperation=true" v-if="onOperation===false">挂载</button>
+  <button @click="onOperation=false" v-else>销毁</button>
+  <button @click="()=>{window.localStorage.clear()}">清缓存</button>
 
-    <p>{{ modelValue }}</p>
-    <p>{{ props }}</p>
-  </el-dialog>
+  <p>{{ modelValue }}</p>
+  <p>{{ props }}</p>
 </template>
 
 <script setup>
@@ -33,6 +28,14 @@ const props = ref({
 })
 </script>
 
-<style lang="scss" scoped>
-
+<style lang="scss">
+/*@media (prefers-color-scheme: dark) {
+  body {
+    filter: invert(1) hue-rotate(180deg);
+    color: white;
+  }
+  img {
+    filter: invert(1) hue-rotate(180deg);
+  }
+}*/
 </style>

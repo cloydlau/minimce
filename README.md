@@ -6,8 +6,8 @@
 
 ## 特性
 
-- 同时支持 Vue 2 & Vue 3
-- 可离线使用
+- Vue 2 & Vue 3 通用
+- 可离线使用，无网络延迟
 - 支持插入 Word 文档（.docx），兼容 Microsoft Office、WPS
 - 适配 [element-plus](https://github.com/element-plus/element-plus) & [element-ui](https://github.com/ElemeFE/element)
   （只读状态默认跟随 el-form）
@@ -50,6 +50,20 @@ Vue.use(MiniMCE, {
 ### 局部引入
 
 ```vue
+<!-- Vue 3 -->
+
+<template>
+  <MiniMCE v-bind="{/* 局部配置 */}"/>
+</template>
+
+<script setup>
+import 'minimce/dist/style.css'
+import MiniMCE from 'minimce'
+</script>
+```
+
+```vue
+<!-- Vue 2 -->
 
 <template>
   <MiniMCE v-bind="{/* 局部配置 */}"/>
@@ -69,31 +83,13 @@ export default {
 
 ## 参数
 
-| 名称               | 说明 | 类型                                                                 | 可选值 | 默认值 |
-|------------------| --- |--------------------------------------------------------------------| --- | --- |
-| value / v-model  | HTML 格式的输入内容 | string                                                             | | |
-| apiKey           | TinyMCE API key | string                                                             | https://www.tiny.cloud/auth/signup/ | |
-| disabled         | 是否禁用（禁用模式不可编辑，保留工具栏） | boolean                                                            | | `false` |
-| readonly         | 是否只读（只读模式仅展示 HTML，相当于预览） | boolean                                                            | | `false` |
-| init             | TinyMCE 配置 | object                                                             | https://www.tiny.cloud/docs/configure/ | |
-| eventBus         | 事件总线 | [mitt](https://github.com/developit/mitt) instance（Vue 官方推荐的事件总线库） | | |
-
-<br>
-
-### 事件总线
-
-> 通常用于外部组件向富文本插入标签
-
-```ts
-// 事件通信
-const eventBus = new Vue()
-
-Vue.use(MiniMCE, {
-  eventBus
-})
-
-export { eventBus } // 暴露 eventBus，用于其它组件与 MiniMCE 通信
-```
+| 名称              | 说明                       | 类型                                                                 | 可选值 | 默认值 |
+|-----------------|--------------------------|--------------------------------------------------------------------| --- | --- |
+| v-model / value | HTML 格式的绑定值              | string                                                             | | |
+| apiKey          | TinyMCE API key          | string                                                             | https://www.tiny.cloud/auth/signup/ | |
+| disabled        | 是否禁用（禁用模式不可编辑，保留工具栏）     | boolean                                                            | | `false` |
+| readonly        | 是否只读（只读模式仅展示 HTML，相当于预览） | boolean                                                            | | `false` |
+| init            | TinyMCE 配置               | object                                                             | https://www.tiny.cloud/docs/configure/ | |
 
 <br>
 
