@@ -165,6 +165,11 @@ export default defineComponent({
       //content_css: useDarkMode ? 'dark' : 'default',
       branding: false,
       quickbars_insert_toolbar: false,
+      // 默认屏蔽 iframe 原因：
+      // - 允许用户引入未知的 iframe 存在执行未知脚本等安全隐患
+      // - 小程序侧不支持 iframe
+      // - 小程序侧 web-view 中使用 iframe 需要配置业务域名
+      // - 给微信公众号 H5 侧带来授权问题
       invalid_elements: 'iframe,frame',
 
       // note that skin and content_css is disabled to avoid the normal

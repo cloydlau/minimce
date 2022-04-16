@@ -12,6 +12,7 @@
 - 适配 [element-plus](https://github.com/element-plus/element-plus) & [element-ui](https://github.com/ElemeFE/element)
   （只读状态默认跟随 el-form）
 - 全局或局部引入，参数支持全局或局部配置
+- 在全局配置中暴露 TinyMCE 实例，支持全局添加自定义菜单项，插入自定义内容
 
 <br>
 
@@ -123,11 +124,6 @@ export default {
 
 [示例代码](https://github.com/cloydlau/minimce/tree/master/demo/Tel)
 
-### 菜单图标
-
-如果 [官方图标库](https://www.tiny.cloud/docs/advanced/editor-icon-identifiers/)
-里没有，可以自行 [添加图标](https://www.tiny.cloud/docs/api/tinymce.editor.ui/tinymce.editor.ui.registry/#addicon)
-
 <br>
 
 ## 内容样式
@@ -154,27 +150,6 @@ img {
 ```
 
 > 可按需复制至富文本展示端使用
-
-<br>
-
-## 屏蔽指定的 HTML 元素
-
-```js
-import MiniMCE from 'minimce'
-
-Vue.use(MiniMCE, {
-  tinymceOptions: {
-    invalid_elements: 'iframe,frame,audio' // 默认值：'iframe,frame'
-  }
-})
-```
-
-**默认屏蔽 iframe 原因**
-
-- 允许用户引入未知的 iframe 存在执行未知脚本等安全隐患
-- 小程序侧不支持 iframe
-- 小程序侧 web-view 中使用 iframe 需要配置业务域名
-- 给微信公众号 H5 侧带来授权问题
 
 <br>
 
