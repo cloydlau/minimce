@@ -25,7 +25,7 @@ npm add minimce
 ```
 
 ### 全局引入
-
+![img.png](img.png)
 ```ts
 // Vue 3
 

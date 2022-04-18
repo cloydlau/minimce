@@ -63,7 +63,7 @@ const app = createApp(App)
           }
         })*/
 
-        TelInsertion.mount.call(this, miniMCE)
+        TelInsertion.mount.call(this, { miniMCE })
         // 菜单图标：
         // 如果官方图标库 https://www.tiny.cloud/docs/advanced/editor-icon-identifiers/ 里没有，
         // 可以自行添加图标 https://www.tiny.cloud/docs/api/tinymce.editor.ui/tinymce.editor.ui.registry/#addicon

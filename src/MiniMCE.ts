@@ -4,7 +4,6 @@ import {
   defineComponent,
   ref,
   computed,
-  watch,
   inject,
   nextTick,
   onUnmounted,
@@ -12,14 +11,12 @@ import {
   vShow,
   getCurrentInstance,
   withDirectives, // 不支持Vue2
-  resolveDirective,
 } from 'vue-demi'
 import insertWord from './components/insert-word'
 import Spin from './components/Spin.vue'
 import { globalProps, globalAttrs } from './index'
 import { conclude } from 'vue-global-config'
 import { v4 as uuidv4 } from 'uuid'
-import { throttle } from 'lodash-es'
 
 const useDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
 
@@ -59,7 +56,7 @@ import 'tinymce/themes/silver'
 // icons
 import 'tinymce/icons/default'
 // plugins
-//import.meta.glob('./assets/5.10.3-128/plugins/*/plugin.min.js')
+//const modules = import.meta.glob('./assets/5.10.3-128/plugins/*/plugin.min.js', { eager: true })
 import './assets/5.10.3-128/plugins/hr/plugin.min'
 import './assets/5.10.3-128/plugins/noneditable/plugin.min'
 import './assets/5.10.3-128/plugins/paste/plugin.min'
@@ -125,7 +122,6 @@ export default defineComponent({
     const loading = ref(true)
     const tinymceId = ref('minimce-' + uuidv4())
     const elForm = inject('elForm', { disabled: false })
-    const modelValue__ = ref<string | null | undefined>('')
 
     /**
      * props & attrs
@@ -218,30 +214,6 @@ export default defineComponent({
     }))
 
     /**
-     * modelValue 同步
-     */
-    const syncingModelValue = ref(false)
-    // 外部设值时，同步内部的 modelValue__
-    watch(() => props.modelValue, (n, o) => {
-      if (syncingModelValue.value) {
-        syncingModelValue.value = false
-      } else {
-        modelValue__.value = n
-      }
-    }, {
-      immediate: true,
-    })
-    const syncModelValue = throttle((n: string | null | undefined) => {
-      syncingModelValue.value = true
-      emit('update:modelValue', n)
-    }, 1000, {
-      leading: false,
-      trailing: true
-    })
-    // 用户输入时，同步 modelValue
-    watch(modelValue__, syncModelValue)
-
-    /**
      * 销毁时清空数据
      */
     onUnmounted(() => {
@@ -260,7 +232,7 @@ export default defineComponent({
          */
         h('div', {
           class: 'minimce-readonly',
-          innerHTML: modelValue__.value
+          innerHTML: props.modelValue
         }) :
         isVue3 ?
           /**
@@ -280,8 +252,7 @@ export default defineComponent({
               init: Init.value,
               apiKey: ApiKey.value,
               disabled: Disabled.value,
-              modelValue: modelValue__.value,
-              'onUpdate:modelValue': (value: string | undefined | null) => emit('update:modelValue', value),
+              modelValue: props.modelValue,
               ...Attrs.value,
             })
           ])
@@ -306,7 +277,7 @@ export default defineComponent({
                 init: Init.value,
                 apiKey: ApiKey.value,
                 disabled: Disabled.value,
-                value: modelValue__.value,
+                value: props.modelValue,
                 ...attrs,
               },
               on: {

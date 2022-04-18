@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import { name } from './package.json'
 //import Unocss from 'unocss/vite'
 //import { presetUno, presetAttributify } from 'unocss'
+import GlobPlugin from 'vite-plugin-glob'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -11,6 +12,9 @@ export default defineConfig({
   },
   plugins: [
     vue(),
+    GlobPlugin({
+      takeover: true,
+    }),
     /*Unocss({
       presets: [
         presetAttributify({ /!* options *!/ }),
