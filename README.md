@@ -94,7 +94,9 @@ import MiniMCE from 'minimce'
 
 默认内置样式：
 
-> 可拷贝至富文本展示端使用
+> 该样式仅在生产侧有效，不包含在生成的 HTML 文本中
+> 
+> 可拷贝至展示侧使用
 
 ```
 line-height: 1.8;
