@@ -1,26 +1,32 @@
 <template>
-  <MiniMCE
-    v-model="modelValue"
-    v-bind="props"
-  />
+  <div>
+    <MiniMCE
+      v-model="value"
+      v-bind="props"
+    />
 
-  <br>
-  <button @click="modelValue='123'">编程式设值</button>
-  <button @click="modelValue=''">清空</button>
+    <br>
+    <button @click="value='123'">编程式设值</button>
+    <button @click="value=''">清空</button>
 
-  <p>{{ modelValue }}</p>
-  <p>{{ props }}</p>
+    <p>{{ value }}</p>
+    <p>{{ props }}</p>
+  </div>
 </template>
 
-<script setup>
-import { ref } from 'vue-demi'
-
-const modelValue = ref('初始值')
-const props = ref({
-  readonly: false,
-  disabled: false,
-  apiKey: import.meta.env.VITE_APP_API_KEY,
-})
+<script>
+export default {
+  data () {
+    return {
+      value: '初始值',
+      props: {
+        readonly: false,
+        disabled: false,
+        apiKey: import.meta.env.VITE_APP_API_KEY,
+      }
+    }
+  }
+}
 </script>
 
 <style lang="scss">

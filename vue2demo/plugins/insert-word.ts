@@ -1,10 +1,8 @@
 import mammoth from 'mammoth/mammoth.browser.min.js'
-import { waitFor } from 'kayran'
-import { name } from '../../package.json'
 import 'cozyalert/dist/style.css'
 import Swal, { confirm } from 'cozyalert'
 
-export default miniMCE => confirm({
+export default currentEditor => confirm({
   input: 'file',
   inputAttributes: {
     placeholder: '将 docx 文件拖到此处',
@@ -25,18 +23,17 @@ export default miniMCE => confirm({
           reader.onload = async e => {
             const arrayBuffer = e.target.result
             if (arrayBuffer.byteLength) {
-              const [res, err] = await waitFor(mammoth.convertToHtml({ arrayBuffer }))
-              if (err) {
-                reject(err)
-              } else {
+              mammoth.convertToHtml({ arrayBuffer }).then(res => {
                 const { messages, value } = res
-                console.log(`[${name}] ${file.name} 解析结果：`, res)
+                console.log(`${file.name} 解析结果：`, res)
                 if (value) {
                   resolve(value)
                 } else {
                   reject(`${file.name} 内容为空`)
                 }
-              }
+              }).catch(err => {
+                reject(err)
+              })
             } else {
               reject(`${file.name} 内容为空`)
             }
@@ -47,7 +44,7 @@ export default miniMCE => confirm({
         results.map(result => {
           const { status, value, reason } = result
           if (status === 'fulfilled') {
-            miniMCE.insertContent(value)
+            currentEditor.insertContent(value)
           } else {
             if (reason) {
               if (typeof reason === 'string') {

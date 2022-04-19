@@ -4,26 +4,25 @@ import App from './index.vue'
 import 'element-plus/dist/index.css'
 import ElementPlus from 'element-plus'
 
-import MiniMCE from '../src/index'
-//import * as ImageInsertion from './ImageInsertion/index.js'
-//import * as FileInsertion from './FileInsertion/index.js'
-import TelInsertion from './TelInsertion/index'
-//import * as MobileLink from './MobileLink/index.js'
+import MiniMCE from './src'
+import insertWord from './plugins/insert-word'
+import InsertTel from './plugins/InsertTel'
+import InsertMiniProgramPageLink from './plugins/InsertMiniProgramPageLink'
 
 const app = createApp(App)
+app // 不能省略，否则在全局配置中拿不到 app
 .use(ElementPlus)
 .use(MiniMCE, {
   apiKey: '',
-  plan: 'custom',
   init: {
     menu: {
       insert: {
-        items: 'localimage localvideo localaudio tel mobilelink | image link media docx template codesample inserttable | charmap emoticons hr | pagebreak nonbreaking anchor toc | insertdatetime'
+        items: 'localimage localvideo localaudio tel miniprogrampagelink | image link media docx template codesample inserttable | charmap emoticons hr | pagebreak nonbreaking anchor toc | insertdatetime'
       },
     },
     setup (editor) {
       nextTick(() => {
-        const miniMCE = window.tinymce.get(editor.id)
+        const currentEditor = window.tinymce.get(editor.id)
 
         /*ImageInsertion.init()
         editor.ui.registry.addMenuItem('localimage', {
@@ -52,18 +51,26 @@ const app = createApp(App)
               type: 'video'
             })
           }
+        })*/
+
+        editor.ui.registry.addMenuItem('docx', {
+          text: 'Word 文档',
+          icon: 'new-document',
+          onAction: () => {
+            insertWord(currentEditor)
+          }
         })
 
-        MobileLink.init()
-        editor.ui.registry.addMenuItem('mobilelink', {
+        InsertMiniProgramPageLink.mount.call(app, { currentEditor })
+        editor.ui.registry.addMenuItem('miniprogrampagelink', {
           text: '小程序页面链接',
           icon: 'link',
           onAction: () => {
-            MobileLink.open()
+            InsertMiniProgramPageLink.open()
           }
-        })*/
+        })
 
-        TelInsertion.mount.call(this, { miniMCE })
+        InsertTel.mount.call(app, { currentEditor })
         // 菜单图标：
         // 如果官方图标库 https://www.tiny.cloud/docs/advanced/editor-icon-identifiers/ 里没有，
         // 可以自行添加图标 https://www.tiny.cloud/docs/api/tinymce.editor.ui/tinymce.editor.ui.registry/#addicon
@@ -72,7 +79,7 @@ const app = createApp(App)
           text: '电话号码',
           icon: 'tel',
           onAction: () => {
-            TelInsertion.open()
+            InsertTel.open()
           }
         })
       })

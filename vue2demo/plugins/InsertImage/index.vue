@@ -1,6 +1,6 @@
 <template>
   <el-dialog
-    v-model="show"
+    :visible.sync="show"
     title="插入图片"
     :append-to-body="true"
     :close-on-click-modal="false"

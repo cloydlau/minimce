@@ -5,33 +5,65 @@ import {
   ref,
   computed,
   inject,
-  nextTick,
   onUnmounted,
   h,
-  vShow,
-  getCurrentInstance,
-  withDirectives, // 不支持Vue2
+  vShow, // 不支持 Vue 2
+  withDirectives, // 不支持 Vue 2
 } from 'vue-demi'
-import insertWord from './components/insert-word'
-import Spin from './components/Spin.vue'
+import Spin from './components/Spin'
 import { globalProps, globalAttrs } from './index'
 import { conclude } from 'vue-global-config'
 import { v4 as uuidv4 } from 'uuid'
 
-const useDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
-
 import 'tinymce/tinymce'
+
 // skin
-import 'tinymce/skins/ui/oxide/skin.min.css'
 // Content styles, including inline UI like fake cursors
 // All the above CSS files are loaded on to the page but these two must
 // be loaded into the editor iframe so they are loaded as strings and passed
 // to the init function.
+const useDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+/*await import(useDarkMode ? 'tinymce/skins/ui/oxide-dark/skin.min.css' : 'tinymce/skins/ui/oxide/skin.min.css')
+
+let contentCSS
+let modules =
+  useDarkMode ?
+    import.meta.glob('/node_modules/tinymce/skins/content/dark/content.min.css', {
+      eager: true,
+      as: 'raw'
+    }) :
+    import.meta.glob('/node_modules/tinymce/skins/content/default/content.min.css', {
+      eager: true,
+      as: 'raw'
+    })
+for (const k in modules) {
+  contentCSS = modules[k]
+}
+
+let contentUICSS
+modules =
+  useDarkMode ?
+    import.meta.glob('/node_modules/tinymce/skins/ui/oxide-dark/content.min.css', {
+      eager: true,
+      as: 'raw'
+    }) :
+    import.meta.glob('/node_modules/tinymce/skins/ui/oxide/content.min.css', {
+      eager: true,
+      as: 'raw'
+    })
+for (const k in modules) {
+  contentUICSS = modules[k]
+}*/
+
+import 'tinymce/skins/ui/oxide/skin.min.css'
 import contentCSS from 'tinymce/skins/content/default/content.min.css?raw'
 import contentUICSS from 'tinymce/skins/ui/oxide/content.min.css?raw'
+
 const contentCustomCSS = `
-  line-height: 1.8;
+  .mce-content-body {
+    line-height: 1.8;
     overflow: auto;
+  }
   p {
     margin-block-end: 0;
     margin-block-start: 0;
@@ -42,10 +74,7 @@ const contentCustomCSS = `
     vertical-align: middle;
   }
 `
-// dark mode
-/*import 'tinymce/skins/content/dark/content.min.css'
-import 'tinymce/skins/ui/oxide-dark/content.min.css'
-import 'tinymce/skins/ui/oxide-dark/skin.min.css'*/
+
 // languages
 import './assets/5.10.3-128/langs/zh_CN' // https://www.tiny.cloud/get-tiny/language-packages/
 import './assets/5.10.3-128/langs/zh_CN_expansion'
@@ -56,7 +85,7 @@ import 'tinymce/themes/silver'
 // icons
 import 'tinymce/icons/default'
 // plugins
-//const modules = import.meta.glob('./assets/5.10.3-128/plugins/*/plugin.min.js', { eager: true })
+//const plugins = import.meta.globEager('./assets/5.10.3-128/plugins/*/plugin.min.js', { eager: true })
 import './assets/5.10.3-128/plugins/hr/plugin.min'
 import './assets/5.10.3-128/plugins/noneditable/plugin.min'
 import './assets/5.10.3-128/plugins/paste/plugin.min'
@@ -95,12 +124,25 @@ import 'tinymce/plugins/emoticons/js/emojis.min'
 import 'tinymce/plugins/save'
 import 'tinymce/plugins/quickbars'
 // Vue wrapper
+//const TinyMCE = (await import(isVue3 ? '@tinymce/tinymce-vue' : '@tinymce/tinymce-vue2')).default
+/*let TinyMCE
+modules =
+  isVue3 ?
+    import.meta.glob('/node_modules/@tinymce/tinymce-vue', {
+      export: 'default',
+      eager: true,
+    }) :
+    import.meta.glob('/node_modules/@tinymce/tinymce-vue2', {
+      export: 'default',
+      eager: true,
+    })
+for (const k in modules) {
+  TinyMCE = modules[k]
+}*/
 import TinyMCE from '@tinymce/tinymce-vue'
-import TinyMCE_Vue2 from '@tinymce/tinymce-vue2'
 
 export default defineComponent({
   name: 'MiniMCE',
-  components: { TinyMCE: isVue3 ? TinyMCE : TinyMCE_Vue2, Spin },
   props: {
     value: String,
     modelValue: String,
@@ -116,9 +158,7 @@ export default defineComponent({
     init: {},
   },
   setup (props, { attrs, expose, emit }) {
-    const currentInstance = getCurrentInstance()
-
-    const miniMCE = ref(null)
+    const currentEditor = ref(null)
     const loading = ref(true)
     const tinymceId = ref('minimce-' + uuidv4())
     const elForm = inject('elForm', { disabled: false })
@@ -157,8 +197,6 @@ export default defineComponent({
           items: 'image link media docx template codesample inserttable | charmap emoticons hr | pagebreak nonbreaking anchor | insertdatetime'
         },
       },
-      //skin: useDarkMode ? 'oxide-dark' : 'oxide',
-      //content_css: useDarkMode ? 'dark' : 'default',
       branding: false,
       quickbars_insert_toolbar: false,
       // 默认屏蔽 iframe 原因：
@@ -172,6 +210,8 @@ export default defineComponent({
       // loading process and is instead loaded as a string via content_style
       skin: false,
       content_css: false,
+      //skin: useDarkMode ? 'oxide-dark' : 'oxide',
+      //content_css: useDarkMode ? 'dark' : 'default',
       content_style: [contentCSS, contentUICSS, contentCustomCSS].join('\n'),
 
       autosave_ask_before_unload: false, // 改动后刷新，不再弹 alert
@@ -189,24 +229,15 @@ export default defineComponent({
       init_instance_callback: editor => {
         loading.value = false
       },
-      setup: editor => {
+      /*setup: editor => {
         nextTick(() => {
-          miniMCE.value = window.tinymce.get(tinymceId.value)
+          currentEditor.value = window.tinymce.get(tinymceId.value)
         })
-
-        // 注册插入 Word 文档菜单项
-        editor.ui.registry.addMenuItem('docx', {
-          text: 'Word 文档',
-          icon: 'new-document',
-          onAction: () => {
-            insertWord(miniMCE.value)
-          }
-        })
-      }
+      }*/
     }], {
       camelCase: false,
       mergeFunction: (globalFunction: Function, defaultFunction: Function) => (...args: any) => {
-        globalFunction.call(currentInstance, ...args)
+        globalFunction(...args)
         defaultFunction(...args)
       },
       name: 'init',
@@ -217,13 +248,16 @@ export default defineComponent({
      * 销毁时清空数据
      */
     onUnmounted(() => {
-      miniMCE.value.setContent('')
+      // 判空原因：HMR 报错
+      currentEditor.value?.setContent('')
     })
 
     /**
      * 暴露 tinymceId
      */
-    expose({ tinymceId })
+    if (isVue3) {
+      expose({ tinymceId })
+    }
 
     return () =>
       Readonly.value ?
@@ -277,11 +311,11 @@ export default defineComponent({
                 init: Init.value,
                 apiKey: ApiKey.value,
                 disabled: Disabled.value,
-                value: props.modelValue,
+                value: props.value,
                 ...attrs,
               },
               on: {
-                'update:value': (value: string | undefined | null) => emit('update:value', value)
+                'input': (value: string | undefined | null) => {emit('input', value)}
               },
             })
           ])

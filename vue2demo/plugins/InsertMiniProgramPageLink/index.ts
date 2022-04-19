@@ -8,13 +8,12 @@ function mount (props) {
   const el = document.createElement('div')
 
   const Constructor = Vue.extend({
-    render: h => h(Component),
+    render: h => h(Component, { props }),
     //store,
   })
 
   vm = new Constructor({
     el,
-    ...props,
   })
 
   vm.$mount(document.body)

@@ -6,7 +6,7 @@ let vm
 function mount (props) {
   const el = document.createElement('div')
   vm = createVNode(Component, props)
-  vm.appContext = this.appContext
+  vm.appContext = this._context
   render(vm, el)
 }
 

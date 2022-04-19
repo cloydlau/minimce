@@ -1,6 +1,6 @@
 <template>
   <el-dialog
-    v-model="show"
+    :visible.sync="show"
     title="插入电话号码"
     :append-to-body="true"
     :close-on-click-modal="false"
@@ -41,7 +41,7 @@ const tel = (value, { multiple = true } = {}) => {
 
 export default {
   props: {
-    miniMCE: {
+    currentEditor: {
       required: true,
     }
   },
@@ -84,7 +84,7 @@ export default {
     confirm () {
       this.$refs.rowForm.validate().then(() => {
         // data-type data-value 用于小程序端解析
-        this.miniMCE.insertContent(`<a data-type="tel" data-value="${this.form.tel}" href="tel:${this.form.tel}">${this.form.tel}</a>`)
+        this.currentEditor.insertContent(`<a data-type="tel" data-value="${this.form.tel}" href="tel:${this.form.tel}">${this.form.tel}</a>`)
         this.show = false
       })
     }

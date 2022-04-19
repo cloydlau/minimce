@@ -1,12 +1,11 @@
 <template>
   <el-dialog
-    title="插入移动端页面链接"
+    title="插入小程序页面链接"
     v-model="show"
     :close-on-click-modal="false"
     append-to-body
     destroy-on-close
     @close="show=false"
-    width="600px"
   >
     <el-form ref="formRef" :model="material" label-position="right" label-width="85px">
       <!--<el-form-item label="目标页面" prop="target" :rules="{required:true,message:'必填项'}">
@@ -17,23 +16,22 @@
       </el-form-item>
       <transition name="slide-fade">
         <el-form-item label="链接标签" v-if="tag">
-          <el-input readonly :value="tag"/>
+          <el-input disabled :value="tag"/>
         </el-form-item>
       </transition>
     </el-form>
 
-    <div slot="footer" class="dialog-footer">
+    <template #footer>
       <el-button @click="show=false">关 闭</el-button>
       <el-button type="primary" @click="insert" v-if="tag">确 定</el-button>
-    </div>
+    </template>
   </el-dialog>
 </template>
 
 <script>
 import qs from 'qs'
-import { eventBus } from '../main'
 
-function getInitData () {
+function getInitialData () {
   return {
     show: false,
     material: {
@@ -52,31 +50,36 @@ function getInitData () {
 }
 
 export default {
-  name: 'MobileLink',
-  //components: { GlobalSearch },
+  props: {
+    currentEditor: {
+      required: true,
+    }
+  },
   data () {
-    return getInitData()
+    return getInitialData()
   },
   watch: {
     material: {
       deep: true,
-      handler (newVal) {
+      handler (n) {
         if (this.show) {
-          this.$refs.formRef.validate(valid => {
-            if (valid) {
-              this.tag = `<a href="${this.material.target.src_type + qs.stringify({ id: this.material.target.id }, { addQueryPrefix: true })}">${this.material.innerText}</a>`
-            }
+          this.$refs.formRef.validate().then(() => {
+            this.tag = `<a href="${this.material.target.src_type + qs.stringify({ id: this.material.target.id }, { addQueryPrefix: true })}">${this.material.innerText}</a>`
           })
         }
       }
     },
     show (newVal) {
       if (!newVal) {
-        Object.assign(this.$data, getInitData())
+        Object.assign(this.$data, getInitialData())
       }
     }
   },
+  expose: ['open'],
   methods: {
+    open () {
+      this.show = true
+    },
     add () {
       if (this.material.param.length >= 10) {
         this.$warn('最多10个参数')
@@ -88,7 +91,7 @@ export default {
       }
     },
     insert () {
-      eventBus.$emit('MiniMCE:insertContent', this.tag)
+      this.currentEditor.insertContent(this.tag)
       this.show = false
     }
   }

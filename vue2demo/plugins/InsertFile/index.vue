@@ -1,6 +1,6 @@
 <template>
   <el-dialog
-    v-model="show"
+    :visible.sync="show"
     :title="'插入'+{'audio':'音频','video':'视频'}[type]"
     :append-to-body="true"
     :close-on-click-modal="false"
