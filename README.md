@@ -9,15 +9,15 @@
 - 基于 TinyMCE 6（2022 最新版）
 - 可离线使用，无网络延迟
 - Vue 2 & Vue 3 通用（API、版本号均一致）
-  - [tinymce-vue](https://github.com/tinymce/tinymce-vue) 分成了两个不同的版本，切换成本较高
+    - [tinymce-vue](https://github.com/tinymce/tinymce-vue) 分成了两个不同的版本，切换成本较高
 - 默认开启插件全家桶，功能全面
 - 提供常用自定义插件示例
-  - 插入 Word 文档（.docx），兼容 Microsoft Office、WPS
-  - 插入本地图片
-  - 插入本地视频
-  - 插入本地音频
-  - 插入电话链接
-  - 插入小程序页面链接
+    - 插入 Word 文档（.docx），兼容 Microsoft Office、WPS
+    - 插入本地图片
+    - 插入本地视频
+    - 插入本地音频
+    - 插入电话链接
+    - 插入小程序页面链接
 - 支持浅色模式 & 深色模式，主题、图标、内容样式均可自定义
 - 输入节流处理，更好的性能
 - 适配 [element-plus](https://github.com/element-plus/element-plus) & [element-ui](https://github.com/ElemeFE/element)
@@ -30,11 +30,13 @@
 
 ![NPM](https://nodei.co/npm/minimce.png)
 
+### Vue 3
+
 ```bash
 npm add minimce
 ```
 
-### 全局引入
+#### 全局引入
 
 ```ts
 import 'tinymce/skins/ui/oxide/skin.min.css'
@@ -42,13 +44,12 @@ import 'tinymce/themes/silver'
 import 'tinymce/icons/default'
 import 'minimce/dist/style.css'
 import MiniMCE from 'minimce'
-
 app.use(MiniMCE, {
   // 全局配置
 })
 ```
 
-### 局部引入
+#### 局部引入
 
 ```vue
 
@@ -64,6 +65,59 @@ import 'minimce/dist/style.css'
 import MiniMCE from 'minimce'
 </script>
 ```
+
+[完整示例代码](https://github.com/cloydlau/minimce/tree/master/demo/vue3)
+
+<br>
+
+### Vue 2
+
+```bash
+npm add minimce @vue/composition-api
+```
+
+#### 全局引入
+
+```ts
+import VCA from '@vue/composition-api'
+Vue.use(VCA)
+
+import 'tinymce/skins/ui/oxide/skin.min.css'
+import 'tinymce/themes/silver'
+import 'tinymce/icons/default'
+import 'minimce/dist/style.css'
+import MiniMCE from 'minimce'
+Vue.use(MiniMCE, {
+  // 全局配置
+})
+```
+
+#### 局部引入
+
+```vue
+
+<template>
+  <MiniMCE v-bind="{/* 局部配置 */}"/>
+</template>
+
+<script>
+import VCA from '@vue/composition-api'
+
+Vue.use(VCA)
+
+import 'tinymce/skins/ui/oxide/skin.min.css'
+import 'tinymce/themes/silver'
+import 'tinymce/icons/default'
+import 'minimce/dist/style.css'
+import MiniMCE from 'minimce'
+
+export default {
+  components: { MiniMCE },
+}
+</script>
+```
+
+[完整示例代码](https://github.com/cloydlau/minimce/tree/master/demo/vue2)
 
 <br>
 
@@ -103,27 +157,33 @@ import MiniMCE from 'minimce'
 ## 插件示例
 
 ### 插入 Word 文档（.docx），兼容 Microsoft Office、WPS
-  - [Vue 3](https://github.com/cloydlau/minimce/blob/master/demo/vue3/plugins/insert-word.ts)
-  - [Vue 2](https://github.com/cloydlau/minimce/blob/master/demo/vue2/plugins/insert-word.ts)
+
+- [Vue 3](https://github.com/cloydlau/minimce/blob/master/demo/vue3/plugins/insert-word.ts)
+- [Vue 2](https://github.com/cloydlau/minimce/blob/master/demo/vue2/plugins/insert-word.ts)
 
 ### 插入本地图片
-  - [Vue 2](https://github.com/cloydlau/minimce/blob/master/demo/vue2/plugins/InsertImage)
+
+- [Vue 2](https://github.com/cloydlau/minimce/blob/master/demo/vue2/plugins/InsertImage)
 
 ### 插入本地视频
-  - [Vue 3](https://github.com/cloydlau/minimce/blob/master/demo/vue3/plugins/InsertVideo)
-  - [Vue 2](https://github.com/cloydlau/minimce/blob/master/demo/vue2/plugins/InsertVideo)
+
+- [Vue 3](https://github.com/cloydlau/minimce/blob/master/demo/vue3/plugins/InsertVideo)
+- [Vue 2](https://github.com/cloydlau/minimce/blob/master/demo/vue2/plugins/InsertVideo)
 
 ### 插入本地音频
-  - [Vue 3](https://github.com/cloydlau/minimce/blob/master/demo/vue3/plugins/InsertAudio)
-  - [Vue 2](https://github.com/cloydlau/minimce/blob/master/demo/vue2/plugins/InsertAudio)
+
+- [Vue 3](https://github.com/cloydlau/minimce/blob/master/demo/vue3/plugins/InsertAudio)
+- [Vue 2](https://github.com/cloydlau/minimce/blob/master/demo/vue2/plugins/InsertAudio)
 
 ### 插入电话链接
-  - [Vue 3](https://github.com/cloydlau/minimce/blob/master/demo/vue3/plugins/InsertTel)
-  - [Vue 2](https://github.com/cloydlau/minimce/blob/master/demo/vue2/plugins/InsertTel)
+
+- [Vue 3](https://github.com/cloydlau/minimce/blob/master/demo/vue3/plugins/InsertTel)
+- [Vue 2](https://github.com/cloydlau/minimce/blob/master/demo/vue2/plugins/InsertTel)
 
 ### 插入小程序页面链接
-  - [Vue 3](https://github.com/cloydlau/minimce/blob/master/demo/vue3/plugins/InsertMiniProgramPageLink)
-  - [Vue 2](https://github.com/cloydlau/minimce/blob/master/demo/vue2/plugins/InsertMiniProgramPageLink)
+
+- [Vue 3](https://github.com/cloydlau/minimce/blob/master/demo/vue3/plugins/InsertMiniProgramPageLink)
+- [Vue 2](https://github.com/cloydlau/minimce/blob/master/demo/vue2/plugins/InsertMiniProgramPageLink)
 
 <br>
 
