@@ -1,20 +1,28 @@
 # MiniMCE
 
+[TinyMCE](https://github.com/tinymce/tinymce) 离线版，更好的 Vue 封装。
+
+<br>
+
 ## 特性
 
-- 基于 [TinyMCE](https://github.com/tinymce/tinymce) v6.0（最新版）
+- 基于 TinyMCE 6（2022 最新版）
 - 可离线使用，无网络延迟
-- 提供 Vue 2 & Vue 3 版本
-- 提供常用插件示例
+- Vue 2 & Vue 3 通用（API、版本号均一致）
+  - [tinymce-vue](https://github.com/tinymce/tinymce-vue) 分成了两个不同的版本，切换成本较高
+- 默认开启插件全家桶，功能全面
+- 提供常用自定义插件示例
   - 插入 Word 文档（.docx），兼容 Microsoft Office、WPS
   - 插入本地图片
   - 插入本地视频
   - 插入本地音频
   - 插入电话链接
   - 插入小程序页面链接
+- 支持浅色模式 & 深色模式，主题、图标、内容样式均可自定义
+- 输入节流处理，更好的性能
 - 适配 [element-plus](https://github.com/element-plus/element-plus) & [element-ui](https://github.com/ElemeFE/element)
   （只读状态默认跟随 `el-form`）
-- 全局或局部引入，参数支持全局或局部配置（Powered by [vue-global-config](https://github.com/cloydlau/vue-global-config.git)）
+- 全局或局部引入，参数支持全局或局部配置（[vue-global-config](https://github.com/cloydlau/vue-global-config.git) 提供技术支持）
 
 <br>
 
@@ -26,16 +34,12 @@
 npm add minimce
 ```
 
-### 版本说明
-
-Vue 3 请使用 `^0.3` 以上版本
-
-Vue 2 请使用 `~0.2` 版本
-
 ### 全局引入
 
 ```ts
-
+import 'tinymce/skins/ui/oxide/skin.min.css'
+import 'tinymce/themes/silver'
+import 'tinymce/icons/default'
 import 'minimce/dist/style.css'
 import MiniMCE from 'minimce'
 
@@ -53,6 +57,9 @@ app.use(MiniMCE, {
 </template>
 
 <script setup>
+import 'tinymce/skins/ui/oxide/skin.min.css'
+import 'tinymce/themes/silver'
+import 'tinymce/icons/default'
 import 'minimce/dist/style.css'
 import MiniMCE from 'minimce'
 </script>
@@ -68,14 +75,13 @@ import MiniMCE from 'minimce'
 | apiKey          | TinyMCE API key          | string                                                             | https://www.tiny.cloud/auth/signup/ |         |
 | disabled        | 是否禁用（禁用模式不可编辑，保留工具栏）     | boolean                                                            | | `false` |
 | readonly        | 是否只读（只读模式仅展示 HTML，相当于预览） | boolean                                                            | | `false` |
-| init            | TinyMCE 配置               | object                                                             | https://www.tiny.cloud/docs/configure/ | https://github.com/cloydlau/minimce/blob/master/src/MiniMCE.ts        |
-| ...             | `@tinymce/tinymce-vue` 配置               |                                                              | https://www.tiny.cloud/docs/integrations/vue/#configuringtheeditor |         |
+| options            | TinyMCE 配置               | object                                                             | https://www.tiny.cloud/docs/configure/ | https://github.com/cloydlau/minimce/blob/master/src/MiniMCE.ts        |
 
 <br>
 
 ## 参数配置规则
 
-- 双向绑定参数（`v-model`）仅支持局部配置
+- 双向绑定参数（`v-model` / `modelValue` / `value`）仅支持局部配置
 - 其余参数均支持全局或局部配置
 
 权重：
@@ -92,38 +98,32 @@ import MiniMCE from 'minimce'
 1. 富文本的生产侧无法满足各展示侧的定制化需求
 2. 展示侧可能包含小程序，小程序不支持 `style` 标签
 
-默认内置样式：
-
-> 该样式仅在生产侧有效，不包含在生成的 HTML 文本中
-> 
-> 可拷贝至展示侧使用
-
-```
-line-height: 1.8;
-overflow: auto;
-
-p {
-  margin-block-end: 0;
-  margin-block-start: 0;
-}
-
-img {
-  max-width: 100%;
-  height: auto !important;
-  vertical-align: middle;
-}
-```
-
 <br>
 
 ## 插件示例
 
-- [插入 Word 文档（.docx），兼容 Microsoft Office、WPS](https://github.com/cloydlau/minimce/blob/master/vue3demo/plugins/insert-word.ts)
-- [插入本地图片](https://github.com/cloydlau/minimce/blob/master/vue3demo/plugins/InsertImage)
-- [插入本地视频](https://github.com/cloydlau/minimce/blob/master/vue3demo/plugins/InsertVideo)
-- [插入本地音频](https://github.com/cloydlau/minimce/blob/master/vue3demo/plugins/InsertAudio)
-- [插入电话链接](https://github.com/cloydlau/minimce/blob/master/vue3demo/plugins/InsertTel)
-- [插入小程序页面链接](https://github.com/cloydlau/minimce/blob/master/vue3demo/plugins/InsertMiniProgramPageLink)
+### 插入 Word 文档（.docx），兼容 Microsoft Office、WPS
+  - [Vue 3](https://github.com/cloydlau/minimce/blob/master/demo/vue3/plugins/insert-word.ts)
+  - [Vue 2](https://github.com/cloydlau/minimce/blob/master/demo/vue2/plugins/insert-word.ts)
+
+### 插入本地图片
+  - [Vue 2](https://github.com/cloydlau/minimce/blob/master/demo/vue2/plugins/InsertImage)
+
+### 插入本地视频
+  - [Vue 3](https://github.com/cloydlau/minimce/blob/master/demo/vue3/plugins/InsertVideo)
+  - [Vue 2](https://github.com/cloydlau/minimce/blob/master/demo/vue2/plugins/InsertVideo)
+
+### 插入本地音频
+  - [Vue 3](https://github.com/cloydlau/minimce/blob/master/demo/vue3/plugins/InsertAudio)
+  - [Vue 2](https://github.com/cloydlau/minimce/blob/master/demo/vue2/plugins/InsertAudio)
+
+### 插入电话链接
+  - [Vue 3](https://github.com/cloydlau/minimce/blob/master/demo/vue3/plugins/InsertTel)
+  - [Vue 2](https://github.com/cloydlau/minimce/blob/master/demo/vue2/plugins/InsertTel)
+
+### 插入小程序页面链接
+  - [Vue 3](https://github.com/cloydlau/minimce/blob/master/demo/vue3/plugins/InsertMiniProgramPageLink)
+  - [Vue 2](https://github.com/cloydlau/minimce/blob/master/demo/vue2/plugins/InsertMiniProgramPageLink)
 
 <br>
 
@@ -147,7 +147,7 @@ import createAxiosShortcut from 'axios-shortcut'
 const { POST } = createAxiosShortcut(axios)
 
 app.use(MiniMCE, {
-  init: {
+  options: {
     images_upload_handler (blobInfo, success, failure) {
       const blob = blobInfo.blob()
       const file = new File(

@@ -1,6 +1,6 @@
 let globalProps = {}, globalAttrs = {}, globalListeners = {}, globalHooks = {}
 import { useGlobalConfig } from 'vue-global-config'
-import Component from './MiniMCE'
+import Component from './Component'
 
 Component.install = (app: any, options = {}) => {
   if (!Component.name) {

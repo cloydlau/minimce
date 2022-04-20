@@ -17,13 +17,13 @@ import { ref } from 'vue'
 
 const modelValue = ref('初始值')
 const props = ref({
-  readonly: true,
+  readonly: false,
   disabled: false,
   apiKey: import.meta.env.VITE_APP_API_KEY,
 })
 </script>
 
-<style lang="scss">
+<style>
 /*@media (prefers-color-scheme: dark) {
   body {
     filter: invert(1) hue-rotate(180deg);

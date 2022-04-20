@@ -1,7 +1,7 @@
 {
   "name": "minimce",
   "version": "0.2.15",
-  "description": "Offline, Word documents insertion supported richtext editor powered by TinyMCE",
+  "description": "TinyMCE offline version, a better Vue wrapper.",
   "keywords": [
     "tinymce",
     "offline",
@@ -17,7 +17,7 @@
     "WYSIWYG"
   ],
   "author": "cloydlau",
-  "license": "LGPL-2.1-only",
+  "license": "MIT",
   "private": false,
   "repository": {
     "type": "git",
@@ -25,30 +25,29 @@
   },
   "main": "./dist/minimce.umd.min.js",
   "scripts": {
-    "dev": "vue-demi-switch 3 vue3 && cd ./vue3demo && pnpm dev",
-    "dev:2": "vue-demi-switch 2 vue2 && cd ./vue2demo && pnpm dev",
+    "dev": "node scripts/switch-vue.js 3 && vite --config ./vite.config.ts",
+    "dev2": "node scripts/switch-vue.js 2 && vite --config ./vite.vue2.config.ts",
     "build": "vite build",
     "serve": "vite preview",
     "clean": "rd /s /q .\\node_modules",
     "ri": "npm run clean && pnpm i",
     "u": "node scripts/upgrade.js",
     "r": "node scripts/release.js",
-    "rs": "node scripts/release.js --straightforward"
+    "rs": "node scripts/release.js --straightforward",
+    "test": "vitest --config ./vitest.config.ts",
+    "test2": "vitest --config ./vitest.vue2.config.ts",
+    "coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@tinymce/tinymce-vue": "latest",
-    "@tinymce/tinymce-vue2": "npm:@tinymce/tinymce-vue@^3.2.8",
     "cozyalert": "latest",
     "kayran": "latest",
     "lodash-es": "latest",
-    "mammoth": "latest",
     "tinymce": "latest",
     "uuid": "latest",
     "vue-demi": "latest",
     "vue-global-config": "latest"
   },
   "peerDependencies": {
-    "@vue/composition-api": "1",
     "vue": "^2.0.0 || >=3.0.0"
   },
   "peerDependenciesMeta": {
@@ -57,15 +56,26 @@
     }
   },
   "devDependencies": {
+    "@vue/composition-api": "^1.4.9",
+    "@vue/test-utils": "1",
     "chalk": "^4.1.2",
+    "element-ui": "^2.15.8",
     "enquirer": "latest",
     "execa": "^4.1.0",
+    "jsdom": "latest",
+    "mammoth": "latest",
     "minimist": "latest",
+    "qs": "^6.10.3",
+    "sass": "latest",
     "semver": "latest",
     "typescript": "latest",
-    "unocss": "latest",
     "vite": "latest",
-    "vite-plugin-glob": "latest",
-    "vitest": "latest"
+    "vite-plugin-vue2": "^1.9.3",
+    "vitest": "latest",
+    "vue": "2",
+    "vue-template-compiler": "^2.6.14"
+  },
+  "stackblitz": {
+    "startCommand": "npm run test"
   }
 }

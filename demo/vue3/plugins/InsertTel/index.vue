@@ -41,7 +41,7 @@ const tel = (value, { multiple = true } = {}) => {
 
 export default {
   props: {
-    currentEditor: {
+    editor: {
       required: true,
     }
   },
@@ -84,7 +84,7 @@ export default {
     confirm () {
       this.$refs.rowForm.validate().then(() => {
         // data-type data-value 用于小程序端解析
-        this.currentEditor.insertContent(`<a data-type="tel" data-value="${this.form.tel}" href="tel:${this.form.tel}">${this.form.tel}</a>`)
+        this.editor.insertContent(`<a data-type="tel" data-value="${this.form.tel}" href="tel:${this.form.tel}">${this.form.tel}</a>`)
         this.show = false
       })
     }
@@ -92,7 +92,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .el-form-item {
   margin-bottom: 0;
 }

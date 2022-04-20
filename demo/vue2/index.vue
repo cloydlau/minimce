@@ -6,7 +6,7 @@
     />
 
     <br>
-    <button @click="value='123'">编程式设值</button>
+    <button @click="value='<p>123</p><p>123</p>'">编程式设值</button>
     <button @click="value=''">清空</button>
 
     <p>{{ value }}</p>

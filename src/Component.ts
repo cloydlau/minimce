@@ -5,85 +5,25 @@ import {
   ref,
   computed,
   inject,
+  watch,
+  nextTick,
   onUnmounted,
   h,
   vShow, // 不支持 Vue 2
   withDirectives, // 不支持 Vue 2
 } from 'vue-demi'
 import Spin from './components/Spin'
-import { globalProps, globalAttrs } from './index'
+import { globalProps } from './index'
 import { conclude } from 'vue-global-config'
 import { v4 as uuidv4 } from 'uuid'
+import { throttle } from 'lodash-es'
 
-import 'tinymce/tinymce'
-
-// skin
-// Content styles, including inline UI like fake cursors
-// All the above CSS files are loaded on to the page but these two must
-// be loaded into the editor iframe so they are loaded as strings and passed
-// to the init function.
-const useDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
-/*await import(useDarkMode ? 'tinymce/skins/ui/oxide-dark/skin.min.css' : 'tinymce/skins/ui/oxide/skin.min.css')
-
-let contentCSS
-let modules =
-  useDarkMode ?
-    import.meta.glob('/node_modules/tinymce/skins/content/dark/content.min.css', {
-      eager: true,
-      as: 'raw'
-    }) :
-    import.meta.glob('/node_modules/tinymce/skins/content/default/content.min.css', {
-      eager: true,
-      as: 'raw'
-    })
-for (const k in modules) {
-  contentCSS = modules[k]
-}
-
-let contentUICSS
-modules =
-  useDarkMode ?
-    import.meta.glob('/node_modules/tinymce/skins/ui/oxide-dark/content.min.css', {
-      eager: true,
-      as: 'raw'
-    }) :
-    import.meta.glob('/node_modules/tinymce/skins/ui/oxide/content.min.css', {
-      eager: true,
-      as: 'raw'
-    })
-for (const k in modules) {
-  contentUICSS = modules[k]
-}*/
-
-import 'tinymce/skins/ui/oxide/skin.min.css'
-import contentCSS from 'tinymce/skins/content/default/content.min.css?raw'
-import contentUICSS from 'tinymce/skins/ui/oxide/content.min.css?raw'
-
-const contentCustomCSS = `
-  .mce-content-body {
-    line-height: 1.8;
-    overflow: auto;
-  }
-  p {
-    margin-block-end: 0;
-    margin-block-start: 0;
-  }
-  img {
-    max-width: 100%;
-    height: auto !important;
-    vertical-align: middle;
-  }
-`
-
+import tinymce from 'tinymce/tinymce'
 // languages
 import './assets/5.10.3-128/langs/zh_CN' // https://www.tiny.cloud/get-tiny/language-packages/
 import './assets/5.10.3-128/langs/zh_CN_expansion'
 // models
 import 'tinymce/models/dom'
-// themes
-import 'tinymce/themes/silver'
-// icons
-import 'tinymce/icons/default'
 // plugins
 //const plugins = import.meta.globEager('./assets/5.10.3-128/plugins/*/plugin.min.js', { eager: true })
 import './assets/5.10.3-128/plugins/hr/plugin.min'
@@ -123,23 +63,6 @@ import 'tinymce/plugins/emoticons'
 import 'tinymce/plugins/emoticons/js/emojis.min'
 import 'tinymce/plugins/save'
 import 'tinymce/plugins/quickbars'
-// Vue wrapper
-//const TinyMCE = (await import(isVue3 ? '@tinymce/tinymce-vue' : '@tinymce/tinymce-vue2')).default
-/*let TinyMCE
-modules =
-  isVue3 ?
-    import.meta.glob('/node_modules/@tinymce/tinymce-vue', {
-      export: 'default',
-      eager: true,
-    }) :
-    import.meta.glob('/node_modules/@tinymce/tinymce-vue2', {
-      export: 'default',
-      eager: true,
-    })
-for (const k in modules) {
-  TinyMCE = modules[k]
-}*/
-import TinyMCE from '@tinymce/tinymce-vue'
 
 export default defineComponent({
   name: 'MiniMCE',
@@ -155,18 +78,17 @@ export default defineComponent({
       default: undefined
     },
     apiKey: {},
-    init: {},
+    options: {},
   },
   setup (props, { attrs, expose, emit }) {
-    const currentEditor = ref(null)
     const loading = ref(true)
+    const syncingValue = ref(false)
     const tinymceId = ref('minimce-' + uuidv4())
     const elForm = inject('elForm', { disabled: false })
 
     /**
      * props & attrs
      */
-    const Attrs = computed(() => conclude([attrs, globalAttrs]))
     const Readonly = computed(() => conclude([props.readonly, globalProps.readonly, Boolean(elForm.disabled)], {
       name: 'readonly',
       type: 'boolean'
@@ -179,9 +101,9 @@ export default defineComponent({
       name: 'disabled',
       type: 'boolean',
     }))
-    const Init = computed(() => conclude([props.init, globalProps.init, {
+    const Options = computed(() => conclude([props.options, globalProps.options, {
       /**
-       * 开启所有免费功能
+       * 默认开启所有免费功能
        * https://www.tiny.cloud/docs/demo/full-featured/
        */
       plugins: 'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists wordcount textpattern noneditable help charmap quickbars emoticons',
@@ -212,7 +134,6 @@ export default defineComponent({
       content_css: false,
       //skin: useDarkMode ? 'oxide-dark' : 'oxide',
       //content_css: useDarkMode ? 'dark' : 'default',
-      content_style: [contentCSS, contentUICSS, contentCustomCSS].join('\n'),
 
       autosave_ask_before_unload: false, // 改动后刷新，不再弹 alert
       min_height: 500,
@@ -225,31 +146,75 @@ export default defineComponent({
       toolbar_mode: 'sliding',
       toolbar_sticky: true,
       //extended_valid_elements: 'img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name|referrerpolicy=no-referrer]',
-      language: 'zh_CN',
       init_instance_callback: editor => {
         loading.value = false
       },
-      /*setup: editor => {
-        nextTick(() => {
-          currentEditor.value = window.tinymce.get(tinymceId.value)
+      setup: editor => {
+        watch(Disabled, (n) => {
+          setTimeout(() => {
+            editor.ui.setEnabled(!n)
+          }, 0)
+        }, {
+          immediate: true
         })
-      }*/
+
+        watch(() => isVue3 ? props.modelValue : props.value, n => {
+          if (syncingValue.value) {
+            syncingValue.value = false
+          } else {
+            editor.setContent(n)
+          }
+        }, {
+          immediate: true,
+        })
+
+        const eventName = isVue3 ? 'update:modelValue' : 'input'
+
+        const onChange = throttle(() => {
+          syncingValue.value = true
+          emit(eventName, editor.getContent({ format: Options.outputFormat }))
+        }, 500, {
+          leading: false,
+          trailing: true
+        })
+
+        editor.on('input', onChange)
+
+        /**
+         * 销毁时清空数据
+         */
+        onUnmounted(() => {
+          // 判空原因：HMR 报错
+          editor.setContent('')
+        })
+      }
     }], {
       camelCase: false,
       mergeFunction: (globalFunction: Function, defaultFunction: Function) => (...args: any) => {
         globalFunction(...args)
         defaultFunction(...args)
       },
-      name: 'init',
+      name: 'options',
       type: 'object',
     }))
 
-    /**
-     * 销毁时清空数据
-     */
-    onUnmounted(() => {
-      // 判空原因：HMR 报错
-      currentEditor.value?.setContent('')
+    function init () {
+      if (Readonly.value) {
+        tinymce.remove('#' + tinymceId.value)
+      } else {
+        nextTick(() => {
+          tinymce.init({
+            selector: '#' + tinymceId.value,
+            ...Options.value,
+          })
+        })
+      }
+    }
+
+    watch(Readonly, () => {
+      init()
+    }, {
+      immediate: true
     })
 
     /**
@@ -278,16 +243,13 @@ export default defineComponent({
               position: 'relative',
             }
           }, [
-            withDirectives(h(Spin), [
-              [vShow, loading.value]
-            ]),
-            h(TinyMCE, {
+            h(Spin, {
+              style: {
+                display: loading.value ? undefined : 'none',
+              }
+            }),
+            h('textarea', {
               id: tinymceId.value,
-              init: Init.value,
-              apiKey: ApiKey.value,
-              disabled: Disabled.value,
-              modelValue: props.modelValue,
-              ...Attrs.value,
             })
           ])
           :
@@ -305,14 +267,9 @@ export default defineComponent({
                 { name: 'show', value: loading.value },
               ]
             }),
-            h(TinyMCE, {
-              props: {
+            h('textarea', {
+              attrs: {
                 id: tinymceId.value,
-                init: Init.value,
-                apiKey: ApiKey.value,
-                disabled: Disabled.value,
-                value: props.value,
-                ...attrs,
               },
               on: {
                 'input': (value: string | undefined | null) => {emit('input', value)}

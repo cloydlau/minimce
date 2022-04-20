@@ -1,7 +1,7 @@
 <template>
   <el-dialog
     title="插入小程序页面链接"
-    v-model="show"
+    :visible.sync="show"
     :close-on-click-modal="false"
     append-to-body
     destroy-on-close
@@ -51,7 +51,7 @@ function getInitialData () {
 
 export default {
   props: {
-    currentEditor: {
+    editor: {
       required: true,
     }
   },
@@ -91,7 +91,7 @@ export default {
       }
     },
     insert () {
-      this.currentEditor.insertContent(this.tag)
+      this.editor.insertContent(this.tag)
       this.show = false
     }
   }

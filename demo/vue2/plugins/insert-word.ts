@@ -2,7 +2,7 @@ import mammoth from 'mammoth/mammoth.browser.min.js'
 import 'cozyalert/dist/style.css'
 import Swal, { confirm } from 'cozyalert'
 
-export default currentEditor => confirm({
+export default editor => confirm({
   input: 'file',
   inputAttributes: {
     placeholder: '将 docx 文件拖到此处',
@@ -44,7 +44,7 @@ export default currentEditor => confirm({
         results.map(result => {
           const { status, value, reason } = result
           if (status === 'fulfilled') {
-            currentEditor.insertContent(value)
+            editor.insertContent(value)
           } else {
             if (reason) {
               if (typeof reason === 'string') {
