@@ -26,7 +26,7 @@ vue.config.js
 babel.config.js
 .browserslistrc
 tsconfig.json
-.env.development
+.env.*
 /preview*.*
 demo/
 coverage/
@@ -41,5 +41,5 @@ windi.config.ts
 /dist/favicon.ico
 /pnpm-lock.yaml
 /scripts/
-/vue2demo/
-/vue3demo/
+/*.config.ts
+/*.config.js

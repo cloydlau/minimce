@@ -8,6 +8,7 @@ const Vue3 = path.join(__dirname, '../node_modules/vue3')*/
 const execa = require('execa')
 const run = (bin, args, opts = {}) =>
   execa(bin, args, { stdio: 'inherit', ...opts })
+const { dependencies, devDependencies } = require('../package.json')
 
 const vue3Deps = [
   '@vitejs/plugin-vue',
@@ -25,21 +26,26 @@ const currentVersion = require('vue').version
 
 useVueVersion(targetVersion)
 
+async function removeDeps (deps) {
+  const depsInstalled = deps.filter(dep => dep in devDependencies || dep in dependencies)
+  await run('pnpm', ['remove', ...depsInstalled, '-D'])
+}
+
 async function useVueVersion (targetVersion) {
   if (
     (currentVersion.startsWith('2.') || currentVersion.substring(1).startsWith('2.')) &&
     targetVersion === 3
   ) {
-    await run('pnpm', ['remove', ...vue2Deps, '-D'])
+    await removeDeps(vue2Deps)
     await run('pnpm', ['add', ...vue3Deps, '-D'])
-    await run('pnpm', ['add', 'vue@latest', '@vue/test-utils@2', '-D'])
+    await run('pnpm', ['add', 'vue@latest', '@vue/test-utils@latest', '-D'])
     await run('npx', ['vue-demi-switch', '3'])
     console.warn('Vue 版本已切换至 3')
   } else if (
     (currentVersion === 'latest' || currentVersion.startsWith('3.') || currentVersion.substring(1).startsWith('3.')) &&
     targetVersion === 2
   ) {
-    await run('pnpm', ['remove', ...vue3Deps, '-D'])
+    await removeDeps(vue3Deps)
     await run('pnpm', ['add', ...vue2Deps, '-D'])
     await run('pnpm', ['add', 'vue@2', '@vue/test-utils@1', '-D'])
     await run('npx', ['vue-demi-switch', '2'])
