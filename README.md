@@ -1,6 +1,18 @@
 # MiniMCE
 
-[TinyMCE](https://github.com/tinymce/tinymce) 离线版，更好的 Vue 封装。
+可离线使用的 [TinyMCE](https://github.com/tinymce/tinymce) Vue 封装。
+
+<hr>
+
+是的，TinyMCE 已经有官方的 Vue 封装 [tinymce-vue](https://github.com/tinymce/tinymce-vue) 了，但它：
+
+- 需要通过网络加载资源，外网会很慢，甚至超时
+- 用不同的版本号来支持不同的 Vue 版本，升级 / 切换成本较高
+- 默认功能最小化，需要繁杂的配置，且没有中文文档
+- 只读模式和禁用模式没区别，没有真正意义上的只读模式
+- 不支持全局参数（需要配置自定义插件时，全局参数会很有用）
+
+于是，MiniMCE 诞生了 🎉
 
 <br>
 
@@ -8,8 +20,7 @@
 
 - 基于 TinyMCE 6（2022 最新版）
 - 可离线使用，无网络延迟
-- Vue 2 & Vue 3 通用（API、版本号均一致）
-    - [tinymce-vue](https://github.com/tinymce/tinymce-vue) 分成了两个不同的版本，切换成本高
+- Vue 2 & Vue 3 通用
 - 默认开启插件全家桶，功能全面
 - 提供常用自定义插件示例
     - 插入 Word 文档（.docx），兼容 Microsoft Office、WPS
@@ -19,6 +30,7 @@
     - 插入电话链接
     - 插入小程序页面链接
 - 支持浅色模式 & 深色模式，主题、图标、内容样式均可自定义
+- 提供只读模式（与禁用模式不同）
 - 全局或局部引入，参数支持全局或局部配置（[vue-global-config](https://github.com/cloydlau/vue-global-config.git) 提供技术支持）
 
 <br>
