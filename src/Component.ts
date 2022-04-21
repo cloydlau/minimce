@@ -4,7 +4,7 @@ import {
   defineComponent,
   ref,
   computed,
-  inject,
+  onMounted,
   watch,
   nextTick,
   onUnmounted,
@@ -82,14 +82,12 @@ export default defineComponent({
   },
   setup (props, { attrs, expose, emit }) {
     const loading = ref(true)
-    const syncingValue = ref(false)
     const tinymceId = ref('minimce-' + uuidv4())
-    const elForm = inject('elForm', { disabled: false })
 
     /**
      * props & attrs
      */
-    const Readonly = computed(() => conclude([props.readonly, globalProps.readonly, Boolean(elForm.disabled)], {
+    const Readonly = computed(() => conclude([props.readonly, globalProps.readonly], {
       name: 'readonly',
       type: 'boolean'
     }))
@@ -97,7 +95,7 @@ export default defineComponent({
       name: 'apiKey',
       type: 'string'
     }))
-    const Disabled = computed(() => conclude([props.disabled, globalProps.disabled, Boolean(elForm.disabled)], {
+    const Disabled = computed(() => conclude([props.disabled, globalProps.disabled], {
       name: 'disabled',
       type: 'boolean',
     }))
@@ -147,23 +145,27 @@ export default defineComponent({
       toolbar_sticky: true,
       //extended_valid_elements: 'img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name|referrerpolicy=no-referrer]',
       init_instance_callback: editor => {
-        loading.value = false
-      },
-      setup: editor => {
+        watch(Readonly, n => {
+          if (n) {
+            editor.destroy()
+          } else {
+            nextTick(() => {
+              tinymce.init({
+                selector: '#' + tinymceId.value,
+                ...Options.value,
+              })
+            })
+          }
+        })
+
         watch(Disabled, (n) => {
-          setTimeout(() => {
-            editor.ui.setEnabled(!n)
-          }, 0)
+          editor.ui.setEnabled(!n)
         }, {
           immediate: true
         })
 
         watch(() => isVue3 ? props.modelValue : props.value, n => {
-          if (syncingValue.value) {
-            syncingValue.value = false
-          } else {
-            editor.setContent(n)
-          }
+          editor.setContent(n)
         }, {
           immediate: true,
         })
@@ -171,8 +173,7 @@ export default defineComponent({
         const eventName = isVue3 ? 'update:modelValue' : 'input'
 
         const onChange = throttle(() => {
-          syncingValue.value = true
-          emit(eventName, editor.getContent({ format: Options.outputFormat }))
+          emit(eventName, editor.getContent({ format: Options.value.outputFormat }))
         }, 500, {
           leading: false,
           trailing: true
@@ -184,10 +185,11 @@ export default defineComponent({
          * 销毁时清空数据
          */
         onUnmounted(() => {
-          // 判空原因：HMR 报错
           editor.setContent('')
         })
-      }
+
+        loading.value = false
+      },
     }], {
       camelCase: false,
       mergeFunction: (globalFunction: Function, defaultFunction: Function) => (...args: any) => {
@@ -198,23 +200,11 @@ export default defineComponent({
       type: 'object',
     }))
 
-    function init () {
-      if (Readonly.value) {
-        tinymce.remove('#' + tinymceId.value)
-      } else {
-        nextTick(() => {
-          tinymce.init({
-            selector: '#' + tinymceId.value,
-            ...Options.value,
-          })
-        })
-      }
-    }
-
-    watch(Readonly, () => {
-      init()
-    }, {
-      immediate: true
+    onMounted(() => {
+      tinymce.init({
+        selector: '#' + tinymceId.value,
+        ...Options.value,
+      })
     })
 
     /**
@@ -224,57 +214,60 @@ export default defineComponent({
       expose({ tinymceId })
     }
 
-    return () =>
+    return () => isVue3 ?
+      /**
+       * Vue 3 模板
+       */
       Readonly.value ?
-        /**
-         * 只读状态
-         */
         h('div', {
-          class: 'minimce-readonly',
+          key: 'minimce-readonly', // 不加 key 的话，在切换只读状态时会有问题
           innerHTML: props.modelValue
         }) :
-        isVue3 ?
-          /**
-           * Vue 3 模板
-           */
-          h('div', {
+        h('div', {
+          key: 'minimce-textarea',
+          style: {
+            height: '500px',
+            position: 'relative',
+          },
+        }, [
+          h(Spin, {
             style: {
-              height: '500px',
-              position: 'relative',
+              display: loading.value ? undefined : 'none',
             }
-          }, [
-            h(Spin, {
-              style: {
-                display: loading.value ? undefined : 'none',
-              }
-            }),
-            h('textarea', {
+          }),
+          h('textarea', {
+            id: tinymceId.value,
+          })
+        ])
+      :
+      /**
+       * Vue 2 模板
+       */
+      Readonly.value ?
+        h('div', {
+          key: 'minimce-readonly',
+          innerHTML: props.value
+        }) :
+        h('div', {
+          key: 'minimce-textarea',
+          style: {
+            height: '500px',
+            position: 'relative',
+          }
+        }, [
+          h(Spin, {
+            directives: [
+              { name: 'show', value: loading.value },
+            ]
+          }),
+          h('textarea', {
+            attrs: {
               id: tinymceId.value,
-            })
-          ])
-          :
-          /**
-           * Vue 2 模板
-           */
-          h('div', {
-            style: {
-              height: '500px',
-              position: 'relative',
-            }
-          }, [
-            h(Spin, {
-              directives: [
-                { name: 'show', value: loading.value },
-              ]
-            }),
-            h('textarea', {
-              attrs: {
-                id: tinymceId.value,
-              },
-              on: {
-                'input': (value: string | undefined | null) => {emit('input', value)}
-              },
-            })
-          ])
+            },
+            on: {
+              'input': (value: string | undefined | null) => {emit('input', value)}
+            },
+          })
+        ])
   },
 })

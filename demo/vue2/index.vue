@@ -1,24 +1,36 @@
 <template>
   <div>
-    <MiniMCE
-      v-model="value"
-      v-bind="props"
-    />
+    <el-form :model="data" disabled ref="formRef">
+      <el-form-item prop="value" required>
+        <MiniMCE v-model="data.value" v-bind="props"/>
+      </el-form-item>
+    </el-form>
 
-    <br>
-    <button @click="value='<p>123</p><p>123</p>'">编程式设值</button>
-    <button @click="value=''">清空</button>
+    <p>
+      <button @click="data.value='<p>123</p><p>123</p>'">编程式设值</button>
+      <button @click="data.value=''">清空</button>
+      <button @click="() => { $refs.formRef.validate() }">校验</button>
+    </p>
 
-    <p>{{ value }}</p>
-    <p>{{ props }}</p>
+    <p>
+      <JsonEditorVue v-model="data.value"/>
+    </p>
+    <p>
+      <JsonEditorVue v-model="props"/>
+    </p>
   </div>
 </template>
 
 <script>
+import JsonEditorVue from 'json-editor-vue'
+
 export default {
+  components: { JsonEditorVue },
   data () {
     return {
-      value: '初始值',
+      data: {
+        value: '初始值',
+      },
       props: {
         readonly: false,
         disabled: false,

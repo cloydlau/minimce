@@ -9,7 +9,7 @@
 - 基于 TinyMCE 6（2022 最新版）
 - 可离线使用，无网络延迟
 - Vue 2 & Vue 3 通用（API、版本号均一致）
-    - [tinymce-vue](https://github.com/tinymce/tinymce-vue) 分成了两个不同的版本，切换成本较高
+    - [tinymce-vue](https://github.com/tinymce/tinymce-vue) 分成了两个不同的版本，切换成本高
 - 默认开启插件全家桶，功能全面
 - 提供常用自定义插件示例
     - 插入 Word 文档（.docx），兼容 Microsoft Office、WPS
@@ -19,9 +19,6 @@
     - 插入电话链接
     - 插入小程序页面链接
 - 支持浅色模式 & 深色模式，主题、图标、内容样式均可自定义
-- 输入节流处理，更好的性能
-- 适配 [element-plus](https://github.com/element-plus/element-plus) & [element-ui](https://github.com/ElemeFE/element)
-  （只读状态默认跟随 `el-form`）
 - 全局或局部引入，参数支持全局或局部配置（[vue-global-config](https://github.com/cloydlau/vue-global-config.git) 提供技术支持）
 
 <br>
