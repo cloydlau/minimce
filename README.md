@@ -120,13 +120,13 @@ export default {
 
 ## 参数
 
-| 名称              | 说明                       | 类型                                                                 | 可选值 | 默认值     |
-|-----------------|--------------------------|--------------------------------------------------------------------| --- |---------|
-| v-model / value | HTML 格式的绑定值              | string                                                             | |         |
-| apiKey          | TinyMCE API key          | string                                                             | https://www.tiny.cloud/auth/signup/ |         |
-| disabled        | 是否禁用（禁用模式不可编辑，保留工具栏）     | boolean                                                            | | `false` |
-| readonly        | 是否只读（只读模式仅展示 HTML，相当于预览） | boolean                                                            | | `false` |
-| options            | TinyMCE 配置               | object                                                             | https://www.tiny.cloud/docs/configure/ | https://github.com/cloydlau/minimce/blob/master/src/MiniMCE.ts        |
+| 名称              | 说明                       | 类型                                                                 | 可选值 | 默认值                                                              |
+|-----------------|--------------------------|--------------------------------------------------------------------| --- |------------------------------------------------------------------|
+| v-model / value | HTML 格式的绑定值              | string                                                             | |                                                                  |
+| apiKey          | TinyMCE API key          | string                                                             | https://www.tiny.cloud/auth/signup/ |                                                                  |
+| disabled        | 是否禁用（禁用模式不可编辑，保留工具栏）     | boolean                                                            | | `false`                                                          |
+| readonly        | 是否只读（只读模式仅展示 HTML，相当于预览） | boolean                                                            | | `false`                                                          |
+| options            | TinyMCE 配置               | object                                                             | https://www.tiny.cloud/docs/configure/ | https://github.com/cloydlau/minimce/blob/master/src/Component.ts |
 
 <br>
 
