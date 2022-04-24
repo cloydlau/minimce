@@ -42,7 +42,7 @@
 ### Vue 3
 
 ```bash
-npm add minimce
+npm add minimce tinymce
 ```
 
 #### 全局引入
@@ -82,7 +82,7 @@ import MiniMCE from 'minimce'
 ### Vue 2
 
 ```bash
-npm add minimce @vue/composition-api
+npm add minimce tinymce @vue/composition-api
 ```
 
 #### 全局引入

@@ -80,7 +80,7 @@ export default defineComponent({
     apiKey: {},
     options: {},
   },
-  setup (props, { attrs, expose, emit }) {
+  setup: (props, { expose, emit }) => {
     const loading = ref(true)
     const tinymceId = ref('minimce-' + uuidv4())
 
