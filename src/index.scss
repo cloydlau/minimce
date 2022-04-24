@@ -15,7 +15,7 @@
 }*/
 
 .tox-tinymce {
-  border-radius: 2px !important;
+  border-radius: 4px !important;
 }
 
 // todo: 此举为了超越 el-dialog 层级，但菜单的隐藏触发方式不是失焦而是外部点击，所以在菜单没有隐藏时打开的嵌套 el-dialog 会被菜单遮挡

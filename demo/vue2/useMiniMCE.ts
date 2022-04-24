@@ -1,17 +1,12 @@
 import MiniMCE from '../../src'
 
 /**
- * 浅色模式
+ * 浅色模式 / 深色模式
+ * '?raw' 是 Vite 语法，如果你使用的是 Webpack，请使用 https://github.com/webpack-contrib/raw-loader
  */
 import 'tinymce/skins/ui/oxide/skin.min.css' // 皮肤
 import contentCSS from 'tinymce/skins/content/default/content.min.css?raw'
 import contentUICSS from 'tinymce/skins/ui/oxide/content.min.css?raw'
-
-// '?raw' 是 Vite 语法，如果你使用的是 Webpack，请使用 https://github.com/webpack-contrib/raw-loader
-
-/**
- * 深色模式
- */
 /*import 'tinymce/skins/ui/oxide-dark/skin.min.css' // 皮肤
 import contentCSS from 'tinymce/skins/content/dark/content.min.css?raw'
 import contentUICSS from 'tinymce/skins/ui/oxide-dark/content.min.css?raw'*/
@@ -63,8 +58,7 @@ export default function (app) {
       content_style: [contentCSS, contentUICSS, contentCustomCSS].join('\n'),
       menu: {
         insert: {
-          items: 'localimage localvideo localaudio tel miniprogrampagelink | image link media docx template codesample inserttable | charmap emoticons hr | pagebreak nonbreaking anchor toc | insertdatetime'
-        },
+          items: 'localimage localvideo localaudio tel miniprogrampagelink docx | image link media template codesample inserttable | charmap emoticons hr | pagebreak nonbreaking anchor toc | insertdatetime'        },
       },
       setup (editor) {
         const insertImage = InsertImage({ editor })

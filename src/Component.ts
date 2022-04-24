@@ -79,7 +79,7 @@ export default defineComponent({
       type: Boolean,
       default: undefined
     },
-    apiKey: {},
+    //apiKey: {},
     options: {},
   },
   setup (props, { expose, emit }) {
@@ -94,10 +94,10 @@ export default defineComponent({
       name: 'readonly',
       type: 'boolean'
     }))
-    const ApiKey = computed(() => conclude([props.apiKey, globalProps.apiKey], {
+    /*const ApiKey = computed(() => conclude([props.apiKey, globalProps.apiKey], {
       name: 'apiKey',
       type: 'string'
-    }))
+    }))*/
     const Disabled = computed(() => conclude([props.disabled, globalProps.disabled], {
       name: 'disabled',
       type: 'boolean',

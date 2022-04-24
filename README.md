@@ -7,6 +7,7 @@
 是的，TinyMCE 已经有官方的 Vue 封装 [tinymce-vue](https://github.com/tinymce/tinymce-vue) 了，但它：
 
 - 需要通过网络加载资源，外网会很慢，甚至超时
+- 有域名检测，部署上线后界面上会弹窗警告
 - 用不同的版本号来支持不同的 Vue 版本，升级 / 切换成本较高
 - 默认功能最小化，需要繁杂的配置，且没有中文文档
 - 只读模式和禁用模式没区别，没有真正意义上的只读模式
@@ -20,6 +21,7 @@
 
 - 基于 TinyMCE 6（2022 最新版）
 - 可离线使用，无网络延迟
+- 无域名检测
 - Vue 2 & Vue 3 通用
 - 默认开启插件全家桶，功能全面
 - 提供常用自定义插件示例
@@ -135,7 +137,6 @@ export default {
 | 名称              | 说明                       | 类型                                                                 | 可选值 | 默认值                                                              |
 |-----------------|--------------------------|--------------------------------------------------------------------| --- |------------------------------------------------------------------|
 | v-model / value | HTML 格式的绑定值              | string                                                             | |                                                                  |
-| apiKey          | TinyMCE API key          | string                                                             | https://www.tiny.cloud/auth/signup/ |                                                                  |
 | disabled        | 是否禁用（禁用模式不可编辑，保留工具栏）     | boolean                                                            | | `false`                                                          |
 | readonly        | 是否只读（只读模式仅展示 HTML，相当于预览） | boolean                                                            | | `false`                                                          |
 | options            | TinyMCE 配置               | object                                                             | https://www.tiny.cloud/docs/configure/ | https://github.com/cloydlau/minimce/blob/master/src/Component.ts#L102 |
@@ -153,6 +154,24 @@ export default {
 - 对于对象类型的参数，局部配置会与全局配置进行合并，同名属性会被局部配置覆盖
 
 <br>
+
+## 域名检测
+
+TinyMCE 有四种价格计划：
+
+- Core（免费）
+- Essential
+- Professional
+- Flexible
+
+如果你没有注册 Tiny 账号、没有在账号设置中注册你项目的域名，当项目部署上线后，界面上会有警告弹出<font color="#dd0000">（即使你使用的是免费的 Core 计划）</font>
+
+TinyMCE 提供了两种加载方式：
+
+- CDN（tinymce-vue 实际上也是在此基础上包了一层）
+- NPM（MiniMCE 采用的方式）: 这种加载方式是不需要提供 api-key 的，所以也就不需要注册账号，参考 [Tiny 官方解释](https://stackoverflow.com/questions/63398432/how-to-use-tinymce-5-api-key-using-npm)
+
+<br> 
 
 ## 内容样式
 
