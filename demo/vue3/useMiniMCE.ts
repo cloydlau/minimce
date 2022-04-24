@@ -126,6 +126,7 @@ export default function (app) {
           }
         })
       },
+      // 用于复制粘贴的图片和 TinyMCE 自带的图片上传
       /*images_upload_handler (blobInfo, success, failure, progress) {
         const loading = Vue.prototype.$loading()
         // img的src为blob或base64时触发
