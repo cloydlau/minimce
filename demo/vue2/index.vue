@@ -1,14 +1,21 @@
 <template>
   <div>
-    <el-form :model="data" disabled ref="formRef">
-      <el-form-item prop="value" required>
-        <MiniMCE v-model="data.value" v-bind="props"/>
-      </el-form-item>
-    </el-form>
+    <el-dialog :visible.sync="showDialog">
+      <el-form :model="data" disabled ref="formRef">
+        <el-form-item prop="value" required>
+          <MiniMCE v-model="data.value" v-bind="props"/>
+        </el-form-item>
+      </el-form>
+
+      <template #footer>
+        <el-button @click="showDialog = false">关 闭</el-button>
+      </template>
+    </el-dialog>
 
     <p>
+      <button @click="showDialog=true">打开对话框</button>
       <button @click="data.value='<p>123</p><p>123</p>'">编程式设值</button>
-      <button @click="data.value=''">清空</button>
+      <button @click="data={}">清空</button>
       <button @click="() => { $refs.formRef.validate() }">校验</button>
     </p>
 
@@ -28,13 +35,14 @@ export default {
   components: { JsonEditorVue },
   data () {
     return {
+      showDialog: true,
       data: {
         value: '初始值',
       },
       props: {
         readonly: false,
         disabled: false,
-        apiKey: import.meta.env.VITE_APP_API_KEY,
+        outputFormat: 'html',
       }
     }
   }

@@ -79,7 +79,7 @@ export default defineComponent({
       type: Boolean,
       default: undefined
     },
-    //apiKey: {},
+    outputFormat: {},
     options: {},
   },
   setup (props, { expose, emit }) {
@@ -94,13 +94,13 @@ export default defineComponent({
       name: 'readonly',
       type: 'boolean'
     }))
-    /*const ApiKey = computed(() => conclude([props.apiKey, globalProps.apiKey], {
-      name: 'apiKey',
-      type: 'string'
-    }))*/
     const Disabled = computed(() => conclude([props.disabled, globalProps.disabled], {
       name: 'disabled',
       type: 'boolean',
+    }))
+    const OutputFormat = computed(() => conclude([props.outputFormat, globalProps.outputFormat], {
+      name: 'outputFormat',
+      type: 'string',
     }))
     const Options = computed(() => conclude([props.options, globalProps.options, {
       /**
@@ -172,16 +172,16 @@ export default defineComponent({
             syncingValue.value = false
             return
           }
-          editor.setContent(n)
+          // 参数必须为 string 类型，否则无效
+          editor.setContent(n || '')
         }, {
           immediate: true,
         })
 
         const eventName = isVue3 ? 'update:modelValue' : 'input'
-
         const onChange = throttle(() => {
           syncingValue.value = true
-          emit(eventName, editor.getContent({ format: Options.value.outputFormat }))
+          emit(eventName, editor.getContent({ format: OutputFormat.value }))
         }, 100, {
           leading: false,
           trailing: true
