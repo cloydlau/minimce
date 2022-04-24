@@ -1,6 +1,6 @@
 {
   "name": "minimce",
-  "version": "0.2.15",
+  "version": "0.3.0-alpha.0",
   "description": "TinyMCE offline version, a better Vue wrapper.",
   "keywords": [
     "tinymce",
@@ -23,7 +23,15 @@
     "type": "git",
     "url": "https://github.com/cloydlau/minimce"
   },
-  "main": "./dist/minimce.umd.min.js",
+  "main": "./dist/minimce.umd.js",
+  "module": "./dist/minimce.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/minimce.es.js",
+      "require": "./dist/minimce.umd.js"
+    },
+    "./dist/style.css": "./dist/style.css"
+  },
   "scripts": {
     "dev": "node scripts/switch-vue.js 3 && vite --config ./vite-vue3.config.ts --open",
     "dev2": "node scripts/switch-vue.js 2 && vite --config ./vite-vue2.config.ts --open",
@@ -57,7 +65,7 @@
   },
   "devDependencies": {
     "@vue/composition-api": "^1.4.9",
-    "@vue/test-utils": "1",
+    "@vue/test-utils": "^1.3.0",
     "chalk": "^4.1.2",
     "element-ui": "^2.15.8",
     "enquirer": "latest",
@@ -71,9 +79,9 @@
     "semver": "latest",
     "typescript": "latest",
     "vite": "latest",
-    "vite-plugin-vue2": "^1.9.3",
+    "vite-plugin-vue2": "latest",
     "vitest": "latest",
-    "vue": "2",
+    "vue": "^2.6.14",
     "vue-template-compiler": "^2.6.14"
   },
   "stackblitz": {
