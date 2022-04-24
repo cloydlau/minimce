@@ -8,11 +8,12 @@ import {
   onMounted,
   watch,
   nextTick,
-  onUnmounted,
   h,
   //vShow, // 不支持 Vue 2
   //withDirectives, // 不支持 Vue 2
-} from 'vue-demi'
+}
+  from 'vue-demi'
+//from '@vue/composition-api'
 import Spin from './components/Spin'
 import { globalProps } from './index'
 import { conclude } from 'vue-global-config'
@@ -65,8 +66,6 @@ import 'tinymce/plugins/emoticons/js/emojis.min'
 import 'tinymce/plugins/save'
 import 'tinymce/plugins/quickbars'
 
-let setupHasBeenCalled = false
-
 export default defineComponent({
   name: 'MiniMCE',
   props: {
@@ -84,15 +83,9 @@ export default defineComponent({
     options: {},
   },
   setup (props, { expose, emit }) {
-    // fix: setup 执行了多次
-    if (setupHasBeenCalled) {
-      return
-    } else {
-      setupHasBeenCalled = true
-    }
-
     const loading = ref(true)
     const tinymceId = ref('minimce-' + uuidv4())
+    const syncingValue = ref(false)
 
     /**
      * props & attrs
@@ -175,6 +168,10 @@ export default defineComponent({
         })
 
         watch(() => isVue3 ? props.modelValue : props.value, n => {
+          if (syncingValue.value) {
+            syncingValue.value = false
+            return
+          }
           editor.setContent(n)
         }, {
           immediate: true,
@@ -183,20 +180,14 @@ export default defineComponent({
         const eventName = isVue3 ? 'update:modelValue' : 'input'
 
         const onChange = throttle(() => {
+          syncingValue.value = true
           emit(eventName, editor.getContent({ format: Options.value.outputFormat }))
-        }, 500, {
+        }, 100, {
           leading: false,
           trailing: true
         })
 
         editor.on('input', onChange)
-
-        /**
-         * 销毁时清空数据
-         */
-        onUnmounted(() => {
-          editor.setContent('')
-        })
 
         loading.value = false
       },
@@ -215,10 +206,6 @@ export default defineComponent({
         selector: '#' + tinymceId.value,
         ...Options.value,
       })
-    })
-
-    onUnmounted(() => {
-      setupHasBeenCalled = false
     })
 
     /**
