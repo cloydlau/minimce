@@ -1,5 +1,5 @@
 <template>
-  <el-dialog v-model="showDialog" destroy-on-close>
+  <el-dialog v-model="showDialog" @closed="data={}">
     <el-form :model="data" disabled ref="formRef">
       <el-form-item prop="value" required>
         <MiniMCE v-model="data.value" v-bind="props"/>
