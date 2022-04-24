@@ -1,6 +1,6 @@
 {
   "name": "minimce",
-  "version": "0.3.0-alpha.1",
+  "version": "0.3.0-alpha.2",
   "description": "Offline TinyMCE Vue wrapper",
   "keywords": [
     "tinymce",
@@ -35,7 +35,7 @@
   "scripts": {
     "dev": "node scripts/switch-vue.js 3 && vite --config ./vite-vue3.config.ts --open",
     "dev2": "node scripts/switch-vue.js 2 && vite --config ./vite-vue2.config.ts --open",
-    "build": "vite build --config ./vite-vue3.config.ts",
+    "build": "vite build",
     "serve": "vite preview",
     "clean": "rd /s /q .\\node_modules",
     "ri": "npm run clean && pnpm i",
@@ -64,25 +64,26 @@
     }
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^2.3.1",
-    "@vue/compiler-sfc": "^3.2.33",
-    "@vue/test-utils": "^2.0.0-rc.21",
+    "@vue/composition-api": "^1.4.9",
+    "@vue/test-utils": "1",
     "chalk": "^4.1.2",
-    "element-plus": "^2.1.10",
+    "element-ui": "^2.15.8",
     "enquirer": "latest",
     "execa": "^4.1.0",
     "jsdom": "latest",
     "json-editor-vue": "latest",
     "mammoth": "latest",
     "minimist": "latest",
-    "qs": "^6.10.3",
+    "qs": "latest",
     "sass": "latest",
     "semver": "latest",
     "tinymce": "latest",
     "typescript": "latest",
     "vite": "latest",
+    "vite-plugin-vue2": "1",
     "vitest": "latest",
-    "vue": "^3.2.33"
+    "vue": "2",
+    "vue-template-compiler": "^2.6.14"
   },
   "stackblitz": {
     "startCommand": "npm run test"

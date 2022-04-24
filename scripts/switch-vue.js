@@ -28,12 +28,14 @@ useVueVersion(targetVersion)
 
 async function removeDeps (deps) {
   const depsInstalled = deps.filter(dep => dep in devDependencies || dep in dependencies)
-  await run('pnpm', ['remove', ...depsInstalled, '-D'])
+  if (depsInstalled.length) {
+    await run('pnpm', ['remove', ...depsInstalled, '-D'])
+  }
 }
 
 async function useVueVersion (targetVersion) {
   if (
-    (currentVersion.startsWith('2.') || currentVersion.substring(1).startsWith('2.')) &&
+    (currentVersion.startsWith('2') || currentVersion.substring(1).startsWith('2')) &&
     targetVersion === 3
   ) {
     await removeDeps(vue2Deps)
@@ -42,7 +44,7 @@ async function useVueVersion (targetVersion) {
     await run('npx', ['vue-demi-switch', '3'])
     console.warn('Vue 版本已切换至 3')
   } else if (
-    (currentVersion === 'latest' || currentVersion.startsWith('3.') || currentVersion.substring(1).startsWith('3.')) &&
+    (currentVersion === 'latest' || currentVersion.startsWith('3') || currentVersion.substring(1).startsWith('3')) &&
     targetVersion === 2
   ) {
     await removeDeps(vue3Deps)

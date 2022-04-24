@@ -1,49 +1,56 @@
 <template>
   <el-dialog
     title="插入小程序页面链接"
-    :visible.sync="show"
+    :visible="show"
     :close-on-click-modal="false"
     append-to-body
     destroy-on-close
-    @close="show=false"
+    custom-class="custom-dialog"
+    @close="show = false"
   >
-    <el-form ref="formRef" :model="material" label-position="right" label-width="85px">
-      <!--<el-form-item label="目标页面" prop="target" :rules="{required:true,message:'必填项'}">
+    <el-form
+      ref="rowForm"
+      :model="material"
+      label-position="right"
+      label-width="85px"
+    >
+      <el-form-item label="目标页面" prop="target" verify>
 
-      </el-form-item>-->
-      <el-form-item label="链接名称" prop="innerText" :rules="{required:true,message:'必填项'}">
-        <el-input v-model="material.innerText" maxlength="30" show-word-limit/>
       </el-form-item>
-      <transition name="slide-fade">
-        <el-form-item label="链接标签" v-if="tag">
-          <el-input disabled :value="tag"/>
-        </el-form-item>
-      </transition>
+      <el-form-item
+        label="链接名称"
+        prop="innerText"
+        verify
+      >
+        <el-input v-model="material.innerText" maxlength="30" show-word-limit />
+      </el-form-item>
     </el-form>
 
-    <template #footer>
-      <el-button @click="show=false">关 闭</el-button>
-      <el-button type="primary" @click="insert" v-if="tag">确 定</el-button>
-    </template>
+    <div slot="footer" class="dialog-footer">
+      <el-button @click="show = false">关 闭</el-button>
+      <el-button type="primary" @click="insert">确 定</el-button>
+    </div>
   </el-dialog>
 </template>
 
 <script>
 import qs from 'qs'
 
-function getInitialData () {
+function getInitData () {
   return {
     show: false,
     material: {
-      target: {
-        src_type: 'test'
-      },
+      type: '',
+      sourceId: '',
+      sourceName: '',
       innerText: '',
       queryString: true,
-      param: [{
-        key: 'id',
-        value: ''
-      }],
+      param: [
+        {
+          key: 'id',
+          value: ''
+        }
+      ]
     },
     tag: ''
   }
@@ -56,26 +63,15 @@ export default {
     }
   },
   data () {
-    return getInitialData()
+    return getInitData()
   },
   watch: {
-    material: {
-      deep: true,
-      handler (n) {
-        if (this.show) {
-          this.$refs.formRef.validate().then(() => {
-            this.tag = `<a href="${this.material.target.src_type + qs.stringify({ id: this.material.target.id }, { addQueryPrefix: true })}">${this.material.innerText}</a>`
-          })
-        }
-      }
-    },
     show (newVal) {
       if (!newVal) {
-        Object.assign(this.$data, getInitialData())
+        Object.assign(this.$data, getInitData())
       }
     }
   },
-  expose: ['open'],
   methods: {
     open () {
       this.show = true
@@ -91,13 +87,40 @@ export default {
       }
     },
     insert () {
-      this.editor.insertContent(this.tag)
-      this.show = false
+      this.$refs.rowForm.validate(async valid => {
+        if (valid) {
+          let detail = null,
+            innerText = ''
+          if (this.material.type === 'product') {
+            innerText = this.material.sourceName
+            let data = (
+              await this.$POST('', {
+                id: this.material.sourceId
+              })
+            ).data
+            if (data) {
+              detail = data
+            }
+          } else {
+            innerText = this.material.innerText
+          }
+          if (detail) {
+            detail = JSON.stringify(detail)
+          }
+          this.tag = `<a data-type="${
+            this.material.type
+          }" href="${this.material.type +
+            qs.stringify(
+              { id: this.material.sourceId },
+              { addQueryPrefix: true }
+            )}" ${detail && `data-detail='${detail}'`}>${innerText}</a>`
+          this.show = false
+          this.editor.insertContent(this.tag)
+        }
+      })
     }
   }
 }
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

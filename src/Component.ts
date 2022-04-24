@@ -1,4 +1,5 @@
 import './index.scss'
+//const isVue3 = false
 import {
   isVue3,
   defineComponent,
@@ -9,8 +10,8 @@ import {
   nextTick,
   onUnmounted,
   h,
-  vShow, // 不支持 Vue 2
-  withDirectives, // 不支持 Vue 2
+  //vShow, // 不支持 Vue 2
+  //withDirectives, // 不支持 Vue 2
 } from 'vue-demi'
 import Spin from './components/Spin'
 import { globalProps } from './index'
@@ -64,6 +65,8 @@ import 'tinymce/plugins/emoticons/js/emojis.min'
 import 'tinymce/plugins/save'
 import 'tinymce/plugins/quickbars'
 
+let setupHasBeenCalled = false
+
 export default defineComponent({
   name: 'MiniMCE',
   props: {
@@ -80,7 +83,14 @@ export default defineComponent({
     apiKey: {},
     options: {},
   },
-  setup: (props, { expose, emit }) => {
+  setup (props, { expose, emit }) {
+    // fix: setup 执行了多次
+    if (setupHasBeenCalled) {
+      return
+    } else {
+      setupHasBeenCalled = true
+    }
+
     const loading = ref(true)
     const tinymceId = ref('minimce-' + uuidv4())
 
@@ -139,8 +149,8 @@ export default defineComponent({
       convert_urls: false,
       image_advtab: true,
       image_caption: true,
-      // 开启时，出现两个 bug：1. 部分菜单项失效；2. 拖拉拽调整视频大小会错位
-      media_live_embeds: true,
+      // 开启时，出现两个 bug：1. 部分菜单项失效；2. 拖拉拽调整视频大小会错位（该问题在 v6.0 仍在存在）
+      media_live_embeds: false,
       toolbar_mode: 'sliding',
       toolbar_sticky: true,
       //extended_valid_elements: 'img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name|referrerpolicy=no-referrer]',
@@ -159,7 +169,7 @@ export default defineComponent({
         })
 
         watch(Disabled, (n) => {
-          editor.ui.setEnabled(!n)
+          editor.mode.set(n ? 'readonly' : 'design')
         }, {
           immediate: true
         })
@@ -207,6 +217,10 @@ export default defineComponent({
       })
     })
 
+    onUnmounted(() => {
+      setupHasBeenCalled = false
+    })
+
     /**
      * 暴露 tinymceId
      */
@@ -214,14 +228,22 @@ export default defineComponent({
       expose({ tinymceId })
     }
 
-    return () => isVue3 ?
+    return {
+      Readonly,
+      loading,
+      tinymceId,
+    }
+  },
+  render (ctx: any) {
+    // Vue 2 中 ctx 为渲染函数 h
+    return isVue3 ?
       /**
        * Vue 3 模板
        */
-      Readonly.value ?
+      ctx.Readonly ?
         h('div', {
           key: 'minimce-readonly', // 不加 key 的话，在切换只读状态时会有问题
-          innerHTML: props.modelValue
+          innerHTML: ctx.modelValue
         }) :
         h('div', {
           key: 'minimce-textarea',
@@ -232,21 +254,21 @@ export default defineComponent({
         }, [
           h(Spin, {
             style: {
-              display: loading.value ? undefined : 'none',
+              display: ctx.loading ? undefined : 'none',
             }
           }),
           h('textarea', {
-            id: tinymceId.value,
+            id: ctx.tinymceId,
           })
         ])
       :
       /**
        * Vue 2 模板
        */
-      Readonly.value ?
+      this.Readonly ?
         h('div', {
           key: 'minimce-readonly',
-          innerHTML: props.value
+          innerHTML: this.value
         }) :
         h('div', {
           key: 'minimce-textarea',
@@ -257,15 +279,15 @@ export default defineComponent({
         }, [
           h(Spin, {
             directives: [
-              { name: 'show', value: loading.value },
+              { name: 'show', value: this.loading },
             ]
           }),
           h('textarea', {
             attrs: {
-              id: tinymceId.value,
+              id: this.tinymceId,
             },
             on: {
-              'input': (value: string | undefined | null) => {emit('input', value)}
+              'input': (value: string | undefined | null) => {this.$emit('input', value)}
             },
           })
         ])

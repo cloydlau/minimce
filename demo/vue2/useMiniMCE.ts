@@ -51,12 +51,13 @@ const contentCustomCSS = `
  * 自定义插件（非必须）
  */
 import insertWord from './plugins/insert-word'
+import InsertFile from './plugins/InsertFile/index'
+import InsertImage from './plugins/InsertImage/index'
 import InsertMiniProgramPageLink from './plugins/InsertMiniProgramPageLink/index'
 import InsertTel from './plugins/InsertTel/index'
 
 export default function (app) {
   app.use(MiniMCE, {
-    apiKey: '',
     options: {
       language: 'zh_CN',
       content_style: [contentCSS, contentUICSS, contentCustomCSS].join('\n'),
@@ -66,34 +67,32 @@ export default function (app) {
         },
       },
       setup (editor) {
-        /*ImageInsertion.init()
+        const insertImage = InsertImage({ editor })
         editor.ui.registry.addMenuItem('localimage', {
-          text: '图片',
+          text: '本地图片',
           icon: 'image',
           onAction: () => {
-            ImageInsertion.open()
+            insertImage.$children[0].open()
           }
         })
 
-        FileInsertion.init()
+        const insertAudio = InsertFile({ editor, type: 'audio' })
         editor.ui.registry.addMenuItem('localaudio', {
-          text: '音频',
+          text: '本地音频',
           icon: 'arrow-right',
           onAction: () => {
-            FileInsertion.open({
-              type: 'audio'
-            })
+            insertAudio.$children[0].open()
           }
         })
+
+        const insertVideo = InsertFile({ editor, type: 'video' })
         editor.ui.registry.addMenuItem('localvideo', {
-          text: '视频',
+          text: '本地视频',
           icon: 'embed',
           onAction: () => {
-            FileInsertion.open({
-              type: 'video'
-            })
+            insertVideo.$children[0].open()
           }
-        })*/
+        })
 
         editor.ui.registry.addMenuItem('docx', {
           text: 'Word 文档',
@@ -103,16 +102,16 @@ export default function (app) {
           }
         })
 
-        InsertMiniProgramPageLink.mount.call(app, { editor })
+        const insertMiniProgramPageLink = InsertMiniProgramPageLink.call(app, { editor })
         editor.ui.registry.addMenuItem('miniprogrampagelink', {
           text: '小程序页面链接',
           icon: 'link',
           onAction: () => {
-            InsertMiniProgramPageLink.open()
+            insertMiniProgramPageLink.$children[0].open()
           }
         })
 
-        InsertTel.mount.call(app, { editor })
+        const insertTel = InsertTel.call(app, { editor })
         // 菜单图标：
         // 如果官方图标库 https://www.tiny.cloud/docs/advanced/editor-icon-identifiers/ 里没有，
         // 可以自行添加图标 https://www.tiny.cloud/docs/api/tinymce.editor.ui/tinymce.editor.ui.registry/#addicon
@@ -121,7 +120,7 @@ export default function (app) {
           text: '电话号码',
           icon: 'tel',
           onAction: () => {
-            InsertTel.open()
+            insertTel.$children[0].open()
           }
         })
       },

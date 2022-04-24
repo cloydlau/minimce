@@ -2,8 +2,6 @@ import Component from './index.vue'
 import Vue from 'vue'
 //import store from '@/store'
 
-let vm
-
 function mount (props) {
   const el = document.createElement('div')
 
@@ -12,15 +10,13 @@ function mount (props) {
     //store,
   })
 
-  vm = new Constructor({
+  const vm = new Constructor({
     el,
   })
 
   vm.$mount(document.body)
+
+  return vm
 }
 
-function open () {
-  vm.$children[0].open()
-}
-
-export default { mount, open }
+export default mount

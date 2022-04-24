@@ -1,19 +1,18 @@
 <template>
   <el-dialog
-    :visible.sync="show"
+    :visible="show"
     title="插入图片"
     :append-to-body="true"
     :close-on-click-modal="false"
     destroy-on-close
     @close="show=false"
-    width="600px"
   >
     <el-form ref="formRef" :model="formData">
       <el-form-item
         prop="src"
         :rules="{required:true,message:'必填项'}"
       >
-        <Imgpond v-model="formData.src" valueType="array"/>
+<!--        <Imgpond v-model="formData.src" valueType="array"/>-->
       </el-form-item>
     </el-form>
     <div slot="footer">
@@ -24,15 +23,16 @@
 </template>
 
 <script>
-import 'imgpond/dist/style.css'
-import Imgpond from 'imgpond'
-import { eventBus } from '../main'
+//import 'imgpond/dist/style.css'
+//import Imgpond from 'imgpond'
 
 export default {
-  components: { Imgpond },
-  /*props: {
-    show: Boolean,
-  },*/
+  //components: { Imgpond },
+  props: {
+    editor: {
+      required: true,
+    }
+  },
   data () {
     return {
       show: false,
@@ -53,11 +53,14 @@ export default {
     },
   },
   methods: {
+    open () {
+      this.show = true
+    },
     confirm () {
       this.$refs.formRef.validate(valid => {
         if (valid) {
           this.formData.src.map(v => {
-            eventBus.$emit('MiniMCE:insertContent', `<img src=${v}>`)
+            this.editor.insertContent(`<img src=${v}>`)
           })
           this.show = false
         }
@@ -68,5 +71,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+::v-deep .el-dialog {
+  min-width: 600px;
+}
 </style>
