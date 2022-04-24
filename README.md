@@ -21,7 +21,7 @@
 
 - 基于 TinyMCE 6（2022 最新版）
 - 可离线使用，无网络延迟
-- 无域名检测
+- 无域名检测，无弹窗困扰
 - Vue 2 & Vue 3 通用
 - 默认开启插件全家桶，功能全面
 - 提供常用自定义插件示例
@@ -136,7 +136,7 @@ export default {
 
 | 名称              | 说明                       | 类型                                                                 | 可选值 | 默认值                                                              |
 |-----------------|--------------------------|--------------------------------------------------------------------| --- |------------------------------------------------------------------|
-| v-model / value | HTML 格式的绑定值              | string                                                             | |                                                                  |
+| v-model / value | 绑定值              | string                                                             | |                                                                  |
 | disabled        | 是否禁用（禁用模式不可编辑，保留工具栏）     | boolean                                                            | | `false`                                                          |
 | readonly        | 是否只读（只读模式仅展示 HTML，相当于预览） | boolean                                                            | | `false`                                                          |
 | options            | TinyMCE 配置               | object                                                             | https://www.tiny.cloud/docs/configure/ | https://github.com/cloydlau/minimce/blob/master/src/Component.ts#L102 |
@@ -164,12 +164,14 @@ TinyMCE 有四种价格计划：
 - Professional
 - Flexible
 
-如果你没有注册 Tiny 账号、没有在账号设置中注册你项目的域名，当项目部署上线后，界面上会有警告弹出<font color="#dd0000">（即使你使用的是免费的 Core 计划）</font>
+如果没有注册 Tiny 账号、或者没有在账号设置中登记域名，当应用部署上线后，界面上会有警告弹出（<font color="#dd0000">**即使你使用的是免费的 Core 计划**</font>）
+
+> 当然，你可以用 CSS 来屏蔽弹窗，只是不推荐这种方式
 
 TinyMCE 提供了两种加载方式：
 
-- CDN（tinymce-vue 实际上也是在此基础上包了一层）
-- NPM（MiniMCE 采用的方式）: 这种加载方式是不需要提供 api-key 的，所以也就不需要注册账号，参考 [Tiny 官方解释](https://stackoverflow.com/questions/63398432/how-to-use-tinymce-5-api-key-using-npm)
+- CDN（tinymce-vue 采用的方式）: 需要注册账号以提供 `api-key`，并在账号设置中登记所有用到 TinyMCE 的项目域名
+- NPM（minimce 采用的方式）: 没有 `api-key` 参数，所以不需要注册账号、不需要登记域名，参考 [Tiny 官方解释](https://stackoverflow.com/questions/63398432/how-to-use-tinymce-5-api-key-using-npm)
 
 <br> 
 
@@ -195,13 +197,11 @@ TinyMCE 提供了两种加载方式：
 
 ### 插入本地视频
 
-- [Vue 3](https://github.com/cloydlau/minimce/blob/master/demo/vue3/plugins/InsertVideo)
-- [Vue 2](https://github.com/cloydlau/minimce/blob/master/demo/vue2/plugins/InsertVideo)
+- [Vue 2](https://github.com/cloydlau/minimce/blob/master/demo/vue2/plugins/InsertFile)
 
 ### 插入本地音频
 
-- [Vue 3](https://github.com/cloydlau/minimce/blob/master/demo/vue3/plugins/InsertAudio)
-- [Vue 2](https://github.com/cloydlau/minimce/blob/master/demo/vue2/plugins/InsertAudio)
+- [Vue 2](https://github.com/cloydlau/minimce/blob/master/demo/vue2/plugins/InsertFile)
 
 ### 插入电话链接
 

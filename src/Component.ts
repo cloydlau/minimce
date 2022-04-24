@@ -230,7 +230,7 @@ export default defineComponent({
       ctx.Readonly ?
         h('div', {
           key: 'minimce-readonly', // 不加 key 的话，在切换只读状态时会有问题
-          innerHTML: ctx.modelValue
+          innerHTML: ctx.modelValue,
         }) :
         h('div', {
           key: 'minimce-textarea',
@@ -255,7 +255,7 @@ export default defineComponent({
       this.Readonly ?
         h('div', {
           key: 'minimce-readonly',
-          innerHTML: this.value
+          innerHTML: this.value,
         }) :
         h('div', {
           key: 'minimce-textarea',

@@ -9,6 +9,7 @@ const execa = require('execa')
 const run = (bin, args, opts = {}) =>
   execa(bin, args, { stdio: 'inherit', ...opts })
 const { dependencies, devDependencies } = require('../package.json')
+const { prompt } = require('enquirer')
 
 const vue3Deps = [
   '@vitejs/plugin-vue',
@@ -38,6 +39,15 @@ async function useVueVersion (targetVersion) {
     (currentVersion.startsWith('2') || currentVersion.substring(1).startsWith('2')) &&
     targetVersion === 3
   ) {
+    const { yes } = await prompt({
+      type: 'confirm',
+      name: 'yes',
+      message: `是否切换至 Vue 3？`
+    })
+    if (!yes) {
+      return
+    }
+
     await removeDeps(vue2Deps)
     await run('pnpm', ['add', ...vue3Deps, '-D'])
     await run('pnpm', ['add', 'vue@latest', '@vue/test-utils@latest', '-D'])
@@ -47,6 +57,15 @@ async function useVueVersion (targetVersion) {
     (currentVersion === 'latest' || currentVersion.startsWith('3') || currentVersion.substring(1).startsWith('3')) &&
     targetVersion === 2
   ) {
+    const { yes } = await prompt({
+      type: 'confirm',
+      name: 'yes',
+      message: `是否切换至 Vue 2？`
+    })
+    if (!yes) {
+      return
+    }
+
     await removeDeps(vue3Deps)
     await run('pnpm', ['add', ...vue2Deps, '-D'])
     await run('pnpm', ['add', 'vue@2', '@vue/test-utils@1', '-D'])
