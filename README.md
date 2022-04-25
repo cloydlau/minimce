@@ -94,11 +94,11 @@ npm add minimce tinymce @vue/composition-api
 import VCA from '@vue/composition-api'
 Vue.use(VCA)
 
+import 'minimce/dist/style.css'
+import MiniMCE from 'minimce'
 import 'tinymce/skins/ui/oxide/skin.min.css'
 import 'tinymce/themes/silver'
 import 'tinymce/icons/default'
-import 'minimce/dist/style.css'
-import MiniMCE from 'minimce'
 Vue.use(MiniMCE, {
   // 全局配置
 })
@@ -117,11 +117,11 @@ import VCA from '@vue/composition-api'
 
 Vue.use(VCA)
 
+import 'minimce/dist/style.css'
+import MiniMCE from 'minimce'
 import 'tinymce/skins/ui/oxide/skin.min.css'
 import 'tinymce/themes/silver'
 import 'tinymce/icons/default'
-import 'minimce/dist/style.css'
-import MiniMCE from 'minimce'
 
 export default {
   components: { MiniMCE },
