@@ -32,6 +32,7 @@
     - 插入电话链接
     - 插入小程序页面链接
 - 支持浅色模式 & 深色模式，主题、图标、内容样式均可自定义
+- 支持将 HTML 输出为普通文本
 - 提供只读模式（与禁用模式不同）
 - 全局或局部引入，参数支持全局或局部配置（[vue-global-config](https://github.com/cloydlau/vue-global-config.git) 提供技术支持）
 
@@ -50,11 +51,11 @@ npm add minimce tinymce
 #### 全局引入
 
 ```ts
+import 'minimce/dist/style.css'
+import MiniMCE from 'minimce'
 import 'tinymce/skins/ui/oxide/skin.min.css'
 import 'tinymce/themes/silver'
 import 'tinymce/icons/default'
-import 'minimce/dist/style.css'
-import MiniMCE from 'minimce'
 app.use(MiniMCE, {
   // 全局配置
 })
@@ -69,11 +70,11 @@ app.use(MiniMCE, {
 </template>
 
 <script setup>
+import 'minimce/dist/style.css'
+import MiniMCE from 'minimce'
 import 'tinymce/skins/ui/oxide/skin.min.css'
 import 'tinymce/themes/silver'
 import 'tinymce/icons/default'
-import 'minimce/dist/style.css'
-import MiniMCE from 'minimce'
 </script>
 ```
 

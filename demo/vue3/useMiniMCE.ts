@@ -1,5 +1,6 @@
 // import 'minimce/dist/style.css'
 // import MiniMCE from 'minimce'
+import './index.scss'
 import MiniMCE from '../../src'
 
 /**

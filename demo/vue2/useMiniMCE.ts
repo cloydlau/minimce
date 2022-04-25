@@ -1,6 +1,11 @@
+import Vue from 'vue'
+import VCA from '@vue/composition-api'
+Vue.use(VCA)
+
+import './index.scss'
+import MiniMCE from '../../src' // todo: 替换为下面两句
 // import 'minimce/dist/style.css'
 // import MiniMCE from 'minimce'
-import MiniMCE from '../../src'
 
 /**
  * 浅色模式
@@ -58,8 +63,8 @@ import InsertImage from './plugins/InsertImage/index'
 import InsertMiniProgramPageLink from './plugins/InsertMiniProgramPageLink/index'
 import InsertTel from './plugins/InsertTel/index'
 
-export default function (app) {
-  app.use(MiniMCE, {
+export default function () {
+  Vue.use(MiniMCE, {
     options: {
       language: 'zh_CN',
       content_style: [contentCSS, contentUICSS, contentCustomCSS].join('\n'),

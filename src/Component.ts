@@ -255,7 +255,9 @@ export default defineComponent({
       this.Readonly ?
         h('div', {
           key: 'minimce-readonly',
-          innerHTML: this.value,
+          domProps: {
+            innerHTML: this.value,
+          },
         }) :
         h('div', {
           key: 'minimce-textarea',
