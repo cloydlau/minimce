@@ -2,22 +2,26 @@
 
 可离线使用的 [TinyMCE](https://github.com/tinymce/tinymce) Vue 封装。
 
-<hr>
+<br>
+
+## 对比 tinymce-vue
 
 是的，TinyMCE 已经有官方的 Vue 封装 [tinymce-vue](https://github.com/tinymce/tinymce-vue) 了，但它：
 
-- 需要通过网络加载资源，外网会很慢，甚至超时
+- 需要加载超过 380kB 的网络资源，外网会很慢，甚至超时
 - 有域名检测，部署上线后界面上会弹窗警告
 - 用不同的版本号来支持不同的 Vue 版本，升级 / 切换成本较高
 - 默认功能最小化，需要繁杂的配置，且没有中文文档
 - 只读模式和禁用模式没区别，没有真正意义上的只读模式
 - 不支持全局参数（需要配置自定义插件时，全局参数会很有用）
 
-于是，MiniMCE 诞生了 🎉
+![tinymce-vue](./tinymce-vue.png)
 
 <br>
 
 ## 特性
+
+![minimce](./minimce.png)
 
 - 基于 TinyMCE 6（2022 最新版）
 - 可离线使用，无网络延迟
