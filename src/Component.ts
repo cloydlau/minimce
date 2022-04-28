@@ -7,7 +7,6 @@ import {
   computed,
   onMounted,
   watch,
-  nextTick,
   h,
   //vShow, // 不支持 Vue 2
   //withDirectives, // 不支持 Vue 2
@@ -71,10 +70,6 @@ export default defineComponent({
   props: {
     value: String,
     modelValue: String,
-    readonly: {
-      type: Boolean,
-      default: undefined
-    },
     disabled: {
       type: Boolean,
       default: undefined
@@ -82,7 +77,7 @@ export default defineComponent({
     outputFormat: {},
     options: {},
   },
-  setup (props, { expose, emit }) {
+  setup(props, { expose, emit }) {
     const loading = ref(true)
     const tinymceId = ref('minimce-' + uuidv4())
     const syncingValue = ref(false)
@@ -90,10 +85,6 @@ export default defineComponent({
     /**
      * props & attrs
      */
-    const Readonly = computed(() => conclude([props.readonly, globalProps.readonly], {
-      name: 'readonly',
-      type: 'boolean'
-    }))
     const Disabled = computed(() => conclude([props.disabled, globalProps.disabled], {
       name: 'disabled',
       type: 'boolean',
@@ -148,19 +139,6 @@ export default defineComponent({
       toolbar_sticky: true,
       //extended_valid_elements: 'img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name|referrerpolicy=no-referrer]',
       init_instance_callback: editor => {
-        watch(Readonly, n => {
-          if (n) {
-            editor.destroy()
-          } else {
-            nextTick(() => {
-              tinymce.init({
-                selector: '#' + tinymceId.value,
-                ...Options.value,
-              })
-            })
-          }
-        })
-
         watch(Disabled, (n) => {
           editor.mode.set(n ? 'readonly' : 'design')
         }, {
@@ -216,69 +194,53 @@ export default defineComponent({
     }
 
     return {
-      Readonly,
       loading,
       tinymceId,
     }
   },
-  render (ctx: any) {
+  render(ctx: any) {
     // Vue 2 中 ctx 为渲染函数 h
     return isVue3 ?
       /**
        * Vue 3 模板
        */
-      ctx.Readonly ?
-        h('div', {
-          key: 'minimce-readonly', // 不加 key 的话，在切换只读状态时会有问题
-          innerHTML: ctx.modelValue,
-        }) :
-        h('div', {
-          key: 'minimce-textarea',
+      h('div', {
+        style: {
+          height: '500px',
+          position: 'relative',
+        },
+      }, [
+        h(Spin, {
           style: {
-            height: '500px',
-            position: 'relative',
-          },
-        }, [
-          h(Spin, {
-            style: {
-              display: ctx.loading ? undefined : 'none',
-            }
-          }),
-          h('textarea', {
-            id: ctx.tinymceId,
-          })
-        ])
-      :
+            display: ctx.loading ? undefined : 'none',
+          }
+        }),
+        h('textarea', {
+          id: ctx.tinymceId,
+        })
+      ]) :
       /**
        * Vue 2 模板
        */
-      this.Readonly ?
-        h('div', {
-          key: 'minimce-readonly',
-          domProps: {
-            innerHTML: this.value,
+      h('div', {
+        style: {
+          height: '500px',
+          position: 'relative',
+        }
+      }, [
+        h(Spin, {
+          directives: [
+            { name: 'show', value: this.loading },
+          ]
+        }),
+        h('textarea', {
+          attrs: {
+            id: this.tinymceId,
           },
-        }) :
-        h('div', {
-          key: 'minimce-textarea',
-          style: {
-            height: '500px',
-            position: 'relative',
-          }
-        }, [
-          h(Spin, {
-            directives: [
-              { name: 'show', value: this.loading },
-            ]
-          }),
-          h('textarea', {
-            attrs: {
-              id: this.tinymceId,
-            },
-            on: {
-              'input': (value: string | undefined | null) => {this.$emit('input', value)}
-            },
-          })
-        ])
+          on: {
+            'input': (value: string | undefined | null) => { this.$emit('input', value) }
+          },
+        })
+      ])
   },
 })

@@ -12,7 +12,6 @@
 - 有域名检测，会弹窗警告
 - 用不同的版本号来支持不同的 Vue 版本，升级 / 切换成本较高
 - 默认功能最小化，需要繁杂的配置，且没有中文文档
-- 只读模式和禁用模式没区别，没有真正意义上的只读模式
 - 不支持全局参数（配置自定义插件时，全局参数会很有用）
 
 ![tinymce-vue](./tinymce-vue.png)
@@ -37,7 +36,6 @@
     - 插入小程序页面链接
 - 支持浅色模式 & 深色模式，主题、图标、内容样式均可自定义
 - 支持将 HTML 输出为普通文本
-- 提供只读模式（与禁用模式不同）
 - 全局或局部引入，参数支持全局或局部配置（[vue-global-config](https://github.com/cloydlau/vue-global-config.git) 提供技术支持）
 
 <br>
@@ -139,13 +137,12 @@ export default {
 
 ## 参数
 
-| 名称                                           | 说明                       | 类型      | 可选值                                    | 默认值                                                                         |
-|----------------------------------------------|--------------------------|---------|----------------------------------------|-----------------------------------------------------------------------------|
-| v-model | 绑定值                      | string  |                                        |                                                                             |
-| disabled                                     | 是否禁用（禁用模式不可编辑，保留工具栏）     | boolean |                                        | `false`                                                                     |
-| readonly                                     | 是否只读（只读模式仅展示 HTML，相当于预览） | boolean |                                        | `false`                                                                     |
-| outputFormat                                 | 输出格式                     | string  | `'html'` / `'text'`                                     | `'html'`                                                                    |
-| options                                      | TinyMCE 配置               | object  | https://www.tiny.cloud/docs/configure/ | [查看](https://github.com/cloydlau/minimce/blob/master/src/Component.ts#L102) |
+| 名称         | 说明                                        | 类型    | 可选值                                 | 默认值                                                                        |
+| ------------ | ------------------------------------------- | ------- | -------------------------------------- | ----------------------------------------------------------------------------- |
+| v-model      | 绑定值                                      | string  |                                        |                                                                               |
+| disabled     | 是否禁用（禁用模式不可编辑，保留工具栏）    | boolean |                                        | `false`                                                                       |
+| outputFormat | 输出格式                                    | string  | `'html'` / `'text'`                    | `'html'`                                                                      |
+| options      | TinyMCE 配置                                | object  | https://www.tiny.cloud/docs/configure/ | [查看](https://github.com/cloydlau/minimce/blob/master/src/Component.ts#L102) |
 
 <br>
 

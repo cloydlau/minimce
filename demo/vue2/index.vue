@@ -40,7 +40,6 @@ export default {
         value: '初始值',
       },
       props: {
-        readonly: false,
         disabled: false,
         outputFormat: 'html',
       }

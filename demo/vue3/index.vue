@@ -37,7 +37,6 @@ const data = reactive({
   value: '初始值'
 })
 const props = ref({
-  readonly: false,
   disabled: false,
   outputFormat: 'html',
 })
