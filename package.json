@@ -1,6 +1,6 @@
 {
   "name": "minimce",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Offline TinyMCE Vue wrapper",
   "keywords": [
     "tinymce",
