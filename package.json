@@ -14,7 +14,8 @@
     "doc",
     "docx",
     "office",
-    "WYSIWYG"
+    "WYSIWYG",
+    "vue-demi"
   ],
   "author": "cloydlau",
   "license": "MIT",
