@@ -110,6 +110,11 @@ export default defineComponent({
           title: 'Insert',
           items: 'image link media docx template codesample inserttable | charmap emoticons hr | pagebreak nonbreaking anchor | insertdatetime'
         },
+        // 除 code（源代码）功能外均开启
+        tools: {
+          title: 'Tools',
+          items: 'spellchecker spellcheckerlanguage | wordcount'
+        },
       },
       branding: false,
       quickbars_insert_toolbar: false,
