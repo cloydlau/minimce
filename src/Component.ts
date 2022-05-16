@@ -170,8 +170,8 @@ export default defineComponent({
           trailing: true
         })
 
-        editor.on('input', onChange)
-
+        editor.on('change input undo redo', onChange)
+        
         loading.value = false
       },
     }], {
