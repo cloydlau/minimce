@@ -1,8 +1,8 @@
 <template>
-  <el-dialog v-model="showDialog" @closed="data={}">
-    <el-form :model="data" disabled ref="formRef">
-      <el-form-item prop="value" required>
-        <MiniMCE v-model="data.value" v-bind="props"/>
+  <el-dialog v-model="showDialog" @closed="form.data = {}">
+    <el-form :model="form.data" disabled ref="formRef">
+      <el-form-item prop="richtext" required>
+        <MiniMCE v-model="form.data.richtext" v-bind="props" />
       </el-form-item>
     </el-form>
 
@@ -12,18 +12,18 @@
   </el-dialog>
 
   <p>
-    <button @click="showDialog=true">打开对话框</button>
-    <button @click="data.value='<p>123</p><p>123</p>'">编程式设值</button>
-    <button @click="data.value=''">清空</button>
+    <button @click="showDialog = true">打开对话框</button>
+    <button @click="form.data.richtext = '<p>123</p><p>123</p>'">编程式设值</button>
+    <button @click="form.data.richtext = undefined">清空</button>
     <button @click="() => { formRef.validate() }">校验</button>
   </p>
 
   <p>
-    <JsonEditorVue v-model="data.value"/>
+    <JsonEditorVue v-model="form.data.richtext" />
   </p>
 
   <p>
-    <JsonEditorVue v-model="props"/>
+    <JsonEditorVue v-model="props" />
   </p>
 </template>
 
@@ -33,8 +33,10 @@ import JsonEditorVue from 'json-editor-vue'
 
 const formRef = ref()
 const showDialog = ref(true)
-const data = reactive({
-  value: '初始值'
+const form = reactive({
+  data: {
+    richtext: '初始值'
+  }
 })
 const props = ref({
   disabled: false,
