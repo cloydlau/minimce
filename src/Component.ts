@@ -41,14 +41,11 @@ import 'tinymce/plugins/searchreplace'
 import 'tinymce/plugins/autolink'
 import 'tinymce/plugins/autosave'
 import 'tinymce/plugins/directionality'
-import 'tinymce/plugins/code'
 import 'tinymce/plugins/visualblocks'
 import 'tinymce/plugins/visualchars'
 import 'tinymce/plugins/fullscreen'
 import 'tinymce/plugins/image'
 import 'tinymce/plugins/link'
-import 'tinymce/plugins/template'
-import 'tinymce/plugins/codesample'
 import 'tinymce/plugins/table'
 import 'tinymce/plugins/charmap'
 import 'tinymce/plugins/pagebreak'
@@ -64,6 +61,9 @@ import 'tinymce/plugins/emoticons'
 import 'tinymce/plugins/emoticons/js/emojis.min'
 import 'tinymce/plugins/save'
 import 'tinymce/plugins/quickbars'
+//import 'tinymce/plugins/code'
+//import 'tinymce/plugins/codesample'
+//import 'tinymce/plugins/template'
 
 export default defineComponent({
   name: 'MiniMCE',
@@ -98,9 +98,9 @@ export default defineComponent({
        * 默认开启所有免费功能
        * https://www.tiny.cloud/docs/demo/full-featured/
        */
-      plugins: 'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists wordcount textpattern noneditable help charmap quickbars emoticons',
+      plugins: 'print preview paste importcss searchreplace autolink autosave save directionality visualblocks visualchars fullscreen image link media table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists wordcount textpattern noneditable help charmap quickbars emoticons',
       menubar: 'file edit view insert format tools table help',
-      toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
+      toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media link anchor | ltr rtl',
       quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
       contextmenu: 'link image table',
       menu: {
@@ -108,7 +108,7 @@ export default defineComponent({
         // https://www.tiny.cloud/docs/configure/editor-appearance/#examplethetinymcedefaultmenuitems
         insert: {
           title: 'Insert',
-          items: 'image link media docx template codesample inserttable | charmap emoticons hr | pagebreak nonbreaking anchor | insertdatetime'
+          items: 'image link media docx inserttable | charmap emoticons hr | pagebreak nonbreaking anchor | insertdatetime'
         },
         // 除 code（源代码）功能外均开启
         tools: {
