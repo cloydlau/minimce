@@ -55,9 +55,12 @@ npm add minimce tinymce
 ```ts
 import 'minimce/dist/style.css'
 import MiniMCE from 'minimce'
+
+// 需要自行引入，以便对皮肤、主题、图标进行更换
 import 'tinymce/skins/ui/oxide/skin.min.css'
 import 'tinymce/themes/silver'
 import 'tinymce/icons/default'
+
 app.use(MiniMCE, {
   // 全局配置
 })
@@ -74,6 +77,8 @@ app.use(MiniMCE, {
 <script setup>
 import 'minimce/dist/style.css'
 import MiniMCE from 'minimce'
+
+// 需要自行引入，以便对皮肤、主题、图标进行更换
 import 'tinymce/skins/ui/oxide/skin.min.css'
 import 'tinymce/themes/silver'
 import 'tinymce/icons/default'
@@ -98,9 +103,12 @@ Vue.use(VCA)
 
 import 'minimce/dist/style.css'
 import MiniMCE from 'minimce'
+
+// 需要自行引入，以便对皮肤、主题、图标进行更换
 import 'tinymce/skins/ui/oxide/skin.min.css'
 import 'tinymce/themes/silver'
 import 'tinymce/icons/default'
+
 Vue.use(MiniMCE, {
   // 全局配置
 })
@@ -116,11 +124,12 @@ Vue.use(MiniMCE, {
 
 <script>
 import VCA from '@vue/composition-api'
-
 Vue.use(VCA)
 
 import 'minimce/dist/style.css'
 import MiniMCE from 'minimce'
+
+// 需要自行引入，以便对皮肤、主题、图标进行更换
 import 'tinymce/skins/ui/oxide/skin.min.css'
 import 'tinymce/themes/silver'
 import 'tinymce/icons/default'
@@ -137,12 +146,12 @@ export default {
 
 ## 参数
 
-| 名称         | 说明                                        | 类型    | 可选值                                 | 默认值                                                                        |
-| ------------ | ------------------------------------------- | ------- | -------------------------------------- | ----------------------------------------------------------------------------- |
-| v-model      | 绑定值                                      | string  |                                        |                                                                               |
-| disabled     | 是否禁用（禁用模式不可编辑，保留工具栏）    | boolean |                                        | `false`                                                                       |
-| outputFormat | 输出格式                                    | string  | `'html'` / `'text'`                    | `'html'`                                                                      |
-| options      | TinyMCE 配置                                | object  | https://www.tiny.cloud/docs/configure/ | [查看](https://github.com/cloydlau/minimce/blob/master/src/Component.ts#L102) |
+| 名称         | 说明                                     | 类型    | 可选值                                 | 默认值                                                                        |
+| ------------ | ---------------------------------------- | ------- | -------------------------------------- | ----------------------------------------------------------------------------- |
+| v-model      | 绑定值                                   | string  |                                        |                                                                               |
+| disabled     | 是否禁用（禁用模式不可编辑，保留工具栏） | boolean |                                        | `false`                                                                       |
+| outputFormat | 输出格式                                 | string  | `'html'` / `'text'`                    | `'html'`                                                                      |
+| options      | TinyMCE 配置                             | object  | https://www.tiny.cloud/docs/configure/ | [查看](https://github.com/cloydlau/minimce/blob/master/src/Component.ts#L102) |
 
 <br>
 
