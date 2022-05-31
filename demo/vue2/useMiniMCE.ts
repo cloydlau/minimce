@@ -70,9 +70,11 @@ export default function () {
       content_style: [contentCSS, contentUICSS, contentCustomCSS].join('\n'),
       menu: {
         insert: {
-          items: 'localimage localvideo localaudio tel miniprogrampagelink docx | image link media template codesample inserttable | charmap emoticons hr | pagebreak nonbreaking anchor toc | insertdatetime'        },
+          title: 'Insert',
+          items: 'localimage localvideo localaudio tel miniprogrampagelink docx | image link media template codesample inserttable | charmap emoticons hr | pagebreak nonbreaking anchor toc | insertdatetime'
+        },
       },
-      setup (editor) {
+      setup(editor) {
         const insertImage = InsertImage({ editor })
         editor.ui.registry.addMenuItem('localimage', {
           text: '本地图片',
@@ -131,37 +133,34 @@ export default function () {
         })
       },
       // 用于复制粘贴的图片和 TinyMCE 自带的图片上传
-      /*images_upload_handler (blobInfo, success, failure, progress) {
-        const loading = Vue.prototype.$loading()
-        // img的src为blob或base64时触发
-        console.log('images_upload_handler', blobInfo)
-        const blob = blobInfo.blob()
-        const file = new File(
-          [blob],
-          blobInfo.filename(),
-          { type: blob.type }
-        )
+      /* images_upload_handler: (blobInfo, progress) =>
+        new Promise((resolve, reject) => {
+          const loading = Vue.prototype.$loading()
+          // img的src为blob或base64时触发
+          console.log('images_upload_handler', blobInfo)
+          const blob = blobInfo.blob()
+          const file = new File(
+            [blob],
+            blobInfo.filename(),
+            { type: blob.type }
+          )
 
-        POST.upload(process.env.VUE_APP_UPLOAD_API, {
-          domainId: 0,
-          dir: 'img',
-          file
-        }, {
-          headers: {
-            'Authorization': process.env.VUE_APP_UPLOAD_API_TOKEN
-          }
-        }).then(res => {
-          if (typeof res.data?.data === 'string') {
-            success(res.data.data)
-          } else {
-            failure(res.data?.message)
-          }
-        }).catch(err => {
-          failure(String(err))
-        }).finally(() => {
-          loading.close()
-        })
-      },*/
+          POST.upload(process.env.VUE_APP_UPLOAD_API, {
+            domainId: 0,
+            dir: 'img',
+            file
+          }).then(res => {
+            if (typeof res.data?.data === 'string') {
+              resolve(res.data.data)
+            } else {
+              reject(res.data?.message)
+            }
+          }).catch(err => {
+            reject(String(err))
+          }).finally(() => {
+            loading.close()
+          })
+        }), */
     }
   })
 }

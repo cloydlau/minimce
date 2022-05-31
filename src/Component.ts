@@ -21,19 +21,11 @@ import { throttle } from 'lodash-es'
 
 import tinymce from 'tinymce/tinymce'
 // languages
-import './assets/5.10.3-128/langs/zh_CN' // https://www.tiny.cloud/get-tiny/language-packages/
-import './assets/5.10.3-128/langs/zh_CN_expansion'
+// 下载地址：https://www.tiny.cloud/get-tiny/language-packages/
+import './langs/zh-Hans'
 // models
 import 'tinymce/models/dom'
 // plugins
-//const plugins = import.meta.globEager('./assets/5.10.3-128/plugins/*/plugin.min.js', { eager: true })
-import './assets/5.10.3-128/plugins/hr/plugin.min'
-import './assets/5.10.3-128/plugins/noneditable/plugin.min'
-import './assets/5.10.3-128/plugins/paste/plugin.min'
-import './assets/5.10.3-128/plugins/print/plugin.min'
-import './assets/5.10.3-128/plugins/textpattern/plugin.min'
-//import './assets/5.10.3-128/plugins/imagetools/plugin.min' // 6.0 移除
-//import './assets/5.10.3-128/plugins/toc/plugin.min' // 6.0 移除
 import 'tinymce/plugins/media'
 import 'tinymce/plugins/preview'
 import 'tinymce/plugins/importcss'
@@ -64,6 +56,8 @@ import 'tinymce/plugins/quickbars'
 //import 'tinymce/plugins/code'
 //import 'tinymce/plugins/codesample'
 //import 'tinymce/plugins/template'
+
+const isSmallScreen = window.matchMedia('(max-width: 1023.5px)').matches
 
 export default defineComponent({
   name: 'MiniMCE',
@@ -96,26 +90,13 @@ export default defineComponent({
     const Options = computed(() => conclude([props.options, globalProps.options, {
       /**
        * 默认开启所有免费功能
-       * https://www.tiny.cloud/docs/demo/full-featured/
+       * https://www.tiny.cloud/docs/tinymce/6/full-featured-open-source-demo/
        */
-      plugins: 'print preview paste importcss searchreplace autolink autosave save directionality visualblocks visualchars fullscreen image link media table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists wordcount textpattern noneditable help charmap quickbars emoticons',
+      plugins: 'preview importcss searchreplace autolink autosave save directionality visualblocks visualchars fullscreen image link media table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons',
       menubar: 'file edit view insert format tools table help',
-      toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media link anchor | ltr rtl',
+      toolbar: 'undo redo | bold italic underline strikethrough | fontfamily fontsize blocks | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
       quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
       contextmenu: 'link image table',
-      menu: {
-        // 默认值：
-        // https://www.tiny.cloud/docs/configure/editor-appearance/#examplethetinymcedefaultmenuitems
-        insert: {
-          title: 'Insert',
-          items: 'image link media docx inserttable | charmap emoticons hr | pagebreak nonbreaking anchor | insertdatetime'
-        },
-        // 除 code（源代码）功能外均开启
-        tools: {
-          title: 'Tools',
-          items: 'spellchecker spellcheckerlanguage | wordcount'
-        },
-      },
       branding: false,
       quickbars_insert_toolbar: false,
       // 默认屏蔽 iframe 原因：
@@ -133,6 +114,11 @@ export default defineComponent({
       //content_css: useDarkMode ? 'dark' : 'default',
 
       autosave_ask_before_unload: false, // 改动后刷新，不再弹 alert
+      autosave_interval: '30s',
+      autosave_prefix: '{path}{query}-{id}-',
+      autosave_restore_when_empty: false,
+      autosave_retention: '2m',
+      //importcss_append: true,
       min_height: 500,
       relative_urls: false,
       convert_urls: false,
@@ -142,6 +128,7 @@ export default defineComponent({
       media_live_embeds: false,
       toolbar_mode: 'sliding',
       toolbar_sticky: true,
+      toolbar_sticky_offset: isSmallScreen ? 102 : 108,
       //extended_valid_elements: 'img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name|referrerpolicy=no-referrer]',
       init_instance_callback: editor => {
         watch(Disabled, (n) => {
@@ -171,7 +158,7 @@ export default defineComponent({
         })
 
         editor.on('change input undo redo', onChange)
-        
+
         loading.value = false
       },
     }], {
