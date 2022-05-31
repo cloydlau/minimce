@@ -8,6 +8,9 @@
     "vue",
     "richtext",
     "rich text",
+    "rich editor",
+    "rich text editor",
+    "rte",
     "editor",
     "word",
     "wps",
@@ -65,11 +68,11 @@
     }
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^2.3.1",
-    "@vue/compiler-sfc": "^3.2.33",
-    "@vue/test-utils": "^2.0.0-rc.21",
+    "@vitejs/plugin-vue": "^2.3.3",
+    "@vue/compiler-sfc": "^3.2.36",
+    "@vue/test-utils": "^2.0.0",
     "chalk": "^4.1.2",
-    "element-plus": "^2.1.11",
+    "element-plus": "2.2.0",
     "enquirer": "latest",
     "execa": "^4.1.0",
     "jsdom": "latest",
@@ -83,7 +86,7 @@
     "typescript": "latest",
     "vite": "latest",
     "vitest": "latest",
-    "vue": "^3.2.33"
+    "vue": "^3.2.36"
   },
   "stackblitz": {
     "startCommand": "npm run test"

@@ -62,8 +62,11 @@ const isSmallScreen = window.matchMedia('(max-width: 1023.5px)').matches
 export default defineComponent({
   name: 'MiniMCE',
   props: {
-    value: String,
-    modelValue: String,
+    ...isVue3 ? {
+      modelValue: String,
+    } : {
+      value: String,
+    },
     disabled: {
       type: Boolean,
       default: undefined
@@ -119,7 +122,7 @@ export default defineComponent({
       autosave_restore_when_empty: false,
       autosave_retention: '2m',
       //importcss_append: true,
-      min_height: 500,
+      height: 500,
       relative_urls: false,
       convert_urls: false,
       image_advtab: true,
@@ -178,9 +181,6 @@ export default defineComponent({
       })
     })
 
-    /**
-     * 暴露 tinymceId
-     */
     if (isVue3) {
       expose({ tinymceId })
     }
