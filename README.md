@@ -151,7 +151,7 @@ export default {
 | v-model      | 绑定值                                   | string  |                                        |                                                                               |
 | disabled     | 是否禁用（禁用模式不可编辑，保留工具栏） | boolean |                                        | `false`                                                                       |
 | outputFormat | 输出格式                                 | string  | `'html'` / `'text'`                    | `'html'`                                                                      |
-| options      | TinyMCE 配置                             | object  | https://www.tiny.cloud/docs/configure/ | [查看](https://github.com/cloydlau/minimce/blob/master/src/Component.ts#L102) |
+| options      | TinyMCE 配置                             | object  | [官方文档](https://www.tiny.cloud/docs/tinymce/6/) | [查看代码](https://github.com/cloydlau/minimce/blob/master/src/Component.ts#L102) |
 
 <br>
 
@@ -289,12 +289,12 @@ app.use(MiniMCE, {
 ### 格式
 
 粘贴的网页内容默认会保留一定的源格式， 启用 PowerPaste
-插件后，对格式的处理将会更加完善。详见 https://www.tiny.cloud/docs/enterprise/system-requirements/#improvedhtmlcleaning
+插件后，对格式的处理将会更加完善。详见 [Improved HTML Cleaning](https://www.tiny.cloud/docs/tinymce/6/powerpaste-support/#improved-html-cleaning)
 
 如需获取纯文本，选中**编辑**-**粘贴为文本**再进行粘贴
 
 **清除格式**按钮得到的<font color="#dd0000">不是</font>纯文本，可以自定义清除效果：
-https://www.tiny.cloud/docs/configure/content-formatting/#removingaformat
+[Removing a format](https://www.tiny.cloud/docs/tinymce/6/content-formatting/#removing-a-format)
 
 <br>
 
