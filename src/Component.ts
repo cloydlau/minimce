@@ -160,7 +160,9 @@ export default defineComponent({
           trailing: true
         })
 
-        editor.on('change input undo redo', onChange)
+        // 为什么不包含 change 事件？
+        // 外部设值时不需要同步
+        editor.on('input undo redo paste drop', onChange)
 
         loading.value = false
       },
