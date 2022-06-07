@@ -160,6 +160,7 @@ export default defineComponent({
           trailing: true
         })
 
+        // 事件列表：https://www.tiny.cloud/docs/tinymce/6/events/#supported-browser-native-events
         // 为什么不包含 change 事件？
         // 外部设值时不需要同步
         editor.on('input undo redo paste drop', onChange)
