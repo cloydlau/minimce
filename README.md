@@ -92,14 +92,16 @@ import 'tinymce/icons/default'
 ### Vue 2
 
 ```bash
-npm add minimce tinymce @vue/composition-api
+# vue@2.6 或更早版本需要额外安装 @vue/composition-api
+npm add minimce tinymce
 ```
 
 #### 全局引入
 
 ```ts
-import VCA from '@vue/composition-api'
-Vue.use(VCA)
+// vue@2.6 或更早版本需要额外安装 @vue/composition-api
+// import VCA from '@vue/composition-api'
+// Vue.use(VCA)
 
 import 'minimce/dist/style.css'
 import MiniMCE from 'minimce'
