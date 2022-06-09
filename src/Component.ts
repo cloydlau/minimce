@@ -17,7 +17,7 @@ import Spin from './components/Spin'
 import { globalProps } from './index'
 import { conclude } from 'vue-global-config'
 import { v4 as uuidv4 } from 'uuid'
-import { throttle } from 'lodash-es'
+import { debounce } from 'lodash-es'
 
 import tinymce from 'tinymce/tinymce'
 // languages
@@ -152,13 +152,10 @@ export default defineComponent({
         })
 
         const eventName = isVue3 ? 'update:modelValue' : 'input'
-        const onChange = throttle(() => {
+        const onChange = debounce(() => {
           syncingValue.value = true
           emit(eventName, editor.getContent({ format: OutputFormat.value }))
-        }, 100, {
-          leading: false,
-          trailing: true
-        })
+        }, 100)
 
         // 事件列表：https://www.tiny.cloud/docs/tinymce/6/events/#supported-browser-native-events
         // 为什么不包含 change 事件？
