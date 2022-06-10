@@ -76,8 +76,10 @@ export default defineComponent({
   },
   setup(props, { expose, emit }) {
     const loading = ref(true)
-    const tinymceId = ref('minimce-' + uuidv4())
+    const id = ref('minimce-' + uuidv4())
+    const tinymceInstance = ref(123)
     const syncingValue = ref(false)
+    const settingContent = ref(false)
 
     /**
      * props & attrs
@@ -134,6 +136,8 @@ export default defineComponent({
       toolbar_sticky_offset: isSmallScreen ? 102 : 108,
       //extended_valid_elements: 'img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name|referrerpolicy=no-referrer]',
       init_instance_callback: editor => {
+        tinymceInstance.value = editor
+
         watch(Disabled, (n) => {
           editor.mode.set(n ? 'readonly' : 'design')
         }, {
@@ -145,6 +149,8 @@ export default defineComponent({
             syncingValue.value = false
             return
           }
+          settingContent.value = true
+          console.log('settingContent')
           // 参数必须为 string 类型，否则无效
           editor.setContent(n || '')
         }, {
@@ -153,14 +159,28 @@ export default defineComponent({
 
         const eventName = isVue3 ? 'update:modelValue' : 'input'
         const onChange = debounce(() => {
+          console.log('onChange')
+          if (settingContent.value) {
+            settingContent.value = false
+            return
+          }
+          console.log('Change')
           syncingValue.value = true
           emit(eventName, editor.getContent({ format: OutputFormat.value }))
         }, 100)
 
-        // 事件列表：https://www.tiny.cloud/docs/tinymce/6/events/#supported-browser-native-events
-        // 为什么不包含 change 事件？
-        // 外部设值时不需要同步
-        editor.on('input undo redo paste drop', onChange)
+        /**
+         * 事件列表：https://www.tiny.cloud/docs/tinymce/6/events/
+         *
+         * SetContent 事件
+         *   触发：undo redo paste drop insertContent resetContent setContent
+         *   不触发：input
+         *
+         * Change 事件
+         *   触发 blur undo paste drop insertContent
+         *   不触发：input redo setContent resetContent
+         */
+        editor.on('input SetContent', onChange)
 
         loading.value = false
       },
@@ -176,18 +196,18 @@ export default defineComponent({
 
     onMounted(() => {
       tinymce.init({
-        selector: '#' + tinymceId.value,
+        selector: '#' + id.value,
         ...Options.value,
       })
     })
 
     if (isVue3) {
-      expose({ tinymceId })
+      expose({ id, tinymceInstance, })
     }
 
     return {
       loading,
-      tinymceId,
+      id,
     }
   },
   render(ctx: any) {
@@ -208,7 +228,7 @@ export default defineComponent({
           }
         }),
         h('textarea', {
-          id: ctx.tinymceId,
+          id: ctx.id,
         })
       ]) :
       /**
@@ -227,7 +247,7 @@ export default defineComponent({
         }),
         h('textarea', {
           attrs: {
-            id: this.tinymceId,
+            id: this.id,
           },
           on: {
             'input': (value: string | undefined | null) => { this.$emit('input', value) }

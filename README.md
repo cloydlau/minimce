@@ -157,6 +157,17 @@ export default {
 
 <br>
 
+## expose
+
+> 仅限 Vue 3，Vue 2 通过 `$refs` 能拿到所有的实例 property
+
+| 名称 | 说明 | 类型 |
+| --- | --- | --- |
+| id | 元素 id | string |
+| tinymceInstance | tinymce 实例 | object |
+
+<br>
+
 ## 参数配置规则
 
 - 双向绑定参数（`v-model` / `modelValue` / `value`）仅支持局部配置
