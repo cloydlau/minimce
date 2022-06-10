@@ -94,7 +94,7 @@ export default defineComponent({
     }))
     const Options = computed(() => conclude([props.options, globalProps.options, {
       /**
-       * 默认开启所有免费功能
+       * 默认开启所有免费插件
        * https://www.tiny.cloud/docs/tinymce/6/full-featured-open-source-demo/
        */
       plugins: 'preview importcss searchreplace autolink autosave save directionality visualblocks visualchars fullscreen image link media table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons',
@@ -144,27 +144,26 @@ export default defineComponent({
           immediate: true
         })
 
+        // 监听外部设值，同步至文本内容
         watch(() => isVue3 ? props.modelValue : props.value, n => {
           if (syncingValue.value) {
             syncingValue.value = false
             return
           }
           settingContent.value = true
-          console.log('settingContent')
           // 参数必须为 string 类型，否则无效
           editor.setContent(n || '')
         }, {
           immediate: true,
         })
 
+        // 监听输入，同步至 value
         const eventName = isVue3 ? 'update:modelValue' : 'input'
         const onChange = debounce(() => {
-          console.log('onChange')
           if (settingContent.value) {
             settingContent.value = false
             return
           }
-          console.log('Change')
           syncingValue.value = true
           emit(eventName, editor.getContent({ format: OutputFormat.value }))
         }, 100)

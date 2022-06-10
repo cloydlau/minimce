@@ -5,6 +5,9 @@
         <MiniMCE v-model="form.data.richtext" v-bind="props" ref="minimce" />
       </el-form-item>
       <el-button-group>
+        <el-button @click="form.data.richtext = '<p>123</p><p>123</p>'">编程式设值
+        </el-button>
+        <el-button @click="form.data.richtext = undefined">清空</el-button>
         <el-button @click="() => {
           minimce.tinymceInstance.insertContent('insertContent')
         }">insertContent</el-button>
@@ -24,12 +27,9 @@
 
   <el-button-group>
     <el-button @click="showDialog = true">打开对话框</el-button>
-    <el-button @click="form.data.richtext = '<p>123</p><p>123</p>'">编程式设值
-    </el-button>
-    <el-button @click="form.data.richtext = undefined">清空</el-button>
     <el-button @click="() => { formRef.validate() }">校验</el-button>
   </el-button-group>
-  
+
   <p>
     <JsonEditorVue v-model="form.data.richtext" />
   </p>
