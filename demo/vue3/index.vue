@@ -1,23 +1,30 @@
 <template>
-  <el-dialog v-model="showDialog" @closed="form.data = {}">
+  <el-dialog v-model="showDialog" @closed="form.data = {}" width="1200px">
     <el-form :model="form.data" ref="formRef">
       <el-form-item prop="richtext" required>
-        <MiniMCE v-model="form.data.richtext" v-bind="props" ref="minimce" />
+        <MiniMCE ref="left" v-model="form.data.richtext" v-bind="props" />
+        <MiniMCE ref="right" />
       </el-form-item>
-      <el-button-group>
-        <el-button @click="form.data.richtext = '<p>123</p><p>123</p>'">编程式设值
-        </el-button>
-        <el-button @click="form.data.richtext = undefined">清空</el-button>
-        <el-button @click="() => {
-          minimce.tinymceInstance.insertContent('insertContent')
-        }">insertContent</el-button>
-        <el-button @click="() => {
-          minimce.tinymceInstance.resetContent('resetContent')
-        }">resetContent</el-button>
-        <el-button @click="() => {
-          minimce.tinymceInstance.setContent('setContent')
-        }">setContent</el-button>
-      </el-button-group>
+      <p>
+        <el-radio-group v-model="radioValue">
+          <el-radio label="active">tinymce.activeEditor</el-radio>
+          <el-radio label="left">左侧的</el-radio>
+          <el-radio label="right">右侧的</el-radio>
+        </el-radio-group>
+      </p>
+      <p>
+        <el-button-group>
+          <el-button @click="() => {
+            targetEditor.insertContent('insertContent')
+          }">insertContent</el-button>
+          <el-button @click="() => {
+            targetEditor.resetContent('resetContent')
+          }">resetContent</el-button>
+          <el-button @click="() => {
+            targetEditor.setContent('setContent')
+          }">setContent</el-button>
+        </el-button-group>
+      </p>
     </el-form>
 
     <template #footer>
@@ -27,6 +34,9 @@
 
   <el-button-group>
     <el-button @click="showDialog = true">打开对话框</el-button>
+    <el-button @click="form.data.richtext = '<p>123</p><p>123</p>'">编程式设值
+    </el-button>
+    <el-button @click="form.data.richtext = undefined">清空</el-button>
     <el-button @click="() => { formRef.validate() }">校验</el-button>
   </el-button-group>
 
@@ -40,11 +50,35 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, nextTick, watch } from 'vue'
 import JsonEditorVue from 'json-editor-vue'
-
+import tinymce from 'tinymce/tinymce'
+setTimeout(() => {
+  console.log(tinymce.activeEditor)
+}, 2000)
 const formRef = ref()
-const minimce = ref()
+const left = ref()
+const right = ref()
+const radioValue = ref('active')
+const targetEditor = ref()
+watch(radioValue, n => {
+  nextTick(() => {
+    switch (n) {
+      case ('active'):
+        targetEditor.value = tinymce.activeEditor
+        break
+      case ('left'):
+        targetEditor.value = tinymce.get((left.value.id))
+        break
+      case ('right'):
+        targetEditor.value = tinymce.get((right.value.id))
+        break
+    }
+  })
+}, {
+  immediate: true
+})
+
 const showDialog = ref(true)
 const form = reactive({
   data: {
@@ -57,7 +91,7 @@ const props = ref({
 })
 </script>
 
-<style>
+<style lang="scss" scoped>
 /*@media (prefers-color-scheme: dark) {
   body {
     filter: invert(1) hue-rotate(180deg);
@@ -67,4 +101,11 @@ const props = ref({
     filter: invert(1) hue-rotate(180deg);
   }
 }*/
+:deep(.el-form-item__content) {
+  gap: 1rem;
+
+  &>div {
+    flex: 1;
+  }
+}
 </style>

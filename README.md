@@ -148,11 +148,11 @@ export default {
 
 ## 参数
 
-| 名称         | 说明                                     | 类型    | 可选值                                 | 默认值                                                                        |
-| ------------ | ---------------------------------------- | ------- | -------------------------------------- | ----------------------------------------------------------------------------- |
-| v-model      | 绑定值                                   | string  |                                        |                                                                               |
-| disabled     | 是否禁用（禁用模式不可编辑，保留工具栏） | boolean |                                        | `false`                                                                       |
-| outputFormat | 输出格式                                 | string  | `'html'` / `'text'`                    | `'html'`                                                                      |
+| 名称         | 说明                                     | 类型    | 可选值                                             | 默认值                                                                            |
+| ------------ | ---------------------------------------- | ------- | -------------------------------------------------- | --------------------------------------------------------------------------------- |
+| v-model      | 绑定值                                   | string  |                                                    |                                                                                   |
+| disabled     | 是否禁用（禁用模式不可编辑，保留工具栏） | boolean |                                                    | `false`                                                                           |
+| outputFormat | 输出格式                                 | string  | `'html'` / `'text'`                                | `'html'`                                                                          |
 | options      | TinyMCE 配置                             | object  | [官方文档](https://www.tiny.cloud/docs/tinymce/6/) | [查看代码](https://github.com/cloydlau/minimce/blob/master/src/Component.ts#L102) |
 
 <br>
@@ -161,10 +161,46 @@ export default {
 
 > 仅限 Vue 3，Vue 2 通过 `$refs` 能拿到所有的实例 property
 
-| 名称 | 说明 | 类型 |
-| --- | --- | --- |
-| id | 元素 id | string |
-| tinymceInstance | tinymce 实例 | object |
+| 名称 | 说明    | 类型   |
+| ---- | ------- | ------ |
+| id   | 元素 id | string |
+
+<br>
+
+## 获取 [TinyMCE Editor](https://www.tiny.cloud/docs/tinymce/6/apis/tinymce.editor/) 实例
+
+### 只有一个实例时
+
+```ts
+import { onMounted } from 'vue'
+import tinymce from 'tinymce/tinymce'
+
+onMounted(() => {
+  console.log(tinymce.activeEditor)  
+})
+```
+
+### 有多个实例时
+
+```vue
+<template>
+  <MiniMCE ref="minimce1" />
+  <MiniMCE ref="minimce2" />
+</template>
+
+<script setup>
+import { ref, onMounted } from 'vue'
+import tinymce from 'tinymce/tinymce'
+
+const minimce1 = ref()
+const minimce2 = ref()
+
+onMounted(() => {
+  console.log(tinymce.get((minimce1.value.id)))
+  console.log(tinymce.get((minimce2.value.id)))
+})
+</script>
+```
 
 <br>
 

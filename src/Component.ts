@@ -77,10 +77,8 @@ export default defineComponent({
   setup(props, { expose, emit }) {
     const loading = ref(true)
     const id = ref('minimce-' + uuidv4())
-    const tinymceInstance = ref(123)
     const syncingValue = ref(false)
     const settingContent = ref(false)
-
     /**
      * props & attrs
      */
@@ -136,8 +134,6 @@ export default defineComponent({
       toolbar_sticky_offset: isSmallScreen ? 102 : 108,
       //extended_valid_elements: 'img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name|referrerpolicy=no-referrer]',
       init_instance_callback: editor => {
-        tinymceInstance.value = editor
-
         watch(Disabled, (n) => {
           editor.mode.set(n ? 'readonly' : 'design')
         }, {
@@ -201,7 +197,7 @@ export default defineComponent({
     })
 
     if (isVue3) {
-      expose({ id, tinymceInstance, })
+      expose({ id })
     }
 
     return {
