@@ -202,6 +202,18 @@ onMounted(() => {
 </script>
 ```
 
+### 在全局配置中获取
+
+```ts
+app.use(MiniMCE, {
+  options: {
+    setup(editor) {
+      console.log(editor)
+    }
+  }
+})
+```
+
 <br>
 
 ## 参数配置规则
