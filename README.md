@@ -14,13 +14,13 @@
 - 默认功能最小化，需要繁杂的配置，且没有中文文档
 - 不支持全局参数（配置自定义插件时，全局参数会很有用）
 
-![tinymce-vue](./tinymce-vue.png)
+![tinymce-vue](https://raw.githubusercontent.com/cloydlau/minimce/master/tinymce-vue.png)
 
 <br>
 
 ## 特性
 
-![minimce](./minimce.png)
+![minimce](https://raw.githubusercontent.com/cloydlau/minimce/master/minimce.png)
 
 - 基于 TinyMCE 6（2022 最新版）
 - 可离线使用，无网络延迟
@@ -334,7 +334,7 @@ app.use(MiniMCE, {
 ```
 
 - 兼容性
-  ![PowerPaste 插件兼容性](./powerpaste-compatibility.png)
+  ![PowerPaste 插件兼容性](https://raw.githubusercontent.com/cloydlau/minimce/master/powerpaste-compatibility.png)
 
 - 受浏览器限制，PowerPaste 插件**无法支持微软 Word 和 Excel 文档所支持的<font color="#dd0000">所有</font>图片类型**
   。举个例子，浏览器禁止以编程方式访问文件系统，所以无法解析文档中使用 `file://` 协议的图片（WPS 使用的就是此协议）。
