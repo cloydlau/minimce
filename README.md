@@ -240,10 +240,15 @@ function onInit2(editor) {
 ```ts
 app.use(MiniMCE, {
   options: {
+    // 方式1
     setup(editor) {
       console.log(editor)
-    }
-  }
+    },
+    // 方式2
+    init_instance_callback(editor) {
+      console.log(editor)
+    },
+  },
 })
 ```
 
