@@ -2,8 +2,10 @@
   <el-dialog v-model="showDialog" @closed="form.data = {}" width="1200px">
     <el-form :model="form.data" ref="formRef">
       <el-form-item prop="richtext" required>
-        <MiniMCE ref="left" v-model="form.data.richtext" v-bind="props" />
-        <MiniMCE ref="right" />
+        <MiniMCE ref="left" v-model="form.data.richtext" v-bind="props" @init="editor => {
+          targetEditor = editor
+        }" />
+        <!-- <MiniMCE ref="right" /> -->
       </el-form-item>
       <p>
         <el-radio-group v-model="radioValue">
@@ -50,33 +52,27 @@
 </template>
 
 <script setup>
-import { ref, reactive, nextTick, watch } from 'vue'
+import { ref, reactive, watch } from 'vue'
 import JsonEditorVue from 'json-editor-vue'
 import tinymce from 'tinymce/tinymce'
-setTimeout(() => {
-  console.log(tinymce.activeEditor)
-}, 2000)
+
 const formRef = ref()
 const left = ref()
 const right = ref()
 const radioValue = ref('active')
 const targetEditor = ref()
 watch(radioValue, n => {
-  nextTick(() => {
-    switch (n) {
-      case ('active'):
-        targetEditor.value = tinymce.activeEditor
-        break
-      case ('left'):
-        targetEditor.value = tinymce.get((left.value.id))
-        break
-      case ('right'):
-        targetEditor.value = tinymce.get((right.value.id))
-        break
-    }
-  })
-}, {
-  immediate: true
+  switch (n) {
+    case ('active'):
+      targetEditor.value = tinymce.activeEditor
+      break
+    case ('left'):
+      targetEditor.value = tinymce.get((left.value.id))
+      break
+    case ('right'):
+      targetEditor.value = tinymce.get((right.value.id))
+      break
+  }
 })
 
 const showDialog = ref(true)

@@ -179,38 +179,59 @@ export default {
 
 <br>
 
+## 事件
+
+| 名称 | 说明                   | 参数                                                                 |
+| ---- | ---------------------- | -------------------------------------------------------------------- |
+| init | [init_instance_callback](https://www.tiny.cloud/docs/tinymce/6/editor-important-options/#init_instance_callback) 执行时 | [editor](https://www.tiny.cloud/docs/tinymce/6/apis/tinymce.editor/) |
+
+<br>
+
 ## 获取 [TinyMCE Editor](https://www.tiny.cloud/docs/tinymce/6/apis/tinymce.editor/) 实例
 
 ### 只有一个实例时
 
-```ts
-import { onMounted } from 'vue'
+```vue
+<template>
+  <MiniMCE ref="minimce" @init="onInit" />
+</template>
+
+<script setup>
+import { ref } from 'vue'
 import tinymce from 'tinymce/tinymce'
 
-onMounted(() => {
-  console.log(tinymce.activeEditor)  
-})
+const minimce1 = ref()
+function onInit(editor) {
+  console.log(editor) // 方式1
+  console.log(tinymce.activeEditor) // 方式2
+  console.log(tinymce.get((minimce.id)) // 方式3
+}
+</script>
 ```
 
 ### 有多个实例时
 
 ```vue
 <template>
-  <MiniMCE ref="minimce1" />
-  <MiniMCE ref="minimce2" />
+  <MiniMCE ref="minimce1" @init="onInit1" />
+  <MiniMCE ref="minimce2" @init="onInit2" />
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import tinymce from 'tinymce/tinymce'
 
 const minimce1 = ref()
-const minimce2 = ref()
+function onInit1(editor) {
+  console.log(editor) // 方式1
+  console.log(tinymce.get((minimce1.id)) // 方式2
+}
 
-onMounted(() => {
-  console.log(tinymce.get((minimce1.value.id)))
-  console.log(tinymce.get((minimce2.value.id)))
-})
+const minimce2 = ref()
+function onInit2(editor) {
+  console.log(editor) // 方式1
+  console.log(tinymce.get((minimce2.id)) // 方式2
+}
 </script>
 ```
 
