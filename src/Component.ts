@@ -140,19 +140,6 @@ export default defineComponent({
           immediate: true
         })
 
-        // 监听外部设值，同步至文本内容
-        watch(() => isVue3 ? props.modelValue : props.value, n => {
-          if (syncingValue.value) {
-            syncingValue.value = false
-            return
-          }
-          settingContent.value = true
-          // 参数必须为 string 类型，否则无效
-          editor.setContent(n || '')
-        }, {
-          immediate: true,
-        })
-
         // 监听输入，同步至 value
         const eventName = isVue3 ? 'update:modelValue' : 'input'
         const onChange = debounce(() => {
@@ -174,8 +161,25 @@ export default defineComponent({
          * Change 事件
          *   触发 blur undo paste drop insertContent
          *   不触发：input redo setContent resetContent
+         * 
+         * 注意：需要先于下方监听 value 执行
          */
         editor.on('input SetContent', onChange)
+
+        // 监听外部设值，同步至文本内容
+        watch(() => isVue3 ? props.modelValue : props.value, n => {
+          if (syncingValue.value) {
+            syncingValue.value = false
+            return
+          }
+          settingContent.value = true
+          // 参数必须为 string 类型，否则无效
+          editor.setContent(n || '')
+        }, {
+          immediate: true,
+        })
+
+        emit('init', editor)
 
         loading.value = false
       },
