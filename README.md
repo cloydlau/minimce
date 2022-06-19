@@ -181,8 +181,8 @@ export default {
 
 ## 事件
 
-| 名称 | 说明                   | 参数                                                                 |
-| ---- | ---------------------- | -------------------------------------------------------------------- |
+| 名称 | 说明                                                                                                                    | 参数                                                                 |
+| ---- | ----------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
 | init | [init_instance_callback](https://www.tiny.cloud/docs/tinymce/6/editor-important-options/#init_instance_callback) 执行时 | [editor](https://www.tiny.cloud/docs/tinymce/6/apis/tinymce.editor/) |
 
 <br>
@@ -202,9 +202,12 @@ import tinymce from 'tinymce/tinymce'
 
 const minimce = ref()
 function onInit(editor) {
-  console.log(editor) // 方式1
-  console.log(tinymce.activeEditor) // 方式2
-  console.log(tinymce.get((minimce.value.id)) // 方式3
+  // 方式1
+  console.log(editor)
+  // 方式2
+  console.log(tinymce.activeEditor)
+  // 方式3
+  console.log(tinymce.get((minimce.value.id))
 }
 </script>
 ```
@@ -223,14 +226,18 @@ import tinymce from 'tinymce/tinymce'
 
 const minimce1 = ref()
 function onInit1(editor) {
-  console.log(editor) // 方式1
-  console.log(tinymce.get((minimce1.value.id)) // 方式2
+  // 方式1
+  console.log(editor)
+  // 方式2
+  console.log(tinymce.get((minimce1.value.id))
 }
 
 const minimce2 = ref()
 function onInit2(editor) {
-  console.log(editor) // 方式1
-  console.log(tinymce.get((minimce2.value.id)) // 方式2
+  // 方式1
+  console.log(editor)
+  // 方式2
+  console.log(tinymce.get((minimce2.value.id))
 }
 </script>
 ```
