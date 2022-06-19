@@ -200,11 +200,11 @@ export default {
 import { ref } from 'vue'
 import tinymce from 'tinymce/tinymce'
 
-const minimce1 = ref()
+const minimce = ref()
 function onInit(editor) {
   console.log(editor) // 方式1
   console.log(tinymce.activeEditor) // 方式2
-  console.log(tinymce.get((minimce.id)) // 方式3
+  console.log(tinymce.get((minimce.value.id)) // 方式3
 }
 </script>
 ```
@@ -224,13 +224,13 @@ import tinymce from 'tinymce/tinymce'
 const minimce1 = ref()
 function onInit1(editor) {
   console.log(editor) // 方式1
-  console.log(tinymce.get((minimce1.id)) // 方式2
+  console.log(tinymce.get((minimce1.value.id)) // 方式2
 }
 
 const minimce2 = ref()
 function onInit2(editor) {
   console.log(editor) // 方式1
-  console.log(tinymce.get((minimce2.id)) // 方式2
+  console.log(tinymce.get((minimce2.value.id)) // 方式2
 }
 </script>
 ```
