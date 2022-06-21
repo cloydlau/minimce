@@ -407,3 +407,11 @@ TinyMCE 的 `urlconverter_callback`、`paste_postprocess` API 不支持异步操
 请自行评估相关风险
 
 <br>
+
+## 菜单漂移 / 菜单消失问题
+
+在 TinyMCE 加载时，如果元素不可见（如 `v-show="false"`），那么在变得可见（如 `v-show="true"`）以后，菜单将无法正确显示，这是菜单的定位机制决定的。
+
+**故不能在 TinyMCE 不可见时进行加载**，比如不能在 TinyMCE 或其父元素上使用 `v-show` 之类的东西，可用 `v-if` 作为替换。
+
+<br>
