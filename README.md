@@ -181,8 +181,8 @@ export default {
 
 ## 事件
 
-| 名称 | 说明                   | 参数                                                                 |
-| ---- | ---------------------- | -------------------------------------------------------------------- |
+| 名称 | 说明                                                                                                                    | 参数                                                                 |
+| ---- | ----------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
 | init | [init_instance_callback](https://www.tiny.cloud/docs/tinymce/6/editor-important-options/#init_instance_callback) 执行时 | [editor](https://www.tiny.cloud/docs/tinymce/6/apis/tinymce.editor/) |
 
 <br>
@@ -200,11 +200,14 @@ export default {
 import { ref } from 'vue'
 import tinymce from 'tinymce/tinymce'
 
-const minimce1 = ref()
+const minimce = ref()
 function onInit(editor) {
-  console.log(editor) // 方式1
-  console.log(tinymce.activeEditor) // 方式2
-  console.log(tinymce.get((minimce.id)) // 方式3
+  // 方式1
+  console.log(editor)
+  // 方式2
+  console.log(tinymce.activeEditor)
+  // 方式3
+  console.log(tinymce.get((minimce.value.id))
 }
 </script>
 ```
@@ -223,14 +226,18 @@ import tinymce from 'tinymce/tinymce'
 
 const minimce1 = ref()
 function onInit1(editor) {
-  console.log(editor) // 方式1
-  console.log(tinymce.get((minimce1.id)) // 方式2
+  // 方式1
+  console.log(editor)
+  // 方式2
+  console.log(tinymce.get((minimce1.value.id))
 }
 
 const minimce2 = ref()
 function onInit2(editor) {
-  console.log(editor) // 方式1
-  console.log(tinymce.get((minimce2.id)) // 方式2
+  // 方式1
+  console.log(editor)
+  // 方式2
+  console.log(tinymce.get((minimce2.value.id))
 }
 </script>
 ```
@@ -398,5 +405,13 @@ TinyMCE 的 `urlconverter_callback`、`paste_postprocess` API 不支持异步操
 技术上是可以解决的，可以通过 nginx 动态代理配合这两个 API 来处理
 
 请自行评估相关风险
+
+<br>
+
+## 菜单漂移 / 菜单消失问题
+
+在 TinyMCE 加载时，如果元素不可见（如 `v-show="false"`），那么在变得可见（如 `v-show="true"`）以后，菜单将无法正确显示，这是菜单的定位机制决定的。
+
+**故不能在 TinyMCE 不可见时进行加载**，比如不能在 TinyMCE 或其父元素上使用 `v-show` 之类的东西，可用 `v-if` 作为替代。
 
 <br>
