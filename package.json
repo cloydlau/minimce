@@ -48,7 +48,8 @@
     "rs": "node scripts/release.js --straightforward",
     "test": "vitest --config ./vitest.config.ts",
     "test2": "vitest --config ./vitest.vue2.config.ts",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "prepare": "husky install"
   },
   "dependencies": {
     "cozyalert": "latest",
@@ -75,6 +76,7 @@
     "element-plus": "latest",
     "enquirer": "latest",
     "execa": "^4.1.0",
+    "husky": "latest",
     "jsdom": "latest",
     "json-editor-vue": "latest",
     "mammoth": "latest",
