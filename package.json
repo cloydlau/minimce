@@ -48,7 +48,17 @@
     "rs": "node scripts/release.js --straightforward",
     "test": "vitest --config ./vitest.config.ts",
     "test2": "vitest --config ./vitest.vue2.config.ts",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write"
+    ],
+    "*.ts?(x)": [
+      "eslint",
+      "prettier --parser=typescript --write"
+    ]
   },
   "dependencies": {
     "cozyalert": "latest",
@@ -68,17 +78,26 @@
     }
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "latest",
+    "@typescript-eslint/parser": "latest",
     "@vitejs/plugin-vue": "^2.3.3",
     "@vue/compiler-sfc": "^3.2.36",
     "@vue/test-utils": "^2.0.0",
     "chalk": "^4.1.2",
     "element-plus": "latest",
     "enquirer": "latest",
+    "eslint": "latest",
+    "eslint-config-prettier": "latest",
+    "eslint-plugin-prettier": "latest",
+    "eslint-plugin-vue": "latest",
     "execa": "^4.1.0",
+    "husky": "latest",
     "jsdom": "latest",
     "json-editor-vue": "latest",
+    "lint-staged": "latest",
     "mammoth": "latest",
     "minimist": "latest",
+    "prettier": "latest",
     "qs": "latest",
     "sass": "latest",
     "semver": "latest",
