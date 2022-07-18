@@ -28,10 +28,10 @@
     "url": "https://github.com/cloydlau/minimce"
   },
   "main": "./dist/minimce.umd.js",
-  "module": "./dist/minimce.es.js",
+  "module": "./dist/minimce.mjs",
   "exports": {
     ".": {
-      "import": "./dist/minimce.es.js",
+      "import": "./dist/minimce.mjs",
       "require": "./dist/minimce.umd.js"
     },
     "./dist/style.css": "./dist/style.css"
