@@ -1,7 +1,14 @@
 {
   "name": "minimce",
   "version": "0.4.5",
+  "private": false,
   "description": "Offline TinyMCE Vue wrapper",
+  "author": "cloydlau",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cloydlau/minimce"
+  },
   "keywords": [
     "tinymce",
     "offline",
@@ -20,22 +27,15 @@
     "WYSIWYG",
     "vue-demi"
   ],
-  "author": "cloydlau",
-  "license": "MIT",
-  "private": false,
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/cloydlau/minimce"
-  },
-  "main": "./dist/minimce.umd.js",
-  "module": "./dist/minimce.mjs",
   "exports": {
     ".": {
-      "import": "./dist/minimce.mjs",
-      "require": "./dist/minimce.umd.js"
+      "require": "./dist/minimce.umd.js",
+      "import": "./dist/minimce.mjs"
     },
     "./dist/style.css": "./dist/style.css"
   },
+  "main": "./dist/minimce.umd.js",
+  "module": "./dist/minimce.mjs",
   "scripts": {
     "dev": "node scripts/switch-vue.js 3 && vite --config ./vite-vue3.config.ts --open",
     "dev2": "node scripts/switch-vue.js 2 && vite --config ./vite-vue2.config.ts --open",
@@ -51,23 +51,6 @@
     "coverage": "vitest run --coverage",
     "prepare": "husky install"
   },
-  "lint-staged": {
-    "*.js": [
-      "prettier --write"
-    ],
-    "*.ts?(x)": [
-      "eslint",
-      "prettier --parser=typescript --write"
-    ]
-  },
-  "dependencies": {
-    "cozyalert": "latest",
-    "kayran": "latest",
-    "lodash-es": "latest",
-    "uuid": "latest",
-    "vue-demi": "latest",
-    "vue-global-config": "latest"
-  },
   "peerDependencies": {
     "tinymce": "^6",
     "vue": "^2.0.0 || >=3.0.0"
@@ -77,19 +60,25 @@
       "optional": true
     }
   },
+  "dependencies": {
+    "cozyalert": "latest",
+    "kayran": "latest",
+    "lodash-es": "latest",
+    "uuid": "latest",
+    "vue-demi": "latest",
+    "vue-global-config": "latest"
+  },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "latest",
-    "@typescript-eslint/parser": "latest",
+    "@antfu/eslint-config": "latest",
     "@vitejs/plugin-vue": "^2.3.3",
     "@vue/compiler-sfc": "^3.2.36",
     "@vue/test-utils": "^2.0.0",
+    "axios": "latest",
+    "axios-shortcut": "latest",
     "chalk": "^4.1.2",
     "element-plus": "latest",
     "enquirer": "latest",
     "eslint": "latest",
-    "eslint-config-prettier": "latest",
-    "eslint-plugin-prettier": "latest",
-    "eslint-plugin-vue": "latest",
     "execa": "^4.1.0",
     "husky": "latest",
     "jsdom": "latest",
@@ -97,7 +86,6 @@
     "lint-staged": "latest",
     "mammoth": "latest",
     "minimist": "latest",
-    "prettier": "latest",
     "qs": "latest",
     "sass": "latest",
     "semver": "latest",
@@ -106,6 +94,11 @@
     "vite": "latest",
     "vitest": "latest",
     "vue": "^3.2.36"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx,vue,md}": [
+      "eslint --fix"
+    ]
   },
   "stackblitz": {
     "startCommand": "npm run test"
