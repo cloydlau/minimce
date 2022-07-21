@@ -69,9 +69,8 @@ app.use(MiniMCE, {
 #### 局部引入
 
 ```vue
-
 <template>
-  <MiniMCE v-bind="{/* 局部配置 */}"/>
+  <MiniMCE v-bind="{/* 局部配置 */}" />
 </template>
 
 <script setup>
@@ -119,14 +118,14 @@ Vue.use(MiniMCE, {
 #### 局部引入
 
 ```vue
-
 <template>
-  <MiniMCE v-bind="{/* 局部配置 */}"/>
+  <MiniMCE v-bind="{/* 局部配置 */}" />
 </template>
 
 <script>
-import VCA from '@vue/composition-api'
-Vue.use(VCA)
+// vue@2.6 或更早版本需要额外安装 @vue/composition-api
+// import VCA from '@vue/composition-api'
+// Vue.use(VCA)
 
 import 'minimce/dist/style.css'
 import MiniMCE from 'minimce'
@@ -207,7 +206,7 @@ function onInit(editor) {
   // 方式2
   console.log(tinymce.activeEditor)
   // 方式3
-  console.log(tinymce.get((minimce.value.id))
+  console.log(tinymce.get((minimce.value.id)))
 }
 </script>
 ```
@@ -229,7 +228,7 @@ function onInit1(editor) {
   // 方式1
   console.log(editor)
   // 方式2
-  console.log(tinymce.get((minimce1.value.id))
+  console.log(tinymce.get((minimce1.value.id)))
 }
 
 const minimce2 = ref()
@@ -237,7 +236,7 @@ function onInit2(editor) {
   // 方式1
   console.log(editor)
   // 方式2
-  console.log(tinymce.get((minimce2.value.id))
+  console.log(tinymce.get((minimce2.value.id)))
 }
 </script>
 ```
@@ -279,7 +278,7 @@ TinyMCE 提供了两种加载方式：
 - CDN（tinymce-vue 采用的方式）: 需要注册账号以提供 `api-key`，并在账号设置中登记所有用到 TinyMCE 的项目域名
 - NPM（minimce 采用的方式）: 没有 `api-key` 参数，所以不需要注册账号、不需要登记域名，参考 [Tiny 官方解释](https://stackoverflow.com/questions/63398432/how-to-use-tinymce-5-api-key-using-npm)
 
-<br> 
+<br>
 
 ## 内容样式
 
@@ -342,7 +341,7 @@ const { POST } = createAxiosShortcut(axios)
 
 app.use(MiniMCE, {
   options: {
-    images_upload_handler (blobInfo, success, failure) {
+    images_upload_handler(blobInfo, success, failure) {
       const blob = blobInfo.blob()
       const file = new File(
         [blob],
@@ -352,13 +351,14 @@ app.use(MiniMCE, {
 
       POST.upload(process.env.VUE_APP_UPLOAD_API, {
         file
-      }).then(res => {
-        if (typeof res.data?.data === 'string') {
+      }).then((res) => {
+        if (typeof res.data?.data === 'string')
           success(res.data.data)
-        } else {
+
+        else
           failure(res.data?.message)
-        }
-      }).catch(err => {
+
+      }).catch((err) => {
         failure(String(err))
       })
     },
