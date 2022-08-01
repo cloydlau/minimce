@@ -37,8 +37,8 @@
   "main": "./dist/minimce.umd.js",
   "module": "./dist/minimce.mjs",
   "scripts": {
-    "dev": "node scripts/switch-vue.js 3 && vite --config ./vite-vue3.config.ts --open",
-    "dev2": "node scripts/switch-vue.js 2 && vite --config ./vite-vue2.config.ts --open",
+    "dev": "deno run --allow-run --allow-read --allow-write ./scripts/switch-vue.js 3 && vite --config ./vite-vue3.config.ts --open",
+    "dev2": "deno run --allow-run --allow-read --allow-write ./scripts/switch-vue.js 2 && vite --config ./vite-vue2.config.ts --open",
     "build": "vite build",
     "serve": "vite preview",
     "clean": "rd /s /q .\\node_modules",
@@ -70,13 +70,11 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "latest",
-    "@vitejs/plugin-vue": "^2.3.3",
-    "@vue/compiler-sfc": "^3.2.36",
-    "@vue/test-utils": "^2.0.0",
+    "@vue/test-utils": "1",
     "axios": "latest",
     "axios-shortcut": "latest",
     "chalk": "^4.1.2",
-    "element-plus": "latest",
+    "element-ui": "^2.15.9",
     "enquirer": "latest",
     "eslint": "latest",
     "execa": "^4.1.0",
@@ -93,7 +91,7 @@
     "typescript": "latest",
     "vite": "latest",
     "vitest": "latest",
-    "vue": "^3.2.36"
+    "vue": "2"
   },
   "lint-staged": {
     "*.{js,ts,tsx,vue,md}": [
