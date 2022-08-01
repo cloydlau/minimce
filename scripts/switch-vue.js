@@ -79,8 +79,6 @@ async function main() {
 
   await run({ cmd: 'pnpm i' })
   await run({ cmd: `npx vue-demi-switch ${targetVersion}` })
-  if (currentVersion !== targetVersion)
-    console.log(`\n%cVue 版本已切换至 ${targetVersion}`, 'color:red;font-weight:bold')
 }
 
 main().catch((e) => {
