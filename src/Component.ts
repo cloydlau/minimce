@@ -1,17 +1,16 @@
 import './index.scss'
-// const isVue3 = false
+
 import {
   computed,
   defineComponent,
   h,
   isVue3,
-  onMounted,
+  nextTick,
   ref,
   watch,
   // vShow, // 不支持 Vue 2
   // withDirectives, // 不支持 Vue 2
 } from 'vue-demi'
-// from '@vue/composition-api'
 import { conclude } from 'vue-global-config'
 import { v4 as uuidv4 } from 'uuid'
 import { debounce } from 'lodash-es'
@@ -231,7 +230,8 @@ export default defineComponent({
       ),
     )
 
-    onMounted(() => {
+    // vue2.6 使用 onMounted 报错
+    nextTick(() => {
       tinymce.init({
         selector: `#${id.value}`,
         ...Options.value,
@@ -284,11 +284,11 @@ export default defineComponent({
         },
         [
           h(Spin, {
-            directives: [{ name: 'show', value: this.loading }],
+            directives: [{ name: 'show', value: this.loading.value }],
           }),
           h('textarea', {
             attrs: {
-              id: this.id,
+              id: this.id.value,
             },
             on: {
               input: (value: string | undefined | null) => {

@@ -37,13 +37,17 @@
   "main": "./dist/minimce.umd.js",
   "module": "./dist/minimce.mjs",
   "scripts": {
-    "dev": "deno run --allow-run --allow-read --allow-write ./scripts/switch-vue.js 3 && vite --config ./vite-vue3.config.ts --open",
-    "dev2": "deno run --allow-run --allow-read --allow-write ./scripts/switch-vue.js 2 && vite --config ./vite-vue2.config.ts --open",
+    "dev": "pnpm switch3 && vite --config ./demo/vue3/vite.config.ts --open",
+    "dev2.7": "pnpm switch2.7 && vite --config ./demo/vue2.7/vite.config.ts --open",
+    "dev2": "pnpm switch2 && vite --config ./demo/vue2/vite.config.ts --open",
+    "switch3": "deno run --allow-run --allow-read --allow-write ./scripts/switch-vue.js 3",
+    "switch2.7": "deno run --allow-run --allow-read --allow-write ./scripts/switch-vue.js 2.7",
+    "switch2": "deno run --allow-run --allow-read --allow-write ./scripts/switch-vue.js 2",
     "build": "vite build",
     "serve": "vite preview",
     "clean": "rd /s /q .\\node_modules",
     "ri": "npm run clean && pnpm i",
-    "u": "node scripts/upgrade.js",
+    "u": "deno run --allow-run scripts/upgrade.js",
     "r": "node scripts/release.js",
     "rs": "node scripts/release.js --straightforward",
     "test": "vitest --config ./vitest.config.ts",
@@ -70,11 +74,9 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "latest",
-    "@vue/test-utils": "1",
     "axios": "latest",
     "axios-shortcut": "latest",
     "chalk": "^4.1.2",
-    "element-ui": "^2.15.9",
     "enquirer": "latest",
     "eslint": "latest",
     "execa": "^4.1.0",
@@ -91,7 +93,12 @@
     "typescript": "latest",
     "vite": "latest",
     "vitest": "latest",
-    "vue": "2"
+    "@vue/composition-api": "latest",
+    "@vue/test-utils": "1",
+    "element-ui": "latest",
+    "vite-plugin-vue2": "latest",
+    "vue": "~2.6",
+    "vue-template-compiler": "~2.6"
   },
   "lint-staged": {
     "*.{js,ts,tsx,vue,md}": [
