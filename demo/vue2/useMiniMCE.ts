@@ -1,9 +1,10 @@
 import Vue from 'vue'
-import VCA from '@vue/composition-api'
-Vue.use(VCA)
 
 import './index.scss'
-import MiniMCE from '../../src' // TODO: 替换为下面两句
+import MiniMCE from '../../src'
+
+/* import VCA from '@vue/composition-api'
+Vue.use(VCA) */
 //import 'minimce/dist/style.css'
 //import MiniMCE from 'minimce'
 //import '../../dist/style.css'

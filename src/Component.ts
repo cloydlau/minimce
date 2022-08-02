@@ -5,8 +5,9 @@ import {
   defineComponent,
   h,
   isVue3,
-  nextTick,
+  onMounted,
   ref,
+  unref,
   watch,
   // vShow, // 不支持 Vue 2
   // withDirectives, // 不支持 Vue 2
@@ -62,11 +63,11 @@ export default defineComponent({
   props: {
     ...(isVue3
       ? {
-          modelValue: String,
-        }
+        modelValue: String,
+      }
       : {
-          value: String,
-        }),
+        value: String,
+      }),
     disabled: {
       type: Boolean,
       default: undefined,
@@ -230,8 +231,7 @@ export default defineComponent({
       ),
     )
 
-    // vue2.6 使用 onMounted 报错
-    nextTick(() => {
+    onMounted(() => {
       tinymce.init({
         selector: `#${id.value}`,
         ...Options.value,
@@ -248,6 +248,7 @@ export default defineComponent({
   },
   render(ctx: any) {
     // Vue 2 中 ctx 为渲染函数 h
+    // this.id 在 vue2.6 中为 ref，vue2.7 中为 id 本身
     return isVue3
       /**
        * Vue 3 模板
@@ -284,11 +285,11 @@ export default defineComponent({
         },
         [
           h(Spin, {
-            directives: [{ name: 'show', value: this.loading.value }],
+            directives: [{ name: 'show', value: unref(this.loading) }],
           }),
           h('textarea', {
             attrs: {
-              id: this.id.value,
+              id: unref(this.id),
             },
             on: {
               input: (value: string | undefined | null) => {
