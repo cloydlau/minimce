@@ -1,14 +1,14 @@
 import Vue from 'vue'
 
-import './index.scss'
-import MiniMCE from '../../src'
-
 /* import VCA from '@vue/composition-api'
 Vue.use(VCA) */
-//import 'minimce/dist/style.css'
-//import MiniMCE from 'minimce'
-//import '../../dist/style.css'
-//import MiniMCE from '../../dist/minimce.mjs'
+
+import './index.scss'
+import MiniMCE from '../../src'
+/* import '../../dist/style.css'
+import MiniMCE from '../../dist/minimce.mjs' */
+/* import 'minimce/dist/style.css'
+import MiniMCE from 'minimce' */
 
 /**
  * 浅色模式
