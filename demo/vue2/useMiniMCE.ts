@@ -3,11 +3,11 @@ import VCA from '@vue/composition-api'
 Vue.use(VCA)
 
 import './index.scss'
-//import MiniMCE from '../../src' // todo: 替换为下面两句
-import '../../dist/style.css' // todo: 替换为下面两句
-import MiniMCE from '../../dist/minimce.mjs' // todo: 替换为下面两句
+import MiniMCE from '../../src' // TODO: 替换为下面两句
 //import 'minimce/dist/style.css'
 //import MiniMCE from 'minimce'
+//import '../../dist/style.css'
+//import MiniMCE from '../../dist/minimce.mjs'
 
 /**
  * 浅色模式

@@ -13,7 +13,7 @@ const deps = {
     '@vitejs/plugin-vue2': 'latest',
     '@vue/test-utils': '1',
     'element-ui': 'latest',
-    'vue': '2',
+    'vue': '^2.7',
   },
   '2': {
     '@vue/composition-api': 'latest',
