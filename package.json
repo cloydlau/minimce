@@ -51,7 +51,6 @@
     "r": "node scripts/release.js",
     "rs": "node scripts/release.js --straightforward",
     "test": "vitest --config ./vitest.config.ts",
-    "test2": "vitest --config ./vitest.vue2.config.ts",
     "coverage": "vitest run --coverage",
     "prepare": "husky install"
   },
