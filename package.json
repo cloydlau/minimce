@@ -47,7 +47,7 @@
     "serve": "vite preview",
     "clean": "rd /s /q .\\node_modules",
     "ri": "npm run clean && pnpm i",
-    "u": "deno run --allow-run scripts/upgrade.js",
+    "u": "deno run --allow-run scripts/u.js",
     "r": "node scripts/release.js",
     "rs": "node scripts/release.js --straightforward",
     "test": "vitest --config ./vitest.config.ts",
