@@ -46,7 +46,7 @@
 
 ### Vue 3
 
-```bash
+```sh
 npm add minimce tinymce
 ```
 
@@ -90,7 +90,7 @@ import 'tinymce/icons/default'
 
 ### Vue 2
 
-```bash
+```sh
 # vue@2.6 或更早版本需要额外安装 @vue/composition-api
 npm add minimce tinymce
 ```
