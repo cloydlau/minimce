@@ -25,7 +25,9 @@
     "docx",
     "office",
     "WYSIWYG",
-    "vue-demi"
+    "vue-demi",
+    "富文本",
+    "离线"
   ],
   "exports": {
     ".": {
