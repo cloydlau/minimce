@@ -32,7 +32,8 @@
   "exports": {
     ".": {
       "require": "./dist/minimce.umd.js",
-      "import": "./dist/minimce.mjs"
+      "import": "./dist/minimce.mjs",
+      "browser": "./dist/minimce.mjs"
     },
     "./dist/style.css": "./dist/style.css"
   },
