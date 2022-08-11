@@ -5,10 +5,7 @@
   "description": "Rich text editor, offline TinyMCE Vue wrapper",
   "author": "cloydlau",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/cloydlau/minimce"
-  },
+  "repository": "https://github.com/cloydlau/minimce",
   "keywords": [
     "tinymce",
     "offline",

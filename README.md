@@ -84,7 +84,7 @@ import 'tinymce/icons/default'
 </script>
 ```
 
-[Vue3完整示例代码](https://github.com/cloydlau/minimce/tree/master/demo/vue3)
+[Vue 3 完整示例代码](https://github.com/cloydlau/minimce/tree/master/demo/vue3)
 
 <br>
 
@@ -141,9 +141,9 @@ export default {
 </script>
 ```
 
-[Vue2.7完整示例代码](https://github.com/cloydlau/minimce/tree/master/demo/vue2.7)
+[Vue 2.7 完整示例代码](https://github.com/cloydlau/minimce/tree/master/demo/vue2.7)
 
-[Vue2.6完整示例代码](https://github.com/cloydlau/minimce/tree/master/demo/vue2)
+[Vue 2.6 完整示例代码](https://github.com/cloydlau/minimce/tree/master/demo/vue2)
 
 <br>
 
