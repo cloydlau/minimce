@@ -54,7 +54,7 @@
   },
   "peerDependencies": {
     "tinymce": "^6",
-    "vue": "^2.0.0 || >=3.0.0"
+    "vue": "^2 || >=3"
   },
   "peerDependenciesMeta": {
     "@vue/composition-api": {
