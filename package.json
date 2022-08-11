@@ -25,12 +25,15 @@
     "docx",
     "office",
     "WYSIWYG",
-    "vue-demi"
+    "vue-demi",
+    "富文本",
+    "离线"
   ],
   "exports": {
     ".": {
       "require": "./dist/minimce.umd.js",
-      "import": "./dist/minimce.mjs"
+      "import": "./dist/minimce.mjs",
+      "browser": "./dist/minimce.mjs"
     },
     "./dist/style.css": "./dist/style.css"
   },
