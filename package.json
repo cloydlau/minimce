@@ -37,6 +37,9 @@
     },
     "./dist/style.css": "./dist/style.css"
   },
+  "files": [
+    "dist"
+  ],
   "main": "./dist/minimce.umd.js",
   "module": "./dist/minimce.mjs",
   "scripts": {
