@@ -2,7 +2,7 @@
   "name": "minimce",
   "version": "0.4.8",
   "private": false,
-  "description": "Offline TinyMCE Vue wrapper",
+  "description": "Rich text editor, offline TinyMCE Vue wrapper",
   "author": "cloydlau",
   "license": "MIT",
   "repository": {

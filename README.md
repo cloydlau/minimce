@@ -1,6 +1,6 @@
 # MiniMCE
 
-可离线使用的 [TinyMCE](https://github.com/tinymce/tinymce) Vue 封装。
+富文本编辑器，可离线使用的 [TinyMCE](https://github.com/tinymce/tinymce) Vue 封装。
 
 <br>
 
