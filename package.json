@@ -5,10 +5,7 @@
   "description": "Rich text editor, offline TinyMCE Vue wrapper",
   "author": "cloydlau",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/cloydlau/minimce"
-  },
+  "repository": "https://github.com/cloydlau/minimce",
   "keywords": [
     "tinymce",
     "offline",
@@ -49,15 +46,16 @@
     "switch3": "cl switchVue 3 --vue2deps \"element-ui\" --vue3deps \"element-plus\"",
     "switch2.7": "cl switchVue 2.7 --vue2deps \"element-ui\" --vue3deps \"element-plus\"",
     "switch2": "cl switchVue 2 --vue2deps \"element-ui\" --vue3deps \"element-plus\"",
-    "build": "vite build",
+    "build": "pnpm switch3 && vite build",
     "serve": "vite preview",
     "test": "vitest --config ./vitest.config.ts",
     "coverage": "vitest run --coverage",
     "prepare": "husky install"
   },
   "peerDependencies": {
-    "tinymce": "^6",
-    "vue": "^2.0.0 || >=3.0.0"
+    "@vue/composition-api": "1",
+    "tinymce": "6",
+    "vue": "2 || 3"
   },
   "peerDependenciesMeta": {
     "@vue/composition-api": {
