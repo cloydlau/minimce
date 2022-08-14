@@ -101,6 +101,7 @@ export default defineComponent({
           props.options,
           globalProps.options,
           {
+            selector: `#${id.value}`,
             /**
              * 默认开启所有免费插件
              * https://www.tiny.cloud/docs/tinymce/6/full-featured-open-source-demo/
@@ -232,10 +233,7 @@ export default defineComponent({
     )
 
     onMounted(() => {
-      tinymce.init({
-        selector: `#${id.value}`,
-        ...Options.value,
-      })
+      tinymce.init(Options.value)
     })
 
     if (isVue3)
