@@ -85,13 +85,11 @@ export default defineComponent({
      */
     const Disabled = computed(() =>
       conclude([props.disabled, globalProps.disabled], {
-        name: 'disabled',
         type: Boolean,
       }),
     )
     const OutputFormat = computed(() =>
       conclude([props.outputFormat, globalProps.outputFormat], {
-        name: 'outputFormat',
         type: String,
       }),
     )
@@ -226,7 +224,6 @@ export default defineComponent({
                 globalFunction(...args)
                 defaultFunction(...args)
               },
-          name: 'options',
           type: Object,
         },
       ),
