@@ -75,8 +75,10 @@
     "@cloydlau/scripts": "latest",
     "@vitejs/plugin-vue": "latest",
     "@vue/compiler-sfc": "latest",
+    "@vue/test-utils": "latest",
     "axios": "latest",
     "axios-shortcut": "latest",
+    "case-police": "latest",
     "element-plus": "latest",
     "eslint": "latest",
     "husky": "latest",
@@ -91,7 +93,6 @@
     "typescript": "latest",
     "vite": "latest",
     "vitest": "latest",
-    "@vue/test-utils": "latest",
     "vue": "latest"
   },
   "lint-staged": {
