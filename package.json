@@ -32,12 +32,14 @@
       "import": "./dist/minimce.mjs",
       "browser": "./dist/minimce.mjs"
     },
-    "./dist/style.css": "./dist/style.css"
+    "./*": "./*"
   },
   "files": [
     "dist"
   ],
   "main": "./dist/minimce.umd.js",
+  "jsdelivr": "./dist/minimce.umd.js",
+  "unpkg": "./dist/minimce.umd.js",
   "module": "./dist/minimce.mjs",
   "scripts": {
     "dev": "pnpm switch3 && vite --config ./demo/vue3/vite.config.ts --open",
