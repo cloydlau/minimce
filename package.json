@@ -2,7 +2,7 @@
   "name": "minimce",
   "version": "0.4.8",
   "private": false,
-  "description": "Rich text editor, offline TinyMCE Vue wrapper",
+  "description": "Rich text editor, offline TinyMCE Vue 2 & 3 wrapper. 富文本编辑器，可离线使用的 TinyMCE Vue 2 & 3 封装。",
   "author": "cloydlau",
   "license": "MIT",
   "repository": "https://github.com/cloydlau/minimce",
@@ -77,8 +77,10 @@
     "@cloydlau/scripts": "latest",
     "@vitejs/plugin-vue": "latest",
     "@vue/compiler-sfc": "latest",
+    "@vue/test-utils": "latest",
     "axios": "latest",
     "axios-shortcut": "latest",
+    "case-police": "latest",
     "element-plus": "latest",
     "eslint": "latest",
     "husky": "latest",
@@ -93,7 +95,6 @@
     "typescript": "latest",
     "vite": "latest",
     "vitest": "latest",
-    "@vue/test-utils": "latest",
     "vue": "latest"
   },
   "lint-staged": {
