@@ -77,7 +77,6 @@
     "@cloydlau/scripts": "latest",
     "@vitejs/plugin-vue": "latest",
     "@vue/compiler-sfc": "latest",
-    "@vue/test-utils": "latest",
     "axios": "latest",
     "axios-shortcut": "latest",
     "case-police": "latest",
@@ -93,8 +92,10 @@
     "sass": "latest",
     "tinymce": "latest",
     "typescript": "latest",
+    "vanilla-jsoneditor": "latest",
     "vite": "latest",
     "vitest": "latest",
+    "@vue/test-utils": "latest",
     "vue": "latest"
   },
   "lint-staged": {
