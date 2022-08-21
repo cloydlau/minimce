@@ -34,13 +34,13 @@
     },
     "./*": "./*"
   },
+  "main": "./dist/minimce.umd.js",
+  "module": "./dist/minimce.mjs",
+  "unpkg": "./dist/minimce.umd.js",
+  "jsdelivr": "./dist/minimce.umd.js",
   "files": [
     "dist"
   ],
-  "main": "./dist/minimce.umd.js",
-  "jsdelivr": "./dist/minimce.umd.js",
-  "unpkg": "./dist/minimce.umd.js",
-  "module": "./dist/minimce.mjs",
   "scripts": {
     "dev": "pnpm switch3 && vite --config ./demo/vue3/vite.config.ts --open",
     "dev2.7": "pnpm switch2.7 && vite --config ./demo/vue2.7/vite.config.ts --open",
@@ -77,6 +77,7 @@
     "@cloydlau/scripts": "latest",
     "@vitejs/plugin-vue": "latest",
     "@vue/compiler-sfc": "latest",
+    "@vue/test-utils": "latest",
     "axios": "latest",
     "axios-shortcut": "latest",
     "case-police": "latest",
@@ -95,7 +96,6 @@
     "vanilla-jsoneditor": "latest",
     "vite": "latest",
     "vitest": "latest",
-    "@vue/test-utils": "latest",
     "vue": "latest"
   },
   "lint-staged": {
