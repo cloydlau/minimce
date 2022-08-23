@@ -11,8 +11,7 @@
 - 需要加载至少 **380kB** 的网络资源（开启插件全家桶将达到 **563kB**，还没算上付费插件），外网会很慢，甚至超时
 - 有[域名检测](#域名检测)，会弹窗警告
 - 用不同的版本号来适配不同的 Vue 版本，升级成本较高
-- 默认功能最小化，需要繁杂的配置，且没有中文文档
-- 不支持全局参数（配置自定义插件时，全局参数会很有用）
+- 默认功能最小化，需要繁杂的配置，还不支持全局传参
 
 ![tinymce-vue](https://raw.githubusercontent.com/cloydlau/minimce/master/tinymce-vue.png)
 
@@ -36,7 +35,7 @@
     - 插入小程序页面链接
 - 支持浅色模式 & 深色模式，主题、图标、内容样式均可自定义
 - 支持将 HTML 输出为普通文本
-- 全局或局部引入，参数支持全局或局部配置（[vue-global-config](https://github.com/cloydlau/vue-global-config) 提供技术支持）
+- 局部注册 + 局部传参，也可以全局注册 + 局部传参（[vue-global-config](https://github.com/cloydlau/vue-global-config) 提供技术支持）
 
 <br>
 
