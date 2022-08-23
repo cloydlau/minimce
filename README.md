@@ -61,7 +61,7 @@ import 'tinymce/themes/silver'
 import 'tinymce/icons/default'
 
 app.use(MiniMCE, {
-  // 全局配置
+  // 全局 props
 })
 ```
 
@@ -69,7 +69,7 @@ app.use(MiniMCE, {
 
 ```vue
 <template>
-  <MiniMCE v-bind="{/* 局部配置 */}" />
+  <MiniMCE v-bind="{/* 局部 props */}" />
 </template>
 
 <script setup>
@@ -110,7 +110,7 @@ import 'tinymce/themes/silver'
 import 'tinymce/icons/default'
 
 Vue.use(MiniMCE, {
-  // 全局配置
+  // 全局 props
 })
 ```
 
@@ -118,7 +118,7 @@ Vue.use(MiniMCE, {
 
 ```vue
 <template>
-  <MiniMCE v-bind="{/* 局部配置 */}" />
+  <MiniMCE v-bind="{/* 局部 props */}" />
 </template>
 
 <script>
@@ -154,18 +154,6 @@ export default {
 | disabled     | 是否禁用（禁用模式不可编辑，保留工具栏） | boolean |                                                    | `false`                                                                           |
 | outputFormat | 输出格式                                 | string  | `'html'` / `'text'`                                | `'html'`                                                                          |
 | options      | TinyMCE 配置                             | object  | [官方文档](https://www.tiny.cloud/docs/tinymce/6/) | [查看代码](https://github.com/cloydlau/minimce/blob/master/src/Component.ts#L102) |
-
-<br>
-
-## 参数配置规则
-
-- 双向绑定参数（`v-model` / `modelValue` / `value`）仅支持局部配置
-- 其余参数均支持全局或局部配置
-
-权重：
-
-- 局部配置高于全局配置
-- 对于对象类型的参数，局部配置会与全局配置进行合并，同名属性会被局部配置覆盖
 
 <br>
 
