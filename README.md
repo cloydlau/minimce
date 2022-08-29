@@ -1,6 +1,6 @@
 # MiniMCE
 
-富文本编辑器，可离线使用的 [TinyMCE](https://github.com/tinymce/tinymce) Vue 2.6 / 2.7 / 3 封装。
+富文本编辑器，可离线使用的 [TinyMCE](https://github.com/tinymce/tinymce) Vue 2.6 / 2.7 / 3 封装，零网络延迟。
 
 <br>
 
@@ -8,6 +8,7 @@
 
 是的，TinyMCE 已经有官方的 Vue 封装 [tinymce-vue](https://github.com/tinymce/tinymce-vue) 了，但它：
 
+- 必须联网使用
 - 需要加载至少 **380kB** 的网络资源（开启插件全家桶将达到 **563kB**，还没算上付费插件），外网会很慢，甚至超时
 - 有[域名检测](#域名检测)，会弹窗警告
 - 用不同的版本号来适配不同的 Vue 版本，升级成本较高
@@ -21,8 +22,8 @@
 
 ![minimce](https://raw.githubusercontent.com/cloydlau/minimce/master/minimce.png)
 
-- 基于 TinyMCE 6（2022 最新版）
-- 可离线使用，无网络延迟
+- 基于 TinyMCE 6
+- 可离线使用，零网络延迟
 - 无[域名检测](#域名检测)，无弹窗困扰
 - Vue 2.6 / 2.7 / 3 通用
 - 插件全家桶开箱即用
