@@ -2,7 +2,7 @@
   "name": "minimce",
   "version": "0.4.8",
   "private": false,
-  "description": "Rich text editor, offline TinyMCE Vue 2.6 / 2.7 / 3 wrapper, no network delay.",
+  "description": "Rich text editor, offline TinyMCE Vue 2.6 / 2.7 / 3 wrapper, zero network delay.",
   "author": "cloydlau",
   "license": "MIT",
   "repository": "https://github.com/cloydlau/minimce",
