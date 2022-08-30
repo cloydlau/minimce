@@ -230,7 +230,18 @@ export default defineComponent({
     )
 
     onMounted(() => {
-      tinymce.init(Options.value)
+      const el = document.querySelector(`#${id.value}`) as Element
+      const intersectionObserver = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          // el is visible
+          intersectionObserver.unobserve(el)
+          tinymce.init(Options.value)
+        } else {
+          // el is not visible
+        }
+      })
+      // Asynchronous call
+      intersectionObserver.observe(el)
     })
 
     if (isVue3)
