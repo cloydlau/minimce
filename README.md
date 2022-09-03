@@ -49,7 +49,7 @@
 npm add minimce tinymce
 ```
 
-#### 全局引入
+#### 全局注册
 
 ```ts
 import 'minimce/dist/style.css'
@@ -65,7 +65,7 @@ app.use(MiniMCE, {
 })
 ```
 
-#### 局部引入
+#### 局部注册
 
 ```vue
 <template>
@@ -83,24 +83,19 @@ import 'tinymce/icons/default'
 </script>
 ```
 
-[Vue 3 完整示例代码](https://github.com/cloydlau/minimce/tree/master/demo/vue3)
+[完整示例代码](https://github.com/cloydlau/minimce/tree/master/demo/vue3)
 
 <br>
 
-### Vue 2
+### Vue 2.7
 
 ```sh
-# vue@2.6 或更早版本需要额外安装 @vue/composition-api
 npm add minimce tinymce
 ```
 
-#### 全局引入
+#### 全局注册
 
 ```ts
-// vue@2.6 或更早版本需要额外安装 @vue/composition-api
-// import VCA from '@vue/composition-api'
-// Vue.use(VCA)
-
 import 'minimce/dist/style.css'
 import MiniMCE from 'minimce'
 
@@ -114,7 +109,7 @@ Vue.use(MiniMCE, {
 })
 ```
 
-#### 局部引入
+#### 局部注册
 
 ```vue
 <template>
@@ -122,10 +117,6 @@ Vue.use(MiniMCE, {
 </template>
 
 <script>
-// vue@2.6 或更早版本需要额外安装 @vue/composition-api
-// import VCA from '@vue/composition-api'
-// Vue.use(VCA)
-
 import 'minimce/dist/style.css'
 import MiniMCE from 'minimce'
 
@@ -140,9 +131,63 @@ export default {
 </script>
 ```
 
-[Vue 2.7 完整示例代码](https://github.com/cloydlau/minimce/tree/master/demo/vue2.7)
+[完整示例代码](https://github.com/cloydlau/minimce/tree/master/demo/vue2.7)
 
-[Vue 2.6 完整示例代码](https://github.com/cloydlau/minimce/tree/master/demo/vue2)
+<br>
+
+### Vue 2.6 或更早版本
+
+```sh
+npm add minimce tinymce @vue/composition-api
+```
+
+#### 全局注册
+
+```ts
+import VCA from '@vue/composition-api'
+
+import 'minimce/dist/style.css'
+import MiniMCE from 'minimce'
+
+// 需要自行引入，以便对皮肤、主题、图标进行更换
+import 'tinymce/skins/ui/oxide/skin.min.css'
+import 'tinymce/themes/silver'
+import 'tinymce/icons/default'
+
+Vue.use(VCA)
+
+Vue.use(MiniMCE, {
+  // 全局 props
+})
+```
+
+#### 局部注册
+
+```vue
+<template>
+  <MiniMCE v-bind="{/* 局部 props */}" />
+</template>
+
+<script>
+import VCA from '@vue/composition-api'
+
+import 'minimce/dist/style.css'
+import MiniMCE from 'minimce'
+
+// 需要自行引入，以便对皮肤、主题、图标进行更换
+import 'tinymce/skins/ui/oxide/skin.min.css'
+import 'tinymce/themes/silver'
+import 'tinymce/icons/default'
+
+Vue.use(VCA)
+
+export default {
+  components: { MiniMCE },
+}
+</script>
+```
+
+[完整示例代码](https://github.com/cloydlau/minimce/tree/master/demo/vue2)
 
 <br>
 
