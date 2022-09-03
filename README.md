@@ -49,6 +49,8 @@
 npm add minimce tinymce
 ```
 
+[完整示例代码](https://github.com/cloydlau/minimce/tree/master/demo/vue3)
+
 #### 全局注册
 
 ```ts
@@ -83,8 +85,6 @@ import 'tinymce/icons/default'
 </script>
 ```
 
-[完整示例代码](https://github.com/cloydlau/minimce/tree/master/demo/vue3)
-
 <br>
 
 ### Vue 2.7
@@ -92,6 +92,8 @@ import 'tinymce/icons/default'
 ```sh
 npm add minimce tinymce
 ```
+
+[完整示例代码](https://github.com/cloydlau/minimce/tree/master/demo/vue2.7)
 
 #### 全局注册
 
@@ -130,8 +132,6 @@ export default {
 }
 </script>
 ```
-
-[完整示例代码](https://github.com/cloydlau/minimce/tree/master/demo/vue2.7)
 
 <br>
 
@@ -141,6 +141,8 @@ export default {
 npm add minimce tinymce @vue/composition-api
 ```
 
+[完整示例代码](https://github.com/cloydlau/minimce/tree/master/demo/vue2)
+
 #### 全局注册
 
 ```ts
@@ -186,8 +188,6 @@ export default {
 }
 </script>
 ```
-
-[完整示例代码](https://github.com/cloydlau/minimce/tree/master/demo/vue2)
 
 <br>
 
