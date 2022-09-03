@@ -13,6 +13,6 @@ module.exports = {
     }],
     'vue/no-deprecated-v-bind-sync': 0,
     'vue/attribute-hyphenation': 0,
-    'curly': 'all',
+    'curly': 0,
   },
 }
