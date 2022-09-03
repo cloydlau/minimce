@@ -12,5 +12,6 @@ module.exports = {
       order: [['script', 'template'], 'style'],
     }],
     'vue/no-deprecated-v-bind-sync': 1,
+    'vue/attribute-hyphenation': 0,
   },
 }
