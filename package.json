@@ -40,7 +40,8 @@
   "unpkg": "./dist/minimce.umd.js",
   "jsdelivr": "./dist/minimce.umd.js",
   "files": [
-    "dist", "docs"
+    "dist",
+    "docs"
   ],
   "scripts": {
     "dev": "pnpm switch3 && vite --config ./demo/vue3/vite.config.ts --open",
@@ -51,9 +52,8 @@
     "switch2": "cl switchVue 2 --vue2deps \"element-ui\" --vue3deps \"element-plus\"",
     "build": "pnpm switch3 && vite build",
     "serve": "vite preview",
-    "test": "vitest --config ./vitest.config.ts",
-    "coverage": "vitest run --coverage",
-    "prepare": "husky install"
+    "test": "vitest --ui",
+    "coverage": "vitest run --coverage"
   },
   "peerDependencies": {
     "@vue/composition-api": "1",
@@ -75,13 +75,17 @@
     "@antfu/eslint-config": "latest",
     "@cloydlau/scripts": "latest",
     "@vitejs/plugin-vue": "latest",
+    "@vitest/coverage-c8": "latest",
+    "@vitest/ui": "latest",
     "@vue/compiler-sfc": "latest",
     "@vue/test-utils": "latest",
     "axios": "latest",
     "axios-shortcut": "latest",
     "case-police": "latest",
+    "cozyalert": "latest",
     "element-plus": "latest",
     "eslint": "latest",
+    "happy-dom": "latest",
     "husky": "latest",
     "jsdom": "latest",
     "json-editor-vue": "latest",

@@ -20,15 +20,13 @@
 </template>
 
 <script>
-import { notEmpty } from 'kayran'
-
 const tel = (value, { multiple = true } = {}) => {
   const regex = multiple ? /^((?:\d{3}-)?\d{8};?)+$|^((?:\d{4}-)?\d{7,8};?)+$/ : /^(?:\d{3}-)?\d{8}$|^(?:\d{4}-)?\d{7,8}$/
   const maxLen = 50
   let errInfo = ''
   if (typeof value === 'number' && Number.isNaN(value)) {
     errInfo = '格式不正确'
-  } else if (notEmpty(value)) {
+  } else if (value) {
     value = value.toString()
     if (value.length > maxLen) {
       errInfo = '不能超过' + maxLen + '个字符'

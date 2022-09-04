@@ -1,7 +1,8 @@
 import { mount } from '@vue/test-utils'
-import MiniMCE from '../src/index.ts'
+import { test } from 'vitest'
+import MiniMCE from '../src/index'
 
-test('mount component', async() => {
+test('mount component', async () => {
   const wrapper = mount(MiniMCE, {
     props: {
       count: 4,

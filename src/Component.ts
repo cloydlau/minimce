@@ -17,6 +17,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { debounce } from 'lodash-es'
 
 import tinymce from 'tinymce/tinymce'
+import type { Editor } from 'tinymce/tinymce'
 import Spin from './components/Spin'
 import { globalProps } from './index'
 // languages
@@ -56,7 +57,7 @@ import 'tinymce/plugins/quickbars'
 // import 'tinymce/plugins/codesample'
 // import 'tinymce/plugins/template'
 
-const isSmallScreen = window.matchMedia('(max-width: 1023.5px)').matches
+//const isSmallScreen = window.matchMedia('(max-width: 1023.5px)').matches
 
 export default defineComponent({
   name: 'MiniMCE',
@@ -142,10 +143,10 @@ export default defineComponent({
             // 开启时，出现两个 bug：1. 部分菜单项失效；2. 拖拉拽调整视频大小会错位（该问题在 v6.0 仍在存在）
             media_live_embeds: false,
             toolbar_mode: 'sliding',
-            toolbar_sticky: true,
-            toolbar_sticky_offset: isSmallScreen ? 102 : 108,
+            //toolbar_sticky: true,
+            //toolbar_sticky_offset: isSmallScreen ? 102 : 108,
             // extended_valid_elements: 'img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name|referrerpolicy=no-referrer]',
-            init_instance_callback: (editor) => {
+            init_instance_callback: (editor: Editor) => {
               watch(
                 Disabled,
                 (n) => {
