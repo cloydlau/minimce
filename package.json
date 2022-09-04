@@ -54,7 +54,7 @@
     "serve": "vite preview",
     "test": "vitest --ui",
     "coverage": "vitest run --coverage",
-    "prerelease": "pnpm switch3 && pnpm build"
+    "release": "pnpm switch3 && pnpm build && cl release"
   },
   "peerDependencies": {
     "@vue/composition-api": "1",
