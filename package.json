@@ -40,7 +40,7 @@
   "unpkg": "./dist/minimce.umd.js",
   "jsdelivr": "./dist/minimce.umd.js",
   "files": [
-    "dist"
+    "dist", "docs"
   ],
   "scripts": {
     "dev": "pnpm switch3 && vite --config ./demo/vue3/vite.config.ts --open",
