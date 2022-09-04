@@ -66,8 +66,6 @@
     }
   },
   "dependencies": {
-    "cozyalert": "latest",
-    "kayran": "latest",
     "lodash-es": "latest",
     "uuid": "latest",
     "vue-demi": "latest",
