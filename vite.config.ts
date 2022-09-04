@@ -1,4 +1,5 @@
 import type { ConfigEnv, UserConfigExport } from 'vite'
+import dts from 'vite-plugin-dts'
 import { name } from './package.json'
 
 // https://vitejs.dev/config/
@@ -28,5 +29,6 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
         },
       },
     },
+    plugins: [dts()],
   }
 }

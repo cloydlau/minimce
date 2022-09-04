@@ -96,6 +96,7 @@
     "typescript": "latest",
     "vanilla-jsoneditor": "latest",
     "vite": "latest",
+    "vite-plugin-dts": "latest",
     "vitest": "latest",
     "vue": "latest"
   },
