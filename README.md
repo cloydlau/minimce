@@ -41,8 +41,6 @@
 
 ## 安装
 
-![NPM](https://nodei.co/npm/minimce.png)
-
 ### Vue 3
 
 ```sh
