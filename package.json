@@ -29,6 +29,7 @@
   ],
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "require": "./dist/minimce.umd.js",
       "import": "./dist/minimce.mjs",
       "browser": "./dist/minimce.mjs"
@@ -39,17 +40,18 @@
   "module": "./dist/minimce.mjs",
   "unpkg": "./dist/minimce.umd.js",
   "jsdelivr": "./dist/minimce.umd.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist",
     "docs"
   ],
   "scripts": {
-    "dev": "pnpm switch3 && vite --config ./demo/vue3/vite.config.ts --open",
+    "dev3": "pnpm switch3 && vite --config ./demo/vue3/vite.config.ts --open",
     "dev2.7": "pnpm switch2.7 && vite --config ./demo/vue2.7/vite.config.ts --open",
-    "dev2": "pnpm switch2 && vite --config ./demo/vue2/vite.config.ts --open",
+    "dev2.6": "pnpm switch2.6 && vite --config ./demo/vue2.6/vite.config.ts --open",
     "switch3": "cl switchVue 3 --vue2deps \"element-ui\" --vue3deps \"element-plus\"",
     "switch2.7": "cl switchVue 2.7 --vue2deps \"element-ui\" --vue3deps \"element-plus\"",
-    "switch2": "cl switchVue 2 --vue2deps \"element-ui\" --vue3deps \"element-plus\"",
+    "switch2.6": "cl switchVue 2.6 --vue2deps \"element-ui\" --vue3deps \"element-plus\"",
     "build": "vite build",
     "serve": "vite preview",
     "test": "vitest --ui",
@@ -74,7 +76,6 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "latest",
-    "@cloydlau/scripts": "latest",
     "@vitejs/plugin-vue": "latest",
     "@vitest/coverage-c8": "latest",
     "@vitest/ui": "latest",
@@ -97,6 +98,7 @@
     "sass": "latest",
     "tinymce": "latest",
     "typescript": "latest",
+    "unplugin-auto-import": "latest",
     "vanilla-jsoneditor": "latest",
     "vite": "latest",
     "vite-plugin-dts": "latest",
@@ -110,5 +112,8 @@
   },
   "stackblitz": {
     "startCommand": "npm run test"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   }
 }

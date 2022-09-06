@@ -63,7 +63,7 @@ import 'tinymce/themes/silver'
 import 'tinymce/icons/default'
 
 app.use(MiniMCE, {
-  // 全局 props
+  // 全局 props（单向数据流）
 })
 ```
 
@@ -107,7 +107,7 @@ import 'tinymce/themes/silver'
 import 'tinymce/icons/default'
 
 Vue.use(MiniMCE, {
-  // 全局 props
+  // 全局 props（单向数据流）
 })
 ```
 
@@ -159,7 +159,7 @@ import 'tinymce/icons/default'
 Vue.use(VCA)
 
 Vue.use(MiniMCE, {
-  // 全局 props
+  // 全局 props（单向数据流）
 })
 ```
 
@@ -441,5 +441,19 @@ TinyMCE 的 `urlconverter_callback`、`paste_postprocess` API 不支持异步操
 技术上是可以解决的，可以通过 nginx 动态代理配合这两个 API 来处理
 
 请自行评估相关风险
+
+<br>
+
+## Contributing
+
+1. [安装 Deno](https://deno.land/#installation)
+
+2. `npm add @cloydlau/scripts -g`
+
+3. 启动
+
+    - `npm run dev3`
+    - `npm run dev2.7`
+    - `npm run dev2.6`
 
 <br>
