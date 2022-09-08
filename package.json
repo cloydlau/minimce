@@ -56,7 +56,7 @@
     "serve": "vite preview",
     "test": "vitest --ui",
     "coverage": "vitest run --coverage",
-    "release": "pnpm switch3 && pnpm build && cl release"
+    "release": "npx case-police --fix --ignore \"./src/langs\" && npx lint-staged && pnpm switch3 && pnpm build && cl release"
   },
   "peerDependencies": {
     "@vue/composition-api": "1",
@@ -89,7 +89,6 @@
     "eslint": "latest",
     "happy-dom": "latest",
     "husky": "latest",
-    "jsdom": "latest",
     "json-editor-vue": "latest",
     "lint-staged": "latest",
     "mammoth": "latest",
@@ -106,7 +105,7 @@
     "vue": "latest"
   },
   "lint-staged": {
-    "*.{js,ts,tsx,vue,md}": [
+    "!(demo/**/*)*.{js,ts,tsx,vue,md}": [
       "eslint --fix"
     ]
   },

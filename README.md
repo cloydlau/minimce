@@ -446,7 +446,7 @@ TinyMCE 的 `urlconverter_callback`、`paste_postprocess` API 不支持异步操
 
 1. [安装 Deno](https://deno.land/#installation)
 
-2. `npm add @cloydlau/scripts -g`
+2. `npm add @cloydlau/scripts pnpm -g`
 
 3. 启动
 
