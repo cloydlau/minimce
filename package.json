@@ -56,8 +56,8 @@
     "release": "npx case-police --fix --ignore \"./src/langs\" && npx lint-staged && cl switchVue 3 && pnpm build && cl release"
   },
   "peerDependencies": {
-    "@vue/composition-api": "1",
-    "tinymce": "6",
+    "@vue/composition-api": ">=1",
+    "tinymce": ">=6",
     "vue": "2 || 3"
   },
   "peerDependenciesMeta": {
