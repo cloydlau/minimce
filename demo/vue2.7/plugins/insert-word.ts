@@ -1,6 +1,6 @@
 import mammoth from 'mammoth/mammoth.browser.min.js'
-import 'cozyalert/dist/style.css'
-import Swal, { confirm } from 'cozyalert'
+import 'sweetalert2-preset/dist/style.css'
+import Swal, { confirm } from 'sweetalert2-preset'
 
 export default editor => confirm({
   input: 'file',

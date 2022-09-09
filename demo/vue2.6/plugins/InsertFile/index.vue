@@ -44,8 +44,6 @@
 //import 'imgpond/dist/style.css'
 //import Imgpond from 'imgpond'
 //import Filepool from 'filepool'
-//import 'cozyalert/dist/style.css'
-//import { warning } from 'cozyalert'
 
 export default {
   //components: { Imgpond, Filepool },

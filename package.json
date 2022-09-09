@@ -46,17 +46,14 @@
     "docs"
   ],
   "scripts": {
-    "dev3": "pnpm switch3 && vite --config ./demo/vue3/vite.config.ts --open",
-    "dev2.7": "pnpm switch2.7 && vite --config ./demo/vue2.7/vite.config.ts --open",
-    "dev2.6": "pnpm switch2.6 && vite --config ./demo/vue2.6/vite.config.ts --open",
-    "switch3": "cl switchVue 3 --vue2deps \"element-ui\" --vue3deps \"element-plus\"",
-    "switch2.7": "cl switchVue 2.7 --vue2deps \"element-ui\" --vue3deps \"element-plus\"",
-    "switch2.6": "cl switchVue 2.6 --vue2deps \"element-ui\" --vue3deps \"element-plus\"",
+    "dev3": "cl switchVue 3 && vite --config ./demo/vue3/vite.config.ts --open",
+    "dev2.7": "cl switchVue 2.7 && vite --config ./demo/vue2.7/vite.config.ts --open",
+    "dev2.6": "cl switchVue 2.6 && vite --config ./demo/vue2.6/vite.config.ts --open",
     "build": "vite build",
     "serve": "vite preview",
-    "test": "vitest --ui",
+    "test": "vitest",
     "coverage": "vitest run --coverage",
-    "release": "npx case-police --fix --ignore \"./src/langs\" && npx lint-staged && pnpm switch3 && pnpm build && cl release"
+    "release": "npx case-police --fix --ignore \"./src/langs\" && npx lint-staged && cl switchVue 3 && pnpm build && cl release"
   },
   "peerDependencies": {
     "@vue/composition-api": "1",
@@ -84,7 +81,6 @@
     "axios": "latest",
     "axios-shortcut": "latest",
     "case-police": "latest",
-    "cozyalert": "latest",
     "element-plus": "latest",
     "eslint": "latest",
     "happy-dom": "latest",
@@ -95,6 +91,8 @@
     "minimce": "latest",
     "qs": "latest",
     "sass": "latest",
+    "sweetalert2": "latest",
+    "sweetalert2-preset": "latest",
     "tinymce": "latest",
     "typescript": "latest",
     "unplugin-auto-import": "latest",
@@ -108,9 +106,6 @@
     "!(demo/**/*)*.{js,ts,tsx,vue,md}": [
       "eslint --fix"
     ]
-  },
-  "stackblitz": {
-    "startCommand": "npm run test"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
