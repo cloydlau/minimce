@@ -9,12 +9,9 @@
   "keywords": [
     "tinymce",
     "offline",
-    "without-network",
     "vue",
     "richtext",
-    "rich text",
-    "rich editor",
-    "rich text editor",
+    "rich-text",
     "rte",
     "editor",
     "word",
@@ -24,8 +21,7 @@
     "office",
     "WYSIWYG",
     "vue-demi",
-    "富文本",
-    "离线"
+    "microsoft-office"
   ],
   "exports": {
     ".": {
