@@ -1,13 +1,13 @@
-import Component from './index.vue'
 import Vue from 'vue'
-//import store from '@/store'
+import Component from './index.vue'
+// import store from '@/store'
 
-function mount (props) {
+function mount(props) {
   const el = document.createElement('div')
 
   const Constructor = Vue.extend({
     render: h => h(Component, { props }),
-    //store,
+    // store,
   })
 
   const vm = new Constructor({
