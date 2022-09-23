@@ -1,6 +1,6 @@
 import type { ConfigEnv, UserConfigExport } from 'vite'
 import { createVuePlugin } from 'vite-plugin-vue2'
-// import AutoImport from 'unplugin-auto-import/vite'
+import AutoImport from 'unplugin-auto-import/vite'
 
 // https://vitejs.dev/config/
 export default ({ command }: ConfigEnv): UserConfigExport => {
@@ -9,7 +9,7 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
       exclude: ['vue-demi'],
     },
     plugins: [
-      /* AutoImport({
+      AutoImport({
         // targets to transform
         include: [
           /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
@@ -19,9 +19,9 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
         // global imports to register
         imports: [
           // presets
-          'vue',
+          '@vue/composition-api',
         ],
-      }), */
+      }),
       createVuePlugin(),
       {
         name: 'html-transform',
