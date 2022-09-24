@@ -3,7 +3,7 @@
     <el-dialog :visible.sync="showDialog" @closed="data = {}">
       <el-form ref="formRef" :model="data" disabled>
         <el-form-item prop="value" required>
-          <MiniMCE v-model="data.value" v-bind="props" />
+          <MiniMCE v-bind="props" ref="miniMCE" v-model="data.value" />
         </el-form-item>
       </el-form>
 

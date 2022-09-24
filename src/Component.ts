@@ -48,7 +48,6 @@ import 'tinymce/plugins/advlist'
 import 'tinymce/plugins/lists'
 import 'tinymce/plugins/wordcount'
 import 'tinymce/plugins/help'
-
 import 'tinymce/plugins/emoticons'
 import 'tinymce/plugins/emoticons/js/emojis.min'
 import 'tinymce/plugins/save'
@@ -76,7 +75,7 @@ export default defineComponent({
     outputFormat: {},
     options: {},
   },
-  setup(props, { expose, emit }) {
+  setup(props, { emit, expose }) {
     const loading = ref(true)
     const id = ref(`minimce-${uuidv4()}`)
     const syncingValue = ref(false)
@@ -245,9 +244,9 @@ export default defineComponent({
       intersectionObserver.observe(el)
     })
 
-    if (isVue3)
-      expose({ id })
+    expose?.({ id })
 
+    // 在 Vue 2.6 中，return 出去的数据不需要 expose
     return {
       loading,
       id,
