@@ -186,14 +186,14 @@ export default defineComponent({
               // 监听外部设值，同步至文本内容
               watch(
                 () => props[modelValueProp],
-                (n: string) => {
+                (n) => {
                   if (syncingValue.value) {
                     syncingValue.value = false
                     return
                   }
                   settingContent.value = true
                   // 参数必须为 string 类型，否则无效
-                  editor.setContent(n || '')
+                  editor.setContent((n || '') as string)
                 },
                 {
                   immediate: true,
