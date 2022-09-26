@@ -61,7 +61,8 @@ npm add minimce tinymce
 import 'minimce/dist/style.css'
 import MiniMCE from 'minimce'
 
-// 需要自行引入，以便对皮肤、主题、图标进行更换
+// 需要自行引入，以便对语言、皮肤、主题、图标进行更换
+// import './langs/TODO' // 默认英文，其它语言下载地址：https://www.tiny.cloud/get-tiny/language-packages/
 import 'tinymce/skins/ui/oxide/skin.min.css'
 import 'tinymce/themes/silver'
 import 'tinymce/icons/default'
@@ -82,7 +83,8 @@ app.use(MiniMCE, {
 import 'minimce/dist/style.css'
 import MiniMCE from 'minimce'
 
-// 需要自行引入，以便对皮肤、主题、图标进行更换
+// 需要自行引入，以便对语言、皮肤、主题、图标进行更换
+// import './langs/TODO' // 默认英文，其它语言下载地址：https://www.tiny.cloud/get-tiny/language-packages/
 import 'tinymce/skins/ui/oxide/skin.min.css'
 import 'tinymce/themes/silver'
 import 'tinymce/icons/default'
@@ -105,7 +107,8 @@ npm add minimce tinymce
 import 'minimce/dist/style.css'
 import MiniMCE from 'minimce'
 
-// 需要自行引入，以便对皮肤、主题、图标进行更换
+// 需要自行引入，以便对语言、皮肤、主题、图标进行更换
+// import './langs/TODO' // 默认英文，其它语言下载地址：https://www.tiny.cloud/get-tiny/language-packages/
 import 'tinymce/skins/ui/oxide/skin.min.css'
 import 'tinymce/themes/silver'
 import 'tinymce/icons/default'
@@ -126,7 +129,8 @@ Vue.use(MiniMCE, {
 import 'minimce/dist/style.css'
 import MiniMCE from 'minimce'
 
-// 需要自行引入，以便对皮肤、主题、图标进行更换
+// 需要自行引入，以便对语言、皮肤、主题、图标进行更换
+// import './langs/TODO' // 默认英文，其它语言下载地址：https://www.tiny.cloud/get-tiny/language-packages/
 import 'tinymce/skins/ui/oxide/skin.min.css'
 import 'tinymce/themes/silver'
 import 'tinymce/icons/default'
@@ -155,7 +159,8 @@ import VCA from '@vue/composition-api'
 import 'minimce/dist/style.css'
 import MiniMCE from 'minimce'
 
-// 需要自行引入，以便对皮肤、主题、图标进行更换
+// 需要自行引入，以便对语言、皮肤、主题、图标进行更换
+// import './langs/TODO' // 默认英文，其它语言下载地址：https://www.tiny.cloud/get-tiny/language-packages/
 import 'tinymce/skins/ui/oxide/skin.min.css'
 import 'tinymce/themes/silver'
 import 'tinymce/icons/default'
@@ -180,7 +185,8 @@ import VCA from '@vue/composition-api'
 import 'minimce/dist/style.css'
 import MiniMCE from 'minimce'
 
-// 需要自行引入，以便对皮肤、主题、图标进行更换
+// 需要自行引入，以便对语言、皮肤、主题、图标进行更换
+// import './langs/TODO' // 默认英文，其它语言下载地址：https://www.tiny.cloud/get-tiny/language-packages/
 import 'tinymce/skins/ui/oxide/skin.min.css'
 import 'tinymce/themes/silver'
 import 'tinymce/icons/default'

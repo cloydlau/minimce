@@ -20,9 +20,6 @@ import tinymce from 'tinymce/tinymce'
 import type { Editor } from 'tinymce/tinymce'
 import Spin from './components/Spin'
 import { globalProps } from './index'
-// languages
-// 下载地址：https://www.tiny.cloud/get-tiny/language-packages/
-import './langs/zh-Hans'
 // models
 import 'tinymce/models/dom'
 // plugins

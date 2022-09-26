@@ -15,6 +15,11 @@ import contentCSS from 'tinymce/skins/content/dark/content.min.css?raw'
 import contentUICSS from 'tinymce/skins/ui/oxide-dark/content.min.css?raw' */
 
 /**
+ * 语言（可更换）
+ */
+import '../langs/zh-Hans'
+
+/**
  * 主题（可更换）
  */
 import 'tinymce/themes/silver'
