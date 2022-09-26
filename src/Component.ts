@@ -18,7 +18,6 @@ import { debounce } from 'lodash-es'
 
 import tinymce from 'tinymce/tinymce'
 import type { Editor } from 'tinymce/tinymce'
-import Spin from './components/Spin'
 import { globalProps } from './index'
 // models
 import 'tinymce/models/dom'
@@ -256,51 +255,21 @@ export default defineComponent({
       /**
        * Vue 3 模板
        */
-      ? h(
-        'div',
-        {
-          style: {
-            height: '500px',
-            position: 'relative',
-          },
-        },
-        [
-          h(Spin, {
-            style: {
-              display: ctx.loading ? undefined : 'none',
-            },
-          }),
-          h('textarea', {
-            id: ctx.id,
-          }),
-        ],
-      )
+      ? h('textarea', {
+        id: ctx.id,
+      })
       /**
        * Vue 2 模板
        */
-      : h(
-        'div',
-        {
-          style: {
-            height: '500px',
-            position: 'relative',
+      : h('textarea', {
+        attrs: {
+          id: unref(this.id),
+        },
+        on: {
+          input: (value: string | undefined | null) => {
+            this.$emit(updateModelValue, value)
           },
         },
-        [
-          h(Spin, {
-            directives: [{ name: 'show', value: unref(this.loading) }],
-          }),
-          h('textarea', {
-            attrs: {
-              id: unref(this.id),
-            },
-            on: {
-              input: (value: string | undefined | null) => {
-                this.$emit('input', value)
-              },
-            },
-          }),
-        ],
-      )
+      })
   },
 })
