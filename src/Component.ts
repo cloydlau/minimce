@@ -54,16 +54,13 @@ import 'tinymce/plugins/quickbars'
 
 // const isSmallScreen = window.matchMedia('(max-width: 1023.5px)').matches
 
+const modelValueProp = isVue3 ? 'modelValue' : 'value'
+const updateModelValue = isVue3 ? 'update:modelValue' : 'input'
+
 export default defineComponent({
   name: 'MiniMCE',
   props: {
-    ...(isVue3
-      ? {
-          modelValue: String,
-        }
-      : {
-          value: String,
-        }),
+    [modelValueProp]: String,
     disabled: {
       type: Boolean,
       default: undefined,
@@ -71,6 +68,7 @@ export default defineComponent({
     outputFormat: {},
     options: {},
   },
+  emits: [updateModelValue, 'init'],
   setup(props, { emit, expose }) {
     const loading = ref(true)
     const id = ref(`minimce-${uuidv4()}`)
@@ -130,7 +128,7 @@ export default defineComponent({
             autosave_restore_when_empty: false,
             autosave_retention: '2m',
             // importcss_append: true,
-            height: 500,
+            // height: 500,
             relative_urls: false,
             convert_urls: false,
             image_advtab: true,
@@ -144,7 +142,7 @@ export default defineComponent({
             init_instance_callback: (editor: Editor) => {
               watch(
                 Disabled,
-                (n) => {
+                (n: boolean) => {
                   editor.mode.set(n ? 'readonly' : 'design')
                 },
                 {
@@ -153,7 +151,6 @@ export default defineComponent({
               )
 
               // 监听输入，同步至 value
-              const eventName = isVue3 ? 'update:modelValue' : 'input'
               const onChange = debounce(() => {
                 if (settingContent.value) {
                   settingContent.value = false
@@ -161,7 +158,7 @@ export default defineComponent({
                 }
                 syncingValue.value = true
                 emit(
-                  eventName,
+                  updateModelValue,
                   editor.getContent({ format: OutputFormat.value }),
                 )
               }, 100)
@@ -188,8 +185,8 @@ export default defineComponent({
 
               // 监听外部设值，同步至文本内容
               watch(
-                () => (isVue3 ? props.modelValue : props.value),
-                (n) => {
+                () => props[modelValueProp],
+                (n: string) => {
                   if (syncingValue.value) {
                     syncingValue.value = false
                     return
@@ -244,12 +241,14 @@ export default defineComponent({
 
     // 在 Vue 2.6 中，return 出去的数据不需要 expose
     return {
-      loading,
       id,
+      loading,
+      // height: (Options.value.height ?? '400') + 'px',
     }
   },
   render(ctx: any) {
-    // Vue 2 中 ctx 为渲染函数 h
+    // Vue 3 中，ctx 和 this 均为组件实例
+    // Vue 2 中，ctx 为渲染函数 h，this 为组件实例
     // this.id 在 vue2.6 中为 ref，vue2.7 中为 id 本身
     return isVue3
       /**

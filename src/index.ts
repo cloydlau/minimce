@@ -1,10 +1,13 @@
-let globalProps = {}, globalAttrs = {}, globalListeners = {}, globalHooks = {}
 import { useGlobalConfig } from 'vue-global-config'
 import Component from './Component'
+let globalProps: { [key: string]: any } = {}
+let globalAttrs: { [key: string]: any } = {}
+let globalListeners: { [key: string]: any } = {}
+let globalHooks: { [key: string]: any } = {}
 
 Component.install = (app: any, options = {}) => {
   if (!Component.name) {
-    throw Error(`Name is required for a global component.`)
+    throw new Error('Name is required for a global component.')
   } else if (Component.install.installed) {
     console.warn(`${Component.name} has been registered.`)
     return
