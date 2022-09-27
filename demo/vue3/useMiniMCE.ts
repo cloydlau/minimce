@@ -1,5 +1,9 @@
-// '?url' 是 Vite 语法，在 Webpack 中请使用 https://webpack.js.org/guides/asset-modules/
 // '?raw' 是 Vite 语法，在 Webpack 中请使用 https://github.com/webpack-contrib/raw-loader
+
+// import 'minimce/dist/style.css'
+// import MiniMCE from 'minimce'
+import './index.scss'
+import MiniMCE from '../../src'
 
 // 浅色模式
 import 'tinymce/skins/ui/oxide/skin.min.css' // 皮肤
@@ -11,22 +15,17 @@ import contentUICSS from 'tinymce/skins/ui/oxide/content.min.css?raw'
 import contentCSS from 'tinymce/skins/content/dark/content.min.css?raw'
 import contentUICSS from 'tinymce/skins/ui/oxide-dark/content.min.css?raw' */
 
-// 图标
-import icons_url from 'tinymce/icons/default/icons?url'
-
-// 主题
-import theme_url from 'tinymce/themes/silver/theme?url'
-
-// 语言（非必须，默认英文，其它语言下载地址：https://www.tiny.cloud/get-tiny/language-packages/）
-import language_url from '../langs/zh-Hans?url'
-
-import 'minimce/dist/style.css'
-import MiniMCE from 'minimce'
-// import './index.scss'
-// import MiniMCE from '../../src'
-
 import axios from 'axios'
 import createAxiosShortcut from 'axios-shortcut'
+
+// 图标
+import 'tinymce/icons/default/icons'
+
+// 主题
+import 'tinymce/themes/silver/theme'
+
+// 语言（非必须，默认英文，其它语言下载地址：https://www.tiny.cloud/get-tiny/language-packages/）
+import '../langs/zh-Hans'
 
 // 自定义插件（非必须）
 import insertWord from './plugins/insert-word'
@@ -58,10 +57,7 @@ const { POST } = createAxiosShortcut(axios)
 export default function (app) {
   app.use(MiniMCE, {
     options: {
-      language: 'zh_CN',
-      language_url,
-      icons_url,
-      theme_url,
+      language: 'zh-Hans',
       content_style: [contentCSS, contentUICSS, contentCustomCSS].join('\n'),
       menu: {
         insert: {
