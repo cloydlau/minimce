@@ -24,7 +24,7 @@ import 'tinymce/icons/default/icons'
 // 主题
 import 'tinymce/themes/silver/theme'
 
-// 语言（非必须，默认英文，其它语言下载地址：https://www.tiny.cloud/get-tiny/language-packages/）
+// 语言（非必须，默认英文，下载地址：https://www.tiny.cloud/get-tiny/language-packages）
 import '../langs/zh-Hans'
 
 // 自定义插件（非必须）

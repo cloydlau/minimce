@@ -61,16 +61,16 @@ npm add minimce tinymce
 import 'minimce/dist/style.css'
 import MiniMCE from 'minimce'
 
-// 需要自行引入，以便对语言、皮肤、主题、图标进行更换
-import 'tinymce/skins/ui/oxide/skin.min.css'
-import icons_url from 'tinymce/icons/default/icons?url'
-import theme_url from 'tinymce/themes/silver/theme?url'
+// 在组件外部引入静态资源的目的是方便用户对其进行更换
+import 'tinymce/skins/ui/oxide/skin.min.css' // 皮肤
+import 'tinymce/themes/silver/theme' // 主题
+import 'tinymce/icons/default/icons' // 图标
+import './langs/zh-Hans' // 语言（非必须，默认英文，下载地址：https://www.tiny.cloud/get-tiny/language-packages）
 
 app.use(MiniMCE, {
   // 全局 props（单向数据流）
   options: {
-    icons_url,
-    theme_url,
+    language: 'zh-Hans',
   },
 })
 ```
@@ -79,22 +79,22 @@ app.use(MiniMCE, {
 
 ```vue
 <template>
-  <MiniMCE :options="options" />
+  <MiniMCE
+    :options="{
+      language: 'zh-Hans',
+    }"
+  />
 </template>
 
 <script setup>
 import 'minimce/dist/style.css'
 import MiniMCE from 'minimce'
 
-// 需要自行引入，以便对语言、皮肤、主题、图标进行更换
-import 'tinymce/skins/ui/oxide/skin.min.css'
-import icons_url from 'tinymce/icons/default/icons?url'
-import theme_url from 'tinymce/themes/silver/theme?url'
-
-const options = ref({
-  icons_url,
-  theme_url,
-})
+// 在组件外部引入静态资源的目的是方便用户对其进行更换
+import 'tinymce/skins/ui/oxide/skin.min.css' // 皮肤
+import 'tinymce/themes/silver/theme' // 主题
+import 'tinymce/icons/default/icons' // 图标
+import './langs/zh-Hans' // 语言（非必须，默认英文，下载地址：https://www.tiny.cloud/get-tiny/language-packages）
 </script>
 ```
 
@@ -114,15 +114,17 @@ npm add minimce tinymce
 import 'minimce/dist/style.css'
 import MiniMCE from 'minimce'
 
-// 需要自行引入，以便对语言、皮肤、主题、图标进行更换
-import 'tinymce/skins/ui/oxide/skin.min.css'
-import icons_url from 'tinymce/icons/default/icons?url'
-import theme_url from 'tinymce/themes/silver/theme?url'
+// 在组件外部引入静态资源的目的是方便用户对其进行更换
+import 'tinymce/skins/ui/oxide/skin.min.css' // 皮肤
+import 'tinymce/themes/silver/theme' // 主题
+import 'tinymce/icons/default/icons' // 图标
+import './langs/zh-Hans' // 语言（非必须，默认英文，下载地址：https://www.tiny.cloud/get-tiny/language-packages）
 
 Vue.use(MiniMCE, {
   // 全局 props（单向数据流）
-  icons_url,
-  theme_url,
+  options: {
+    language: 'zh-Hans',
+  },
 })
 ```
 
@@ -130,22 +132,22 @@ Vue.use(MiniMCE, {
 
 ```vue
 <template>
-  <MiniMCE :options="options" />
+  <MiniMCE
+    :options="{
+      language: 'zh-Hans',
+    }"
+  />
 </template>
 
 <script setup>
 import 'minimce/dist/style.css'
 import MiniMCE from 'minimce'
 
-// 需要自行引入，以便对语言、皮肤、主题、图标进行更换
-import 'tinymce/skins/ui/oxide/skin.min.css'
-import icons_url from 'tinymce/icons/default/icons?url'
-import theme_url from 'tinymce/themes/silver/theme?url'
-
-const options = ref({
-  icons_url,
-  theme_url,
-})
+// 在组件外部引入静态资源的目的是方便用户对其进行更换
+import 'tinymce/skins/ui/oxide/skin.min.css' // 皮肤
+import 'tinymce/themes/silver/theme' // 主题
+import 'tinymce/icons/default/icons' // 图标
+import './langs/zh-Hans' // 语言（非必须，默认英文，下载地址：https://www.tiny.cloud/get-tiny/language-packages）
 </script>
 ```
 
@@ -167,17 +169,19 @@ import VCA from '@vue/composition-api'
 import 'minimce/dist/style.css'
 import MiniMCE from 'minimce'
 
-// 需要自行引入，以便对语言、皮肤、主题、图标进行更换
-import 'tinymce/skins/ui/oxide/skin.min.css'
-import icons_url from 'tinymce/icons/default/icons?url'
-import theme_url from 'tinymce/themes/silver/theme?url'
+// 在组件外部引入静态资源的目的是方便用户对其进行更换
+import 'tinymce/skins/ui/oxide/skin.min.css' // 皮肤
+import 'tinymce/themes/silver/theme' // 主题
+import 'tinymce/icons/default/icons' // 图标
+import './langs/zh-Hans' // 语言（非必须，默认英文，下载地址：https://www.tiny.cloud/get-tiny/language-packages）
 
 Vue.use(VCA)
 
 Vue.use(MiniMCE, {
   // 全局 props（单向数据流）
-  icons_url,
-  theme_url,
+  options: {
+    language: 'zh-Hans',
+  },
 })
 ```
 
@@ -185,7 +189,11 @@ Vue.use(MiniMCE, {
 
 ```vue
 <template>
-  <MiniMCE :options="options" />
+  <MiniMCE
+    :options="{
+      language: 'zh-Hans',
+    }"
+  />
 </template>
 
 <script>
@@ -194,23 +202,16 @@ import VCA from '@vue/composition-api'
 import 'minimce/dist/style.css'
 import MiniMCE from 'minimce'
 
-// 需要自行引入，以便对语言、皮肤、主题、图标进行更换
-import 'tinymce/skins/ui/oxide/skin.min.css'
-import icons_url from 'tinymce/icons/default/icons?url'
-import theme_url from 'tinymce/themes/silver/theme?url'
+// 在组件外部引入静态资源的目的是方便用户对其进行更换
+import 'tinymce/skins/ui/oxide/skin.min.css' // 皮肤
+import 'tinymce/themes/silver/theme' // 主题
+import 'tinymce/icons/default/icons' // 图标
+import './langs/zh-Hans' // 语言（非必须，默认英文，下载地址：https://www.tiny.cloud/get-tiny/language-packages）
 
 Vue.use(VCA)
 
 export default {
   components: { MiniMCE },
-  data() {
-    return {
-      options: {
-        icons_url,
-        theme_url,
-      },
-    }
-  },
 }
 </script>
 ```
