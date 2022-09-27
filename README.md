@@ -22,9 +22,9 @@
 ![minimce](https://raw.githubusercontent.com/cloydlau/minimce/master/minimce.png)
 
 - 基于 TinyMCE 6
+- Vue 2.6 / 2.7 / 3 通用
 - 可离线使用，零网络延迟
 - 无[域名检测](#域名检测)，无弹窗困扰
-- Vue 2.6 / 2.7 / 3 通用
 - 插件全家桶开箱即用
 - 提供常用自定义插件示例
     - 插入 Word 文档（.docx），兼容 Microsoft Office、WPS
