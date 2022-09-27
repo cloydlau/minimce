@@ -1,44 +1,31 @@
-import Vue from 'vue'
+// '?url' 是 Vite 语法，在 Webpack 中请使用 https://webpack.js.org/guides/asset-modules/
+// '?raw' 是 Vite 语法，在 Webpack 中请使用 https://github.com/webpack-contrib/raw-loader
+
+// 浅色模式
+import 'tinymce/skins/ui/oxide/skin.min.css' // 皮肤
+import contentCSS from 'tinymce/skins/content/default/content.min.css?raw'
+import contentUICSS from 'tinymce/skins/ui/oxide/content.min.css?raw'
+
+// 深色模式
+/* import 'tinymce/skins/ui/oxide-dark/skin.min.css' // 皮肤
+import contentCSS from 'tinymce/skins/content/dark/content.min.css?raw'
+import contentUICSS from 'tinymce/skins/ui/oxide-dark/content.min.css?raw' */
+
+// 图标
+import icons_url from 'tinymce/icons/default/icons?url'
+
+// 主题
+import theme_url from 'tinymce/themes/silver/theme?url'
+
+// 语言（非必须，默认英文，其它语言下载地址：https://www.tiny.cloud/get-tiny/language-packages/）
+import language_url from '../langs/zh-Hans?url'
 
 import './index.scss'
 import MiniMCE from '../../src' // todo: 替换为下面两句
 // import 'minimce/dist/style.css'
 // import MiniMCE from 'minimce'
 
-/**
- * 浅色模式
- */
-import 'tinymce/skins/ui/oxide/skin.min.css' // 皮肤
-import contentCSS from 'tinymce/skins/content/default/content.min.css?raw'
-import contentUICSS from 'tinymce/skins/ui/oxide/content.min.css?raw'
-
-// '?raw' 是 Vite 语法，如果你使用的是 Webpack，请使用 https://github.com/webpack-contrib/raw-loader
-
-/**
- * 深色模式
- */
-/* import 'tinymce/skins/ui/oxide-dark/skin.min.css' // 皮肤
-import contentCSS from 'tinymce/skins/content/dark/content.min.css?raw'
-import contentUICSS from 'tinymce/skins/ui/oxide-dark/content.min.css?raw' */
-
-/**
- * 语言（可更换）
- */
-import '../langs/zh-Hans'
-
-/**
- * 主题（可更换）
- */
-import 'tinymce/themes/silver'
-
-/**
- * 图标（可更换）
- */
-import 'tinymce/icons/default'
-
-/**
- * 自定义插件（非必须）
- */
+// 自定义插件（非必须）
 import insertWord from './plugins/insert-word'
 import InsertFile from './plugins/InsertFile/index'
 import InsertImage from './plugins/InsertImage/index'
@@ -70,6 +57,9 @@ export default function () {
   Vue.use(MiniMCE, {
     options: {
       language: 'zh_CN',
+      language_url,
+      theme_url,
+      icons_url,
       content_style: [contentCSS, contentUICSS, contentCustomCSS].join('\n'),
       menu: {
         insert: {

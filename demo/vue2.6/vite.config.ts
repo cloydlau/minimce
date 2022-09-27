@@ -23,6 +23,11 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
         imports: [
           // presets
           '@vue/composition-api',
+          {
+            vue: [
+              ['default', 'Vue'],
+            ],
+          },
         ],
       }),
       {

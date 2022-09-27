@@ -1,7 +1,5 @@
-import Vue from 'vue'
-
-/* import VCA from '@vue/composition-api'
-Vue.use(VCA) */
+// '?url' 是 Vite 语法，在 Webpack 中请使用 https://webpack.js.org/guides/asset-modules/
+// '?raw' 是 Vite 语法，在 Webpack 中请使用 https://github.com/webpack-contrib/raw-loader
 
 import './index.scss'
 import MiniMCE from '../../src'
@@ -10,40 +8,31 @@ import MiniMCE from '../../dist/minimce.mjs' */
 /* import 'minimce/dist/style.css'
 import MiniMCE from 'minimce' */
 
-/**
- * 浅色模式
- */
+// 浅色模式
 import 'tinymce/skins/ui/oxide/skin.min.css' // 皮肤
 import contentCSS from 'tinymce/skins/content/default/content.min.css?raw'
 import contentUICSS from 'tinymce/skins/ui/oxide/content.min.css?raw'
 
-// '?raw' 是 Vite 语法，如果你使用的是 Webpack，请使用 https://github.com/webpack-contrib/raw-loader
-
-/**
- * 深色模式
- */
+// 深色模式
 /* import 'tinymce/skins/ui/oxide-dark/skin.min.css' // 皮肤
 import contentCSS from 'tinymce/skins/content/dark/content.min.css?raw'
 import contentUICSS from 'tinymce/skins/ui/oxide-dark/content.min.css?raw' */
 
-/**
- * 语言（可更换）
- */
-import '../langs/zh-Hans'
+// 图标
+import icons_url from 'tinymce/icons/default/icons?url'
 
-/**
- * 主题（可更换）
- */
-import 'tinymce/themes/silver'
+// 主题
+import theme_url from 'tinymce/themes/silver/theme?url'
 
-/**
- * 图标（可更换）
- */
-import 'tinymce/icons/default'
+// 语言（非必须，默认英文，其它语言下载地址：https://www.tiny.cloud/get-tiny/language-packages/）
+import language_url from '../langs/zh-Hans?url'
 
-/**
- * 自定义插件（非必须）
- */
+import 'minimce/dist/style.css'
+import MiniMCE from 'minimce'
+// import './index.scss'
+// import MiniMCE from '../../src'
+
+// 自定义插件（非必须）
 import insertWord from './plugins/insert-word'
 import InsertFile from './plugins/InsertFile/index'
 import InsertImage from './plugins/InsertImage/index'
@@ -75,6 +64,9 @@ export default function () {
   Vue.use(MiniMCE, {
     options: {
       language: 'zh_CN',
+      language_url,
+      theme_url,
+      icons_url,
       content_style: [contentCSS, contentUICSS, contentCustomCSS].join('\n'),
       menu: {
         insert: {

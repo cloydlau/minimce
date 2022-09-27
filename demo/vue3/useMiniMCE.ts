@@ -1,47 +1,37 @@
-/**
- * 浅色模式
- */
+// '?url' 是 Vite 语法，在 Webpack 中请使用 https://webpack.js.org/guides/asset-modules/
+// '?raw' 是 Vite 语法，在 Webpack 中请使用 https://github.com/webpack-contrib/raw-loader
+
+// 浅色模式
 import 'tinymce/skins/ui/oxide/skin.min.css' // 皮肤
 import contentCSS from 'tinymce/skins/content/default/content.min.css?raw'
 import contentUICSS from 'tinymce/skins/ui/oxide/content.min.css?raw'
 
-// '?raw' 是 Vite 语法，如果你使用的是 Webpack，请使用 https://github.com/webpack-contrib/raw-loader
-
-/**
- * 深色模式
- */
+// 深色模式
 /* import 'tinymce/skins/ui/oxide-dark/skin.min.css' // 皮肤
 import contentCSS from 'tinymce/skins/content/dark/content.min.css?raw'
 import contentUICSS from 'tinymce/skins/ui/oxide-dark/content.min.css?raw' */
 
-/**
- * 语言（可更换）
- */
-import '../langs/zh-Hans'
+// 图标
+import icons_url from 'tinymce/icons/default/icons?url'
 
-/**
- * 主题（可更换）
- */
-import 'tinymce/themes/silver'
+// 主题
+import theme_url from 'tinymce/themes/silver/theme?url'
 
-/**
- * 图标（可更换）
- */
-import 'tinymce/icons/default'
+// 语言（非必须，默认英文，其它语言下载地址：https://www.tiny.cloud/get-tiny/language-packages/）
+import language_url from '../langs/zh-Hans?url'
 
-/**
- * 自定义插件（非必须）
- */
+import 'minimce/dist/style.css'
+import MiniMCE from 'minimce'
+// import './index.scss'
+// import MiniMCE from '../../src'
+
 import axios from 'axios'
 import createAxiosShortcut from 'axios-shortcut'
-import MiniMCE from '../../src'
+
+// 自定义插件（非必须）
 import insertWord from './plugins/insert-word'
 import InsertMiniProgramPageLink from './plugins/InsertMiniProgramPageLink/index'
 import InsertTel from './plugins/InsertTel/index'
-
-// import 'minimce/dist/style.css'
-// import MiniMCE from 'minimce'
-import './index.scss'
 
 /**
  * 自定义内容样式（非必须）
@@ -69,6 +59,9 @@ export default function (app) {
   app.use(MiniMCE, {
     options: {
       language: 'zh_CN',
+      language_url,
+      icons_url,
+      theme_url,
       content_style: [contentCSS, contentUICSS, contentCustomCSS].join('\n'),
       menu: {
         insert: {

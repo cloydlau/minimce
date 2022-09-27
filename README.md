@@ -62,13 +62,16 @@ import 'minimce/dist/style.css'
 import MiniMCE from 'minimce'
 
 // 需要自行引入，以便对语言、皮肤、主题、图标进行更换
-// import './langs/TODO' // 默认英文，其它语言下载地址：https://www.tiny.cloud/get-tiny/language-packages/
 import 'tinymce/skins/ui/oxide/skin.min.css'
-import 'tinymce/themes/silver'
-import 'tinymce/icons/default'
+import icons_url from 'tinymce/icons/default/icons?url'
+import theme_url from 'tinymce/themes/silver/theme?url'
 
 app.use(MiniMCE, {
   // 全局 props（单向数据流）
+  options: {
+    icons_url,
+    theme_url,
+  },
 })
 ```
 
@@ -76,7 +79,7 @@ app.use(MiniMCE, {
 
 ```vue
 <template>
-  <MiniMCE v-bind="{/* 局部 props */}" />
+  <MiniMCE :options="options" />
 </template>
 
 <script setup>
@@ -84,10 +87,14 @@ import 'minimce/dist/style.css'
 import MiniMCE from 'minimce'
 
 // 需要自行引入，以便对语言、皮肤、主题、图标进行更换
-// import './langs/TODO' // 默认英文，其它语言下载地址：https://www.tiny.cloud/get-tiny/language-packages/
 import 'tinymce/skins/ui/oxide/skin.min.css'
-import 'tinymce/themes/silver'
-import 'tinymce/icons/default'
+import icons_url from 'tinymce/icons/default/icons?url'
+import theme_url from 'tinymce/themes/silver/theme?url'
+
+const options = ref({
+  icons_url,
+  theme_url,
+})
 </script>
 ```
 
@@ -108,13 +115,14 @@ import 'minimce/dist/style.css'
 import MiniMCE from 'minimce'
 
 // 需要自行引入，以便对语言、皮肤、主题、图标进行更换
-// import './langs/TODO' // 默认英文，其它语言下载地址：https://www.tiny.cloud/get-tiny/language-packages/
 import 'tinymce/skins/ui/oxide/skin.min.css'
-import 'tinymce/themes/silver'
-import 'tinymce/icons/default'
+import icons_url from 'tinymce/icons/default/icons?url'
+import theme_url from 'tinymce/themes/silver/theme?url'
 
 Vue.use(MiniMCE, {
   // 全局 props（单向数据流）
+  icons_url,
+  theme_url,
 })
 ```
 
@@ -122,22 +130,22 @@ Vue.use(MiniMCE, {
 
 ```vue
 <template>
-  <MiniMCE v-bind="{/* 局部 props */}" />
+  <MiniMCE :options="options" />
 </template>
 
-<script>
+<script setup>
 import 'minimce/dist/style.css'
 import MiniMCE from 'minimce'
 
 // 需要自行引入，以便对语言、皮肤、主题、图标进行更换
-// import './langs/TODO' // 默认英文，其它语言下载地址：https://www.tiny.cloud/get-tiny/language-packages/
 import 'tinymce/skins/ui/oxide/skin.min.css'
-import 'tinymce/themes/silver'
-import 'tinymce/icons/default'
+import icons_url from 'tinymce/icons/default/icons?url'
+import theme_url from 'tinymce/themes/silver/theme?url'
 
-export default {
-  components: { MiniMCE },
-}
+const options = ref({
+  icons_url,
+  theme_url,
+})
 </script>
 ```
 
@@ -160,15 +168,16 @@ import 'minimce/dist/style.css'
 import MiniMCE from 'minimce'
 
 // 需要自行引入，以便对语言、皮肤、主题、图标进行更换
-// import './langs/TODO' // 默认英文，其它语言下载地址：https://www.tiny.cloud/get-tiny/language-packages/
 import 'tinymce/skins/ui/oxide/skin.min.css'
-import 'tinymce/themes/silver'
-import 'tinymce/icons/default'
+import icons_url from 'tinymce/icons/default/icons?url'
+import theme_url from 'tinymce/themes/silver/theme?url'
 
 Vue.use(VCA)
 
 Vue.use(MiniMCE, {
   // 全局 props（单向数据流）
+  icons_url,
+  theme_url,
 })
 ```
 
@@ -176,7 +185,7 @@ Vue.use(MiniMCE, {
 
 ```vue
 <template>
-  <MiniMCE v-bind="{/* 局部 props */}" />
+  <MiniMCE :options="options" />
 </template>
 
 <script>
@@ -186,15 +195,22 @@ import 'minimce/dist/style.css'
 import MiniMCE from 'minimce'
 
 // 需要自行引入，以便对语言、皮肤、主题、图标进行更换
-// import './langs/TODO' // 默认英文，其它语言下载地址：https://www.tiny.cloud/get-tiny/language-packages/
 import 'tinymce/skins/ui/oxide/skin.min.css'
-import 'tinymce/themes/silver'
-import 'tinymce/icons/default'
+import icons_url from 'tinymce/icons/default/icons?url'
+import theme_url from 'tinymce/themes/silver/theme?url'
 
 Vue.use(VCA)
 
 export default {
   components: { MiniMCE },
+  data() {
+    return {
+      options: {
+        icons_url,
+        theme_url,
+      },
+    }
+  },
 }
 </script>
 ```
