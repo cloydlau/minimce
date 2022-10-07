@@ -29,8 +29,14 @@ import '../langs/zh-Hans'
 
 // 自定义插件（非必须）
 import insertWord from './plugins/insert-word'
-import InsertMiniProgramPageLink from './plugins/InsertMiniProgramPageLink/index'
+import InsertMPPageLink from './plugins/InsertMPPageLink/index'
 import InsertTel from './plugins/InsertTel/index'
+
+// 官方插件（非必须）
+if (import.meta.env.MODE === 'development') {
+  await import('tinymce/plugins/code')
+  await import('tinymce/plugins/codesample')
+}
 
 /**
  * 自定义内容样式（非必须）
@@ -59,11 +65,13 @@ export default function (app) {
     options: {
       language: 'zh-Hans',
       content_style: [contentCSS, contentUICSS, contentCustomCSS].join('\n'),
+      plugins: `preview importcss searchreplace autolink autosave save directionality visualblocks visualchars fullscreen image link media table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons
+        ${import.meta.env.MODE === 'development' ? ' code codesample' : ''}`,
+      // https://www.tiny.cloud/docs/tinymce/6/menus-configuration-options/#example-the-tinymce-default-menu-items
       menu: {
         insert: {
           title: 'Insert',
-          items:
-            'localimage localvideo localaudio tel miniprogrampagelink docx | image link media template codesample inserttable | charmap emoticons hr | pagebreak nonbreaking anchor toc | insertdatetime',
+          items: 'localimage localvideo localaudio tel mppagelink docx | image link media addcomment pageembed template codesample inserttable | charmap emoticons hr | pagebreak nonbreaking anchor tableofcontents | insertdatetime',
         },
       },
       setup(editor) {
@@ -104,12 +112,12 @@ export default function (app) {
           },
         })
 
-        InsertMiniProgramPageLink.mount.call(app, { editor })
-        editor.ui.registry.addMenuItem('miniprogrampagelink', {
+        InsertMPPageLink.mount.call(app, { editor })
+        editor.ui.registry.addMenuItem('mppagelink', {
           text: '小程序页面链接',
           icon: 'link',
           onAction: () => {
-            InsertMiniProgramPageLink.open()
+            InsertMPPageLink.open()
           },
         })
 
