@@ -33,10 +33,12 @@ import InsertMPPageLink from './plugins/InsertMPPageLink/index'
 import InsertTel from './plugins/InsertTel/index'
 
 // 官方插件（非必须）
-if (import.meta.env.MODE === 'development') {
+/* if (import.meta.env.MODE === 'development') {
   await import('tinymce/plugins/code')
   await import('tinymce/plugins/codesample')
-}
+} */
+import 'tinymce/plugins/code'
+import 'tinymce/plugins/codesample'
 
 /**
  * 自定义内容样式（非必须）
