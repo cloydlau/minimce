@@ -1,6 +1,11 @@
 # MiniMCE
 
-富文本编辑器，可离线使用的 [TinyMCE](https://github.com/tinymce/tinymce) Vue 2.6 / 2.7 / 3 封装，零网络延迟。
+<p align="left">
+  <img src="https://img.shields.io/npm/v/minimce.svg" alt="npm package">
+  <img src="http://img.badgesize.io/https://unpkg.com/minimce/dist/minimce.umd.js?compression=gzip&label=gziped" alt="gziped">
+</p>
+
+富文本编辑器，可离线使用的 [TinyMCE](https://github.com/tinymce/tinymce) Vue 2.6 / 2.7 / 3 封装。
 
 <br>
 
@@ -23,6 +28,7 @@
 
 - 基于 TinyMCE 6
 - Vue 2.6 / 2.7 / 3 通用
+- 支持 SSR，Nuxt 2 / 3 通用
 - 可离线使用，零网络延迟
 - 无[域名检测](#域名检测)，无弹窗困扰
 - 插件全家桶开箱即用
@@ -43,7 +49,9 @@
 
 ### 外置依赖
 
+- `vue`
 - `tinymce`
+- `@vue/composition-api` 仅 Vue 2.6 或更早版本需要
 
 <br>
 
@@ -53,7 +61,28 @@
 npm add minimce tinymce
 ```
 
-[完整示例代码](https://github.com/cloydlau/minimce/tree/master/demo/vue3)
+#### 局部注册
+
+```vue
+<template>
+  <MiniMCE
+    :options="{
+      language: 'zh-Hans',
+    }"
+  />
+</template>
+
+<script setup>
+import 'minimce/dist/style.css'
+import MiniMCE from 'minimce'
+
+// 在组件外部引入静态资源的目的是方便用户对其进行更换
+import 'tinymce/skins/ui/oxide/skin.min.css' // 皮肤
+import 'tinymce/themes/silver/theme' // 主题
+import 'tinymce/icons/default/icons' // 图标
+import './langs/zh-Hans' // 语言（非必须，默认英文，下载地址：https://www.tiny.cloud/get-tiny/language-packages）
+</script>
+```
 
 #### 全局注册
 
@@ -75,28 +104,7 @@ app.use(MiniMCE, {
 })
 ```
 
-#### 局部注册
-
-```vue
-<template>
-  <MiniMCE
-    :options="{
-      language: 'zh-Hans',
-    }"
-  />
-</template>
-
-<script setup>
-import 'minimce/dist/style.css'
-import MiniMCE from 'minimce'
-
-// 在组件外部引入静态资源的目的是方便用户对其进行更换
-import 'tinymce/skins/ui/oxide/skin.min.css' // 皮肤
-import 'tinymce/themes/silver/theme' // 主题
-import 'tinymce/icons/default/icons' // 图标
-import './langs/zh-Hans' // 语言（非必须，默认英文，下载地址：https://www.tiny.cloud/get-tiny/language-packages）
-</script>
-```
+[完整示例代码](https://github.com/cloydlau/minimce/tree/master/demo/vue3)
 
 <br>
 
@@ -106,28 +114,6 @@ import './langs/zh-Hans' // 语言（非必须，默认英文，下载地址：h
 npm add minimce tinymce
 ```
 
-[完整示例代码](https://github.com/cloydlau/minimce/tree/master/demo/vue2.7)
-
-#### 全局注册
-
-```ts
-import 'minimce/dist/style.css'
-import MiniMCE from 'minimce'
-
-// 在组件外部引入静态资源的目的是方便用户对其进行更换
-import 'tinymce/skins/ui/oxide/skin.min.css' // 皮肤
-import 'tinymce/themes/silver/theme' // 主题
-import 'tinymce/icons/default/icons' // 图标
-import './langs/zh-Hans' // 语言（非必须，默认英文，下载地址：https://www.tiny.cloud/get-tiny/language-packages）
-
-Vue.use(MiniMCE, {
-  // 全局 props（单向数据流）
-  options: {
-    language: 'zh-Hans',
-  },
-})
-```
-
 #### 局部注册
 
 ```vue
@@ -151,21 +137,9 @@ import './langs/zh-Hans' // 语言（非必须，默认英文，下载地址：h
 </script>
 ```
 
-<br>
-
-### Vue 2.6 或更早版本
-
-```sh
-npm add minimce tinymce @vue/composition-api
-```
-
-[完整示例代码](https://github.com/cloydlau/minimce/tree/master/demo/vue2)
-
 #### 全局注册
 
 ```ts
-import VCA from '@vue/composition-api'
-
 import 'minimce/dist/style.css'
 import MiniMCE from 'minimce'
 
@@ -175,14 +149,22 @@ import 'tinymce/themes/silver/theme' // 主题
 import 'tinymce/icons/default/icons' // 图标
 import './langs/zh-Hans' // 语言（非必须，默认英文，下载地址：https://www.tiny.cloud/get-tiny/language-packages）
 
-Vue.use(VCA)
-
 Vue.use(MiniMCE, {
   // 全局 props（单向数据流）
   options: {
     language: 'zh-Hans',
   },
 })
+```
+
+[完整示例代码](https://github.com/cloydlau/minimce/tree/master/demo/vue2.7)
+
+<br>
+
+### Vue 2.6 或更早版本
+
+```sh
+npm add minimce tinymce @vue/composition-api
 ```
 
 #### 局部注册
@@ -212,6 +194,285 @@ Vue.use(VCA)
 
 export default {
   components: { MiniMCE },
+}
+</script>
+```
+
+#### 全局注册
+
+```ts
+import VCA from '@vue/composition-api'
+
+import 'minimce/dist/style.css'
+import MiniMCE from 'minimce'
+
+// 在组件外部引入静态资源的目的是方便用户对其进行更换
+import 'tinymce/skins/ui/oxide/skin.min.css' // 皮肤
+import 'tinymce/themes/silver/theme' // 主题
+import 'tinymce/icons/default/icons' // 图标
+import './langs/zh-Hans' // 语言（非必须，默认英文，下载地址：https://www.tiny.cloud/get-tiny/language-packages）
+
+Vue.use(VCA)
+
+Vue.use(MiniMCE, {
+  // 全局 props（单向数据流）
+  options: {
+    language: 'zh-Hans',
+  },
+})
+```
+
+[完整示例代码](https://github.com/cloydlau/minimce/tree/master/demo/vue2)
+
+<br>
+
+### Nuxt 3
+
+```sh
+npm add minimce tinymce
+```
+
+#### 局部注册
+
+```vue
+<!-- ~/components/MiniMCE.client.vue -->
+
+<template>
+  <MiniMCE v-bind="attrs" />
+</template>
+
+<script setup>
+import MiniMCE from 'minimce'
+
+const attrs = useAttrs()
+</script>
+```
+
+```vue
+<template>
+  <client-only>
+    <MiniMCE v-model="value" v-bind="{/* 局部 props & attrs */}" />
+  </client-only>
+</template>
+
+<script setup>
+const value = ref()
+</script>
+```
+
+#### 全局注册
+
+```ts
+// ~/plugins/MiniMCE.client.ts
+
+import MiniMCE from 'minimce'
+
+export default defineNuxtPlugin((nuxtApp) => {
+  nuxtApp.vueApp.use(MiniMCE, {
+    // 全局 props & attrs（单向数据流）
+  })
+})
+```
+
+```vue
+<template>
+  <client-only>
+    <MiniMCE v-model="value" />
+  </client-only>
+</template>
+
+<script setup>
+const value = ref()
+</script>
+```
+
+<br>
+
+### Nuxt 2 + Vue 2.7
+
+```sh
+npm add minimce tinymce
+```
+
+#### 局部注册
+
+```ts
+// nuxt.config.js
+
+export default {
+  build: {
+    extend(config) {
+      config.module.rules.push({
+        test: /\.mjs$/,
+        include: /node_modules/,
+        type: 'javascript/auto',
+      })
+    },
+  },
+}
+```
+
+```vue
+<template>
+  <client-only>
+    <MiniMCE v-model="value" v-bind="{/* 局部 props & attrs */}" />
+  </client-only>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+
+const MiniMCE = () => process.client
+  ? import('minimce')
+  : Promise.resolve({ render: h => h('div') })
+
+const value = ref()
+</script>
+```
+
+#### 全局注册
+
+```ts
+// nuxt.config.js
+
+export default {
+  plugins: ['~/plugins/MiniMCE.client'],
+  build: {
+    extend(config) {
+      config.module.rules.push({
+        test: /\.mjs$/,
+        include: /node_modules/,
+        type: 'javascript/auto',
+      })
+    },
+  },
+}
+```
+
+```ts
+// ~/plugins/MiniMCE.client.js
+
+import Vue from 'vue'
+import MiniMCE from 'minimce'
+
+Vue.use(MiniMCE, {
+  // 全局 props & attrs（单向数据流）
+})
+```
+
+```vue
+<template>
+  <client-only>
+    <MiniMCE v-model="value" />
+  </client-only>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+
+const value = ref()
+</script>
+```
+
+<br>
+
+### Nuxt 2 + Vue 2.6 或更早版本
+
+```sh
+npm add minimce tinymce @vue/composition-api
+```
+
+#### 局部注册
+
+```ts
+// nuxt.config.js
+
+export default {
+  build: {
+    extend(config) {
+      config.module.rules.push({
+        test: /\.mjs$/,
+        include: /node_modules/,
+        type: 'javascript/auto',
+      })
+    },
+  },
+}
+```
+
+```vue
+<template>
+  <client-only>
+    <MiniMCE v-model="value" v-bind="{/* 局部 props & attrs */}" />
+  </client-only>
+</template>
+
+<script>
+import Vue from 'vue'
+import VCA from '@vue/composition-api'
+Vue.use(VCA)
+
+export default {
+  components: {
+    MiniMCE: () => process.client
+      ? import('minimce')
+      : Promise.resolve({ render: h => h('div') }),
+  },
+  data() {
+    return {
+      value: undefined,
+    }
+  },
+}
+</script>
+```
+
+#### 全局注册
+
+```ts
+// nuxt.config.js
+
+export default {
+  plugins: ['~/plugins/MiniMCE.client'],
+  build: {
+    extend(config) {
+      config.module.rules.push({
+        test: /\.mjs$/,
+        include: /node_modules/,
+        type: 'javascript/auto',
+      })
+    },
+  },
+}
+```
+
+```ts
+// ~/plugins/MiniMCE.client.js
+
+import Vue from 'vue'
+import VCA from '@vue/composition-api'
+import MiniMCE from 'minimce'
+
+Vue.use(VCA)
+Vue.use(MiniMCE, {
+  // 全局 props & attrs（单向数据流）
+})
+```
+
+```vue
+<template>
+  <client-only>
+    <MiniMCE v-model="value" />
+  </client-only>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      value: undefined,
+    }
+  },
 }
 </script>
 ```
@@ -479,9 +740,7 @@ TinyMCE 的 `urlconverter_callback`、`paste_postprocess` API 不支持异步操
 
 **PR welcome!** 💗
 
-1. 安装 Deno
-    - https://deno.land/#installation
-    - https://x.deno.js.cn/#%E5%AE%89%E8%A3%85%E6%9C%80%E6%96%B0%E7%89%88
+1. 安装 Deno: https://x.deno.js.cn/#%E5%AE%89%E8%A3%85%E6%9C%80%E6%96%B0%E7%89%88
 
 2. `npm add pnpm @cloydlau/scripts -g; pnpm i`
 
