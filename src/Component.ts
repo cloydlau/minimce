@@ -102,6 +102,7 @@ export default defineComponent({
         quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
         contextmenu: 'link image table',
         branding: false,
+        promotion: false,
         quickbars_insert_toolbar: false,
         // 默认屏蔽 iframe 原因：
         // - 允许用户引入未知的 iframe 存在执行未知脚本等安全隐患
