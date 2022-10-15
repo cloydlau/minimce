@@ -1,4 +1,4 @@
-// '?raw' 是 Vite 语法，在 Webpack 中请使用 https://github.com/webpack-contrib/raw-loader
+// '?raw' 是 Vite 语法，在 webpack 中请使用 https://github.com/webpack-contrib/raw-loader
 
 // import 'minimce/dist/style.css'
 // import MiniMCE from 'minimce'

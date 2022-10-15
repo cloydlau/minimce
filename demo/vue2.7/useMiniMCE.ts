@@ -1,5 +1,5 @@
-// '?url' 是 Vite 语法，在 Webpack 中请使用 https://webpack.js.org/guides/asset-modules/
-// '?raw' 是 Vite 语法，在 Webpack 中请使用 https://github.com/webpack-contrib/raw-loader
+// '?url' 是 Vite 语法，在 webpack 中请使用 https://webpack.js.org/guides/asset-modules/
+// '?raw' 是 Vite 语法，在 webpack 中请使用 https://github.com/webpack-contrib/raw-loader
 
 import './index.scss'
 import MiniMCE from '../../src' // todo: 替换为下面两句
