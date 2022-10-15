@@ -5,7 +5,7 @@
   <img src="http://img.badgesize.io/https://unpkg.com/minimce/dist/minimce.umd.js?compression=gzip&label=gziped" alt="gziped">
 </p>
 
-富文本编辑器，可离线使用的 [TinyMCE](https://github.com/tinymce/tinymce) Vue 2.6 / 2.7 / 3 封装。
+富文本编辑器，可离线使用的 [TinyMCE](https://github.com/tinymce/tinymce) Vue 2.6 / 2.7 / 3 封装，支持 Nuxt 2 / 3。
 
 <br>
 
