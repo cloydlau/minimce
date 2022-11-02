@@ -191,12 +191,9 @@ export default defineComponent({
         },
       }], {
       camelCase: false,
-      mergeFunction: (
-        globalFunction: (...args: any) => any,
-        defaultFunction: (...args: any) => any,
-      ) => (...args: any) => {
-        globalFunction(...args)
-        defaultFunction(...args)
+      mergeFunction: (previousValue: Function, currentValue: Function) => (...args: any) => {
+        previousValue(...args)
+        currentValue(...args)
       },
       type: Object,
     }))
