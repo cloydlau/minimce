@@ -52,7 +52,7 @@
     "serve": "vite preview",
     "test": "vitest",
     "coverage": "vitest run --coverage",
-    "release": "npx case-police --fix --ignore \"./demo/langs\" && npx lint-staged && cl switchVue 3 && pnpm build && cl release"
+    "release": "cl switchVue 3 && npx case-police --fix --ignore \"./demo/langs\" && npx lint-staged && pnpm build && cl release"
   },
   "peerDependencies": {
     "@vue/composition-api": ">=1",
