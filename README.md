@@ -4,6 +4,7 @@
   <a href="https://npmjs.com/package/minimce"><img src="https://img.shields.io/npm/v/minimce.svg" alt="npm package"></a>
   <a href="https://npmjs.com/package/minimce"><img src="http://img.badgesize.io/https://unpkg.com/minimce/dist/minimce.umd.js?compression=gzip&label=gziped" alt="gziped"></a>
   <a href="https://app.fossa.com/projects/git%2Bgithub.com%2Fcloydlau%2Fminimce?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Fcloydlau%2Fminimce.svg?type=shield"/></a>
+  <a href="https://github.com/cloydlau/minimce#develop"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome"></a>
 </p>
 
 > 富文本编辑器，可离线使用的 [TinyMCE](https://github.com/tinymce/tinymce) Vue 2.6 / 2.7 / 3 封装，支持 Nuxt 2 / 3。
@@ -738,8 +739,6 @@ TinyMCE 的 `urlconverter_callback`、`paste_postprocess` API 不支持异步操
 <br>
 
 ## 开发
-
-**PR welcome!** 💗
 
 1. [安装 Deno](https://x.deno.js.cn/#%E5%AE%89%E8%A3%85%E6%9C%80%E6%96%B0%E7%89%88)
 
