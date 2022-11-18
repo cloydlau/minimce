@@ -102,7 +102,7 @@
     "vue": "latest"
   },
   "lint-staged": {
-    "!(demo/**/*)*.{js,ts,tsx,vue,md}": [
+    "{src,__tests__}/**.*": [
       "eslint --fix"
     ]
   },
