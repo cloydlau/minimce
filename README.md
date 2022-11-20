@@ -1,18 +1,12 @@
 # MiniMCE
 
 <p align="left">
-  <a href="https://npmjs.com/package/minimce">
-    <img alt="npm package" src="https://img.shields.io/npm/v/minimce.svg?logo=npm">
-  </a>
-  <a href="https://bundlephobia.com/package/minimce">
-    <img alt="minzipped size" src="https://img.shields.io/bundlephobia/minzip/minimce">
-  </a>
-  <a href="https://eslint.org">
-    <img alt="code style" src="https://img.shields.io/badge/code_style-eslint-4B32C3.svg">
-  </a>
-  <a href="https://github.com/cloydlau/minimce#develop">
-    <img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-welcome-ff69b4.svg">
-  </a>
+  <a href="https://npmjs.com/package/minimce"><img alt="npm package" src="https://img.shields.io/npm/v/minimce.svg?logo=npm"></a>
+  <a href="https://bundlephobia.com/package/minimce"><img alt="minzipped size" src="https://img.shields.io/bundlephobia/minzip/minimce"></a>
+  <br>
+  <a href="https://eslint.org"><img alt="code style" src="https://img.shields.io/badge/code_style-eslint-4B32C3.svg"></a>
+  <a href="https://conventionalcommits.org"><img alt="conventional commits" src="https://img.shields.io/badge/commits-conventional-fe5196.svg"></a>
+  <a href="https://github.com/cloydlau/minimce#develop"><img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg"></a>
 </p>
 
 > 富文本编辑器，可离线使用的 [TinyMCE](https://github.com/tinymce/tinymce) Vue 2.6 / 2.7 / 3 封装，支持 Nuxt 2 / 3。
