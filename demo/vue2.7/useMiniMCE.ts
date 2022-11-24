@@ -1,8 +1,9 @@
 // '?url' 是 Vite 语法，在 webpack 中请使用 https://webpack.js.org/guides/asset-modules/
 // '?raw' 是 Vite 语法，在 webpack 中请使用 https://github.com/webpack-contrib/raw-loader
 
-import MiniMCE from '../../src' // todo: 替换为下面两句
+// import './index.scss'
 // import MiniMCE from 'minimce'
+import MiniMCE from '../../src'
 
 // 浅色模式
 import 'tinymce/skins/ui/oxide/skin.min.css' // 皮肤
