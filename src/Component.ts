@@ -59,11 +59,12 @@ import 'tinymce/plugins/wordcount'
 
 // const isSmallScreen = window.matchMedia('(max-width: 1023.5px)').matches
 
+const name = 'MiniMCE'
 const modelValueProp = isVue3 ? 'modelValue' : 'value'
 const updateModelValue = isVue3 ? 'update:modelValue' : 'input'
 
 export default defineComponent({
-  name: 'MiniMCE',
+  name,
   props: {
     [modelValueProp]: String,
     disabled: {
@@ -248,3 +249,5 @@ export default defineComponent({
       })
   },
 })
+
+export { name }

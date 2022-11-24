@@ -1,8 +1,6 @@
 // '?raw' 是 Vite 语法，在 webpack 中请使用 https://github.com/webpack-contrib/raw-loader
 
-// import 'minimce/dist/style.css'
 // import MiniMCE from 'minimce'
-import './index.scss'
 import MiniMCE from '../../src'
 
 // 浅色模式

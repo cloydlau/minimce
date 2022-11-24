@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-dialog :visible.sync="showDialog" @closed="data = {}">
-      <el-form ref="formRef" :model="data" disabled>
+      <el-form :model="data" disabled>
         <el-form-item prop="value" required>
           <MiniMCE v-bind="props" ref="miniMCE" v-model="data.value" />
         </el-form-item>
@@ -23,9 +23,6 @@
       </button>
       <button @click="data = {}">
         清空
-      </button>
-      <button @click="() => { $refs.formRef.validate() }">
-        校验
       </button>
     </p>
 
@@ -57,15 +54,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss">
-/*@media (prefers-color-scheme: dark) {
-  body {
-    filter: invert(1) hue-rotate(180deg);
-    color: white;
-  }
-  img {
-    filter: invert(1) hue-rotate(180deg);
-  }
-}*/
-</style>

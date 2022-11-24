@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-dialog :visible.sync="showDialog" @closed="data = {}">
-      <el-form ref="formRef" :model="data" disabled>
+      <el-form :model="data" disabled>
         <el-form-item prop="value" required>
           <MiniMCE v-model="data.value" v-bind="props" />
         </el-form-item>
@@ -18,14 +18,15 @@
       <button @click="showDialog = true">
         打开对话框
       </button>
-      <button @click="data.value = '<p>123</p><p>123</p>'">
+      <button
+        @click="() => {
+          data.value = '<p>123</p><p>123</p>'
+        }"
+      >
         编程式设值
       </button>
       <button @click="data = {}">
         清空
-      </button>
-      <button @click="() => { $refs.formRef.validate() }">
-        校验
       </button>
     </p>
 
@@ -38,34 +39,15 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import JsonEditorVue from 'json-editor-vue'
 
-export default {
-  components: { JsonEditorVue },
-  data() {
-    return {
-      showDialog: true,
-      data: {
-        value: '初始值',
-      },
-      props: {
-        disabled: false,
-        outputFormat: 'html',
-      },
-    }
-  },
-}
+const showDialog = ref(true)
+const data = reactive({
+  value: '初始值',
+})
+const props = reactive({
+  disabled: false,
+  outputFormat: 'html',
+})
 </script>
-
-<style lang="scss">
-/*@media (prefers-color-scheme: dark) {
-  body {
-    filter: invert(1) hue-rotate(180deg);
-    color: white;
-  }
-  img {
-    filter: invert(1) hue-rotate(180deg);
-  }
-}*/
-</style>
