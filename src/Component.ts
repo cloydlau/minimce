@@ -1,5 +1,3 @@
-import './index.scss'
-
 import {
   computed,
   defineComponent,

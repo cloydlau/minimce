@@ -79,7 +79,6 @@ npm add minimce tinymce
 </template>
 
 <script setup>
-import 'minimce/dist/style.css'
 import MiniMCE from 'minimce'
 
 // 在组件外部引入静态资源的目的是方便用户对其进行更换
@@ -93,7 +92,6 @@ import './langs/zh-Hans' // 语言（非必须，默认英文，下载地址：h
 #### 全局注册
 
 ```ts
-import 'minimce/dist/style.css'
 import MiniMCE from 'minimce'
 
 // 在组件外部引入静态资源的目的是方便用户对其进行更换
@@ -132,7 +130,6 @@ npm add minimce tinymce
 </template>
 
 <script setup>
-import 'minimce/dist/style.css'
 import MiniMCE from 'minimce'
 
 // 在组件外部引入静态资源的目的是方便用户对其进行更换
@@ -146,7 +143,6 @@ import './langs/zh-Hans' // 语言（非必须，默认英文，下载地址：h
 #### 全局注册
 
 ```ts
-import 'minimce/dist/style.css'
 import MiniMCE from 'minimce'
 
 // 在组件外部引入静态资源的目的是方便用户对其进行更换
@@ -186,8 +182,6 @@ npm add minimce tinymce @vue/composition-api
 
 <script>
 import VCA from '@vue/composition-api'
-
-import 'minimce/dist/style.css'
 import MiniMCE from 'minimce'
 
 // 在组件外部引入静态资源的目的是方便用户对其进行更换
@@ -208,8 +202,6 @@ export default {
 
 ```ts
 import VCA from '@vue/composition-api'
-
-import 'minimce/dist/style.css'
 import MiniMCE from 'minimce'
 
 // 在组件外部引入静态资源的目的是方便用户对其进行更换
