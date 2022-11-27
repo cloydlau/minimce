@@ -16,7 +16,8 @@ import { debounce } from 'lodash-es'
 
 import tinymce from 'tinymce/tinymce'
 import type { Editor } from 'tinymce/tinymce'
-import { globalProps } from './index'
+import { pascalCasedName as name } from '../package.json'
+import { globalProps } from './install'
 // models
 import 'tinymce/models/dom'
 // plugins
@@ -57,7 +58,6 @@ import 'tinymce/plugins/wordcount'
 
 // const isSmallScreen = window.matchMedia('(max-width: 1023.5px)').matches
 
-const name = 'MiniMCE'
 const modelValueProp = isVue3 ? 'modelValue' : 'value'
 const updateModelValue = isVue3 ? 'update:modelValue' : 'input'
 
@@ -247,5 +247,3 @@ export default defineComponent({
       })
   },
 })
-
-export { name }

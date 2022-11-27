@@ -1,5 +1,6 @@
 {
   "name": "minimce",
+  "pascalCasedName": "MiniMCE",
   "version": "0.6.0",
   "private": false,
   "description": "Rich text editor, offline TinyMCE Vue 2.6 / 2.7 / 3 wrapper, support Nuxt 2 / 3.",
