@@ -16,7 +16,7 @@
 
 ## 对比 tinymce-vue
 
-是的，TinyMCE 已经有官方的 Vue 封装 [tinymce-vue](https://github.com/tinymce/tinymce-vue) 了，但它：
+是的，TinyMCE 已经有官方的 Vue 封装 [tinymce-vue](https://github.com/tinymce/tinymce-vue) 了，但它: 
 
 - 需要加载至少 **380kB** 的网络资源（开启插件全家桶将达到 **563kB**，还没算上付费插件），外网会很慢，甚至超时
 - 有[域名检测](#域名检测)，会弹窗警告
@@ -85,7 +85,7 @@ import MiniMCE from 'minimce'
 import 'tinymce/skins/ui/oxide/skin.min.css' // 皮肤
 import 'tinymce/themes/silver/theme' // 主题
 import 'tinymce/icons/default/icons' // 图标
-import './langs/zh-Hans' // 语言（非必须，默认英文，下载地址：https://www.tiny.cloud/get-tiny/language-packages）
+import './langs/zh-Hans' // 语言（非必须，默认英文，下载地址: https://www.tiny.cloud/get-tiny/language-packages）
 </script>
 ```
 
@@ -98,7 +98,7 @@ import MiniMCE from 'minimce'
 import 'tinymce/skins/ui/oxide/skin.min.css' // 皮肤
 import 'tinymce/themes/silver/theme' // 主题
 import 'tinymce/icons/default/icons' // 图标
-import './langs/zh-Hans' // 语言（非必须，默认英文，下载地址：https://www.tiny.cloud/get-tiny/language-packages）
+import './langs/zh-Hans' // 语言（非必须，默认英文，下载地址: https://www.tiny.cloud/get-tiny/language-packages）
 
 app.use(MiniMCE, {
   // 全局 props（单向数据流）
@@ -108,7 +108,105 @@ app.use(MiniMCE, {
 })
 ```
 
-[完整示例代码](https://github.com/cloydlau/minimce/tree/master/demo/vue3)
+#### CDN
+
+##### 使用 ESM 构建版本
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <!-- 皮肤 -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/tinymce/skins/ui/oxide/skin.min.css"
+  >
+</head>
+
+<body>
+  <div id="app">
+    <minimce :options="options"></minimce>
+  </div>
+  <script type="importmap">
+    {
+      "imports": {
+        "vue": "https://unpkg.com/vue/dist/vue.esm-browser.prod.js",
+        "vue-demi": "https://unpkg.com/vue-demi/lib/v3/index.mjs",
+        "tinymce": "https://unpkg.com/tinymce",
+        "minimce": "https://unpkg.com/minimce@0.6/dist/minimce.mjs"
+      }
+    }
+  </script>
+  <script type="module">
+    import { createApp } from 'vue'
+    import MiniMCE from 'minimce'
+
+    createApp({
+      setup: () => ({
+        options: {
+          // 主题
+          theme_url: 'https://unpkg.com/tinymce/themes/silver/theme',
+          // 图标
+          icons_url: 'https://unpkg.com/tinymce/icons/default/icons',
+          // 语言（非必须，默认英文，下载地址: https://www.tiny.cloud/get-tiny/language-packages）
+          // language_url: 'https://xxx',
+        },
+      }),
+    }).component('minimce', MiniMCE)
+      .mount('#app')
+  </script>
+</body>
+
+</html>
+```
+
+##### 使用全局构建版本
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <!-- 皮肤 -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/tinymce/skins/ui/oxide/skin.min.css"
+  >
+</head>
+
+<body>
+  <div id="app">
+    <minimce :options="options"></minimce>
+  </div>
+
+  <script src="https://unpkg.com/vue"></script>
+  <script src="https://unpkg.com/vue-demi"></script>
+  <script src="https://unpkg.com/tinymce"></script>
+  <script src="https://unpkg.com/minimce@0.6/dist/minimce.umd.js"></script>
+  <script>
+    const { createApp } = Vue
+
+    createApp({
+      setup: () => ({
+        options: {
+          // 主题
+          theme_url: 'https://unpkg.com/tinymce/themes/silver/theme',
+          // 图标
+          icons_url: 'https://unpkg.com/tinymce/icons/default/icons',
+          // 语言（非必须，默认英文，下载地址: https://www.tiny.cloud/get-tiny/language-packages）
+          // language_url: 'https://xxx',
+        },
+      }),
+    }).component('minimce', MiniMCE)
+      .mount('#app')
+  </script>
+</body>
+
+</html>
+```
 
 <br>
 
@@ -136,7 +234,7 @@ import MiniMCE from 'minimce'
 import 'tinymce/skins/ui/oxide/skin.min.css' // 皮肤
 import 'tinymce/themes/silver/theme' // 主题
 import 'tinymce/icons/default/icons' // 图标
-import './langs/zh-Hans' // 语言（非必须，默认英文，下载地址：https://www.tiny.cloud/get-tiny/language-packages）
+import './langs/zh-Hans' // 语言（非必须，默认英文，下载地址: https://www.tiny.cloud/get-tiny/language-packages）
 </script>
 ```
 
@@ -149,7 +247,7 @@ import MiniMCE from 'minimce'
 import 'tinymce/skins/ui/oxide/skin.min.css' // 皮肤
 import 'tinymce/themes/silver/theme' // 主题
 import 'tinymce/icons/default/icons' // 图标
-import './langs/zh-Hans' // 语言（非必须，默认英文，下载地址：https://www.tiny.cloud/get-tiny/language-packages）
+import './langs/zh-Hans' // 语言（非必须，默认英文，下载地址: https://www.tiny.cloud/get-tiny/language-packages）
 
 Vue.use(MiniMCE, {
   // 全局 props（单向数据流）
@@ -159,7 +257,107 @@ Vue.use(MiniMCE, {
 })
 ```
 
-[完整示例代码](https://github.com/cloydlau/minimce/tree/master/demo/vue2.7)
+#### CDN
+
+##### 使用 ESM 构建版本
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <!-- 皮肤 -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/tinymce/skins/ui/oxide/skin.min.css"
+  >
+</head>
+
+<body>
+  <div id="app">
+    <minimce :options="options"></minimce>
+  </div>
+  <script type="importmap">
+    {
+      "imports": {
+        "vue": "https://unpkg.com/vue@2/dist/vue.esm.browser.min.js",
+        "vue-demi": "https://unpkg.com/vue-demi/lib/v2.7/index.mjs",
+        "tinymce": "https://unpkg.com/tinymce",
+        "minimce": "https://unpkg.com/minimce@0.6/dist/minimce.mjs"
+      }
+    }
+  </script>
+  <script type="module">
+    import Vue from 'vue'
+    import MiniMCE from 'minimce'
+
+    new Vue({
+      components: { minimce: MiniMCE },
+      data() {
+        return {
+          options: {
+            // 主题
+            theme_url: 'https://unpkg.com/tinymce/themes/silver/theme',
+            // 图标
+            icons_url: 'https://unpkg.com/tinymce/icons/default/icons',
+            // 语言（非必须，默认英文，下载地址: https://www.tiny.cloud/get-tiny/language-packages）
+            // language_url: 'https://xxx',
+          },
+        }
+      },
+    }).$mount('#app')
+  </script>
+</body>
+
+</html>
+```
+
+##### 使用全局构建版本
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <!-- 皮肤 -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/tinymce/skins/ui/oxide/skin.min.css"
+  >
+</head>
+
+<body>
+  <div id="app">
+    <minimce :options="options"></minimce>
+  </div>
+
+  <script src="https://unpkg.com/vue@2"></script>
+  <script src="https://unpkg.com/vue-demi"></script>
+  <script src="https://unpkg.com/tinymce"></script>
+  <script src="https://unpkg.com/minimce@0.6/dist/minimce.umd.js"></script>
+  <script>
+    new Vue({
+      components: { minimce: MiniMCE },
+      data() {
+        return {
+          options: {
+            // 主题
+            theme_url: 'https://unpkg.com/tinymce/themes/silver/theme',
+            // 图标
+            icons_url: 'https://unpkg.com/tinymce/icons/default/icons',
+            // 语言（非必须，默认英文，下载地址: https://www.tiny.cloud/get-tiny/language-packages）
+            // language_url: 'https://xxx',
+          },
+        }
+      },
+    }).$mount('#app')
+  </script>
+</body>
+
+</html>
+```
 
 <br>
 
@@ -188,7 +386,7 @@ import MiniMCE from 'minimce'
 import 'tinymce/skins/ui/oxide/skin.min.css' // 皮肤
 import 'tinymce/themes/silver/theme' // 主题
 import 'tinymce/icons/default/icons' // 图标
-import './langs/zh-Hans' // 语言（非必须，默认英文，下载地址：https://www.tiny.cloud/get-tiny/language-packages）
+import './langs/zh-Hans' // 语言（非必须，默认英文，下载地址: https://www.tiny.cloud/get-tiny/language-packages）
 
 Vue.use(VCA)
 
@@ -208,7 +406,7 @@ import MiniMCE from 'minimce'
 import 'tinymce/skins/ui/oxide/skin.min.css' // 皮肤
 import 'tinymce/themes/silver/theme' // 主题
 import 'tinymce/icons/default/icons' // 图标
-import './langs/zh-Hans' // 语言（非必须，默认英文，下载地址：https://www.tiny.cloud/get-tiny/language-packages）
+import './langs/zh-Hans' // 语言（非必须，默认英文，下载地址: https://www.tiny.cloud/get-tiny/language-packages）
 
 Vue.use(VCA)
 
@@ -220,7 +418,115 @@ Vue.use(MiniMCE, {
 })
 ```
 
-[完整示例代码](https://github.com/cloydlau/minimce/tree/master/demo/vue2)
+#### CDN
+
+##### 使用 ESM 构建版本
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <!-- 皮肤 -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/tinymce/skins/ui/oxide/skin.min.css"
+  >
+</head>
+
+<body>
+  <div id="app">
+    <minimce :options="options"></minimce>
+  </div>
+  <script>
+    window.process = { env: { NODE_ENV: 'production' } }
+  </script>
+  <script type="importmap">
+    {
+      "imports": {
+        "vue": "https://unpkg.com/vue@2.6/dist/vue.esm.browser.min.js",
+        "@vue/composition-api": "https://unpkg.com/@vue/composition-api/dist/vue-composition-api.mjs",
+        "@vue/composition-api/dist/vue-composition-api.mjs": "https://unpkg.com/@vue/composition-api/dist/vue-composition-api.mjs",
+        "vue-demi": "https://unpkg.com/vue-demi/lib/v2/index.mjs",
+        "tinymce": "https://unpkg.com/tinymce",
+        "minimce": "https://unpkg.com/minimce@0.6/dist/minimce.mjs"
+      }
+    }
+  </script>
+  <script type="module">
+    import { createApp } from '@vue/composition-api'
+    import MiniMCE from 'minimce'
+
+    const app = createApp({
+      setup: () => ({
+        options: {
+          // 主题
+          theme_url: 'https://unpkg.com/tinymce/themes/silver/theme',
+          // 图标
+          icons_url: 'https://unpkg.com/tinymce/icons/default/icons',
+          // 语言（非必须，默认英文，下载地址: https://www.tiny.cloud/get-tiny/language-packages）
+          // language_url: 'https://xxx',
+        },
+      }),
+    })
+
+    app.component('minimce', MiniMCE)
+    app.mount('#app')
+  </script>
+</body>
+
+</html>
+```
+
+##### 使用全局构建版本
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <!-- 皮肤 -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/tinymce/skins/ui/oxide/skin.min.css"
+  >
+</head>
+
+<body>
+  <div id="app">
+    <minimce :options="options"></minimce>
+  </div>
+
+  <script src="https://unpkg.com/vue@2.6"></script>
+  <script src="https://unpkg.com/@vue/composition-api"></script>
+  <script src="https://unpkg.com/vue-demi"></script>
+  <script src="https://unpkg.com/tinymce"></script>
+  <script src="https://unpkg.com/minimce@0.6/dist/minimce.umd.js"></script>
+  <script>
+    const { createApp } = VueCompositionAPI
+
+    const app = createApp({
+      setup: () => ({
+        options: {
+          // 主题
+          theme_url: 'https://unpkg.com/tinymce/themes/silver/theme',
+          // 图标
+          icons_url: 'https://unpkg.com/tinymce/icons/default/icons',
+          // 语言（非必须，默认英文，下载地址: https://www.tiny.cloud/get-tiny/language-packages）
+          // language_url: 'https://xxx',
+        },
+      }),
+    })
+
+    app.component('minimce', MiniMCE)
+    app.mount('#app')
+  </script>
+</body>
+
+</html>
+```
 
 <br>
 
@@ -582,7 +888,7 @@ app.use(MiniMCE, {
 
 ## 域名检测
 
-TinyMCE 有四种价格计划：
+TinyMCE 有四种价格计划: 
 
 - Core（免费）
 - Essential
@@ -593,7 +899,7 @@ TinyMCE 有四种价格计划：
 
 > 当然，你可以用 CSS 来屏蔽弹窗，只是不推荐这种方式
 
-TinyMCE 提供了两种加载方式：
+TinyMCE 提供了两种加载方式: 
 
 - CDN（tinymce-vue 采用的方式）: 需要注册账号以提供 `api-key`，并在账号设置中登记所有用到 TinyMCE 的项目域名
 - NPM（minimce 采用的方式）: 没有 `api-key` 参数，所以不需要注册账号、不需要登记域名，参考 [Tiny 官方解释](https://stackoverflow.com/questions/63398432/how-to-use-tinymce-5-api-key-using-npm)
@@ -602,7 +908,7 @@ TinyMCE 提供了两种加载方式：
 
 ## 内容样式
 
-富文本的内容样式建议在展示侧自行添加，而不是在富文本的生产侧添加，因为：
+富文本的内容样式建议在展示侧自行添加，而不是在富文本的生产侧添加，因为: 
 
 1. 富文本的生产侧无法满足展示侧各自的定制化需求
 2. 展示侧可能包含小程序，小程序不支持 `style` 标签
@@ -646,7 +952,7 @@ TinyMCE 提供了 premium 插件 PowerPaste，可用于粘贴 Word 文档，但�
 
 MiniMCE 提供了插入 Word 文档的插件示例，兼容 Microsoft Office、WPS，可在一定程度上替代 PowerPaste
 
-注意：粘贴可以片段粘贴，插入只能整个文档插入
+注意: 粘贴可以片段粘贴，插入只能整个文档插入
 
 ### PowerPaste 插件
 
@@ -707,14 +1013,14 @@ app.use(MiniMCE, {
 
 如需获取纯文本，选中**编辑**-**粘贴为文本**再进行粘贴
 
-**清除格式**按钮得到的<font color="#dd0000">不是</font>纯文本，可以自定义清除效果：
+**清除格式**按钮得到的<font color="#dd0000">不是</font>纯文本，可以自定义清除效果: 
 [Removing a format](https://www.tiny.cloud/docs/tinymce/6/content-formatting/#removing-a-format)
 
 <br>
 
 ### 图片
 
-如果用户复制第三方网站的内容到编辑框内，静态资源（如图片）可能无法正常显示，这是因为：
+如果用户复制第三方网站的内容到编辑框内，静态资源（如图片）可能无法正常显示，这是因为: 
 
 1. 第三方网站没有开启静态资源的跨域访问
 
