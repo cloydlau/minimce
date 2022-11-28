@@ -108,9 +108,7 @@ app.use(MiniMCE, {
 })
 ```
 
-#### CDN
-
-##### 使用 ESM 构建版本
+#### CDN + ESM
 
 ```html
 <!DOCTYPE html>
@@ -162,7 +160,7 @@ app.use(MiniMCE, {
 </html>
 ```
 
-##### 使用全局构建版本
+#### CDN + UMD
 
 ```html
 <!DOCTYPE html>
@@ -257,9 +255,7 @@ Vue.use(MiniMCE, {
 })
 ```
 
-#### CDN
-
-##### 使用 ESM 构建版本
+#### CDN + ESM
 
 ```html
 <!DOCTYPE html>
@@ -313,7 +309,7 @@ Vue.use(MiniMCE, {
 </html>
 ```
 
-##### 使用全局构建版本
+#### CDN + UMD
 
 ```html
 <!DOCTYPE html>
@@ -418,9 +414,7 @@ Vue.use(MiniMCE, {
 })
 ```
 
-#### CDN
-
-##### 使用 ESM 构建版本
+#### CDN + ESM
 
 ```html
 <!DOCTYPE html>
@@ -479,7 +473,7 @@ Vue.use(MiniMCE, {
 </html>
 ```
 
-##### 使用全局构建版本
+#### CDN + UMD
 
 ```html
 <!DOCTYPE html>
