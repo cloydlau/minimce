@@ -10,6 +10,7 @@ export default editor => SwalPreset.confirm({
   },
   titleText: '插入 Word 文档',
   confirmButtonText: '确定',
+  cancelButtonText: '取消',
   showLoaderOnConfirm: true,
   preConfirm: (fileList: FileList | null) => {
     if (fileList) {
