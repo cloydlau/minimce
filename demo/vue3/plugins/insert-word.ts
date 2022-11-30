@@ -1,15 +1,15 @@
 import mammoth from 'mammoth/mammoth.browser.min.js'
-import 'sweetalert2-preset/dist/style.css'
-import Swal, { confirm } from 'sweetalert2-preset'
+import Swal from 'sweetalert2'
+import SwalPreset from 'sweetalert2-preset'
 
-export default editor => confirm({
+export default editor => SwalPreset.confirm({
   input: 'file',
   inputAttributes: {
     placeholder: '将 docx 文件拖到此处',
     multiple: true,
   },
   titleText: '插入 Word 文档',
-  confirmButtonText: `确定`,
+  confirmButtonText: '确定',
   showLoaderOnConfirm: true,
   preConfirm: (fileList: FileList | null) => {
     if (fileList) {
@@ -20,10 +20,10 @@ export default editor => confirm({
           }
 
           const reader = new FileReader()
-          reader.onload = async e => {
+          reader.onload = async (e) => {
             const arrayBuffer = e.target.result
             if (arrayBuffer.byteLength) {
-              mammoth.convertToHtml({ arrayBuffer }).then(res => {
+              mammoth.convertToHtml({ arrayBuffer }).then((res) => {
                 const { messages, value } = res
                 console.log(`${file.name} 解析结果：`, res)
                 if (value) {
@@ -31,7 +31,7 @@ export default editor => confirm({
                 } else {
                   reject(`${file.name} 内容为空`)
                 }
-              }).catch(err => {
+              }).catch((err) => {
                 reject(err)
               })
             } else {
@@ -39,9 +39,9 @@ export default editor => confirm({
             }
           }
           reader.readAsArrayBuffer(file)
-        })
-      )).then(results => {
-        results.map(result => {
+        }),
+      )).then((results) => {
+        results.map((result) => {
           const { status, value, reason } = result
           if (status === 'fulfilled') {
             editor.insertContent(value)
