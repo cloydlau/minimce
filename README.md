@@ -16,20 +16,20 @@
 
 ## 对比 tinymce-vue
 
-是的，TinyMCE 已经有官方的 Vue 封装 [tinymce-vue](https://github.com/tinymce/tinymce-vue) 了，但它: 
+是的，TinyMCE 已经有官方的 Vue 封装 [tinymce-vue](https://github.com/tinymce/tinymce-vue) 了，但它:
 
 - 需要加载至少 **380kB** 的网络资源（开启插件全家桶将达到 **563kB**，还没算上付费插件），外网会很慢，甚至超时
 - 有[域名检测](#域名检测)，会弹窗警告
 - 用不同的版本号来适配不同的 Vue 版本，升级成本较高
 - 默认功能最小化，需要繁杂的配置，还不支持全局传参
 
-![tinymce-vue](https://raw.githubusercontent.com/cloydlau/minimce/master/tinymce-vue.png)
+![tinymce-vue](https://raw.githubusercontent.com/cloydlau/minimce/main/tinymce-vue.png)
 
 <br>
 
 ## 特性
 
-![minimce](https://raw.githubusercontent.com/cloydlau/minimce/master/minimce.png)
+![minimce](https://raw.githubusercontent.com/cloydlau/minimce/main/minimce.png)
 
 - 基于 TinyMCE 6
 - Vue 2.6 / 2.7 / 3 通用
@@ -784,7 +784,7 @@ export default {
 | v-model      | 绑定值                                   | string  |                                                    |                                                                                   |
 | disabled     | 是否禁用（禁用模式不可编辑，保留工具栏） | boolean |                                                    | `false`                                                                           |
 | outputFormat | 输出格式                                 | string  | `'html'` / `'text'`                                | `'html'`                                                                          |
-| options      | TinyMCE 配置                             | object  | [官方文档](https://www.tiny.cloud/docs/tinymce/6/) | [查看代码](https://github.com/cloydlau/minimce/blob/master/src/Component.ts#L102) |
+| options      | TinyMCE 配置                             | object  | [官方文档](https://www.tiny.cloud/docs/tinymce/6/) | [查看代码](https://github.com/cloydlau/minimce/blob/main/src/Component.ts#L102) |
 
 <br>
 
@@ -913,30 +913,30 @@ TinyMCE 提供了两种加载方式:
 
 ### 插入 Word 文档（.docx），兼容 Microsoft Office、WPS
 
-- [Vue 3](https://github.com/cloydlau/minimce/blob/master/demo/vue3/plugins/insert-word.ts)
-- [Vue 2](https://github.com/cloydlau/minimce/blob/master/demo/vue2/plugins/insert-word.ts)
+- [Vue 3](https://github.com/cloydlau/minimce/blob/main/demo/vue3/plugins/insert-word.ts)
+- [Vue 2](https://github.com/cloydlau/minimce/blob/main/demo/vue2/plugins/insert-word.ts)
 
 ### 插入本地图片
 
-- [Vue 2](https://github.com/cloydlau/minimce/blob/master/demo/vue2/plugins/InsertImage)
+- [Vue 2](https://github.com/cloydlau/minimce/blob/main/demo/vue2/plugins/InsertImage)
 
 ### 插入本地视频
 
-- [Vue 2](https://github.com/cloydlau/minimce/blob/master/demo/vue2/plugins/InsertFile)
+- [Vue 2](https://github.com/cloydlau/minimce/blob/main/demo/vue2/plugins/InsertFile)
 
 ### 插入本地音频
 
-- [Vue 2](https://github.com/cloydlau/minimce/blob/master/demo/vue2/plugins/InsertFile)
+- [Vue 2](https://github.com/cloydlau/minimce/blob/main/demo/vue2/plugins/InsertFile)
 
 ### 插入电话链接
 
-- [Vue 3](https://github.com/cloydlau/minimce/blob/master/demo/vue3/plugins/InsertTel)
-- [Vue 2](https://github.com/cloydlau/minimce/blob/master/demo/vue2/plugins/InsertTel)
+- [Vue 3](https://github.com/cloydlau/minimce/blob/main/demo/vue3/plugins/InsertTel)
+- [Vue 2](https://github.com/cloydlau/minimce/blob/main/demo/vue2/plugins/InsertTel)
 
 ### 插入小程序页面链接
 
-- [Vue 3](https://github.com/cloydlau/minimce/blob/master/demo/vue3/plugins/InsertMiniProgramPageLink)
-- [Vue 2](https://github.com/cloydlau/minimce/blob/master/demo/vue2/plugins/InsertMiniProgramPageLink)
+- [Vue 3](https://github.com/cloydlau/minimce/blob/main/demo/vue3/plugins/InsertMiniProgramPageLink)
+- [Vue 2](https://github.com/cloydlau/minimce/blob/main/demo/vue2/plugins/InsertMiniProgramPageLink)
 
 <br>
 
@@ -987,7 +987,7 @@ app.use(MiniMCE, {
 ```
 
 - 兼容性
-  ![PowerPaste 插件兼容性](https://raw.githubusercontent.com/cloydlau/minimce/master/powerpaste-compatibility.png)
+  ![PowerPaste 插件兼容性](https://raw.githubusercontent.com/cloydlau/minimce/main/powerpaste-compatibility.png)
 
 - 受浏览器限制，PowerPaste 插件**无法支持微软 Word 和 Excel 文档所支持的<font color="#dd0000">所有</font>图片类型**
   。举个例子，浏览器禁止以编程方式访问文件系统，所以无法解析文档中使用 `file://` 协议的图片（WPS 使用的就是此协议）。
