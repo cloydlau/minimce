@@ -63,7 +63,7 @@
 
 ### Vue 3
 
-```sh
+```shell
 npm add minimce tinymce
 ```
 
@@ -210,7 +210,7 @@ app.use(MiniMCE, {
 
 ### Vue 2.7
 
-```sh
+```shell
 npm add minimce tinymce
 ```
 
@@ -359,7 +359,7 @@ Vue.use(MiniMCE, {
 
 ### Vue 2.6 或更早版本
 
-```sh
+```shell
 npm add minimce tinymce @vue/composition-api
 ```
 
@@ -526,7 +526,7 @@ Vue.use(MiniMCE, {
 
 ### Nuxt 3
 
-```sh
+```shell
 npm add minimce tinymce
 ```
 
@@ -588,7 +588,7 @@ const value = ref()
 
 ### Nuxt 2 + Vue 2.7
 
-```sh
+```shell
 npm add minimce tinymce
 ```
 
@@ -676,7 +676,7 @@ const value = ref()
 
 ### Nuxt 2 + Vue 2.6 或更早版本
 
-```sh
+```shell
 npm add minimce tinymce @vue/composition-api
 ```
 
