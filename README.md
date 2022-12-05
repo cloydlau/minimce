@@ -1,16 +1,19 @@
-# MiniMCE <sup>[![Version Badge][npm-version-svg]][package-url]</sup>
+<h1 align="center">
+  <a href="https://npmjs.com/package/minimce" target="_blank" rel="noopener noreferrer">
+    MiniMCE <sup><img alt="version" src="https://versionbadg.es/cloydlau/minimce.svg"></sup>
+  </a>
+</h1>
 
-[npm-version-svg]: https://versionbadg.es/cloydlau/minimce.svg
-[package-url]: https://npmjs.com/package/minimce
+<p align="center">
+  富文本编辑器，可离线使用的 <a href="https://github.com/tinymce/tinymce">TinyMCE</a> Vue 2.6 / 2.7 / 3 封装，支持 Nuxt 2 / 3
+</p>
 
-<p align="left">
+<p align="center">
   <a href="https://bundlephobia.com/package/minimce"><img alt="minzipped size" src="https://img.shields.io/bundlephobia/minzip/minimce"></a>
   <a href="https://eslint.org"><img alt="code style" src="https://img.shields.io/badge/code_style-ESLint-4B32C3.svg?logo=eslint"></a>
   <a href="https://conventionalcommits.org"><img alt="conventional commits" src="https://img.shields.io/badge/commits-Conventional-FE5196.svg?logo=conventionalcommits&logoColor=white"></a>
   <a href="https://github.com/cloydlau/minimce#develop"><img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg"></a>
 </p>
-
-> 富文本编辑器，可离线使用的 [TinyMCE](https://github.com/tinymce/tinymce) Vue 2.6 / 2.7 / 3 封装，支持 Nuxt 2 / 3。
 
 <br>
 
@@ -25,11 +28,11 @@
 
 ![tinymce-vue](https://raw.githubusercontent.com/cloydlau/minimce/main/tinymce-vue.png)
 
+![minimce](https://raw.githubusercontent.com/cloydlau/minimce/main/minimce.png)
+
 <br>
 
 ## 特性
-
-![minimce](https://raw.githubusercontent.com/cloydlau/minimce/main/minimce.png)
 
 - 基于 TinyMCE 6
 - Vue 2.6 / 2.7 / 3 通用
