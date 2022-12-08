@@ -782,12 +782,12 @@ export default {
 
 ## Props
 
-| 名称         | 说明                                     | 类型    | 可选值                                             | 默认值                                                                            |
-| ------------ | ---------------------------------------- | ------- | -------------------------------------------------- | --------------------------------------------------------------------------------- |
-| v-model      | 绑定值                                   | string  |                                                    |                                                                                   |
-| disabled     | 是否禁用（禁用模式不可编辑，保留工具栏） | boolean |                                                    | `false`                                                                           |
-| outputFormat | 输出格式                                 | string  | `'html'` / `'text'`                                | `'html'`                                                                          |
-| options      | TinyMCE 配置                             | object  | [官方文档](https://www.tiny.cloud/docs/tinymce/6/) | [查看代码](https://github.com/cloydlau/minimce/blob/main/src/Component.ts#L102) |
+| 名称         | 说明                                                   | 类型    | 默认值                                                                          |
+| ------------ | ------------------------------------------------------ | ------- | ------------------------------------------------------------------------------- |
+| v-model      | 绑定值                                                 | string  |                                                                                 |
+| disabled     | 是否禁用（禁用模式不可编辑，保留工具栏）               | boolean | `false`                                                                         |
+| outputFormat | 输出格式，`'html'` 或 `'text'`                         | string  | `'html'`                                                                        |
+| options      | [TinyMCE 配置](https://www.tiny.cloud/docs/tinymce/6/) | object  | [查看代码](https://github.com/cloydlau/minimce/blob/main/src/Component.ts#L102) |
 
 <br>
 
@@ -801,7 +801,7 @@ export default {
 
 ## 事件
 
-| 名称 | 说明                                                                                                                    | 参数                                                                 |
+| 名称 | 说明                                                                                                                    | 回调参数                                                             |
 | ---- | ----------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
 | init | [init_instance_callback](https://www.tiny.cloud/docs/tinymce/6/editor-important-options/#init_instance_callback) 执行时 | [editor](https://www.tiny.cloud/docs/tinymce/6/apis/tinymce.editor/) |
 
