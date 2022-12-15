@@ -189,7 +189,6 @@ export default defineComponent({
           loading.value = false
         },
       }], {
-      camelCase: false,
       mergeFunction: (previousValue: Function, currentValue: Function) => (...args: any) => {
         previousValue(...args)
         currentValue(...args)
