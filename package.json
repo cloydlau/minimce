@@ -3,6 +3,7 @@
   "PascalCasedName": "MiniMCE",
   "version": "0.7.0",
   "private": false,
+  "packageManager": "pnpm@7.18.2",
   "description": "Rich text editor, offline TinyMCE Vue 2.6 / 2.7 / 3 wrapper, supports Nuxt 2 / 3.",
   "author": "cloydlau",
   "license": "MIT",
