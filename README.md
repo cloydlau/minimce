@@ -5,7 +5,7 @@
 </h1>
 
 <p align="center">
-  富文本编辑器，可离线使用的 <a href="https://github.com/tinymce/tinymce">TinyMCE</a> Vue 2.6 / 2.7 / 3 封装，支持 Nuxt 2 / 3
+  富文本编辑器，可离线使用的 <a href="https://github.com/tinymce/tinymce">TinyMCE</a> Vue 2.6 / 2.7 / 3 封装，支持 Nuxt 2 / 3。
 </p>
 
 <p align="center">
@@ -18,7 +18,6 @@
 <br>
 
 ## 对比 tinymce-vue
-
 是的，TinyMCE 已经有官方的 Vue 封装 [tinymce-vue](https://github.com/tinymce/tinymce-vue) 了，但它:
 
 - 需要加载至少 **380kB** 的网络资源（开启插件全家桶将达到 **563kB**，还没算上付费插件），外网会很慢，甚至超时
@@ -782,12 +781,12 @@ export default {
 
 ## Props
 
-| 名称         | 说明                                                   | 类型    | 默认值                                                                          |
-| ------------ | ------------------------------------------------------ | ------- | ------------------------------------------------------------------------------- |
-| v-model      | 绑定值                                                 | string  |                                                                                 |
-| disabled     | 是否禁用（禁用模式不可编辑，保留工具栏）               | boolean | `false`                                                                         |
-| outputFormat | 输出格式，`'html'` 或 `'text'`                         | string  | `'html'`                                                                        |
-| options      | [TinyMCE 配置](https://www.tiny.cloud/docs/tinymce/6/) | object  | [查看代码](https://github.com/cloydlau/minimce/blob/main/src/Component.ts#L102) |
+| 名称            | 说明                                                   | 类型    | 默认值                                                                          |
+| --------------- | ------------------------------------------------------ | ------- | ------------------------------------------------------------------------------- |
+| v-model / value | 绑定值                                                 | string  |                                                                                 |
+| disabled        | 禁用状态                                               | boolean | `false`                                                                         |
+| outputFormat    | 输出格式，`'html'` 或 `'text'`                         | string  | `'html'`                                                                        |
+| options         | [TinyMCE 配置](https://www.tiny.cloud/docs/tinymce/6/) | object  | [查看代码](https://github.com/cloydlau/minimce/blob/main/src/Component.ts#L102) |
 
 <br>
 
@@ -795,7 +794,7 @@ export default {
 
 | 名称 | 说明    | 类型   |
 | ---- | ------- | ------ |
-| id   | 元素 id | string |
+| id   | 元素 ID | string |
 
 <br>
 
@@ -803,7 +802,7 @@ export default {
 
 | 名称 | 说明                                                                                                                    | 回调参数                                                             |
 | ---- | ----------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| init | [init_instance_callback](https://www.tiny.cloud/docs/tinymce/6/editor-important-options/#init_instance_callback) 执行时 | [editor](https://www.tiny.cloud/docs/tinymce/6/apis/tinymce.editor/) |
+| init | [init_instance_callback](https://www.tiny.cloud/docs/tinymce/6/editor-important-options/#init_instance_callback) 触发时 | [editor](https://www.tiny.cloud/docs/tinymce/6/apis/tinymce.editor/) |
 
 <br>
 
@@ -885,7 +884,7 @@ app.use(MiniMCE, {
 
 ## 域名检测
 
-TinyMCE 有四种价格计划: 
+TinyMCE 有四种价格计划:
 
 - Core（免费）
 - Essential
@@ -896,7 +895,7 @@ TinyMCE 有四种价格计划:
 
 > 当然，你可以用 CSS 来屏蔽弹窗，只是不推荐这种方式
 
-TinyMCE 提供了两种加载方式: 
+TinyMCE 提供了两种加载方式:
 
 - CDN（tinymce-vue 采用的方式）: 需要注册账号以提供 `api-key`，并在账号设置中登记所有用到 TinyMCE 的项目域名
 - NPM（minimce 采用的方式）: 没有 `api-key` 参数，所以不需要注册账号、不需要登记域名，参考 [Tiny 官方解释](https://stackoverflow.com/questions/63398432/how-to-use-tinymce-5-api-key-using-npm)
@@ -905,7 +904,7 @@ TinyMCE 提供了两种加载方式:
 
 ## 内容样式
 
-富文本的内容样式建议在展示侧自行添加，而不是在富文本的生产侧添加，因为: 
+富文本的内容样式建议在展示侧自行添加，而不是在富文本的生产侧添加，因为:
 
 1. 富文本的生产侧无法满足展示侧各自的定制化需求
 2. 展示侧可能包含小程序，小程序不支持 `style` 标签
@@ -1033,7 +1032,7 @@ TinyMCE 的 `urlconverter_callback`、`paste_postprocess` API 不支持异步操
 
 ## 更新日志
 
-各版本详细改动请参考 [release notes](https://github.com/cloydlau/minimce/releases) 。
+各版本详细改动请参考 [release notes](https://github.com/cloydlau/minimce/releases)
 
 <br>
 

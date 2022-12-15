@@ -1,6 +1,6 @@
 import type { ConfigEnv, UserConfigExport } from 'vite'
 import dts from 'vite-plugin-dts'
-import { name, pascalCasedName } from './package.json'
+import { name, PascalCasedName } from './package.json'
 
 // https://vitejs.dev/config/
 export default ({ command }: ConfigEnv): UserConfigExport => {
@@ -22,7 +22,7 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
         ],
         output: {
           globals: {
-            [name]: pascalCasedName,
+            [name]: PascalCasedName,
             'tinymce': 'TinyMCE',
             'vue': 'Vue',
             'vue-demi': 'VueDemi',

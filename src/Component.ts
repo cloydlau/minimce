@@ -16,7 +16,7 @@ import { debounce } from 'lodash-es'
 
 import tinymce from 'tinymce/tinymce'
 import type { Editor } from 'tinymce/tinymce'
-import { pascalCasedName as name } from '../package.json'
+import { PascalCasedName as name } from '../package.json'
 import { globalProps } from './install'
 // models
 import 'tinymce/models/dom'
