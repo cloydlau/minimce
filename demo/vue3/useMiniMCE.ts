@@ -1,6 +1,6 @@
 // '?raw' 是 Vite 语法，在 webpack 中请使用 https://github.com/webpack-contrib/raw-loader
 
-// import './index.scss'
+import './index.scss'
 // import MiniMCE from 'minimce'
 import MiniMCE from '../../src'
 
@@ -14,8 +14,8 @@ import contentUICSS from 'tinymce/skins/ui/oxide/content.min.css?raw'
 import contentCSS from 'tinymce/skins/content/dark/content.min.css?raw'
 import contentUICSS from 'tinymce/skins/ui/oxide-dark/content.min.css?raw' */
 
+import AxiosShortcut from 'axios-shortcut'
 import axios from 'axios'
-import createAxiosShortcut from 'axios-shortcut'
 
 // 图标
 import 'tinymce/icons/default/icons'
@@ -59,7 +59,7 @@ const contentCustomCSS = `
     vertical-align: middle;
   }
 `
-const { POST } = createAxiosShortcut(axios)
+const { POST } = AxiosShortcut(axios)
 
 export default function (app) {
   app.use(MiniMCE, {
@@ -139,29 +139,30 @@ export default function (app) {
         })
       },
       // 用于复制粘贴的图片和 TinyMCE 自带的图片上传
-      images_upload_handler: blobInfo =>
-        new Promise((resolve, reject) => {
-          // img 的 src 为 blob 或 base64 时触发
-          const blob = blobInfo.blob()
-          const file = new File([blob], blobInfo.filename(), {
-            type: blob.type,
-          })
+      // img 的 src 为 object URL 或 Base64 时触发
+      images_upload_handler(blobInfo, progress) {
+        // console.log('images_upload_handler: ', blobInfo)
+        const blob = blobInfo.blob()
+        const file = new File([blob], blobInfo.filename(), {
+          type: blob.type,
+        })
 
-          POST.upload(import.meta.env.VITE_APP_UPLOAD_API, {
-            domainId: 0,
-            dir: 'img',
-            file,
-          })
-            .then((res) => {
-              if (typeof res.data?.data === 'string')
-                resolve(res.data.data)
-              else
-                reject(res.data?.message)
-            })
-            .catch((err) => {
-              reject(String(err))
-            })
-        }),
+        return POST.upload(import.meta.env.VITE_APP_UPLOAD_API, {
+          domainId: '0',
+          dir: 'img',
+          file,
+        }, {
+          onUploadProgress(e) {
+            progress(e.loaded / e.total * 100)
+          },
+        }).then((res) => {
+          if (typeof res.data?.data === 'string') {
+            return res.data.data
+          } else {
+            Promise.reject(res)
+          }
+        })
+      },
     },
   })
 }
