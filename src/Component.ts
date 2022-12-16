@@ -76,8 +76,8 @@ export default defineComponent({
   setup(props, { emit, expose }) {
     const loading = ref(true)
     const id = ref(`minimce-${uuidv4()}`)
-    const syncingValue = ref(false)
-    const settingContent = ref(false)
+    const preventSettingContent = ref(false)
+    const preventUpdatingModalValue = ref(false)
     /**
      * props & attrs
      */
@@ -141,45 +141,51 @@ export default defineComponent({
             immediate: true,
           })
 
-          // 监听输入，同步至 value
-          const onChange = debounce(() => {
-            if (settingContent.value) {
-              settingContent.value = false
+          // 监听手动输入，更新绑定值
+          const onContentChange = debounce(() => {
+            if (preventUpdatingModalValue.value) {
+              preventUpdatingModalValue.value = false
               return
             }
-            syncingValue.value = true
-            emit(updateModelValue, editor.getContent({ format: OutputFormat.value }))
+            // 更新绑定值会触发编程式输入的监听，需要避免
+            preventSettingContent.value = true
+            const newContent = editor.getContent({ format: OutputFormat.value })
+            // console.log('手动输入:', newContent)
+            emit(updateModelValue, newContent)
           }, 100)
 
           /**
-           * 事件列表：https://www.tiny.cloud/docs/tinymce/6/events/
+           * 事件列表: https://www.tiny.cloud/docs/tinymce/6/events/
            *
            * SetContent 事件
-           *   触发：undo redo paste drop insertContent resetContent setContent
-           *   不触发：input
+           *   触发: Undo Redo paste drop insertContent resetContent setContent
+           *   不触发: input
            *
            * Change 事件
-           *   触发 blur undo paste drop insertContent
-           *   不触发：input redo setContent resetContent
+           *   触发: blur Undo paste drop insertContent
+           *   不触发: input Redo setContent resetContent
+           *   注意:「改变内容后失焦」也会触发，与 input 重复，
+           *        打破 preventUpdatingModalValue 与 preventSettingContent 的平衡
            *
-           * 注意：需要先于下方监听 value 执行
+           * 全小写表示原生事件，editor.on 不区分大小写
            *
-           * tinymce-vue 使用的是：change input undo redo
+           * 顺序: 先监听手动输入，再监听编程式输入
            *
-           * 加 change 的原因：
-           *   images_upload_handler 等 API 异步改变内容时，不会触发 input 和 SetContent
+           * tinymce-vue 使用的是: Change input Redo Undo
            */
-          editor.on('change input SetContent', onChange)
+          editor.on('input SetContent', onContentChange)
 
-          // 监听外部设值，同步至文本内容
-          watch(() => props[modelValueProp], (n) => {
-            if (syncingValue.value) {
-              syncingValue.value = false
+          // 监听编程式输入，更新文本内容
+          watch(() => props[modelValueProp], (newModalValue) => {
+            if (preventSettingContent.value) {
+              preventSettingContent.value = false
               return
             }
-            settingContent.value = true
+            // 更新文本内容会触发手动输入的监听，需要避免
+            preventUpdatingModalValue.value = true
             // 参数必须为 string 类型，否则无效
-            editor.setContent((n || '') as string)
+            // console.log('编程式输入:', newModalValue)
+            editor.setContent((newModalValue || '') as string)
           }, {
             immediate: true,
           })
@@ -202,7 +208,7 @@ export default defineComponent({
           intersectionObserver.unobserve(el)
           tinymce.init(Options.value)
         } else {
-          // el is not visible
+          // el is invisible
         }
       })
       // Asynchronous call
@@ -218,26 +224,20 @@ export default defineComponent({
       // height: (Options.value.height ?? '400') + 'px',
     }
   },
-  render(ctx: any) {
-    // Vue 3 中，ctx 和 this 均为组件实例
-    // Vue 2 中，ctx 为渲染函数 h，this 为组件实例
-    // this.id 在 vue2.6 中为 ref，vue2.7 中为 id 本身
+  render() {
+    // this 为组件实例
+    // this.id 在 Vue 2.6 中为 id 的 ref
+    // 参数 ctx 在 Vue 3 中为组件实例，在 Vue 2 中为渲染函数 h
+    // console.log('this.id: ', this.id)
+    // console.log('ctx: ', ctx)
     return isVue3
-      /**
-       * Vue 3 模板
-       */
-      ? h('textarea', {
-        id: ctx.id,
-      })
-      /**
-       * Vue 2 模板
-       */
+      ? h('textarea', { id: this.id })
       : h('textarea', {
         attrs: {
           id: unref(this.id),
         },
         on: {
-          input: (value: string | undefined | null) => {
+          input: (value?: string | null) => {
             this.$emit(updateModelValue, value)
           },
         },
