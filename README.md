@@ -996,7 +996,7 @@ TinyMCE 的 `urlconverter_callback`、`paste_postprocess` API 不支持异步操
 
 ## 更新日志
 
-各版本详细改动请参考 [release notes](https://github.com/cloydlau/minimce/releases)
+各版本详细改动请参考 [release notes](https://github.com/cloydlau/minimce/releases) 。
 
 <br>
 
