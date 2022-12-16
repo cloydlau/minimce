@@ -798,84 +798,48 @@ export default {
 
 <br>
 
-## 事件
-
-| 名称 | 说明                                                                                                                    | 回调参数                                                             |
-| ---- | ----------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| init | [init_instance_callback](https://www.tiny.cloud/docs/tinymce/6/editor-important-options/#init_instance_callback) 触发时 | [editor](https://www.tiny.cloud/docs/tinymce/6/apis/tinymce.editor/) |
-
-<br>
-
 ## 获取 [TinyMCE Editor](https://www.tiny.cloud/docs/tinymce/6/apis/tinymce.editor/) 实例
 
-### 只有一个实例时
-
 ```vue
+<!-- 示例: 监听 TinyMCE 的事件 -->
+
 <template>
-  <MiniMCE ref="minimce" @init="onInit" />
+  <MiniMCE
+    ref="miniMCERef"
+    :options="options"
+  />
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 import tinymce from 'tinymce/tinymce'
 
-const minimce = ref()
-function onInit(editor) {
-  // 方式1
-  console.log(editor)
-  // 方式2
-  console.log(tinymce.activeEditor)
-  // 方式3
-  console.log(tinymce.get((minimce.value.id)))
-}
-</script>
-```
-
-### 有多个实例时
-
-```vue
-<template>
-  <MiniMCE ref="minimce1" @init="onInit1" />
-  <MiniMCE ref="minimce2" @init="onInit2" />
-</template>
-
-<script setup>
-import { ref } from 'vue'
-import tinymce from 'tinymce/tinymce'
-
-const minimce1 = ref()
-function onInit1(editor) {
-  // 方式1
-  console.log(editor)
-  // 方式2
-  console.log(tinymce.get((minimce1.value.id)))
-}
-
-const minimce2 = ref()
-function onInit2(editor) {
-  // 方式1
-  console.log(editor)
-  // 方式2
-  console.log(tinymce.get((minimce2.value.id)))
-}
-</script>
-```
-
-### 在全局配置中获取
-
-```ts
-app.use(MiniMCE, {
-  options: {
+const miniMCERef = ref()
+const options = reactive({
+  setup(editor) {
     // 方式1
-    setup(editor) {
-      console.log(editor)
-    },
-    // 方式2
-    init_instance_callback(editor) {
-      console.log(editor)
-    },
+    editor.on('init', (e) => {
+      console.log('init', e)
+
+      // 方式2
+      tinymce.get(miniMCERef.value.id).on('Change', (e) => {
+        console.log('Change', e)
+      })
+
+      // 方式3
+      tinymce.activeEditor.on('Change', (e) => {
+        console.log('Change', e)
+      })
+    })
+  },
+  // 方式4
+  init_instance_callback(editor) {
+    editor.on('Change', (e) => {
+      console.log('Change', e)
+    })
   },
 })
+</script>
 ```
 
 <br>

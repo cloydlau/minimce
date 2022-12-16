@@ -184,8 +184,6 @@ export default defineComponent({
             immediate: true,
           })
 
-          emit('init', editor)
-
           loading.value = false
         },
       }], {
