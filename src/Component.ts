@@ -77,7 +77,7 @@ export default defineComponent({
     const loading = ref(true)
     const id = ref(`minimce-${uuidv4()}`)
     const preventSettingContent = ref(false)
-    const preventUpdatingModalValue = ref(false)
+    const preventUpdatingModelValue = ref(false)
     /**
      * props & attrs
      */
@@ -143,8 +143,8 @@ export default defineComponent({
 
           // 监听手动输入，更新绑定值
           const onContentChange = debounce(() => {
-            if (preventUpdatingModalValue.value) {
-              preventUpdatingModalValue.value = false
+            if (preventUpdatingModelValue.value) {
+              preventUpdatingModelValue.value = false
               return
             }
             // 更新绑定值会触发编程式输入的监听，需要避免
@@ -165,7 +165,7 @@ export default defineComponent({
            *   触发: blur Undo paste drop insertContent
            *   不触发: input Redo setContent resetContent
            *   注意:「改变内容后失焦」也会触发，与 input 重复，
-           *        打破 preventUpdatingModalValue 与 preventSettingContent 的平衡
+           *        打破 preventUpdatingModelValue 与 preventSettingContent 的平衡
            *
            * 全小写表示原生事件，editor.on 不区分大小写
            *
@@ -176,16 +176,16 @@ export default defineComponent({
           editor.on('input SetContent', onContentChange)
 
           // 监听编程式输入，更新文本内容
-          watch(() => props[modelValueProp], (newModalValue) => {
+          watch(() => props[modelValueProp], (newModelValue) => {
             if (preventSettingContent.value) {
               preventSettingContent.value = false
               return
             }
             // 更新文本内容会触发手动输入的监听，需要避免
-            preventUpdatingModalValue.value = true
+            preventUpdatingModelValue.value = true
             // 参数必须为 string 类型，否则无效
-            // console.log('编程式输入:', newModalValue)
-            editor.setContent((newModalValue || '') as string)
+            // console.log('编程式输入:', newModelValue)
+            editor.setContent((newModelValue || '') as string)
           }, {
             immediate: true,
           })
