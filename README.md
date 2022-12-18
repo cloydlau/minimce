@@ -18,9 +18,9 @@
 <br>
 
 ## 对比 tinymce-vue
-是的，TinyMCE 已经有官方的 Vue 封装 [tinymce-vue](https://github.com/tinymce/tinymce-vue) 了，但它:
+是的，TinyMCE 已经有官方的 Vue 封装 [tinymce-vue](https://github.com/tinymce/tinymce-vue) 了，但它：
 
-- 需要加载至少 **380kB** 的网络资源（开启插件全家桶将达到 **563kB**，还没算上付费插件），外网会很慢，甚至超时
+- 需要加载至少 **380kB** 的网络资源 (开启插件全家桶将达到 **563kB**，还没算上付费插件)，外网会很慢，甚至超时
 - 有[域名检测](#域名检测)，会弹窗警告
 - 用不同的版本号来适配不同的 Vue 版本，升级成本较高
 - 默认功能最小化，需要繁杂的配置，还不支持全局传参
@@ -36,12 +36,12 @@
 - 基于 TinyMCE 6
 - Vue 2.6 / 2.7 / 3 通用
 - 支持 SSR，Nuxt 2 / 3 通用
-- 支持微前端（比如 [wujie](https://github.com/Tencent/wujie)）
+- 支持微前端 (比如 [wujie](https://github.com/Tencent/wujie))
 - 可离线使用，零网络延迟
 - 无[域名检测](#域名检测)，无弹窗困扰
 - 插件全家桶开箱即用
 - 提供常用自定义插件示例
-    - 插入 Word 文档（.docx），兼容 Microsoft Office、WPS
+    - 插入 Word 文档 (`.docx`)，兼容 Microsoft Office、WPS
     - 插入本地图片
     - 插入本地视频
     - 插入本地音频
@@ -49,7 +49,7 @@
     - 插入小程序页面链接
 - 支持浅色模式 & 深色模式，主题、图标、内容样式均可自定义
 - 支持将 HTML 输出为普通文本
-- 局部注册 + 局部传参，也可以全局注册 + 全局传参（[vue-global-config](https://github.com/cloydlau/vue-global-config) 提供技术支持）
+- 局部注册 + 局部传参，也可以全局注册 + 全局传参 ([vue-global-config](https://github.com/cloydlau/vue-global-config) 提供技术支持)
 
 <br>
 
@@ -848,27 +848,27 @@ const options = reactive({
 
 ## 域名检测
 
-TinyMCE 有四种价格计划:
+TinyMCE 有四种价格计划：
 
-- Core（免费）
+- Core (免费)
 - Essential
 - Professional
 - Flexible
 
-如果没有注册 Tiny 账号、或者没有在账号设置中登记域名，界面上会有警告弹出（**即使你使用的是免费的 Core 计划**）
+如果没有注册 Tiny 账号、或者没有在账号设置中登记域名，界面上会有警告弹出 (**即使你使用的是免费的 Core 计划**)
 
 > 当然，你可以用 CSS 来屏蔽弹窗，只是不推荐这种方式
 
-TinyMCE 提供了两种加载方式:
+TinyMCE 提供了两种加载方式：
 
-- CDN（tinymce-vue 采用的方式）: 需要注册账号以提供 `api-key`，并在账号设置中登记所有用到 TinyMCE 的项目域名
-- NPM（minimce 采用的方式）: 没有 `api-key` 参数，所以不需要注册账号、不需要登记域名，参考 [Tiny 官方解释](https://stackoverflow.com/questions/63398432/how-to-use-tinymce-5-api-key-using-npm)
+- CDN (tinymce-vue 采用的方式)：需要注册账号以提供 `api-key`，并在账号设置中登记所有用到 TinyMCE 的项目域名
+- NPM (minimce 采用的方式)：没有 `api-key` 参数，所以不需要注册账号、不需要登记域名，参考 [Tiny 官方解释](https://stackoverflow.com/questions/63398432/how-to-use-tinymce-5-api-key-using-npm)
 
 <br>
 
 ## 内容样式
 
-富文本的内容样式建议在展示侧自行添加，而不是在富文本的生产侧添加，因为:
+富文本的内容样式建议在展示侧自行添加，而不是在富文本的生产侧添加，因为：
 
 1. 富文本的生产侧无法满足展示侧各自的定制化需求
 2. 展示侧可能包含小程序，小程序不支持 `style` 标签
@@ -877,7 +877,7 @@ TinyMCE 提供了两种加载方式:
 
 ## 插件示例
 
-### 插入 Word 文档（.docx），兼容 Microsoft Office、WPS
+### 插入 Word 文档 (`.docx`)，兼容 Microsoft Office、WPS
 
 - [Vue 3](https://github.com/cloydlau/minimce/blob/main/demo/vue3/plugins/insert-word.ts)
 - [Vue 2](https://github.com/cloydlau/minimce/blob/main/demo/vue2/plugins/insert-word.ts)
@@ -912,7 +912,7 @@ TinyMCE 提供了 premium 插件 PowerPaste，可用于粘贴 Word 文档，但�
 
 MiniMCE 提供了插入 Word 文档的插件示例，兼容 Microsoft Office、WPS，可在一定程度上替代 PowerPaste
 
-注意: 粘贴可以片段粘贴，插入只能整个文档插入
+注意：粘贴可以片段粘贴，插入只能整个文档插入
 
 ### PowerPaste 插件
 
@@ -956,31 +956,31 @@ app.use(MiniMCE, {
   ![PowerPaste 插件兼容性](https://raw.githubusercontent.com/cloydlau/minimce/main/powerpaste-compatibility.png)
 
 - 受浏览器限制，PowerPaste 插件**无法支持微软 Word 和 Excel 文档所支持的<font color="#dd0000">所有</font>图片类型**
-  。举个例子，浏览器禁止以编程方式访问文件系统，所以无法解析文档中使用 `file://` 协议的图片（WPS 使用的就是此协议）。
+  。举个例子，浏览器禁止以编程方式访问文件系统，所以无法解析文档中使用 `file://` 协议的图片 (WPS 使用的就是此协议)。
 
-- 粘贴微软 Word 文档（Windows 系统、≥ 2013 版本）中<font color="#dd0000">受保护视图</font>的内容，将仅得到**无格式的普通文本**，这是受保护视图与剪贴板的交互机制决定的。
+- 粘贴微软 Word 文档 (Windows 系统、≥ 2013 版本) 中<font color="#dd0000">受保护视图</font>的内容，将仅得到**无格式的普通文本**，这是受保护视图与剪贴板的交互机制决定的。
 
 - 受微软 Excel 网页版限制，粘贴<font color="#dd0000">微软 Excel 网页版</font>的内容将仅得到**无格式的普通文本**。
 
 <br>
 
-## 粘贴网页内容（HTML）
+## 粘贴网页内容 (HTML)
 
 ### 格式
 
-粘贴的网页内容默认会保留一定的源格式， 启用 PowerPaste
+粘贴的网页内容默认会保留一定的源格式，启用 PowerPaste
 插件后，对格式的处理将会更加完善。详见 [Improved HTML Cleaning](https://www.tiny.cloud/docs/tinymce/6/powerpaste-support/#improved-html-cleaning)
 
 如需获取纯文本，选中**编辑**-**粘贴为文本**再进行粘贴
 
-**清除格式**按钮得到的<font color="#dd0000">不是</font>纯文本，可以自定义清除效果: 
+**清除格式**按钮得到的<font color="#dd0000">不是</font>纯文本，可以自定义清除效果： 
 [Removing a format](https://www.tiny.cloud/docs/tinymce/6/content-formatting/#removing-a-format)
 
 <br>
 
 ### 图片
 
-如果用户复制第三方网站的内容到编辑框内，静态资源（如图片）可能无法正常显示，这是因为: 
+如果用户复制第三方网站的内容到编辑框内，静态资源 (如图片) 可能无法正常显示，这是因为：
 
 1. 第三方网站没有开启静态资源的跨域访问
 
@@ -996,7 +996,7 @@ TinyMCE 的 `urlconverter_callback`、`paste_postprocess` API 不支持异步操
 
 ## 更新日志
 
-各版本详细改动请参考 [release notes](https://github.com/cloydlau/minimce/releases) 。
+各版本详细改动请参考 [release notes](https://github.com/cloydlau/minimce/releases)。
 
 <br>
 
