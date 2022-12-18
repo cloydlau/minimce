@@ -19,7 +19,7 @@ specifiers:
   eslint: ^8.30.0
   happy-dom: ^8.1.0
   husky: ^8.0.2
-  json-editor-vue: ^0.10.4
+  json-editor-vue: ^0.10.5
   lint-staged: ^13.1.0
   lodash-es: ^4.17.21
   mammoth: ^1.5.1
@@ -33,7 +33,7 @@ specifiers:
   unplugin-auto-import: ^0.12.1
   uuid: ^9.0.0
   vanilla-jsoneditor: ^0.11.4
-  vite: 3.2.5
+  vite: ^4.0.2
   vite-plugin-dts: ^1.7.1
   vitepress: 1.0.0-alpha.32
   vitest: ^0.25.8
@@ -55,7 +55,7 @@ devDependencies:
   '@types/lodash-es': 4.17.6
   '@types/node': 18.11.17
   '@types/uuid': 9.0.0
-  '@vitejs/plugin-vue': 4.0.0_vite@3.2.5+vue@3.2.45
+  '@vitejs/plugin-vue': 4.0.0_vite@4.0.2+vue@3.2.45
   '@vitest/coverage-c8': 0.25.8_4vuzesw2lqtdilzrtclxnxhlda
   '@vitest/ui': 0.25.8
   '@vue/compiler-sfc': 3.2.45
@@ -67,7 +67,7 @@ devDependencies:
   eslint: 8.30.0
   happy-dom: 8.1.0
   husky: 8.0.2
-  json-editor-vue: 0.10.4_pbi7bslezat4zmrzo5wzqdo5zi
+  json-editor-vue: 0.10.5_pbi7bslezat4zmrzo5wzqdo5zi
   lint-staged: 13.1.0
   mammoth: 1.5.1
   minimce: 0.7.0_tinymce@6.3.1+vue@3.2.45
@@ -79,8 +79,8 @@ devDependencies:
   typescript: 4.9.4
   unplugin-auto-import: 0.12.1
   vanilla-jsoneditor: 0.11.4
-  vite: 3.2.5_weymykvlyevlx27gnlcyv4bfs4
-  vite-plugin-dts: 1.7.1_vite@3.2.5
+  vite: 4.0.2_weymykvlyevlx27gnlcyv4bfs4
+  vite-plugin-dts: 1.7.1_vite@4.0.2
   vitepress: 1.0.0-alpha.32_weymykvlyevlx27gnlcyv4bfs4
   vitest: 0.25.8_4vuzesw2lqtdilzrtclxnxhlda
   vue: 3.2.45
@@ -1212,25 +1212,14 @@ packages:
       eslint-visitor-keys: 3.3.0
     dev: true
 
-  /@vitejs/plugin-vue/4.0.0_vite@3.2.5+vue@3.2.45:
+  /@vitejs/plugin-vue/4.0.0_vite@4.0.2+vue@3.2.45:
     resolution: {integrity: sha512-e0X4jErIxAB5oLtDqbHvHpJe/uWNkdpYV83AOG2xo2tEVSzCzewgJMtREZM30wXnM5ls90hxiOtAuVU6H5JgbA==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
       vite: ^4.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 3.2.5_weymykvlyevlx27gnlcyv4bfs4
-      vue: 3.2.45
-    dev: true
-
-  /@vitejs/plugin-vue/4.0.0_vite@4.0.1+vue@3.2.45:
-    resolution: {integrity: sha512-e0X4jErIxAB5oLtDqbHvHpJe/uWNkdpYV83AOG2xo2tEVSzCzewgJMtREZM30wXnM5ls90hxiOtAuVU6H5JgbA==}
-    engines: {node: ^14.18.0 || >=16.0.0}
-    peerDependencies:
-      vite: ^4.0.0
-      vue: ^3.2.25
-    dependencies:
-      vite: 4.0.1_weymykvlyevlx27gnlcyv4bfs4
+      vite: 4.0.2_weymykvlyevlx27gnlcyv4bfs4
       vue: 3.2.45
     dev: true
 
@@ -3877,8 +3866,8 @@ packages:
     hasBin: true
     dev: true
 
-  /json-editor-vue/0.10.4_pbi7bslezat4zmrzo5wzqdo5zi:
-    resolution: {integrity: sha512-L4101AShiyHcyRCTPXOXHI+G57SqWdko4jixO2JqI1HoMJklm6fmeTUjTY3i1Vl8Rg2ANt2dFbDw92/q3/kkUA==}
+  /json-editor-vue/0.10.5_pbi7bslezat4zmrzo5wzqdo5zi:
+    resolution: {integrity: sha512-L9fQqf3XMWA+uhI+q1n+mHio2tc1WmHdHRyn4H6HBG4LxW1nNzqvnrQniAwjk7MIxQkbhE1QI/B5MTunxTpkKA==}
     peerDependencies:
       '@vue/composition-api': '>=1'
       vanilla-jsoneditor: '>=0'
@@ -5891,7 +5880,7 @@ packages:
       vfile-message: 2.0.4
     dev: true
 
-  /vite-plugin-dts/1.7.1_vite@3.2.5:
+  /vite-plugin-dts/1.7.1_vite@4.0.2:
     resolution: {integrity: sha512-2oGMnAjcrZN7jM1TloiS1b1mCn42s3El04ix2RFhId5P1WfMigF8WAwsqT6a6jk0Yso8t7AeZsBkkxYShR0hBQ==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
@@ -5905,7 +5894,7 @@ packages:
       fs-extra: 10.1.0
       kolorist: 1.6.0
       ts-morph: 16.0.0
-      vite: 3.2.5_weymykvlyevlx27gnlcyv4bfs4
+      vite: 4.0.2_weymykvlyevlx27gnlcyv4bfs4
     transitivePeerDependencies:
       - rollup
       - supports-color
@@ -5946,8 +5935,8 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vite/4.0.1_weymykvlyevlx27gnlcyv4bfs4:
-    resolution: {integrity: sha512-kZQPzbDau35iWOhy3CpkrRC7It+HIHtulAzBhMqzGHKRf/4+vmh8rPDDdv98SWQrFWo6//3ozwsRmwQIPZsK9g==}
+  /vite/4.0.2_weymykvlyevlx27gnlcyv4bfs4:
+    resolution: {integrity: sha512-QJaY3R+tFlTagH0exVqbgkkw45B+/bXVBzF2ZD1KB5Z8RiAoiKo60vSUf6/r4c2Vh9jfGBKM4oBI9b4/1ZJYng==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     peerDependencies:
@@ -5987,12 +5976,12 @@ packages:
     dependencies:
       '@docsearch/css': 3.3.0
       '@docsearch/js': 3.3.0
-      '@vitejs/plugin-vue': 4.0.0_vite@4.0.1+vue@3.2.45
+      '@vitejs/plugin-vue': 4.0.0_vite@4.0.2+vue@3.2.45
       '@vue/devtools-api': 6.4.5
       '@vueuse/core': 9.7.0_vue@3.2.45
       body-scroll-lock: 4.0.0-beta.0
       shiki: 0.11.1
-      vite: 4.0.1_weymykvlyevlx27gnlcyv4bfs4
+      vite: 4.0.2_weymykvlyevlx27gnlcyv4bfs4
       vue: 3.2.45
     transitivePeerDependencies:
       - '@algolia/client-search'
@@ -6090,7 +6079,7 @@ packages:
       tinybench: 2.3.1
       tinypool: 0.3.0
       tinyspy: 1.0.2
-      vite: 3.2.5_weymykvlyevlx27gnlcyv4bfs4
+      vite: 4.0.2_weymykvlyevlx27gnlcyv4bfs4
     transitivePeerDependencies:
       - less
       - sass
