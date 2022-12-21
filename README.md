@@ -786,7 +786,7 @@ export default {
 | v-model / value | 绑定值                                                 | string  |                                                                                 |
 | disabled        | 禁用状态                                               | boolean | `false`                                                                         |
 | outputFormat    | 输出格式，`'html'` 或 `'text'`                         | string  | `'html'`                                                                        |
-| options         | [TinyMCE 配置](https://www.tiny.cloud/docs/tinymce/6/) | object  | [查看代码](https://github.com/cloydlau/minimce/blob/main/src/Component.ts#L102) |
+| options         | [TinyMCE 配置](https://www.tiny.cloud/docs/tinymce/6/) | object  | [查看代码](https://github.com/cloydlau/minimce/blob/main/src/Component.ts#L93) |
 
 <br>
 
