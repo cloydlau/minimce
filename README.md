@@ -5,7 +5,7 @@
 </h1>
 
 <p align="center">
-  富文本编辑器，可离线使用的 <a href="https://github.com/tinymce/tinymce">TinyMCE</a> Vue 2.6 / 2.7 / 3 封装，支持 Nuxt 2 / 3。
+  富文本编辑器，可离线使用的 <a href="https://github.com/tinymce/tinymce">TinyMCE</a> Vue 2.6/2.7/3 封装。
 </p>
 
 <p align="center">
@@ -34,9 +34,9 @@
 ## 特性
 
 - 基于 TinyMCE 6
-- Vue 2.6 / 2.7 / 3 通用
-- 支持 SSR，Nuxt 2 / 3 通用
-- 支持微前端 (比如 [wujie](https://github.com/Tencent/wujie))
+- Vue 2.6/2.7/3 通用
+- 支持 SSR，Nuxt 2/3 通用
+- 支持微前端 ([wujie](https://github.com/Tencent/wujie)，[qiankun](https://github.com/umijs/qiankun)，[single-spa](https://github.com/single-spa/single-spa)……)
 - 可离线使用，零网络延迟
 - 无[域名检测](#域名检测)，无弹窗困扰
 - 插件全家桶开箱即用
