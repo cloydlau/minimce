@@ -66,7 +66,7 @@
 ### Vue 3
 
 ```shell
-npm add minimce tinymce
+npm i minimce tinymce
 ```
 
 #### 局部注册
@@ -213,7 +213,7 @@ app.use(MiniMCE, {
 ### Vue 2.7
 
 ```shell
-npm add minimce tinymce
+npm i minimce tinymce
 ```
 
 #### 局部注册
@@ -362,7 +362,7 @@ Vue.use(MiniMCE, {
 ### Vue 2.6 或更早版本
 
 ```shell
-npm add minimce tinymce @vue/composition-api
+npm i minimce tinymce @vue/composition-api
 ```
 
 #### 局部注册
@@ -529,7 +529,7 @@ Vue.use(MiniMCE, {
 ### Nuxt 3
 
 ```shell
-npm add minimce tinymce
+npm i minimce tinymce
 ```
 
 #### 局部注册
@@ -591,7 +591,7 @@ const value = ref()
 ### Nuxt 2 + Vue 2.7
 
 ```shell
-npm add minimce tinymce
+npm i minimce tinymce
 ```
 
 #### 局部注册
@@ -679,7 +679,7 @@ const value = ref()
 ### Nuxt 2 + Vue 2.6 或更早版本
 
 ```shell
-npm add minimce tinymce @vue/composition-api
+npm i minimce tinymce @vue/composition-api
 ```
 
 #### 局部注册
@@ -1004,7 +1004,7 @@ TinyMCE 的 `urlconverter_callback`、`paste_postprocess` API 不支持异步操
 
 1. [安装 Deno](https://x.deno.js.cn/#%E5%AE%89%E8%A3%85%E6%9C%80%E6%96%B0%E7%89%88)
 
-2. `npm add pnpm @cloydlau/scripts -g; pnpm i`
+2. `npm i pnpm @cloydlau/scripts -g; pnpm i`
 
 3. 启动
 
