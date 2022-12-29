@@ -57,9 +57,9 @@
 
 ### 外置依赖
 
-- `vue`
-- `tinymce`
-- `@vue/composition-api` 仅 Vue 2.6 或更早版本需要
+- vue
+- tinymce
+- ~~@vue/composition-api~~：仅 Vue 2.6 或更早版本需要
 
 <br>
 
