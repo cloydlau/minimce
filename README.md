@@ -49,7 +49,7 @@
     - 插入小程序页面链接
 - 支持浅色模式 & 深色模式，主题、图标、内容样式均可自定义
 - 支持将 HTML 输出为普通文本
-- 局部注册 + 局部传参，也可以全局注册 + 全局传参 ([vue-global-config](https://github.com/cloydlau/vue-global-config) 提供技术支持)
+- 局部注册并传参，或全局注册并传参 ([vue-global-config](https://github.com/cloydlau/vue-global-config) 提供技术支持)
 
 <br>
 
