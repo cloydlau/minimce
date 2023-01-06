@@ -103,7 +103,7 @@ import 'tinymce/icons/default/icons' // 图标
 import './langs/zh-Hans' // 语言（非必须，默认英文，下载地址: https://www.tiny.cloud/get-tiny/language-packages）
 
 app.use(MiniMCE, {
-  // 全局 props（单向数据流）
+  // 全局 props & attrs (单向数据流)
   options: {
     language: 'zh-Hans',
   },
@@ -250,7 +250,7 @@ import 'tinymce/icons/default/icons' // 图标
 import './langs/zh-Hans' // 语言（非必须，默认英文，下载地址: https://www.tiny.cloud/get-tiny/language-packages）
 
 Vue.use(MiniMCE, {
-  // 全局 props（单向数据流）
+  // 全局 props & attrs (单向数据流)
   options: {
     language: 'zh-Hans',
   },
@@ -409,7 +409,7 @@ import './langs/zh-Hans' // 语言（非必须，默认英文，下载地址: ht
 Vue.use(VCA)
 
 Vue.use(MiniMCE, {
-  // 全局 props（单向数据流）
+  // 全局 props & attrs (单向数据流)
   options: {
     language: 'zh-Hans',
   },
@@ -781,16 +781,16 @@ export default {
 
 ## 属性
 
-| 名称            | 说明                                                   | 类型    | 默认值                                                                          |
-| --------------- | ------------------------------------------------------ | ------- | ------------------------------------------------------------------------------- |
-| v-model / value | 绑定值                                                 | string  |                                                                                 |
-| disabled        | 禁用状态                                               | boolean | `false`                                                                         |
-| outputFormat    | 输出格式，`'html'` 或 `'text'`                         | string  | `'html'`                                                                        |
+| 名称            | 说明                                                   | 类型    | 默认值                                                                         |
+| --------------- | ------------------------------------------------------ | ------- | ------------------------------------------------------------------------------ |
+| value / v-model | 绑定值                                                 | string  |                                                                                |
+| disabled        | 禁用状态                                               | boolean | `false`                                                                        |
+| outputFormat    | 输出格式，`'html'` 或 `'text'`                         | string  | `'html'`                                                                       |
 | options         | [TinyMCE 配置](https://www.tiny.cloud/docs/tinymce/6/) | object  | [查看代码](https://github.com/cloydlau/minimce/blob/main/src/Component.ts#L93) |
 
 <br>
 
-## Expose
+## 外部属性
 
 | 名称 | 说明    | 类型   |
 | ---- | ------- | ------ |
@@ -862,7 +862,7 @@ TinyMCE 有四种价格计划：
 TinyMCE 提供了两种加载方式：
 
 - CDN (tinymce-vue 采用的方式)：需要注册账号以提供 `api-key`，并在账号设置中登记所有用到 TinyMCE 的项目域名
-- NPM (minimce 采用的方式)：没有 `api-key` 参数，所以不需要注册账号、不需要登记域名，参考 [Tiny 官方解释](https://stackoverflow.com/questions/63398432/how-to-use-tinymce-5-api-key-using-npm)
+- NPM (MiniMCE 采用的方式)：没有 `api-key` 参数，所以不需要注册账号、不需要登记域名，参考 [Tiny 官方解释](https://stackoverflow.com/questions/63398432/how-to-use-tinymce-5-api-key-using-npm)
 
 <br>
 
@@ -973,7 +973,7 @@ app.use(MiniMCE, {
 
 如需获取纯文本，选中**编辑**-**粘贴为文本**再进行粘贴
 
-**清除格式**按钮得到的<font color="#dd0000">不是</font>纯文本，可以自定义清除效果： 
+**清除格式**按钮得到的<font color="#dd0000">不是</font>纯文本，可以自定义清除效果：
 [Removing a format](https://www.tiny.cloud/docs/tinymce/6/content-formatting/#removing-a-format)
 
 <br>
@@ -984,11 +984,11 @@ app.use(MiniMCE, {
 
 1. 第三方网站没有开启静态资源的跨域访问
 
-2. 第三方网站对静态资源做了 referrer 校验
+2. 第三方网站对静态资源做了 Referer 校验
 
 TinyMCE 的 `urlconverter_callback`、`paste_postprocess` API 不支持异步操作，所以批量转存图片可行性低
 
-技术上是可以解决的，可以通过 nginx 动态代理配合这两个 API 来处理
+技术上是可以解决的，可以通过 NGINX 动态代理配合这两个 API 来处理
 
 请自行评估相关风险
 
