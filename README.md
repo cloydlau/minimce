@@ -49,7 +49,7 @@
     - 插入小程序页面链接
 - 支持浅色模式 & 深色模式，主题、图标、内容样式均可自定义
 - 支持将 HTML 输出为普通文本
-- 局部注册 + 局部传参，也可以全局注册 + 全局传参 ([vue-global-config](https://github.com/cloydlau/vue-global-config) 提供技术支持)
+- 局部注册并传参，或全局注册并传参 ([vue-global-config](https://github.com/cloydlau/vue-global-config) 提供技术支持)
 
 <br>
 
@@ -1003,13 +1003,8 @@ TinyMCE 的 `urlconverter_callback`、`paste_postprocess` API 不支持异步操
 ## 开发
 
 1. [安装 Deno](https://x.deno.js.cn/#%E5%AE%89%E8%A3%85%E6%9C%80%E6%96%B0%E7%89%88)
-
-2. `npm i pnpm @cloydlau/scripts -g; pnpm i`
-
-3. 启动
-
-    - `pnpm dev3`
-    - `pnpm dev2.7`
-    - `pnpm dev2.6`
+2. 执行 `npm i -g @cloydlau/scripts`
+3. 执行 `cl i` 并选择 pnpm
+4. 执行 `cl dev3`/`cl dev2.7`/`cl dev2.6`
 
 <br>
