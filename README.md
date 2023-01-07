@@ -781,12 +781,12 @@ export default {
 
 ## 属性
 
-| 名称            | 说明                                                   | 类型    | 默认值                                                                         |
-| --------------- | ------------------------------------------------------ | ------- | ------------------------------------------------------------------------------ |
-| value / v-model | 绑定值                                                 | string  |                                                                                |
-| disabled        | 禁用状态                                               | boolean | `false`                                                                        |
-| outputFormat    | 输出格式，`'html'` 或 `'text'`                         | string  | `'html'`                                                                       |
-| options         | [TinyMCE 配置](https://www.tiny.cloud/docs/tinymce/6/) | object  | [查看代码](https://github.com/cloydlau/minimce/blob/main/src/Component.ts#L93) |
+| 名称                                            | 说明                                                   | 类型    | 默认值                                                                         |
+| ----------------------------------------------- | ------------------------------------------------------ | ------- | ------------------------------------------------------------------------------ |
+| modelValue (Vue 3) /<br>value (Vue 2) / v-model | 绑定值                                                 | string  |                                                                                |
+| disabled                                        | 禁用状态                                               | boolean | `false`                                                                        |
+| outputFormat                                    | 输出格式，`'html'` 或 `'text'`                         | string  | `'html'`                                                                       |
+| options                                         | [TinyMCE 配置](https://www.tiny.cloud/docs/tinymce/6/) | object  | [查看代码](https://github.com/cloydlau/minimce/blob/main/src/Component.ts#L93) |
 
 <br>
 
