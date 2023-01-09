@@ -4,6 +4,7 @@ import {
   h,
   isVue3,
   onMounted,
+  onUnmounted,
   ref,
   unref,
   watch,
@@ -58,13 +59,15 @@ import 'tinymce/plugins/wordcount'
 
 // const isSmallScreen = window.matchMedia('(max-width: 1023.5px)').matches
 
-const modelValueProp = isVue3 ? 'modelValue' : 'value'
-const updateModelValue = isVue3 ? 'update:modelValue' : 'input'
+const model = {
+  prop: isVue3 ? 'modelValue' : 'value',
+  event: isVue3 ? 'update:modelValue' : 'input',
+}
 
 export default defineComponent({
   name,
   props: {
-    [modelValueProp]: String,
+    [model.prop]: String,
     disabled: {
       type: Boolean,
       default: undefined,
@@ -72,7 +75,7 @@ export default defineComponent({
     outputFormat: {},
     options: {},
   },
-  emits: [updateModelValue, 'init'],
+  emits: [model.event, 'init'],
   setup(props, { emit, expose }) {
     const loading = ref(true)
     const id = ref(`minimce-${uuidv4()}`)
@@ -151,7 +154,7 @@ export default defineComponent({
             preventSettingContent.value = true
             const newContent = editor.getContent({ format: OutputFormat.value })
             // console.log('手动输入:', newContent)
-            emit(updateModelValue, newContent)
+            emit(model.event, newContent)
           }, 100)
 
           /**
@@ -176,7 +179,7 @@ export default defineComponent({
           editor.on('input SetContent', onContentChange)
 
           // 监听编程式输入，更新文本内容
-          watch(() => props[modelValueProp], (newModelValue) => {
+          watch(() => props[model.prop], (newModelValue) => {
             if (preventSettingContent.value) {
               preventSettingContent.value = false
               return
@@ -200,13 +203,19 @@ export default defineComponent({
       type: Object,
     }))
 
+    onUnmounted(() => {
+      tinymce.get(id.value)?.destroy()
+    })
+
     onMounted(() => {
       const el = document.querySelector(`#${id.value}`) as Element
       const intersectionObserver = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting) {
           // el is visible
-          intersectionObserver.unobserve(el)
-          tinymce.init(Options.value)
+          if (!tinymce.get(id.value)) {
+            intersectionObserver.unobserve(el)
+            tinymce.init(Options.value)
+          }
         } else {
           // el is invisible
         }
@@ -238,7 +247,7 @@ export default defineComponent({
         },
         on: {
           input: (value?: string | null) => {
-            this.$emit(updateModelValue, value)
+            this.$emit(model.event, value)
           },
         },
       })

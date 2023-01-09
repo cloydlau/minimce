@@ -1,9 +1,22 @@
 <template>
   <div>
-    <el-dialog :visible.sync="showDialog" @closed="data = {}">
-      <el-form :model="data" disabled>
-        <el-form-item prop="value" required>
-          <MiniMCE v-model="data.value" v-bind="props" />
+    <el-dialog
+      :visible.sync="showDialog"
+      @closed="data = {}"
+    >
+      <el-form
+        :model="data"
+      >
+        <el-form-item
+          prop="value"
+          required
+        >
+          <el-switch v-model="toggle" />
+          <MiniMCE
+            v-if="toggle"
+            v-model="data.value"
+            v-bind="props"
+          />
         </el-form-item>
       </el-form>
 
@@ -50,4 +63,6 @@ const props = reactive({
   disabled: false,
   outputFormat: 'html',
 })
+
+const toggle = ref(false)
 </script>
