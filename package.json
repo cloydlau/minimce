@@ -26,9 +26,7 @@
     "microsoft-office",
     "nuxt",
     "nuxtjs",
-    "ssr",
-    "microfrontends",
-    "wujie"
+    "ssr"
   ],
   "exports": {
     ".": {

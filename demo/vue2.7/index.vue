@@ -13,7 +13,7 @@
         >
           <el-switch v-model="toggle" />
           <MiniMCE
-            v-show="toggle"
+            v-if="toggle"
             v-model="data.value"
             v-bind="props"
           />
