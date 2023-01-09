@@ -1,8 +1,8 @@
-import type { Plugin } from 'vue'
 import { useGlobalConfig } from 'vue-global-config'
+import type { Plugin, install } from 'vue-demi'
 import Component from './Component'
 
-type SFCWithInstall<T> = T & Plugin
+type SFCWithInstall<T> = T & Plugin & { install: typeof install }
 
 const withInstall = <T, E extends Record<string, any>>(
   main: T,
@@ -10,7 +10,7 @@ const withInstall = <T, E extends Record<string, any>>(
 ) => {
   (main as SFCWithInstall<T>).install = (app): void => {
     for (const comp of [main, ...Object.values(extra ?? {})]) {
-      app.component(comp.name, comp)
+      app?.component(comp.name, comp)
     }
   }
 
@@ -38,5 +38,5 @@ ComponentWithInstall.install = (app: any, options = {}) => {
   app.component(ComponentWithInstall.name, ComponentWithInstall)
 }
 
-export { globalProps, globalAttrs, globalListeners, globalHooks }
 export default ComponentWithInstall
+export { globalProps, globalAttrs, globalListeners, globalHooks }
