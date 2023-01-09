@@ -212,12 +212,14 @@ export default defineComponent({
       const intersectionObserver = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting) {
           // el is visible
+          console.log('visible', tinymce.get(id.value))
           if (!tinymce.get(id.value)) {
-            intersectionObserver.unobserve(el)
             tinymce.init(Options.value)
           }
         } else {
           // el is invisible
+          console.log('invisible', tinymce.get(id.value))
+          // tinymce.get(id.value)?.destroy()
         }
       })
       // Asynchronous call
