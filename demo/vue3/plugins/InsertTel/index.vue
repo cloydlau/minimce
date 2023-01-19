@@ -9,12 +9,16 @@
   >
     <el-form ref="rowForm" :model="form">
       <el-form-item label="" prop="tel" :rules="tel">
-        <el-input v-model="form.tel" clearable/>
+        <el-input v-model="form.tel" clearable />
       </el-form-item>
     </el-form>
     <template #footer>
-      <el-button @click="show = false">取消</el-button>
-      <el-button type="primary" @click="confirm">确定</el-button>
+      <el-button @click="show = false">
+        取消
+      </el-button>
+      <el-button type="primary" @click="confirm">
+        确定
+      </el-button>
     </template>
   </el-dialog>
 </template>
@@ -29,9 +33,9 @@ const tel = (value, { multiple = true } = {}) => {
   } else if (value) {
     value = value.toString()
     if (value.length > maxLen) {
-      errInfo = '不能超过' + maxLen + '个字符'
+      errInfo = `不能超过${maxLen}个字符`
     } else if (!regex.test(value)) {
-      errInfo = '格式不正确' + (multiple ? '，如有多个请用英文分号隔开' : '')
+      errInfo = `格式不正确${multiple ? '，如有多个请用英文分号隔开' : ''}`
     }
   }
   return errInfo
@@ -41,52 +45,52 @@ export default {
   props: {
     editor: {
       required: true,
-    }
+    },
   },
-  data () {
+  data() {
     return {
       show: false,
       tel: {
         required: true,
-        validator (rule, value, callback) {
+        validator(rule, value, callback) {
           let errInfo = ''
-          if (notEmpty(value)) {
+          if (value) {
             errInfo = tel(value, {
-              multiple: false
+              multiple: false,
             })
           } else {
             errInfo = '必填项'
           }
           callback(errInfo ? new Error(errInfo) : undefined)
-        }
+        },
       },
       form: {
-        tel: ''
-      }
+        tel: '',
+      },
     }
   },
   watch: {
-    show (n) {
+    show(n) {
       if (!n) {
         this.form = {
-          tel: ''
+          tel: '',
         }
       }
     },
   },
   expose: ['open'],
   methods: {
-    open () {
+    open() {
       this.show = true
     },
-    confirm () {
+    confirm() {
       this.$refs.rowForm.validate().then(() => {
         // data-type data-value 用于小程序端解析
         this.editor.insertContent(`<a data-type="tel" data-value="${this.form.tel}" href="tel:${this.form.tel}">${this.form.tel}</a>`)
         this.show = false
       })
-    }
-  }
+    },
+  },
 }
 </script>
 

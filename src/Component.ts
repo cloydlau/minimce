@@ -161,22 +161,22 @@ export default defineComponent({
            * 事件列表: https://www.tiny.cloud/docs/tinymce/6/events/
            *
            * SetContent 事件
-           *   触发: Undo Redo paste drop insertContent resetContent setContent
-           *   不触发: input
+           *   触发：Undo Redo paste drop insertContent resetContent setContent
+           *   不触发：input
            *
            * Change 事件
-           *   触发: blur Undo paste drop insertContent
-           *   不触发: input Redo setContent resetContent
-           *   注意:「改变内容后失焦」也会触发，与 input 重复，
-           *        打破 preventUpdatingModelValue 与 preventSettingContent 的平衡
+           *   触发：blur Undo paste drop insertContent
+           *   不触发：input Redo setContent resetContent
            *
            * 全小写表示原生事件，editor.on 不区分大小写
            *
-           * 顺序: 先监听手动输入，再监听编程式输入
+           * 顺序：先监听手动输入，再监听编程式输入
            *
            * tinymce-vue 使用的是: Change input Redo Undo
+           *
+           * input 监听不到加粗，所以需要 Change
            */
-          editor.on('input SetContent', onContentChange)
+          editor.on('Change input Redo Undo SetContent', onContentChange)
 
           // 监听编程式输入，更新文本内容
           watch(() => props[model.prop], (newModelValue) => {
