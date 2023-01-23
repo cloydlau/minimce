@@ -53,7 +53,7 @@
     "doc": "vitepress dev --open /README",
     "test": "vitest",
     "coverage": "vitest run --coverage",
-    "release": "npx case-police --fix --ignore \"./demo/langs\" && npx zhlint README.md --fix && npx lint-staged && pnpm build && cl release"
+    "release": "npx lint-staged && pnpm build && cl release"
   },
   "peerDependencies": {
     "@vue/composition-api": ">=1",
@@ -72,7 +72,6 @@
     "vue-global-config": "^0.3.1"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.34.1",
     "@commitlint/cli": "^17.4.2",
     "@commitlint/config-conventional": "^17.4.2",
     "@types/lodash-es": "^4.17.6",
@@ -87,7 +86,6 @@
     "axios-shortcut": "^0.1.1",
     "case-police": "^0.5.10",
     "element-plus": "^2.2.28",
-    "eslint": "^8.32.0",
     "happy-dom": "^8.1.4",
     "husky": "^8.0.3",
     "json-editor-vue": "^0.10.5",
@@ -95,6 +93,7 @@
     "mammoth": "^1.5.1",
     "minimce": "^0.7.0",
     "qs": "^6.11.0",
+    "rome": "^11.0.0",
     "sass": "^1.57.1",
     "sweetalert2": "^11.7.0",
     "sweetalert2-preset": "^0.2.2",
@@ -110,8 +109,10 @@
     "zhlint": "^0.7.1"
   },
   "lint-staged": {
-    "{src,__tests__}/**.*": [
-      "eslint --fix"
+    "{src,__tests__}/**.*": "rome check",
+    "*.md": [
+      "case-police --fix",
+      "zhlint --fix"
     ]
   },
   "publishConfig": {
