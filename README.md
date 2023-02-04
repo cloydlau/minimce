@@ -135,7 +135,7 @@ app.use(MiniMCE, {
         "vue": "https://unpkg.com/vue/dist/vue.esm-browser.prod.js",
         "vue-demi": "https://unpkg.com/vue-demi/lib/v3/index.mjs",
         "tinymce": "https://unpkg.com/tinymce",
-        "minimce": "https://unpkg.com/minimce@0.7/dist/minimce.mjs"
+        "minimce": "https://unpkg.com/minimce@0.8/dist/minimce.mjs"
       }
     }
   </script>
@@ -185,7 +185,7 @@ app.use(MiniMCE, {
   <script src="https://unpkg.com/vue"></script>
   <script src="https://unpkg.com/vue-demi"></script>
   <script src="https://unpkg.com/tinymce"></script>
-  <script src="https://unpkg.com/minimce@0.7/dist/minimce.umd.js"></script>
+  <script src="https://unpkg.com/minimce@0.8/dist/minimce.umd.js"></script>
   <script>
     const { createApp } = Vue
 
@@ -282,7 +282,7 @@ Vue.use(MiniMCE, {
         "vue": "https://unpkg.com/vue@2/dist/vue.esm.browser.min.js",
         "vue-demi": "https://unpkg.com/vue-demi/lib/v2.7/index.mjs",
         "tinymce": "https://unpkg.com/tinymce",
-        "minimce": "https://unpkg.com/minimce@0.7/dist/minimce.mjs"
+        "minimce": "https://unpkg.com/minimce@0.8/dist/minimce.mjs"
       }
     }
   </script>
@@ -334,7 +334,7 @@ Vue.use(MiniMCE, {
   <script src="https://unpkg.com/vue@2"></script>
   <script src="https://unpkg.com/vue-demi"></script>
   <script src="https://unpkg.com/tinymce"></script>
-  <script src="https://unpkg.com/minimce@0.7/dist/minimce.umd.js"></script>
+  <script src="https://unpkg.com/minimce@0.8/dist/minimce.umd.js"></script>
   <script>
     new Vue({
       components: { minimce: MiniMCE },
@@ -446,7 +446,7 @@ Vue.use(MiniMCE, {
         "@vue/composition-api/dist/vue-composition-api.mjs": "https://unpkg.com/@vue/composition-api/dist/vue-composition-api.mjs",
         "vue-demi": "https://unpkg.com/vue-demi/lib/v2/index.mjs",
         "tinymce": "https://unpkg.com/tinymce",
-        "minimce": "https://unpkg.com/minimce@0.7/dist/minimce.mjs"
+        "minimce": "https://unpkg.com/minimce@0.8/dist/minimce.mjs"
       }
     }
   </script>
@@ -499,7 +499,7 @@ Vue.use(MiniMCE, {
   <script src="https://unpkg.com/@vue/composition-api"></script>
   <script src="https://unpkg.com/vue-demi"></script>
   <script src="https://unpkg.com/tinymce"></script>
-  <script src="https://unpkg.com/minimce@0.7/dist/minimce.umd.js"></script>
+  <script src="https://unpkg.com/minimce@0.8/dist/minimce.umd.js"></script>
   <script>
     const { createApp } = VueCompositionAPI
 
