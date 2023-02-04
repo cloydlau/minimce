@@ -162,7 +162,7 @@ app.use(MiniMCE, {
 </html>
 ```
 
-#### CDN + UMD
+#### CDN + IIFE
 
 ```html
 <!DOCTYPE html>
@@ -311,7 +311,7 @@ Vue.use(MiniMCE, {
 </html>
 ```
 
-#### CDN + UMD
+#### CDN + IIFE
 
 ```html
 <!DOCTYPE html>
@@ -475,7 +475,7 @@ Vue.use(MiniMCE, {
 </html>
 ```
 
-#### CDN + UMD
+#### CDN + IIFE
 
 ```html
 <!DOCTYPE html>
