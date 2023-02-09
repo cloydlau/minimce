@@ -5,7 +5,7 @@
   "private": false,
   "packageManager": "pnpm@7.25.1",
   "description": "Rich text editor, offline TinyMCE Vue 2.6/2.7/3 wrapper.",
-  "author": "cloydlau",
+  "author": "Cloyd Lau",
   "license": "MIT",
   "repository": "https://github.com/cloydlau/minimce",
   "keywords": [
