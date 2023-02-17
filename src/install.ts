@@ -1,4 +1,4 @@
-import { useGlobalConfig } from 'vue-global-config'
+import { resolveConfig } from 'vue-global-config'
 import type { Plugin, install } from 'vue-demi'
 import Component from './Component'
 
@@ -30,7 +30,7 @@ const globalHooks: Record<string, any> = {}
 const ComponentWithInstall = withInstall(Component)
 
 ComponentWithInstall.install = (app: any, options = {}) => {
-  const { props, attrs, listeners, hooks } = useGlobalConfig(options, Component.props)
+  const { props, attrs, listeners, hooks } = resolveConfig(options, Component.props)
   Object.assign(globalProps, props)
   Object.assign(globalAttrs, attrs)
   Object.assign(globalListeners, listeners)
