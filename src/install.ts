@@ -1,42 +1,22 @@
 import { resolveConfig } from 'vue-global-config'
-import type { Plugin, install } from 'vue-demi'
-import Component from './Component'
+import type { App, Component } from 'vue-demi'
+import component from './component'
 
-type SFCWithInstall<T> = T & Plugin & { install: typeof install }
+const globalProps: Record<string | symbol, any> = {}
 
-const withInstall = <T, E extends Record<string, any>>(
-  main: T,
-  extra?: E,
-) => {
-  (main as SFCWithInstall<T>).install = (app): void => {
-    for (const comp of [main, ...Object.values(extra ?? {})]) {
-      app?.component(comp.name, comp)
-    }
-  }
-
-  if (extra) {
-    for (const [key, comp] of Object.entries(extra)) {
-      (main as any)[key] = comp
-    }
-  }
-  return main as SFCWithInstall<T> & E
+type SFCWithInstall = Component & {
+  install: (app: App, options?: Record<string | symbol, any>) => void
 }
 
-const globalProps: Record<string, any> = {}
-const globalAttrs: Record<string, any> = {}
-const globalListeners: Record<string, any> = {}
-const globalHooks: Record<string, any> = {}
+function withInstall(sfc: Component): SFCWithInstall {
+  ;(sfc as SFCWithInstall).install = (app: App, options = {}): void => {
+    const { props } = resolveConfig(options, component.props)
+    Object.assign(globalProps, props)
+    app.component(sfc.name as string, sfc as Object)
+  }
 
-const ComponentWithInstall = withInstall(Component)
-
-ComponentWithInstall.install = (app: any, options = {}) => {
-  const { props, attrs, listeners, hooks } = resolveConfig(options, Component.props)
-  Object.assign(globalProps, props)
-  Object.assign(globalAttrs, attrs)
-  Object.assign(globalListeners, listeners)
-  Object.assign(globalHooks, hooks)
-  app.component(ComponentWithInstall.name, ComponentWithInstall)
+  return sfc as SFCWithInstall
 }
 
-export default ComponentWithInstall
-export { globalProps, globalAttrs, globalListeners, globalHooks }
+export { globalProps }
+export default withInstall(component)
