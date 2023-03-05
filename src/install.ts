@@ -2,10 +2,10 @@ import { resolveConfig } from 'vue-global-config'
 import type { App, Component } from 'vue-demi'
 import component from './component'
 
-const globalProps: Record<string | symbol, any> = {}
+const globalProps: Record<keyof any, any> = {}
 
 type SFCWithInstall = Component & {
-  install: (app: App, options?: Record<string | symbol, any>) => void
+  install: (app: App, options?: Record<keyof any, any>) => void
 }
 
 function withInstall(sfc: Component): SFCWithInstall {
