@@ -19,16 +19,20 @@ import tinymce from 'tinymce/tinymce'
 import type { Editor } from 'tinymce/tinymce'
 import { PascalCasedName as name } from '../package.json'
 import { globalProps } from './install'
+
 // models
 import 'tinymce/models/dom'
+
 // plugins
 import 'tinymce/plugins/advlist'
 import 'tinymce/plugins/anchor'
 import 'tinymce/plugins/autolink'
+
 // 该插件在官方的 full-featured 示例中被排除，故默认关闭
 // import 'tinymce/plugins/autoresize' //
 import 'tinymce/plugins/autosave'
 import 'tinymce/plugins/charmap'
+
 // 该插件只有开发者会用到，故默认关闭
 // import 'tinymce/plugins/code'
 // 该插件只有开发者会用到，故默认关闭
@@ -51,6 +55,7 @@ import 'tinymce/plugins/quickbars'
 import 'tinymce/plugins/save'
 import 'tinymce/plugins/searchreplace'
 import 'tinymce/plugins/table'
+
 // 该插件需要用户进一步的配置，故默认关闭
 // import 'tinymce/plugins/template'
 import 'tinymce/plugins/visualblocks'
@@ -262,14 +267,14 @@ export default defineComponent({
     return isVue3
       ? h('textarea', { id: this.id })
       : h('textarea', {
-          attrs: {
-            id: unref(this.id),
+        attrs: {
+          id: unref(this.id),
+        },
+        on: {
+          input: (value?: string | null) => {
+            this.$emit(model.event, value)
           },
-          on: {
-            input: (value?: string | null) => {
-              this.$emit(model.event, value)
-            },
-          },
-        })
+        },
+      })
   },
 })

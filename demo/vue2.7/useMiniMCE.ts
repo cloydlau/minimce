@@ -1,10 +1,6 @@
 // '?url' 是 Vite 语法，在 webpack 中请使用 https://webpack.js.org/guides/asset-modules/
 // '?raw' 是 Vite 语法，在 webpack 中请使用 https://github.com/webpack-contrib/raw-loader
 
-// import './index.scss'
-// import MiniMCE from 'minimce'
-import MiniMCE from '../../src'
-
 // 浅色模式
 import 'tinymce/skins/ui/oxide/skin.min.css' // 皮肤
 import contentCSS from 'tinymce/skins/content/default/content.min.css?raw'
@@ -20,6 +16,10 @@ import 'tinymce/icons/default/icons'
 
 // 主题
 import 'tinymce/themes/silver/theme'
+
+// import './index.scss'
+// import MiniMCE from 'minimce'
+import MiniMCE from '../../src'
 
 // 语言（非必须，默认英文，下载地址：https://www.tiny.cloud/get-tiny/language-packages）
 import '../langs/zh-Hans'

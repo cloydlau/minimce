@@ -1,16 +1,16 @@
 import { resolveConfig } from 'vue-global-config'
-import type { App, Component } from 'vue-demi'
-import component from './component'
+import type { App } from 'vue-demi'
+import Component from './Component'
 
 const globalProps: Record<keyof any, any> = {}
 
-type SFCWithInstall = Component & {
+type SFCWithInstall = typeof Component & {
   install: (app: App, options?: Record<keyof any, any>) => void
 }
 
-function withInstall(sfc: Component): SFCWithInstall {
-  ;(sfc as SFCWithInstall).install = (app: App, options = {}): void => {
-    const { props } = resolveConfig(options, component.props)
+function withInstall(sfc: typeof Component): SFCWithInstall {
+  (sfc as SFCWithInstall).install = (app: App, options = {}): void => {
+    const { props } = resolveConfig(options, Component.props)
     Object.assign(globalProps, props)
     app.component(sfc.name as string, sfc as Object)
   }
@@ -19,4 +19,4 @@ function withInstall(sfc: Component): SFCWithInstall {
 }
 
 export { globalProps }
-export default withInstall(component)
+export default withInstall(Component)

@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Component from './index.vue'
+
 // import store from '@/store'
 
 function mount(props) {

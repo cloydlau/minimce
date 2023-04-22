@@ -3,7 +3,6 @@
   "PascalCasedName": "MiniMCE",
   "version": "0.8.3",
   "private": false,
-  "packageManager": "pnpm@7.25.1",
   "description": "Rich text editor, offline TinyMCE Vue 2.6/2.7/3 wrapper.",
   "author": "Cloyd Lau",
   "license": "MIT",
@@ -72,6 +71,7 @@
     "vue-global-config": "latest"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "latest",
     "@commitlint/cli": "latest",
     "@commitlint/config-conventional": "latest",
     "@types/lodash-es": "latest",
@@ -81,11 +81,13 @@
     "@vitest/coverage-c8": "latest",
     "@vitest/ui": "latest",
     "@vue/compiler-sfc": "latest",
+    "@vue/composition-api": "latest",
     "@vue/test-utils": "latest",
     "axios": "latest",
     "axios-shortcut": "latest",
     "case-police": "latest",
     "element-plus": "latest",
+    "eslint": "latest",
     "happy-dom": "latest",
     "husky": "latest",
     "json-editor-vue": "latest",
@@ -93,7 +95,6 @@
     "mammoth": "latest",
     "minimce": "latest",
     "qs": "latest",
-    "rome": "latest",
     "sass": "latest",
     "sweetalert2": "latest",
     "sweetalert2-preset": "latest",
@@ -109,11 +110,8 @@
     "zhlint": "latest"
   },
   "lint-staged": {
-    "{src,__tests__}/**.{js,ts}": "rome check",
-    "*.md": [
-      "case-police --fix",
-      "zhlint --fix"
-    ]
+    "*.md": ["case-police --fix", "zhlint --fix"],
+    "*": "eslint --fix"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"

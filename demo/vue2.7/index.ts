@@ -1,11 +1,10 @@
 import Vue from 'vue'
-import App from './index.vue'
-
 import 'element-ui/lib/theme-chalk/index.css'
 import ElementUI from 'element-ui'
-Vue.use(ElementUI)
-
+import App from './index.vue'
 import useMiniMCE from './useMiniMCE'
+
+Vue.use(ElementUI)
 useMiniMCE()
 
 new Vue({

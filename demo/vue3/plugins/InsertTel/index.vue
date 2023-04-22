@@ -7,16 +7,29 @@
     destroy-on-close
     @close="show = false"
   >
-    <el-form ref="rowForm" :model="form">
-      <el-form-item label="" prop="tel" :rules="tel">
-        <el-input v-model="form.tel" clearable />
+    <el-form
+      ref="rowForm"
+      :model="form"
+    >
+      <el-form-item
+        label=""
+        prop="tel"
+        :rules="tel"
+      >
+        <el-input
+          v-model="form.tel"
+          clearable
+        />
       </el-form-item>
     </el-form>
     <template #footer>
       <el-button @click="show = false">
         取消
       </el-button>
-      <el-button type="primary" @click="confirm">
+      <el-button
+        type="primary"
+        @click="confirm"
+      >
         确定
       </el-button>
     </template>
@@ -24,7 +37,7 @@
 </template>
 
 <script>
-const tel = (value, { multiple = true } = {}) => {
+function tel(value, { multiple = true } = {}) {
   const regex = multiple ? /^((?:\d{3}-)?\d{8};?)+$|^((?:\d{4}-)?\d{7,8};?)+$/ : /^(?:\d{3}-)?\d{8}$|^(?:\d{4}-)?\d{7,8}$/
   const maxLen = 50
   let errInfo = ''

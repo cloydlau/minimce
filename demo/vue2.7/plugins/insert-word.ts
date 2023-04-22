@@ -17,7 +17,7 @@ export default editor => SwalPreset.confirm({
       return Promise.allSettled([...fileList].map(file =>
         new Promise((resolve, reject) => {
           if (!file.name.endsWith('.docx')) {
-            reject('仅支持 docx 格式')
+            reject(new Error('仅支持 docx 格式'))
           }
 
           const reader = new FileReader()
@@ -30,19 +30,19 @@ export default editor => SwalPreset.confirm({
                 if (value) {
                   resolve(value)
                 } else {
-                  reject(`${file.name} 内容为空`)
+                  reject(new Error(`${file.name} 内容为空`))
                 }
               }).catch((err) => {
                 reject(err)
               })
             } else {
-              reject(`${file.name} 内容为空`)
+              reject(new Error(`${file.name} 内容为空`))
             }
           }
           reader.readAsArrayBuffer(file)
         }),
       )).then((results) => {
-        results.map((result) => {
+        results.forEach((result) => {
           const { status, value, reason } = result
           if (status === 'fulfilled') {
             editor.insertContent(value)

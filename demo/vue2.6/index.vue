@@ -1,9 +1,21 @@
 <template>
   <div>
-    <el-dialog :visible.sync="showDialog" @closed="data = {}">
-      <el-form :model="data" disabled>
-        <el-form-item prop="value" required>
-          <MiniMCE v-bind="props" ref="miniMCE" v-model="data.value" />
+    <el-dialog
+      :visible.sync="showDialog"
+      @closed="data = {}"
+    >
+      <el-form
+        :model="data"
+        disabled
+      >
+        <el-form-item
+          prop="value"
+          required
+        >
+          <MiniMCE
+            v-bind="props"
+            v-model="data.value"
+          />
         </el-form-item>
       </el-form>
 

@@ -1,9 +1,19 @@
 <template>
-  <el-dialog v-model="showDialog" width="1200px" @closed="form.data = {}">
+  <el-dialog
+    v-model="showDialog"
+    width="1200px"
+    @closed="form.data = {}"
+  >
     <el-form :model="form.data">
-      <el-form-item prop="richtext" required>
+      <el-form-item
+        prop="richtext"
+        required
+      >
         <MiniMCE
-          ref="left" v-model="form.data.richtext" v-bind="props" @init="editor => {
+          ref="left"
+          v-model="form.data.richtext"
+          v-bind="props"
+          @init="editor => {
             targetEditor = editor
           }"
         />

@@ -14,29 +14,40 @@
       label-position="right"
       label-width="85px"
     >
-      <el-form-item label="目标页面" prop="target" verify>
-
-      </el-form-item>
+      <el-form-item
+        label="目标页面"
+        prop="target"
+        verify
+      />
       <el-form-item
         label="链接名称"
         prop="innerText"
         verify
       >
-        <el-input v-model="material.innerText" maxlength="30" show-word-limit />
+        <el-input
+          v-model="material.innerText"
+          maxlength="30"
+          show-word-limit
+        />
       </el-form-item>
     </el-form>
 
-    <div slot="footer" class="dialog-footer">
+    <template #footer>
       <el-button @click="show = false">关 闭</el-button>
-      <el-button type="primary" @click="insert">确 定</el-button>
-    </div>
+      <el-button
+        type="primary"
+        @click="insert"
+      >
+        确 定
+      </el-button>
+    </template>
   </el-dialog>
 </template>
 
 <script>
 import qs from 'qs'
 
-function getInitData () {
+function getInitData() {
   return {
     show: false,
     material: {
@@ -48,11 +59,11 @@ function getInitData () {
       param: [
         {
           key: 'id',
-          value: ''
-        }
-      ]
+          value: '',
+        },
+      ],
     },
-    tag: ''
+    tag: '',
   }
 }
 
@@ -60,42 +71,42 @@ export default {
   props: {
     editor: {
       required: true,
-    }
+    },
   },
-  data () {
+  data() {
     return getInitData()
   },
   watch: {
-    show (newVal) {
+    show(newVal) {
       if (!newVal) {
         Object.assign(this.$data, getInitData())
       }
-    }
+    },
   },
   methods: {
-    open () {
+    open() {
       this.show = true
     },
-    add () {
+    add() {
       if (this.material.param.length >= 10) {
         this.$warn('最多10个参数')
       } else {
         this.material.param.push({
           key: '',
-          value: ''
+          value: '',
         })
       }
     },
-    insert () {
-      this.$refs.rowForm.validate(async valid => {
+    insert() {
+      this.$refs.rowForm.validate(async (valid) => {
         if (valid) {
-          let detail = null,
-            innerText = ''
+          let detail = null
+          let innerText = ''
           if (this.material.type === 'product') {
             innerText = this.material.sourceName
-            let data = (
+            const data = (
               await this.$POST('', {
-                id: this.material.sourceId
+                id: this.material.sourceId,
               })
             ).data
             if (data) {
@@ -109,17 +120,17 @@ export default {
           }
           this.tag = `<a data-type="${
             this.material.type
-          }" href="${this.material.type +
-            qs.stringify(
+          }" href="${this.material.type
+            + qs.stringify(
               { id: this.material.sourceId },
-              { addQueryPrefix: true }
+              { addQueryPrefix: true },
             )}" ${detail && `data-detail='${detail}'`}>${innerText}</a>`
           this.show = false
           this.editor.insertContent(this.tag)
         }
       })
-    }
-  }
+    },
+  },
 }
 </script>
 
