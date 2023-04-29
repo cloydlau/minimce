@@ -1055,12 +1055,3 @@ TinyMCE 的 `urlconverter_callback`、`paste_postprocess` API 不支持异步操
 各版本详细改动请参考 [release notes](https://github.com/cloydlau/minimce/releases)。
 
 <br>
-
-## 开发
-
-1. [安装 Deno](https://x.deno.js.cn/#%E5%AE%89%E8%A3%85%E6%9C%80%E6%96%B0%E7%89%88)
-2. 执行 `npm i -g @cloydlau/scripts`
-3. 执行 `cl i` 并选择 pnpm
-4. 执行 `cl dev3`/`cl dev2.7`/`cl dev2.6`
-
-<br>
