@@ -1,4 +1,4 @@
-import { createVuePlugin as vue } from 'vite-plugin-vue2'
+import vue from '@vitejs/plugin-vue'
 import type { ConfigEnv, UserConfigExport } from 'vite'
 import { version } from 'vue'
 import dts from 'vite-plugin-dts'
