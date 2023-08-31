@@ -10,7 +10,7 @@
 
 <p align="center">
   <a href="https://bundlephobia.com/package/minimce"><img alt="minzipped size" src="https://img.shields.io/bundlephobia/minzip/minimce"></a>
-  <a href="https://standardjs.com"><img alt="code style" src="https://img.shields.io/badge/code_style-Standard-F3DF49.svg?logo=standardjs"></a>
+  <a href="https://github.com/antfu/eslint-config"><img alt="code style" src="https://antfu.me/badge-code-style.svg"></a>
   <a href="https://conventionalcommits.org"><img alt="conventional commits" src="https://img.shields.io/badge/commits-Conventional-FE5196.svg?logo=conventionalcommits"></a>
   <a href="https://github.com/cloydlau/minimce#develop"><img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg"></a>
 </p>
@@ -830,10 +830,10 @@ export default {
 ## 属性
 
 | 名称                                            | 说明                                                   | 类型    | 默认值                                                                         |
-| ----------------------------------------------- | ------------------------------------------------------ | ------- | ------------------------------------------------------------------------------ |
+|-------------------------------------------------|------------------------------------------------------|---------|--------------------------------------------------------------------------------|
 | modelValue (Vue 3) /<br>value (Vue 2) / v-model | 绑定值                                                 | string  |                                                                                |
 | disabled                                        | 禁用状态                                               | boolean | `false`                                                                        |
-| outputFormat                                    | 输出格式，`'html'` 或 `'text'`                         | string  | `'html'`                                                                       |
+| outputFormat                                    | 输出格式，`'html'` 或 `'text'`                          | string  | `'html'`                                                                       |
 | options                                         | [TinyMCE 配置](https://www.tiny.cloud/docs/tinymce/6/) | object  | [查看代码](https://github.com/cloydlau/minimce/blob/main/src/Component.ts#L93) |
 
 <br>
@@ -841,7 +841,7 @@ export default {
 ## 外部属性
 
 | 名称 | 说明    | 类型   |
-| ---- | ------- | ------ |
+|------|-------|--------|
 | id   | 元素 ID | string |
 
 <br>

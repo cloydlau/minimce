@@ -30,8 +30,8 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "require": "./dist/minimce.umd.js",
-      "import": "./dist/minimce.mjs"
+      "import": "./dist/minimce.mjs",
+      "require": "./dist/minimce.umd.js"
     },
     "./*": "./*"
   },
@@ -45,14 +45,12 @@
     "docs"
   ],
   "scripts": {
-    "dev3": "cl switchVue 3 && vite --config ./demo/vue3/vite.config.ts --open",
-    "dev2.7": "cl switchVue 2.7 && vite --config ./demo/vue2.7/vite.config.ts --open",
-    "dev2.6": "cl switchVue 2.6 && vite --config ./demo/vue2.6/vite.config.ts --open",
+    "dev": "esno ./scripts/dev.mts",
     "build": "vite build",
     "doc": "vitepress dev --open /README",
     "test": "vitest",
     "coverage": "vitest run --coverage",
-    "release": "npx lint-staged && pnpm build && cl release"
+    "release": "esno ./scripts/release.mts"
   },
   "peerDependencies": {
     "@vue/composition-api": ">=1",
@@ -77,40 +75,48 @@
     "@types/lodash-es": "latest",
     "@types/node": "latest",
     "@types/uuid": "latest",
-    "@vitejs/plugin-vue": "latest",
     "@vitest/coverage-c8": "latest",
     "@vitest/ui": "latest",
-    "@vue/compiler-sfc": "latest",
     "@vue/composition-api": "latest",
-    "@vue/test-utils": "latest",
+    "@vue/test-utils": "legacy",
     "axios": "latest",
     "axios-shortcut": "latest",
     "case-police": "latest",
-    "element-plus": "latest",
+    "cross-spawn": "latest",
+    "element-ui": "latest",
     "eslint": "latest",
+    "esno": "latest",
     "happy-dom": "latest",
     "husky": "latest",
     "json-editor-vue": "latest",
+    "kolorist": "latest",
     "lint-staged": "latest",
+    "magicast": "latest",
     "mammoth": "latest",
     "minimce": "latest",
+    "prompts": "latest",
     "qs": "latest",
     "sass": "latest",
+    "semver": "latest",
     "sweetalert2": "latest",
     "sweetalert2-preset": "latest",
     "tinymce": "latest",
     "typescript": "latest",
-    "unplugin-auto-import": "latest",
     "vanilla-jsoneditor": "latest",
     "vite": "latest",
     "vite-plugin-dts": "latest",
+    "vite-plugin-vue2": "latest",
     "vitepress": "latest",
     "vitest": "latest",
-    "vue": "latest",
+    "vue": "~2.6.14",
+    "vue-template-compiler": "~2.6.14",
     "zhlint": "latest"
   },
   "lint-staged": {
-    "*.md": ["case-police --fix", "zhlint --fix"],
+    "*.md": [
+      "case-police --fix",
+      "zhlint --fix"
+    ],
     "*": "eslint --fix"
   },
   "publishConfig": {

@@ -2,7 +2,7 @@
   <div>
     <el-dialog
       :visible.sync="showDialog"
-      @closed="data = {}"
+      @closed="data.value = undefined"
     >
       <el-form
         :model="data"
@@ -33,7 +33,7 @@
       <button @click="data.value = '<p>123</p><p>123</p>'">
         编程式设值
       </button>
-      <button @click="data = {}">
+      <button @click="data.value = undefined">
         清空
       </button>
     </p>

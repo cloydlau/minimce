@@ -1,6 +1,11 @@
+import { createVuePlugin as vue } from 'vite-plugin-vue2'
 import type { ConfigEnv, UserConfigExport } from 'vite'
+import { version } from 'vue'
 import dts from 'vite-plugin-dts'
+import { parse } from 'semver'
 import { PascalCasedName, name } from './package.json'
+
+const { major, minor } = parse(version)
 
 // https://vitejs.dev/config/
 export default ({ command }: ConfigEnv): UserConfigExport => {
@@ -30,6 +35,15 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
         },
       },
     },
-    plugins: [dts()],
+    plugins: [
+      {
+        name: 'html-transform',
+        transformIndexHtml(html: string) {
+          return html.replace(/\{\{NAME\}\}/, name).replace(/\{\{VUE_VERSION\}\}/g, String(major === 3 ? major : `${major}.${minor}`))
+        },
+      },
+      vue(),
+      dts(),
+    ],
   }
 }

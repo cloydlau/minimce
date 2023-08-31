@@ -2,7 +2,7 @@
   <div>
     <el-dialog
       :visible.sync="showDialog"
-      @closed="data = {}"
+      @closed="data.value = undefined"
     >
       <el-form
         :model="data"
@@ -38,7 +38,7 @@
       >
         编程式设值
       </button>
-      <button @click="data = {}">
+      <button @click="data.value = undefined">
         清空
       </button>
     </p>
@@ -53,6 +53,7 @@
 </template>
 
 <script setup>
+import { reactive, ref } from 'vue'
 import JsonEditorVue from 'json-editor-vue'
 
 const showDialog = ref(true)
