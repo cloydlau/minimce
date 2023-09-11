@@ -20,6 +20,9 @@ async function release() {
   console.log(cyan('Building...'))
   spawn.sync('pnpm', ['build'], { stdio: 'inherit' })
 
+  console.log(cyan('Packing...'))
+  spawn.sync('npm', ['pack'], { stdio: 'inherit' })
+
   const pkg = JSON.parse(fs.readFileSync('./package.json', 'utf-8'))
   const { version: currentVersion } = pkg
 
