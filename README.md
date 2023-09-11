@@ -1,6 +1,6 @@
 <h1 align="center">
   <a href="https://npmjs.com/package/minimce" target="_blank" rel="noopener noreferrer">
-    MiniMCE <sup><img alt="version" src="https://versionbadg.es/cloydlau/minimce.svg"></sup>
+    MiniMCE <sup><img alt="version" src="https://img.shields.io/npm/v/minimce.svg?style=flat-square&color=white&label="></sup>
   </a>
 </h1>
 
