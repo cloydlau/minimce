@@ -5,7 +5,7 @@
 </h1>
 
 <p align="center">
-  富文本编辑器，可离线使用的 <a href="https://github.com/tinymce/tinymce">TinyMCE</a> Vue 2.6/2.7/3 封装。
+  富文本编辑器，可离线使用的 <a href="https://github.com/tinymce/tinymce">TinyMCE</a> Vue 2.6/2.7/3 一体通用封装。
 </p>
 
 <p align="center">
@@ -34,8 +34,8 @@
 ## 特性
 
 - 基于 TinyMCE 6
-- Vue 2.6/2.7/3 通用
-- 支持 SSR，Nuxt 2/3 通用
+- Vue 2.6/2.7/3 一体通用
+- 支持 SSR，Nuxt 2/3 一体通用
 - 支持微前端 ([wujie](https://github.com/Tencent/wujie)，[qiankun](https://github.com/umijs/qiankun)，[single-spa](https://github.com/single-spa/single-spa)……)
 - 可离线使用，零网络延迟
 - 无[域名检测](#域名检测)，无弹窗困扰
@@ -72,14 +72,6 @@ npm i minimce tinymce
 #### 局部注册
 
 ```vue
-<template>
-  <MiniMCE
-    :options="{
-      language: 'zh-Hans',
-    }"
-  />
-</template>
-
 <script setup>
 import MiniMCE from 'minimce'
 
@@ -95,6 +87,14 @@ import 'tinymce/icons/default/icons'
 // 图标
 import './langs/zh-Hans' // 语言（非必须，默认英文，下载地址: https://www.tiny.cloud/get-tiny/language-packages）
 </script>
+
+<template>
+  <MiniMCE
+    :options="{
+      language: 'zh-Hans',
+    }"
+  />
+</template>
 ```
 
 #### 全局注册
@@ -231,14 +231,6 @@ npm i minimce tinymce
 #### 局部注册
 
 ```vue
-<template>
-  <MiniMCE
-    :options="{
-      language: 'zh-Hans',
-    }"
-  />
-</template>
-
 <script setup>
 import MiniMCE from 'minimce'
 
@@ -254,6 +246,14 @@ import 'tinymce/icons/default/icons'
 // 图标
 import './langs/zh-Hans' // 语言（非必须，默认英文，下载地址: https://www.tiny.cloud/get-tiny/language-packages）
 </script>
+
+<template>
+  <MiniMCE
+    :options="{
+      language: 'zh-Hans',
+    }"
+  />
+</template>
 ```
 
 #### 全局注册
@@ -392,14 +392,6 @@ npm i minimce tinymce @vue/composition-api
 #### 局部注册
 
 ```vue
-<template>
-  <MiniMCE
-    :options="{
-      language: 'zh-Hans',
-    }"
-  />
-</template>
-
 <script>
 import VCA from '@vue/composition-api'
 import MiniMCE from 'minimce'
@@ -422,6 +414,14 @@ export default {
   components: { MiniMCE },
 }
 </script>
+
+<template>
+  <MiniMCE
+    :options="{
+      language: 'zh-Hans',
+    }"
+  />
+</template>
 ```
 
 #### 全局注册
@@ -573,18 +573,22 @@ npm i minimce tinymce
 ```vue
 <!-- ~/components/MiniMCE.client.vue -->
 
-<template>
-  <MiniMCE v-bind="attrs" />
-</template>
-
 <script setup>
 import MiniMCE from 'minimce'
 
 const attrs = useAttrs()
 </script>
+
+<template>
+  <MiniMCE v-bind="attrs" />
+</template>
 ```
 
 ```vue
+<script setup>
+const value = ref()
+</script>
+
 <template>
   <client-only>
     <MiniMCE
@@ -593,10 +597,6 @@ const attrs = useAttrs()
     />
   </client-only>
 </template>
-
-<script setup>
-const value = ref()
-</script>
 ```
 
 #### 全局注册
@@ -614,15 +614,15 @@ export default defineNuxtPlugin((nuxtApp) => {
 ```
 
 ```vue
+<script setup>
+const value = ref()
+</script>
+
 <template>
   <client-only>
     <MiniMCE v-model="value" />
   </client-only>
 </template>
-
-<script setup>
-const value = ref()
-</script>
 ```
 
 <br>
@@ -652,15 +652,6 @@ export default {
 ```
 
 ```vue
-<template>
-  <client-only>
-    <MiniMCE
-      v-model="value"
-      v-bind="{/* 局部 props & attrs */}"
-    />
-  </client-only>
-</template>
-
 <script setup>
 import { ref } from 'vue'
 
@@ -672,6 +663,15 @@ function MiniMCE() {
 
 const value = ref()
 </script>
+
+<template>
+  <client-only>
+    <MiniMCE
+      v-model="value"
+      v-bind="{/* 局部 props & attrs */}"
+    />
+  </client-only>
+</template>
 ```
 
 #### 全局注册
@@ -705,17 +705,17 @@ Vue.use(MiniMCE, {
 ```
 
 ```vue
-<template>
-  <client-only>
-    <MiniMCE v-model="value" />
-  </client-only>
-</template>
-
 <script setup>
 import { ref } from 'vue'
 
 const value = ref()
 </script>
+
+<template>
+  <client-only>
+    <MiniMCE v-model="value" />
+  </client-only>
+</template>
 ```
 
 <br>
@@ -745,15 +745,6 @@ export default {
 ```
 
 ```vue
-<template>
-  <client-only>
-    <MiniMCE
-      v-model="value"
-      v-bind="{/* 局部 props & attrs */}"
-    />
-  </client-only>
-</template>
-
 <script>
 import Vue from 'vue'
 import VCA from '@vue/composition-api'
@@ -773,6 +764,15 @@ export default {
   },
 }
 </script>
+
+<template>
+  <client-only>
+    <MiniMCE
+      v-model="value"
+      v-bind="{/* 局部 props & attrs */}"
+    />
+  </client-only>
+</template>
 ```
 
 #### 全局注册
@@ -808,12 +808,6 @@ Vue.use(MiniMCE, {
 ```
 
 ```vue
-<template>
-  <client-only>
-    <MiniMCE v-model="value" />
-  </client-only>
-</template>
-
 <script>
 export default {
   data() {
@@ -823,6 +817,12 @@ export default {
   },
 }
 </script>
+
+<template>
+  <client-only>
+    <MiniMCE v-model="value" />
+  </client-only>
+</template>
 ```
 
 <br>
@@ -850,13 +850,6 @@ export default {
 
 ```vue
 <!-- 示例: 监听 TinyMCE 的事件 -->
-
-<template>
-  <MiniMCE
-    ref="miniMCERef"
-    :options="options"
-  />
-</template>
 
 <script setup>
 import { reactive, ref } from 'vue'
@@ -888,6 +881,13 @@ const options = reactive({
   },
 })
 </script>
+
+<template>
+  <MiniMCE
+    ref="miniMCERef"
+    :options="options"
+  />
+</template>
 ```
 
 <br>

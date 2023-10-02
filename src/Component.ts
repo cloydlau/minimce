@@ -221,7 +221,7 @@ export default defineComponent({
           },
         ],
         {
-          mergeFunction: (previousValue: Function, currentValue: Function) => (...args: any) => {
+          mergeFunction: (previousValue: (...args: any) => unknown, currentValue: (...args: any) => unknown) => (...args: any) => {
             previousValue(...args)
             currentValue(...args)
           },

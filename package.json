@@ -3,8 +3,8 @@
   "PascalCasedName": "MiniMCE",
   "version": "0.8.4",
   "private": false,
-  "description": "Rich text editor, offline TinyMCE Vue 2.6/2.7/3 wrapper.",
-  "author": "Cloyd Lau",
+  "description": "Rich text editor, offline TinyMCE Vue 2.6/2.7/3 isomorphic wrapper.",
+  "author": "Cloyd Lau (https://github.com/cloydlau)",
   "license": "MIT",
   "repository": "https://github.com/cloydlau/minimce",
   "keywords": [
@@ -29,7 +29,7 @@
   ],
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
+      "types": "./dist/minimce.d.ts",
       "import": "./dist/minimce.mjs",
       "require": "./dist/minimce.umd.js"
     },
@@ -39,7 +39,7 @@
   "module": "./dist/minimce.mjs",
   "unpkg": "./dist/minimce.umd.js",
   "jsdelivr": "./dist/minimce.umd.js",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/minimce.d.ts",
   "files": [
     "dist",
     "docs"
@@ -63,15 +63,13 @@
     }
   },
   "dependencies": {
-    "lodash-es": "latest",
-    "uuid": "latest",
-    "vue-demi": "latest",
-    "vue-global-config": "latest"
+    "vue-demi": "latest"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "latest",
+    "@antfu/eslint-config": "~0.42.1",
     "@commitlint/cli": "latest",
     "@commitlint/config-conventional": "latest",
+    "@element-plus/icons-vue": "latest",
     "@types/lodash-es": "latest",
     "@types/node": "latest",
     "@types/uuid": "latest",
@@ -85,41 +83,45 @@
     "axios-shortcut": "latest",
     "case-police": "latest",
     "cross-spawn": "latest",
+    "del": "latest",
     "element-plus": "latest",
     "eslint": "latest",
     "esno": "latest",
     "happy-dom": "latest",
-    "husky": "latest",
     "json-editor-vue": "latest",
+    "kikimore": "latest",
     "kolorist": "latest",
     "lint-staged": "latest",
+    "lodash-es": "latest",
     "magicast": "latest",
     "mammoth": "latest",
-    "minimce": "latest",
+    "minimce": "workspace:*",
     "prompts": "latest",
     "qs": "latest",
     "sass": "latest",
     "semver": "latest",
-    "sweetalert2": "latest",
-    "sweetalert2-preset": "latest",
+    "simple-git-hooks": "latest",
     "tinymce": "latest",
     "typescript": "latest",
+    "uuid": "latest",
     "vanilla-jsoneditor": "latest",
     "vite": "latest",
     "vite-plugin-dts": "latest",
     "vitepress": "latest",
     "vitest": "latest",
     "vue": "latest",
+    "vue-global-config": "latest",
     "zhlint": "latest"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm exec lint-staged --concurrent false",
+    "commit-msg": "npx --no -- commitlint --edit ${1}"
   },
   "lint-staged": {
     "*.md": [
       "case-police --fix",
       "zhlint --fix"
     ],
-    "*": "eslint --fix"
-  },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org"
+    "*": "eslint --cache --ignore-pattern 'demo/' --fix"
   }
 }

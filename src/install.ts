@@ -12,7 +12,7 @@ function withInstall(sfc: typeof Component): SFCWithInstall {
   (sfc as SFCWithInstall).install = (app: App, options = {}): void => {
     const { props } = resolveConfig(options, Component.props)
     Object.assign(globalProps, props)
-    app.component(sfc.name as string, sfc as Object)
+    app.component(sfc.name as string, sfc as object)
   }
 
   return sfc as SFCWithInstall

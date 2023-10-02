@@ -1,8 +1,7 @@
 import mammoth from 'mammoth/mammoth.browser.min.js'
-import Swal from 'sweetalert2'
-import SwalPreset from 'sweetalert2-preset'
+import { KiMessageBox } from 'kikimore'
 
-export default editor => SwalPreset.confirm({
+export default editor => KiMessageBox.confirm({
   input: 'file',
   inputAttributes: {
     placeholder: '将 docx 文件拖到此处',
@@ -49,17 +48,17 @@ export default editor => SwalPreset.confirm({
           } else {
             if (reason) {
               if (typeof reason === 'string') {
-                Swal.showValidationMessage(reason)
+                KiMessageBox.showValidationMessage(reason)
               } else {
                 console.error(reason)
-                Swal.showValidationMessage('解析失败')
+                KiMessageBox.showValidationMessage('解析失败')
               }
             }
           }
         })
       })
     } else {
-      Swal.showValidationMessage('未选择任何文件')
+      KiMessageBox.showValidationMessage('未选择任何文件')
     }
   },
 })
