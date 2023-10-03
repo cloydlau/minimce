@@ -51,7 +51,7 @@
     "test": "vitest",
     "coverage": "vitest run --coverage",
     "release": "esno ./scripts/release.mts",
-    "preinstall": "node -e \"if (process.env.INIT_CWD === process.cwd()) { process.exit(1) }\" || npx only-allow pnpm",
+    "preinstall": "node -e \"if (process.env.INIT_CWD === process.cwd()) { process.exit(1) }\" || esno ./scripts/preinstall.mts",
     "postinstall": "node -e \"if (process.env.INIT_CWD === process.cwd()) { process.exit(1) }\" || npx simple-git-hooks"
   },
   "peerDependencies": {
@@ -105,6 +105,8 @@
     "simple-git-hooks": "latest",
     "tinymce": "latest",
     "typescript": "latest",
+    "unplugin-auto-import": "latest",
+    "unplugin-vue-components": "latest",
     "uuid": "latest",
     "vanilla-jsoneditor": "latest",
     "vite": "latest",
