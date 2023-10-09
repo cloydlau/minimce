@@ -4,7 +4,10 @@
   "version": "0.8.4",
   "private": false,
   "description": "Rich text editor, offline TinyMCE Vue 2.6/2.7/3 isomorphic wrapper.",
-  "author": "Cloyd Lau (https://github.com/cloydlau)",
+  "author": {
+    "name": "Cloyd Lau",
+    "url": "https://github.com/cloydlau"
+  },
   "license": "MIT",
   "repository": "https://github.com/cloydlau/minimce",
   "keywords": [
