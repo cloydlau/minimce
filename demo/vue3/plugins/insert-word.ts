@@ -1,7 +1,8 @@
 import mammoth from 'mammoth/mammoth.browser.min.js'
-import { KiMessageBox } from 'kikimore'
+import FaMessageBox from 'faim/dist/components/MessageBox/index.mjs'
 
-export default editor => KiMessageBox.confirm({
+export default editor => FaMessageBox.confirm({
+  target: '.el-overlay',
   input: 'file',
   inputAttributes: {
     placeholder: '将 docx 文件拖到此处',
@@ -48,17 +49,17 @@ export default editor => KiMessageBox.confirm({
           } else {
             if (reason) {
               if (typeof reason === 'string') {
-                KiMessageBox.showValidationMessage(reason)
+                FaMessageBox.showValidationMessage(reason)
               } else {
                 console.error(reason)
-                KiMessageBox.showValidationMessage('解析失败')
+                FaMessageBox.showValidationMessage('解析失败')
               }
             }
           }
         })
       })
     } else {
-      KiMessageBox.showValidationMessage('未选择任何文件')
+      FaMessageBox.showValidationMessage('未选择任何文件')
     }
   },
 })

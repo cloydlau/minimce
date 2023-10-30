@@ -17,6 +17,13 @@
 
 <br>
 
+## ⚠ DEPRECATED
+
+- minimce 已升级至原作者 [cloydlau](https://github.com/cloydlau) 的 [faim](https://github.com/cloydlau/faim)
+- 不仅能力得到增强，为了后续的漏洞修复和迭代优化，建议尽快迁移
+
+<br>
+
 ## 对比 tinymce-vue
 是的，TinyMCE 已经有官方的 Vue 封装 [tinymce-vue](https://github.com/tinymce/tinymce-vue) 了，但它：
 

@@ -60,11 +60,15 @@
   },
   "peerDependencies": {
     "@vue/composition-api": ">=1",
+    "element-plus": ">=2",
     "tinymce": ">=6",
     "vue": "2||3"
   },
   "peerDependenciesMeta": {
     "@vue/composition-api": {
+      "optional": true
+    },
+    "element-plus": {
       "optional": true
     }
   },
@@ -83,7 +87,6 @@
     "@vitest/coverage-c8": "latest",
     "@vitest/ui": "latest",
     "@vue/compiler-sfc": "latest",
-    "@vue/composition-api": "latest",
     "@vue/test-utils": "latest",
     "axios": "latest",
     "axios-shortcut": "latest",
@@ -93,9 +96,9 @@
     "element-plus": "latest",
     "eslint": "latest",
     "esno": "latest",
+    "faim": "latest",
     "happy-dom": "latest",
     "json-editor-vue": "latest",
-    "kikimore": "latest",
     "kolorist": "latest",
     "lint-staged": "latest",
     "lodash-es": "latest",
