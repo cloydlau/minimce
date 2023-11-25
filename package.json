@@ -49,6 +49,7 @@
   ],
   "scripts": {
     "dev": "esno ./scripts/dev.mts",
+    "up": "nu -L !@antfu/eslint-config",
     "build": "vite build",
     "doc": "vitepress dev --open /README",
     "test": "vitest",
@@ -120,7 +121,7 @@
     "vanilla-jsoneditor": "latest",
     "vite": "latest",
     "vite-plugin-dts": "latest",
-    "vitepress": "latest",
+    "vitepress": "1.0.0-rc.31",
     "vitest": "latest",
     "vue": "latest",
     "vue-global-config": "latest",

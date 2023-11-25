@@ -19,8 +19,11 @@
 
 ## ⚠ DEPRECATED
 
-- minimce 已升级至原作者 [cloydlau](https://github.com/cloydlau) 的 [faim](https://github.com/cloydlau/faim)
-- 不仅能力得到增强，为了后续的漏洞修复和迭代优化，建议尽快迁移
+> **Warning**
+>
+> minimce 已升级至原作者 [cloydlau](https://github.com/cloydlau) 的 [faim](https://github.com/cloydlau/faim)
+>
+> 不仅能力得到增强，为了后续的漏洞修复和迭代优化，请尽快迁移
 
 <br>
 
