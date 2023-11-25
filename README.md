@@ -157,7 +157,7 @@ app.use(MiniMCE, {
         "vue": "https://cdn.jsdelivr.net/npm/vue/dist/vue.esm-browser.prod.js",
         "vue-demi": "https://cdn.jsdelivr.net/npm/vue-demi/lib/v3/index.mjs",
         "tinymce": "https://cdn.jsdelivr.net/npm/tinymce",
-        "minimce": "https://cdn.jsdelivr.net/npm/minimce@0.8/dist/minimce.mjs"
+        "minimce": "https://cdn.jsdelivr.net/npm/minimce@0.9/dist/minimce.mjs"
       }
     }
   </script>
@@ -207,7 +207,7 @@ app.use(MiniMCE, {
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue-demi"></script>
   <script src="https://cdn.jsdelivr.net/npm/tinymce"></script>
-  <script src="https://cdn.jsdelivr.net/npm/minimce@0.8/dist/minimce.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/minimce@0.9/dist/minimce.umd.js"></script>
   <script>
     const { createApp } = Vue
 
@@ -316,7 +316,7 @@ Vue.use(MiniMCE, {
         "vue": "https://cdn.jsdelivr.net/npm/vue@2/dist/vue.esm.browser.min.js",
         "vue-demi": "https://cdn.jsdelivr.net/npm/vue-demi/lib/v2.7/index.mjs",
         "tinymce": "https://cdn.jsdelivr.net/npm/tinymce",
-        "minimce": "https://cdn.jsdelivr.net/npm/minimce@0.8/dist/minimce.mjs"
+        "minimce": "https://cdn.jsdelivr.net/npm/minimce@0.9/dist/minimce.mjs"
       }
     }
   </script>
@@ -368,7 +368,7 @@ Vue.use(MiniMCE, {
   <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue-demi"></script>
   <script src="https://cdn.jsdelivr.net/npm/tinymce"></script>
-  <script src="https://cdn.jsdelivr.net/npm/minimce@0.8/dist/minimce.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/minimce@0.9/dist/minimce.umd.js"></script>
   <script>
     new Vue({
       components: { minimce: MiniMCE },
@@ -492,7 +492,7 @@ Vue.use(MiniMCE, {
         "@vue/composition-api/dist/vue-composition-api.mjs": "https://cdn.jsdelivr.net/npm/@vue/composition-api/dist/vue-composition-api.mjs",
         "vue-demi": "https://cdn.jsdelivr.net/npm/vue-demi/lib/v2/index.mjs",
         "tinymce": "https://cdn.jsdelivr.net/npm/tinymce",
-        "minimce": "https://cdn.jsdelivr.net/npm/minimce@0.8/dist/minimce.mjs"
+        "minimce": "https://cdn.jsdelivr.net/npm/minimce@0.9/dist/minimce.mjs"
       }
     }
   </script>
@@ -545,7 +545,7 @@ Vue.use(MiniMCE, {
   <script src="https://cdn.jsdelivr.net/npm/@vue/composition-api"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue-demi"></script>
   <script src="https://cdn.jsdelivr.net/npm/tinymce"></script>
-  <script src="https://cdn.jsdelivr.net/npm/minimce@0.8/dist/minimce.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/minimce@0.9/dist/minimce.umd.js"></script>
   <script>
     const { createApp } = VueCompositionAPI
 

@@ -1,7 +1,7 @@
 {
   "name": "minimce",
   "PascalCasedName": "MiniMCE",
-  "version": "0.8.4",
+  "version": "0.9.0",
   "private": false,
   "description": "Rich text editor, offline TinyMCE Vue 2.6/2.7/3 isomorphic wrapper.",
   "author": {
